@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Interactive Cost Accounting Summary</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- (Removed unnecessary Lucide CDN script) -->
+    <style>
+        /* Custom styles for a better look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        /* Style for the scrollable detail pane */
+        .detail-scroll-area {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        /* Custom Scrollbar for better aesthetics */
+        .detail-scroll-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        .detail-scroll-area::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .detail-scroll-area::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .detail-scroll-area::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Hide descriptive text for pills on small screens */
+        @media (max-width: 768px) {
+            .desc-text {
+                display: none !important;
+            }
+            .factor-pill {
+                padding: 0.5rem;
+            }
+            /* Hide the table view on mobile and show stacked view */
+            .comparison-table-desktop {
+                display: none;
+            }
+        }
+        /* Show the table view on desktop and hide stacked view */
+        @media (min-width: 769px) {
+            .comparison-stacked-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="app" class="max-w-6xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-2">
+            Comprehensive Interactive Cost Accounting Summary
+        </h1>
+        <p class="text-center text-indigo-600 mb-10 text-sm sm:text-lg">
+            (Expanded Key Concepts Overview - Single File HTML)
+        </p>
+
+        <!-- Dynamic Content will be rendered here -->
+    </div>
+
+    <script>
+        const ICONS = {
+            Target: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+            ChevronsRight: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>',
+            DollarSign: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dollar-sign"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+            Repeat: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat-2"><path d="m2 9 3-3 3 3"/><path d="M13 18H7a2 2 0 0 1-2-2V6"/><path d="m22 15-3 3-3-3"/><path d="M11 6h6a2 2 0 0 1 2 2v10"/></svg>',
+            Clock: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+            TrendingUp: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+            BookOpen: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+            Layers: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers"><path d="m12.83 2.189 7.641 3.518c.288.132.515.359.647.647l3.519 7.641c.132.288.132.616 0 .904l-3.519 7.641c-.132.288-.359.515-.647.647l-7.641 3.519c-.288.132-.616.132-.904 0l-7.641-3.519c-.288-.132-.515-.359-.647-.647l-3.519-7.641c-.132-.288-.132-.616 0-.904l3.519-7.641c.132-.288.359-.515.647-.647l7.641-3.518c.288-.133.616-.133.904 0Z"/></svg>',
+            Warehouse: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-warehouse"><path d="M22 13V6H2v7"/><path d="M10 12h4"/><path d="M10 18h4"/><path d="M18.8 13.8c-.4-.7-.8-1.5-.8-2.3V7"/><path d="m20 13-1-3"/><path d="m6 13-1-3"/><path d="M2 18h20"/><path d="M2 22h20"/><path d="M10 18v4"/><path d="M14 18v4"/></svg>',
+            Settings: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.44.75a2 2 0 0 0 .73 2.73l.15.08a2 2 0 0 1 1 1.73v.52a2 2 0 0 1-1 1.73l-.15.08a2 2 0 0 0-.73 2.73l.44.75a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.44-.75a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.73v-.52a2 2 0 0 1 1-1.73l.15-.08a2 2 0 0 0 .73-2.73l-.44-.75a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+            Users: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+            ChevronRight: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>',
+            Grid: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid-3x3"><rect x="10" y="2" width="4" height="4"/><rect x="2" y="2" width="4" height="4"/><rect x="18" y="2" width="4" height="4"/><rect x="10" y="10" width="4" height="4"/><rect x="2" y="10" width="4" height="4"/><rect x="18" y="10" width="4" height="4"/><rect x="10" y="18" width="4" height="4"/><rect x="2" y="18" width="4" height="4"/><rect x="18" y="18" width="4" height="4"/></svg>',
+        };
+
+        const conceptsData = [
+            {
+                category: "Management Accounting Strategy",
+                title: "Focus and Objective",
+                icon: 'Target',
+                details: [
+                    { term: "Target Users", description: "Internal Users/Managers, for internal decision-making." },
+                    { term: "Time Horizon", description: "Forward-looking, focuses on planning and budgeting." },
+                    { term: "Rules & Compliance", description: "Not restricted by GAAP, emphasizes usefulness and timeliness of information." },
+                ]
+            },
+            {
+                category: "Decision Making Process",
+                title: "Five-Step Routine for Effective Decisions",
+                icon: 'Settings',
+                details: [
+                    { term: "Step 1: Identify Problems & Uncertainties", description: "Define choices and uncertainties faced (Part of Planning)." },
+                    { term: "Step 2: Obtain Information", description: "Gather relevant data; guard against 'information overload'." },
+                    { term: "Step 3: Make Predictions", description: "Forecast outcomes for each alternative course of action." },
+                    { term: "Step 4: Make Decisions (Choose Alternatives)", description: "Select the optimal strategy (Planning phase completion)." },
+                    { term: "Step 5: Implement, Evaluate & Learn", description: "Monitor the decision (Control), compare budget to actual results, and use feedback for future improvements." },
+                ]
+            },
+            {
+                category: "The Value Chain",
+                title: "Value Creation Path",
+                icon: 'ChevronsRight',
+                details: [
+                    { term: "Research & Development (R&D)", description: "Generating and experimenting with ideas." },
+                    { term: "Design of Products/Processes", description: "Detailed planning, engineering, and testing." },
+                    { term: "Production", description: "Procuring, storing, coordinating, and assembling resources." },
+                    { term: "Marketing", description: "Promoting and selling products or services." },
+                    { term: "Distribution", description: "Processing orders and shipping products to customers." },
+                    { term: "Customer Service", description: "Providing after-sales support to customers." },
+                ]
+            },
+            {
+                category: "Competitive Strategies",
+                title: "Achieving Competitive Advantage",
+                icon: 'Layers',
+                details: [
+                    { term: "Cost Leadership Strategy", description: "Compete based on low price by minimizing cost while maintaining quality. Goal is to minimize customer sacrifice." },
+                    { term: "Product Differentiation Strategy", description: "Compete based on unique products/services, increasing customer realization. Allows charging premium prices." },
+                    { term: "Strategic Cost Management", description: "Activities to increase product value and achieve goals, often involving cost reduction or strategic cost increase (e.g., for quality)." },
+                ]
+            },
+            {
+                category: "Cost Classification (Behavioral)",
+                title: "Core Cost Concepts",
+                icon: 'DollarSign',
+                details: [
+                    { term: "Variable Cost", description: "Changes in total in proportion to output volume, but is constant on a per-unit basis." },
+                    { term: "Fixed Cost", description: "Remains unchanged in total over the relevant range, but changes inversely on a per-unit basis with volume." },
+                    { term: "Direct Cost", description: "Can be traced to a specific cost object in an economically feasible way (e.g., Raw Materials)." },
+                    { term: "Indirect Cost", description: "Relates to the cost object but cannot be traced easily, and must be allocated (e.g., Factory Rent)." },
+                ]
+            },
+            {
+                category: "Manufacturing Costs Analysis",
+                title: "Product Cost Elements",
+                icon: 'Repeat',
+                details: [
+                    { term: "Direct Materials (DM)", description: "Acquisition costs of all materials that become part of the finished product." },
+                    { term: "Direct Labor (DL)", description: "Compensation of manufacturing labor traceable to the product." },
+                    { term: "Factory Overhead (FOH/MOH)", description: "All other indirect manufacturing costs (e.g., supervisors, utilities, supplies)." },
+                    { term: "Inventoriable Costs", description: "Includes DM + DL + FOH. Treated as an asset until the product is sold (Cost of Goods Sold)." },
+                    { term: "Period Costs", description: "Non-manufacturing costs (e.g., Marketing, R&D). Expensed in the accounting period they are incurred (Operating Costs)." },
+                ]
+            },
+        ];
+
+        const KeySuccessFactors = [
+            { name: "Cost and Efficiency", icon: 'DollarSign', color: "text-green-500", description: "Achieving Target Costing to deliver high value at a low price." },
+            { name: "Quality", icon: 'TrendingUp', color: "text-blue-500", description: "Applying Total Quality Management (TQM) to exceed customer expectations." },
+            { name: "Time", icon: 'Clock', color: "text-yellow-500", description: "Product development speed and customer response time." },
+            { name: "Innovation", icon: 'Target', color: "text-red-500", description: "The constant flow of new products or services." },
+            { name: "Sustainability", icon: 'Repeat', color: "text-purple-500", description: "Applying the other factors to ensure long-term competitive advantage." },
+        ];
+
+        const accountingComparisonData = [
+            { aspect: "Primary Users", management: "Internal (Managers)", financial: "External (Investors, Creditors)" },
+            { aspect: "Time Focus", management: "Future-Oriented (Planning/Budgeting)", financial: "Past-Oriented (Historical Reporting)" },
+            { aspect: "Rules & Guidelines", management: "No GAAP restriction (Cost-Benefit)", financial: "Must follow GAAP/IFRS" },
+            { aspect: "Detail & Reports", management: "Highly detailed (Products, Departments, Strategies)", financial: "Summarized (Company as a whole)" },
+        ];
+
+        const inventoryData = [
+            { type: "Manufacturing Sector", items: ["Direct Materials (DM)", "Work-in-Process (WIP)", "Finished Goods"] },
+            { type: "Merchandising Sector", items: ["Merchandise Inventory (One Type)"] },
+            { type: "Service Sector", items: ["None (Intangible products/services)"] },
+        ];
+
+        const dualClassificationData = [
+            { term: "Direct & Variable", example: "Raw materials used in production." },
+            { term: "Direct & Fixed", example: "Salary of a supervisor dedicated to one product line." },
+            { term: "Indirect & Variable", example: "Power costs for the entire plant (varies with total output)." },
+            { term: "Indirect & Fixed", example: "Annual lease cost for the entire manufacturing facility." },
+        ];
+
+        let activeCategory = conceptsData[0].category;
+        let isCOGMScheduleOpen = false;
+        let activeInventoryType = inventoryData[0].type;
+
+        // --- Utility Functions ---
+
+        const getIconSVG = (iconName, colorClass, sizeClass = "w-6 h-6") => {
+            const svg = ICONS[iconName] || '';
+            return `<span class="${colorClass} ${sizeClass} mr-3">${svg}</span>`;
+        };
+
+        const updateActiveCategory = (category) => {
+            activeCategory = category;
+            renderApp();
+        };
+
+        const toggleCOGMSchedule = () => {
+            isCOGMScheduleOpen = !isCOGMScheduleOpen;
+            renderApp();
+        };
+        
+        const updateActiveInventoryType = (type) => {
+            activeInventoryType = type;
+            renderApp();
+        };
+
+        // --- Components HTML Generation ---
+
+        const CardHTML = (title, contentHTML, iconName, colorClass = "text-indigo-600") => `
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform border border-gray-100 mb-6">
+                <div class="flex items-center mb-4">
+                    ${getIconSVG(iconName, colorClass, "w-8 h-8")}
+                    <h3 class="text-xl font-extrabold text-gray-800">${title}</h3>
+                </div>
+                ${contentHTML}
+            </div>
+        `;
+
+        const DetailItemHTML = (term, description) => `
+            <div class="py-2 border-b border-gray-100 last:border-b-0">
+                <p class="font-semibold text-gray-700 flex items-center">
+                    ${getIconSVG('ChevronRight', 'text-indigo-400', 'w-4 h-4')}
+                    ${term}
+                </p>
+                <p class="text-sm text-gray-500 ml-6 mt-1 pr-4">${description}</p>
+            </div>
+        `;
+        
+        const AnimatedPillHTML = (factor) => {
+            const { name, icon, color, description } = factor;
+            return `
+                <div 
+                    class="factor-pill flex items-center p-3 rounded-full cursor-pointer transition-all duration-300 ease-in-out bg-indigo-50 hover:bg-white hover:shadow-xl hover:ring-2 hover:ring-indigo-300"
+                    onmouseenter="this.classList.add('is-hovered')"
+                    onmouseleave="this.classList.remove('is-hovered')"
+                    data-description="${description}"
+                >
+                    ${getIconSVG(icon, color, 'w-5 h-5')}
+                    <span class="font-medium text-gray-700 flex-shrink-0 whitespace-nowrap text-sm">${name}</span>
+                    <span class="desc-text text-sm text-gray-500 ml-4 transition-all duration-500 overflow-hidden max-w-0 opacity-0">${description}</span>
+                </div>
+            `;
+        };
+
+        const renderPillLogic = () => {
+            document.querySelectorAll('.factor-pill').forEach(pill => {
+                const descSpan = pill.querySelector('.desc-text');
+                const description = pill.getAttribute('data-description');
+
+                pill.onmouseenter = () => {
+                    // Check for screen size to only expand on larger screens for better mobile experience
+                    if (window.innerWidth > 768) { 
+                        descSpan.textContent = description;
+                        descSpan.classList.remove('max-w-0', 'opacity-0');
+                        descSpan.classList.add('max-w-md', 'opacity-100');
+                    }
+                };
+                pill.onmouseleave = () => {
+                    if (window.innerWidth > 768) { 
+                        descSpan.classList.remove('max-w-md', 'opacity-100');
+                        descSpan.classList.add('max-w-0', 'opacity-0');
+                    }
+                };
+            });
+        };
+
+
+        const ComparisonTableHTML = (data) => {
+            let rowsDesktop = data.map(row => `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-800 w-1/4">${row.aspect}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600 w-3/8">${row.management}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600 w-3/8">${row.financial}</td>
+                </tr>
+            `).join('');
+
+            let rowsMobile = data.map(row => `
+                <div class="bg-white p-4 rounded-xl shadow-md mb-4 border-t-4 border-indigo-400">
+                    <p class="font-bold text-lg text-indigo-700 mb-2">${row.aspect}</p>
+                    <div class="space-y-1">
+                        <p class="text-sm font-semibold text-gray-800">Management Accounting:</p>
+                        <p class="text-sm text-gray-600 ml-3">${row.management}</p>
+                        <p class="text-sm font-semibold text-gray-800 pt-2">Financial Accounting:</p>
+                        <p class="text-sm text-gray-600 ml-3">${row.financial}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            return `
+                <div class="mt-6">
+                    <!-- Desktop/Tablet View (Table) -->
+                    <div class="comparison-table-desktop bg-white rounded-xl shadow-lg overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-indigo-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-indigo-700 uppercase tracking-wider w-1/4">Aspect</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-indigo-700 uppercase tracking-wider w-3/8">Management Accounting</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-indigo-700 uppercase tracking-wider w-3/8">Financial Accounting</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                ${rowsDesktop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Mobile View (Stacked Cards) -->
+                    <div class="comparison-stacked-mobile space-y-4">
+                        ${rowsMobile}
+                    </div>
+                </div>
+            `;
+        };
+
+        const COGMScheduleHTML = (isOpen) => {
+            const flowSteps = [
+                { id: 1, formula: "DM Used = Beg. DM Inv. + DM Purchased - End. DM Inv.", description: "Calculates the total cost of raw materials consumed during the period." },
+                { id: 2, formula: "Total MFG Costs = DM Used + DL + FOH", description: "The total cost added to production in the current period." },
+                { id: 3, formula: "COGM = Beg. WIP Inv. + Total MFG Costs - End. WIP Inv.", description: "Cost of Goods MANUFACTURED (completed) and transferred to Finished Goods Inventory." },
+                { id: 4, formula: "COGS = Beg. Finished Goods Inv. + COGM - End. Finished Goods Inv.", description: "Cost of Goods SOLD (expensed) and moved to the Income Statement." },
+                { id: 5, formula: "Gross Margin = Revenues - COGS", description: "The profit before deducting operating (period) costs." },
+                { id: 6, formula: "Operating Income = Gross Margin - Period Costs", description: "The final profit after deducting all non-manufacturing expenses." },
+            ];
+
+            const stepsHTML = flowSteps.map(step => `
+                <div class="bg-white p-4 rounded-lg shadow-md border-t-2 border-indigo-200">
+                    <p class="font-mono text-indigo-700 text-sm mb-1">STEP ${step.id}:</p>
+                    <p class="font-bold text-gray-800 text-base mb-1">${step.formula}</p>
+                    <p class="text-gray-500 text-xs italic">${step.description}</p>
+                </div>
+            `).join('');
+
+            return `
+                <div class="mt-10 p-6 bg-indigo-50 border-l-4 border-indigo-500 rounded-xl shadow-inner">
+                    <button onclick="toggleCOGMSchedule()" class="w-full text-left font-bold text-lg text-indigo-800 flex justify-between items-center">
+                        <div class='flex items-center'>
+                            ${getIconSVG('BookOpen', 'text-indigo-800', 'w-6 h-6')}
+                            Schedule of COGS Manufactured & Income Statement Flow
+                        </div>
+                        <span class="transition-transform ${isOpen ? 'rotate-90' : ''}">${ICONS.ChevronRight}</span>
+                    </button>
+                    <div class="mt-4 space-y-3 pt-2" style="display: ${isOpen ? 'block' : 'none'};">
+                        ${stepsHTML}
+                    </div>
+                </div>
+            `;
+        };
+        
+        const InventoryTypesHTML = (data, activeType) => {
+            const buttonsHTML = data.map(item => `
+                <button
+                    onclick="updateActiveInventoryType('${item.type}')"
+                    class="px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-300 ${
+                        activeType === item.type
+                            ? 'bg-pink-600 text-white shadow-md'
+                            : 'text-gray-700 hover:bg-pink-100'
+                    }"
+                >
+                    ${item.type}
+                </button>
+            `).join('');
+            
+            const activeItems = data.find(d => d.type === activeType)?.items || [];
+            const listItemsHTML = activeItems.map(item => `
+                <li class="flex items-center text-gray-700 text-sm">
+                    ${getIconSVG('ChevronRight', 'text-pink-500', 'w-4 h-4')}
+                    ${item}
+                </li>
+            `).join('');
+
+            return `
+                <div class="mt-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        ${getIconSVG('Warehouse', 'text-indigo-500', 'w-6 h-6')}
+                        Inventory Types by Sector
+                    </h2>
+                    <div class="flex flex-wrap gap-2 mb-4 p-1 bg-white rounded-xl shadow-inner">
+                        ${buttonsHTML}
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">${activeType} Inventory:</h3>
+                        <ul class="space-y-2">
+                            ${listItemsHTML}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        };
+
+
+        // --- Main Render Function ---
+
+        const renderApp = () => {
+            const appDiv = document.getElementById('app');
+            if (!appDiv) return;
+
+            const activeConcept = conceptsData.find(c => c.category === activeCategory) || conceptsData[0];
+            const activeDetailsHTML = activeConcept.details.map(d => DetailItemHTML(d.term, d.description)).join('');
+            
+            const keyFactorsHTML = KeySuccessFactors.map(f => AnimatedPillHTML(f)).join('');
+
+            const dualClassificationHTML = dualClassificationData.map(d => `
+                <div class="bg-white p-4 rounded-lg shadow-sm border-t-2 border-green-200">
+                    <p class="font-bold text-green-700 mb-1">${d.term}</p>
+                    <p class="text-gray-600 text-sm italic">${d.example}</p>
+                </div>
+            `).join('');
+
+            const formulaGridHTML = `
+                <div class="text-gray-700 text-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Prime Cost</p>
+                        <p class="font-bold text-sm">DM + DL</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Conversion Cost</p>
+                        <p class="font-bold text-sm">DL + FOH</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Total MFG Cost</p>
+                        <p class="font-bold text-sm">DM + DL + FOH</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Total Variable Cost</p>
+                        <p class="font-bold text-sm">UVC × Units Produced</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Unit Fixed Cost (UFC)</p>
+                        <p class="font-bold text-sm">Total Fixed Cost / Units Produced</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Total Cost</p>
+                        <p class="font-bold text-sm">TVC + TFC</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Total Cost Per Unit</p>
+                        <p class="font-bold text-sm">UVC + UFC</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <p class="font-mono text-base text-indigo-600 mb-2">Customer Value</p>
+                        <p class="font-bold text-sm">Realization - Sacrifice</p>
+                    </div>
+                </div>
+            `;
+
+
+            const contentHTML = `
+                <!-- Key Success Factors Section -->
+                ${CardHTML("Key Success Factors in the Market", `<div class="flex flex-wrap gap-3 pt-2">${keyFactorsHTML}</div>`, 'TrendingUp', 'text-purple-600')}
+
+                <!-- Dual Cost Classification (NEW SECTION) -->
+                <div class="mt-10 p-6 bg-green-50 border-l-4 border-green-500 rounded-xl shadow-inner">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        ${getIconSVG('Grid', 'text-green-700', 'w-6 h-6')}
+                        Dual Cost Classification Examples (D/I vs. V/F)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${dualClassificationHTML}
+                    </div>
+                </div>
+                
+                <!-- Inventory Types by Sector -->
+                ${InventoryTypesHTML(inventoryData, activeInventoryType)}
+
+                <!-- Interactive Concepts Section -->
+                <div class="mt-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        ${getIconSVG('Users', 'text-indigo-500', 'w-6 h-6')}
+                        Core Concepts by Category
+                    </h2>
+                    <div class="flex flex-wrap gap-2 mb-6 p-1 bg-white rounded-xl shadow-inner">
+                        ${conceptsData.map(c => `
+                            <button
+                                onclick="updateActiveCategory('${c.category}')"
+                                class="px-3 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-300 ${activeCategory === c.category ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-700 hover:bg-indigo-100'}"
+                            >
+                                ${c.category}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <!-- Details Display (Dynamic Content) -->
+                    ${CardHTML(activeConcept.category, `
+                        <p class="text-sm text-gray-500 mb-4">${activeConcept.title}</p>
+                        <div class="detail-scroll-area divide-y divide-gray-100">
+                            ${activeDetailsHTML}
+                        </div>
+                    `, activeConcept.icon, 'text-indigo-600')}
+                </div>
+
+                <!-- COGM/COGS Calculation Flow -->
+                ${COGMScheduleHTML(isCOGMScheduleOpen)}
+                
+                <!-- Accounting Systems Comparison -->
+                <h2 class="text-2xl font-bold text-gray-800 mt-10 mb-4 flex items-center">
+                    ${getIconSVG('BookOpen', 'text-indigo-500', 'w-6 h-6')}
+                    Management vs. Financial Accounting
+                </h2>
+                ${ComparisonTableHTML(accountingComparisonData)}
+
+                <!-- All Product Cost Formulas (EXPANDED SECTION) -->
+                <div class="mt-10 p-6 bg-indigo-50 border-l-4 border-indigo-500 rounded-xl shadow-inner">
+                    <h3 class="text-lg font-bold text-indigo-800 mb-3 flex items-center">
+                        ${getIconSVG('DollarSign', 'text-indigo-800', 'w-5 h-5')}
+                        Comprehensive Cost Formulas
+                    </h3>
+                    ${formulaGridHTML}
+                </div>
+            `;
+            appDiv.innerHTML = contentHTML;
+            // Re-attach dynamic hover logic after innerHTML update
+            renderPillLogic(); 
+        };
+
+        // Initial render on window load
+        window.onload = function() {
+            renderApp();
+        };
+        // Re-render on resize to ensure responsiveness is applied correctly
+        window.onresize = renderApp;
+    </script>
+</body>
+</html>
