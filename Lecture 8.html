@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetics Lecture 8 - Mutations (Deep Dive)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf4ff;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #6b21a8 0%, #86198f 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .example-box {
+            background-color: #fefce8;
+            border-left: 4px solid #eab308;
+        }
+    </style>
+</head>
+<body class="text-gray-900 antialiased">
+
+    <!-- Header -->
+    <header class="gradient-header text-white py-12 mb-8 shadow-xl">
+        <div class="max-w-7xl mx-auto text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Genetics Lecture 8</h1>
+            <h2 class="text-2xl md:text-4xl ar-text font-bold text-purple-100">الطفرات: الآليات، الأسباب، والإصلاح (شرح موسع)</h2>
+            <p class="mt-6 text-lg text-purple-200 max-w-3xl mx-auto">
+                Comprehensive guide to Somatic vs Germline mutations, Molecular mechanisms of base changes, Huntington's pathogenesis, and detailed DNA repair pathways.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pb-20 space-y-16">
+
+        <!-- 1. The Biological Context of Mutations -->
+        <section>
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-6 border-b-2 border-purple-200 pb-2">
+                <h3 class="text-3xl font-bold text-purple-900">1. Nature & Classification</h3>
+                <span class="ar-text text-xl text-purple-700 font-bold">طبيعة وتصنيف الطفرات</span>
+            </div>
+            
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-purple-100 mb-8">
+                <div class="mb-6">
+                    <h4 class="text-xl font-bold text-purple-800 mb-2">Evolutionary Significance</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Mutations are the primary source of <strong>Genetic Variation</strong>. Without mutations, evolution cannot occur. 
+                        <br><em>Classic Example:</em> The elongation of the giraffe's neck was driven by beneficial mutations selected over generations.
+                    </p>
+                    <p class="ar-text text-gray-600 mt-2 text-right border-t pt-2">
+                        الطفرات هي المصدر الرئيسي للتنوع الجيني، وبدونها لا يحدث التطور. مثال: استطالة عنق الزرافة كانت نتيجة طفرات مفيدة تم اختيارها طبيعياً.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Somatic -->
+                    <div class="bg-purple-50 p-6 rounded-xl border-t-4 border-purple-600 shadow-sm hover:bg-purple-100 transition">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-xl text-purple-900">Somatic Mutations</h4>
+                            <span class="bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded font-bold uppercase">Non-Inherited</span>
+                        </div>
+                        <p class="ar-text text-gray-500 font-bold mt-1 mb-3">طفرات الخلايا الجسدية</p>
+                        <ul class="space-y-2 text-sm text-gray-800 list-disc pl-5">
+                            <li>Occur in body tissues (Skin, Liver, Muscle).</li>
+                            <li><strong>Effect:</strong> Affects only the individual (e.g., Skin Cancer).</li>
+                            <li><strong>Scope:</strong> Only tissues derived from the mutated cell via Mitosis are affected (Mosaicism).</li>
+                            <li><strong>Inheritance:</strong> NEVER passed to offspring.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Germline -->
+                    <div class="bg-pink-50 p-6 rounded-xl border-t-4 border-pink-600 shadow-sm hover:bg-pink-100 transition">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-xl text-pink-900">Germ Cell Mutations</h4>
+                            <span class="bg-pink-200 text-pink-800 text-xs px-2 py-1 rounded font-bold uppercase">Inherited</span>
+                        </div>
+                        <p class="ar-text text-gray-500 font-bold mt-1 mb-3">طفرات الخلايا التناسلية</p>
+                        <ul class="space-y-2 text-sm text-gray-800 list-disc pl-5">
+                            <li>Occur in Gametes (Sperm/Egg) or their precursors.</li>
+                            <li><strong>Effect:</strong> May not affect the parent, but defines the offspring.</li>
+                            <li><strong>Scope:</strong> Every single cell in the new organism will carry this mutation.</li>
+                            <li><strong>Inheritance:</strong> Passed to future generations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Molecular Types: Substitutions -->
+        <section>
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-6 border-b-2 border-blue-200 pb-2">
+                <h3 class="text-3xl font-bold text-blue-900">2. Substitution Mutations</h3>
+                <span class="ar-text text-xl text-blue-700 font-bold">طفرات الاستبدال (تغيير كيميائي)</span>
+            </div>
+
+            <!-- Transition vs Transversion Deep Dive -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-blue-500">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">A. Transition (الأكثر شيوعاً)</h4>
+                    <p class="text-sm text-gray-600 mb-3">Replacing a base with another of the <strong>same chemical family</strong> (Ring structure remains similar).</p>
+                    <div class="bg-blue-50 p-3 rounded text-sm font-mono text-blue-900">
+                        <p>Purine ↔ Purine (A ↔ G)</p>
+                        <p>Pyrimidine ↔ Pyrimidine (C ↔ T)</p>
+                    </div>
+                    <p class="ar-text text-sm text-gray-500 mt-2">استبدال "حلقة بحلقة" أو "حلقتين بحلقتين". يحافظ على عرض الهيكل.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-red-500">
+                    <h4 class="font-bold text-lg text-red-800 mb-2">B. Transversion (الأخطر)</h4>
+                    <p class="text-sm text-gray-600 mb-3">Replacing a base with one from a <strong>different family</strong> (Changes DNA width).</p>
+                    <div class="bg-red-50 p-3 rounded text-sm font-mono text-red-900">
+                        <p>Purine ↔ Pyrimidine</p>
+                        <p>(A/G ↔ C/T)</p>
+                    </div>
+                    <p class="ar-text text-sm text-gray-500 mt-2">استبدال "حلقة بحلقتين" أو العكس. يسبب تشوهاً في الحلزون المزدوج.</p>
+                </div>
+            </div>
+
+            <!-- Functional Impact Table -->
+            <div class="overflow-hidden rounded-xl border border-gray-200 shadow-lg">
+                <table class="w-full text-left bg-white">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="p-4 w-1/4">Type</th>
+                            <th class="p-4 w-1/2">Mechanism & Consequence</th>
+                            <th class="p-4 w-1/4">Specific Example</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4">
+                                <strong class="text-green-700 text-lg">Silent</strong>
+                                <span class="ar-text block text-sm text-gray-500">صامتة</span>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700">
+                                <strong>Wobble Hypothesis:</strong> Due to redundancy in the genetic code, the new codon still codes for the <strong>same amino acid</strong>.
+                                <br><span class="text-xs text-gray-500">Phenotype is unchanged. often occurs at the 3rd base of a codon.</span>
+                            </td>
+                            <td class="p-4 font-mono text-sm">GGU &rarr; GGC<br>(Both = Glycine)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4">
+                                <strong class="text-yellow-700 text-lg">Missense</strong>
+                                <span class="ar-text block text-sm text-gray-500">مغلوطة (تغيير المعنى)</span>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700">
+                                The new codon codes for a <strong>different amino acid</strong>.
+                                <br>Effect depends on the chemical difference between the old and new amino acid (Conservative vs Non-conservative).
+                            </td>
+                            <td class="p-4 font-mono text-sm">
+                                <span class="block mb-1">Slide Ex:</span>
+                                CAA (Gln) &rarr; CCA (Pro)
+                                <span class="block mt-2 text-xs text-gray-400">Famous Ex: Sickle Cell (Glu &rarr; Val)</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4">
+                                <strong class="text-red-700 text-lg">Nonsense</strong>
+                                <span class="ar-text block text-sm text-gray-500">لاغية (وقوف مبكر)</span>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700">
+                                The new codon is a <strong>STOP codon</strong> (UAA, UAG, UGA).
+                                <br>Ribosome stops translation immediately. Result is a <strong>truncated (shortened) protein</strong>, usually non-functional.
+                            </td>
+                            <td class="p-4 font-mono text-sm">CAA (Gln) &rarr; <span class="text-red-600 font-bold">UAA (Stop)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Structural Changes: Indels & Expansions -->
+        <section>
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-6 border-b-2 border-orange-200 pb-2">
+                <h3 class="text-3xl font-bold text-orange-900">3. Frameshifts & Repeats</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Frameshift Explanation -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
+                    <h4 class="font-bold text-xl text-orange-800 mb-3">Frameshift Mutation</h4>
+                    <p class="text-sm text-gray-700 mb-4">
+                        Insertion or Deletion of bases (not divisible by 3) shifts the "Reading Frame" of the ribosome.
+                    </p>
+                    
+                    <div class="example-box p-4 rounded-lg text-sm font-mono mb-4">
+                        <p class="text-gray-500 mb-1">Normal Sentence (Codons of 3):</p>
+                        <strong class="block text-green-700 text-lg">THE FAT CAT SAT</strong>
+                        
+                        <p class="text-gray-500 mt-3 mb-1">Delete 'F' (Frameshift):</p>
+                        <strong class="block text-red-600 text-lg">THE ATC ATS AT...</strong>
+                        <p class="text-xs text-red-500 mt-1">Total gibberish downstream!</p>
+                    </div>
+                    
+                    <p class="ar-text text-sm text-gray-600 text-right">
+                        تخيل الجملة الوراثية ككلمات ثلاثية. حذف حرف واحد يغير تقسيم كل الكلمات التي تليه، مما ينتج بروتيناً عشوائياً تماماً وغالباً ما ينتهي بوقوف مبكر.
+                    </p>
+                </div>
+
+                <!-- Huntington's Detail -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-600">
+                    <h4 class="font-bold text-xl text-red-800 mb-3">Trinucleotide Repeat Expansion</h4>
+                    <p class="text-sm text-gray-700 mb-3">
+                        <strong>Mechanism:</strong> Replication Slippage. DNA polymerase "slips" and copies the same section multiple times.
+                    </p>
+                    
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                        <strong class="block text-red-900 mb-2">Huntington's Disease (HD)</strong>
+                        <ul class="list-disc pl-4 text-sm text-gray-700 space-y-1">
+                            <li><strong>Repeated Sequence:</strong> <span class="font-mono bg-white px-1">CAG</span> (Codes for Glutamine).</li>
+                            <li><strong>Normal:</strong> 10-26 repeats.</li>
+                            <li><strong>Pathogenic:</strong> >40 repeats.</li>
+                            <li><strong>Effect:</strong> Creates a "Poly-Glutamine" tail in the Huntingtin protein. This makes the protein sticky/toxic, killing brain neurons.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Spontaneous Chemical Changes (Detailed Mechanisms) -->
+        <section>
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-6 border-b-2 border-indigo-200 pb-2">
+                <h3 class="text-3xl font-bold text-indigo-900">4. Spontaneous Causes</h3>
+                <span class="ar-text text-xl text-indigo-700 font-bold">أسباب تلقائية (كيميائية)</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Tautomerism -->
+                <div class="bg-white p-6 rounded-xl shadow card-hover border-t-4 border-indigo-400">
+                    <h5 class="font-bold text-indigo-900 mb-2">1. Tautomeric Shift</h5>
+                    <p class="text-xs text-gray-500 font-mono mb-2">Keto Form (Normal) ↔ Enol Form (Rare)</p>
+                    <p class="text-sm text-gray-700">
+                        Bases exist in equilibrium between two shapes. If replication happens while a base is in its rare <strong>Enol form</strong>, it pairs wrongly.
+                        <br><span class="text-indigo-600 font-bold text-xs">Ex: Rare 'G' pairs with 'T' (instead of C).</span>
+                    </p>
+                    <p class="ar-text text-xs text-gray-500 mt-2 border-t pt-2">تغير لحظي في توزيع ذرات الهيدروجين يغير قدرة القاعدة على الارتباط، فتتزوج مع الخطأ.</p>
+                </div>
+
+                <!-- Depurination -->
+                <div class="bg-white p-6 rounded-xl shadow card-hover border-t-4 border-indigo-500">
+                    <h5 class="font-bold text-indigo-900 mb-2">2. Depurination</h5>
+                    <p class="text-xs text-gray-500 font-mono mb-2">Loss of A or G</p>
+                    <p class="text-sm text-gray-700">
+                        Spontaneous hydrolysis breaks the bond between the base and sugar.
+                        <br><strong>Result:</strong> Apurinic Site (AP site). A hole in the DNA code.
+                        <br><span class="text-red-500 font-bold text-xs">Replication stalls or inserts a random base here.</span>
+                    </p>
+                    <p class="ar-text text-xs text-gray-500 mt-2 border-t pt-2">انفصال قاعدة البيورين تلقائياً عن السكر، مما يترك مكاناً فارغاً يسبب الحيرة للإنزيم الباني.</p>
+                </div>
+
+                <!-- Deamination -->
+                <div class="bg-white p-6 rounded-xl shadow card-hover border-t-4 border-indigo-600">
+                    <h5 class="font-bold text-indigo-900 mb-2">3. Deamination</h5>
+                    <p class="text-xs text-gray-500 font-mono mb-2">Cytosine &rarr; Uracil</p>
+                    <p class="text-sm text-gray-700">
+                        Loss of an amino group (-NH2). Cytosine turns into Uracil (which belongs in RNA!).
+                        <br><strong>Danger:</strong> Uracil pairs with Adenine.
+                        <br><span class="text-indigo-600 font-bold text-xs">Result: C-G pair becomes T-A pair in next gen.</span>
+                    </p>
+                    <p class="ar-text text-xs text-gray-500 mt-2 border-t pt-2">تحول كيميائي للسيتوزين يجعله يوراسيل. إذا لم يُصلح، سيتم قراءته كأنه ثايمين وتتغير الشفرة.</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-gray-100 p-4 rounded-lg flex items-center gap-4">
+                <span class="bg-gray-800 text-white font-bold px-3 py-1 rounded text-xs">INDUCED</span>
+                <p class="text-sm text-gray-700"><strong>Mutagens:</strong> UV Light (Causes Thymine Dimers), X-Rays (Break backbone), Chemicals (Intercalating agents).</p>
+            </div>
+        </section>
+
+        <!-- 5. DNA Repair Systems (Step-by-Step) -->
+        <section>
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-6 border-b-2 border-teal-200 pb-2">
+                <h3 class="text-3xl font-bold text-teal-900">5. DNA Repair Pathways</h3>
+                <span class="ar-text text-xl text-teal-700 font-bold">أنظمة الدفاع (الإصلاح)</span>
+            </div>
+
+            <div class="space-y-8">
+                
+                <!-- Single Strand Repair -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-teal-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-teal-500 text-white px-4 py-1 rounded-bl-xl text-xs font-bold">Single Strand Damage</div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- MMR -->
+                        <div class="space-y-2">
+                            <h5 class="font-bold text-teal-800 border-b pb-1">1. Mismatch Repair (MMR)</h5>
+                            <p class="text-xs font-bold text-gray-500 uppercase">The Spell Checker</p>
+                            <p class="text-sm text-gray-700">
+                                Works <strong>immediately after replication</strong>. It scans the <em>newly synthesized strand</em> for bumps caused by mismatches (e.g., G paired with T).
+                            </p>
+                            <p class="text-xs bg-teal-50 p-2 rounded text-teal-800">Cuts out the chunk of new strand and replaces it correctly.</p>
+                        </div>
+
+                        <!-- BER -->
+                        <div class="space-y-2">
+                            <h5 class="font-bold text-teal-800 border-b pb-1">2. Base Excision Repair (BER)</h5>
+                            <p class="text-xs font-bold text-gray-500 uppercase">The Tweezer</p>
+                            <p class="text-sm text-gray-700">
+                                Fixes small, non-bulky damage (e.g., Uracil in DNA).
+                            </p>
+                            <ol class="list-decimal pl-4 text-xs text-gray-600 space-y-1">
+                                <li><strong>Glycosylase enzyme</strong> flips the damaged base out and cuts it off.</li>
+                                <li>Endonuclease cuts the sugar-phosphate backbone.</li>
+                                <li>Polymerase fills the 1-nucleotide gap.</li>
+                            </ol>
+                        </div>
+
+                        <!-- NER -->
+                        <div class="space-y-2">
+                            <h5 class="font-bold text-teal-800 border-b pb-1">3. Nucleotide Excision Repair (NER)</h5>
+                            <p class="text-xs font-bold text-gray-500 uppercase">The Surgeon</p>
+                            <p class="text-sm text-gray-700">
+                                Fixes <strong>Bulky Lesions</strong> that distort the helix (e.g., <strong>Thymine Dimers</strong> caused by UV).
+                            </p>
+                            <p class="text-xs bg-teal-50 p-2 rounded text-teal-800">Cuts a large "patch" (12-24 bases) around the damage, removes it, and rebuilds fresh.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Double Strand Repair -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-inner border border-gray-200">
+                    <h4 class="font-bold text-xl text-red-800 mb-4">Double-Strand Breaks (The most dangerous)</h4>
+                    <p class="text-sm text-gray-600 mb-6">If the DNA snaps completely in half (e.g., from X-rays), the cell has two options:</p>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-green-500 shadow-sm">
+                            <h5 class="font-bold text-green-800 mb-2">A. Homologous Recombination (HR)</h5>
+                            <span class="bg-green-100 text-green-800 text-[10px] px-2 py-1 rounded font-bold uppercase">Error-Free</span>
+                            <p class="text-sm text-gray-700 mt-3">
+                                <strong>Requirement:</strong> Needs a sister chromatid (undamaged copy) nearby.
+                                <br><strong>Timing:</strong> Only in S or G2 phase.
+                                <br><strong>Process:</strong> Copies the sequence from the sister to repair the break perfectly.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                            <h5 class="font-bold text-red-800 mb-2">B. Non-Homologous End Joining (NHEJ)</h5>
+                            <span class="bg-red-100 text-red-800 text-[10px] px-2 py-1 rounded font-bold uppercase">Error-Prone</span>
+                            <p class="text-sm text-gray-700 mt-3">
+                                <strong>Scenario:</strong> No sister chromatid available (G1 phase) or desperate emergency.
+                                <br><strong>Process:</strong> Proteins just grab the two broken ends, trim them, and glue them back together.
+                                <br><strong>Cost:</strong> Often loses a few bases (Mutation), but saves the chromosome from falling apart.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
