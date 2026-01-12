@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetics Lecture 10 - Population Genetics (Complete)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background-color: #15803d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="gradient-header text-white py-12 mb-8 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Genetics Lecture 10</h1>
+            <h2 class="text-2xl md:text-3xl ar-text font-bold text-gray-200">وراثة العشائر - النسخة الكاملة</h2>
+            <p class="mt-4 opacity-90">Evolution, Modern Synthesis, Speciation, and Hardy-Weinberg</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20 space-y-12">
+
+        <!-- 1. Definitions -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-green-200 pb-2">
+                <h3 class="text-2xl font-bold text-green-900">1. Basic Definitions</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl shadow border-t-4 border-green-600">
+                    <h4 class="font-bold text-green-800 mb-2">Species (النوع)</h4>
+                    <p class="text-sm text-gray-600">Group of similar organisms that interbreed to produce <strong>fertile viable offspring</strong>.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border-t-4 border-teal-600">
+                    <h4 class="font-bold text-teal-800 mb-2">Population (العشيرة)</h4>
+                    <p class="text-sm text-gray-600">Group of organisms of the <strong>same species</strong> living in the <strong>same area</strong> at the <strong>same time</strong>.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow border-t-4 border-blue-600">
+                    <h4 class="font-bold text-blue-800 mb-2">Gene Pool</h4>
+                    <p class="text-sm text-gray-600">The collective genetic information contained within a population.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Darwin's Theory & Mendel -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-yellow-200 pb-2">
+                <h3 class="text-2xl font-bold text-yellow-900">2. Darwin & Mendel</h3>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-500 mb-6">
+                <h4 class="font-bold text-lg text-yellow-800 mb-3">Darwin's Natural Selection</h4>
+                <p class="text-sm text-gray-700 mb-2">Organisms better adapted tend to survive and reproduce.</p>
+                <ul class="list-disc pl-5 text-sm text-gray-600">
+                    <li><strong>Key Concept:</strong> Differential survival based on phenotype.</li>
+                    <li><strong>Divergence:</strong> Changes lead to <strong>divergent organisms</strong> (sharing a common ancestor).</li>
+                    <li><strong>3 Principles:</strong> Variation is Random, Heritable, and changes in frequency.</li>
+                </ul>
+            </div>
+
+            <!-- ADDED: Mendel Section (Slide 8) -->
+            <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                <h4 class="font-bold text-purple-800 mb-2">Mendelian Inheritance (1865)</h4>
+                <p class="text-sm text-gray-700">Mendel discovered <strong>Particulate Inheritance</strong>:</p>
+                <div class="bg-white p-3 mt-2 rounded border-l-4 border-purple-500">
+                    <p class="text-xs italic text-gray-600">"Inheritance of discrete characters via genes that are independently expressed <strong>without the blending</strong> of characters from one generation to the next."</p>
+                    <p class="ar-text text-xs text-gray-500 mt-1 text-right">وراثة الجسيمات: توريث صفات محددة عبر الجينات التي يتم التعبير عنها بشكل مستقل دون "امتزاج" الصفات.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. The Modern Evolutionary Synthesis (Expanded) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-indigo-200 pb-2">
+                <h3 class="text-2xl font-bold text-indigo-900">3. Modern Evolutionary Synthesis</h3>
+            </div>
+            
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200 mb-8">
+                <h4 class="text-center font-bold text-indigo-900 mb-4">Integration of Darwin & Mendel (1930s-40s)</h4>
+                <div class="flex flex-col md:flex-row gap-4 text-sm justify-center">
+                    <div class="bg-white p-4 rounded shadow-sm w-full md:w-1/3">
+                        <strong class="block text-indigo-600 border-b pb-1 mb-2">Mendel's Insights</strong>
+                        <ul class="list-disc pl-4 text-gray-600 text-xs space-y-1">
+                            <li>Heredity</li>
+                            <li>Mechanics of inheritance (Genes)</li>
+                            <li>Particulate Inheritance</li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center justify-center text-2xl text-gray-400">+</div>
+                    <div class="bg-white p-4 rounded shadow-sm w-full md:w-1/3">
+                        <strong class="block text-yellow-600 border-b pb-1 mb-2">Darwin's Insights</strong>
+                        <ul class="list-disc pl-4 text-gray-600 text-xs space-y-1">
+                            <li>Evolution</li>
+                            <li>Natural Selection</li>
+                            <li>Variation</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-center mt-4 text-sm font-bold text-indigo-800 bg-white py-2 rounded">
+                    Result: Evolution defined as "Changes in allele frequencies within populations".
+                </p>
+            </div>
+
+            <!-- The 5 Steps (Detailed from Slide 12) -->
+            <div class="space-y-4">
+                <h4 class="font-bold text-gray-800">Five Basic Steps of Evolution (T. Dobzhansky):</h4>
+                
+                <!-- Step 1: Gene Variability (Expanded) -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="step-number">1</div>
+                        <h5 class="font-bold text-green-700">Gene Variability (التنوع الجيني)</h5>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3 ml-11">Variations present due to genetic changes. Causes:</p>
+                    <div class="grid md:grid-cols-2 gap-3 ml-11">
+                        <div class="bg-green-50 p-2 rounded text-xs border border-green-100">
+                            <strong>Mutations:</strong> Sudden heritable changes (permanent change in genetic material).
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs border border-green-100">
+                            <strong>Recombination:</strong> Exchange of genetic material during crossing over (Meiosis).
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs border border-green-100">
+                            <strong>Hybridization:</strong> Two species are crossed -> offspring is <em>Hybrid</em>.
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs border border-green-100">
+                            <strong>Genetic Drift:</strong> Elimination of genes/alleles by <em>chance events</em> (like disease or natural enemies).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-3">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h5 class="font-bold text-green-700 text-sm">Heredity</h5>
+                        <p class="text-xs text-gray-600">Transfer of characters from parents to offspring.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-3">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h5 class="font-bold text-green-700 text-sm">Natural Selection</h5>
+                        <p class="text-xs text-gray-600">Differential reproduction. Useful genes become predominant.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-3">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h5 class="font-bold text-green-700 text-sm">Reproductive Isolation</h5>
+                        <p class="text-xs text-gray-600">Prevention of interbreeding (Geographical, Temporal, Behavioral).</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-3">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h5 class="font-bold text-green-700 text-sm">Speciation</h5>
+                        <p class="text-xs text-gray-600">Formation of new and distinct species.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Hardy-Weinberg Equilibrium -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-red-200 pb-2">
+                <h3 class="text-2xl font-bold text-red-900">4. Hardy-Weinberg Equilibrium</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow border-l-4 border-red-500">
+                <h4 class="font-bold text-gray-800 mb-2">The Theory (1908)</h4>
+                <p class="text-sm text-gray-600 mb-4">
+                    Allele frequencies remain <strong>constant</strong> in the absence of evolutionary influences.
+                </p>
+                <div class="bg-red-50 p-4 rounded-lg">
+                    <h5 class="font-bold text-red-800 text-sm mb-2">Microevolution (Disturbing Factors):</h5>
+                    <ul class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                        <li>• Mutation</li>
+                        <li>• Natural Selection</li>
+                        <li>• Gene Flow (Migration)</li>
+                        <li>• Genetic Drift (Change in population size)</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-xs text-gray-500 italic">
+                    * Microevolution can occur for a single locus while others remain at equilibrium.
+                </p>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
