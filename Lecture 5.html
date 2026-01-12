@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetics Lecture 5 - Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            vertical-align: middle;
+        }
+        .syndrome-card {
+            border-top: 4px solid;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="gradient-header text-white py-12 mb-8 shadow-lg">
+        <div class="max-w-5xl mx-auto text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Genetics Lecture 5</h1>
+            <h2 class="text-2xl md:text-3xl ar-text font-bold text-gray-200">الوراثة - المحاضرة الخامسة</h2>
+            <p class="mt-4 text-lg opacity-90">Sex Determination, Chromosomal Disorders, and Sex-Related Inheritance</p>
+            <p class="ar-text opacity-90">تحديد الجنس، الاضطرابات الكروموسومات، وأنماط الوراثة المرتبطة بالجنس</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20 space-y-12">
+
+        <!-- 1. Organism Types (Monoecious vs Dioecious) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-purple-200 pb-2">
+                <h3 class="text-2xl font-bold text-purple-900">1. Organism Types (أنواع الكائنات)</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Monoecious -->
+                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
+                    <h4 class="text-xl font-bold text-green-700 mb-2">Monoecious (أحادي المسكن)</h4>
+                    <p class="text-sm text-gray-600 mb-2"><em>"Mono" = One, "Ecy" = House.</em></p>
+                    <p class="text-gray-800 font-semibold">Organism is both male and female (Hermaphrodite).</p>
+                    <p class="ar-text text-gray-600 mt-2">الكائن يحتوي على أعضاء التذكير والتأنيث معاً في "مسكن واحد".</p>
+                    <div class="mt-4 bg-green-50 p-2 rounded text-sm font-bold text-green-800">
+                        Examples: Plants, Earthworms, Jellyfish.
+                    </div>
+                </div>
+                <!-- Dioecious -->
+                <div class="bg-white p-6 rounded-xl shadow border-l-4 border-blue-500">
+                    <h4 class="text-xl font-bold text-blue-700 mb-2">Dioecious (ثنائي المسكن)</h4>
+                    <p class="text-sm text-gray-600 mb-2"><em>"Di" = Two, "Ecy" = House.</em></p>
+                    <p class="text-gray-800 font-semibold">Separate male and female individuals.</p>
+                    <p class="ar-text text-gray-600 mt-2">الكائنات منفصلة الجنس، الذكر في جسم والأنثى في جسم آخر ("مسكنين").</p>
+                    <div class="mt-4 bg-blue-50 p-2 rounded text-sm font-bold text-blue-800">
+                        Examples: Humans, Mammals.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. X vs Y Chromosome Comparison -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-indigo-200 pb-2">
+                <h3 class="text-2xl font-bold text-indigo-900">2. The X vs Y Chromosome</h3>
+                <span class="ar-text text-lg text-indigo-700 font-bold">مقارنة الكروموسومات الجنسية</span>
+            </div>
+            <div class="overflow-x-auto bg-white rounded-xl shadow-md">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-indigo-900 text-white">
+                        <tr>
+                            <th class="p-4 w-1/4">Feature / وجه المقارنة</th>
+                            <th class="p-4 w-1/3">X Chromosome (كروموسوم X)</th>
+                            <th class="p-4 w-1/3">Y Chromosome (كروموسوم Y)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="p-4 font-bold bg-gray-50">Discovery</td>
+                            <td class="p-4">Identified as special in 1890.</td>
+                            <td class="p-4">Identified as sex-determining in 1905.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold bg-gray-50">Function</td>
+                            <td class="p-4">Female sex determination.<br><span class="ar-text text-sm text-gray-500">تحديد الجنس الأنثوي.</span></td>
+                            <td class="p-4">Male sex determination.<br><span class="ar-text text-sm text-gray-500">تحديد الجنس الذكري.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold bg-gray-50">Size & Position</td>
+                            <td class="p-4">Large (5x larger than Y). Position 8 in karyotype.<br><span class="ar-text text-sm text-gray-500">كبير الحجم (أكبر 5 مرات).</span></td>
+                            <td class="p-4">Smallest human chromosome. Much shorter.<br><span class="ar-text text-sm text-gray-500">صغير جداً وقصير.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold bg-gray-50">Gene Count</td>
+                            <td class="p-4"><strong>900 - 1200 genes</strong></td>
+                            <td class="p-4"><strong>70 - 300 genes</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold bg-gray-50">Survival</td>
+                            <td class="p-4 text-green-600 font-bold">Essential for Life (لا حياة بدونه)</td>
+                            <td class="p-4 text-gray-500">Not required for survival (غير ضروري للحياة)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Chromosomal Disorders (Nondisjunction) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-red-200 pb-2">
+                <h3 class="text-2xl font-bold text-red-900">3. Sex-Determination Disorders</h3>
+                <span class="ar-text text-lg text-red-700 font-bold">اضطرابات تحديد الجنس</span>
+            </div>
+            
+            <div class="bg-red-50 p-6 rounded-xl border border-red-100 mb-8">
+                <h4 class="font-bold text-red-800 mb-2">Mechanism: Nondisjunction (عدم الانفصال)</h4>
+                <p class="mb-2">Failure of chromosomes to segregate normally during <strong>Meiosis I</strong> or <strong>Meiosis II</strong>.</p>
+                <p class="ar-text text-gray-700">فشل الكروموسومات في الانفصال بشكل طبيعي أثناء الانقسام الميوزي، مما يؤدي إلى أمشاج (حيوانات منوية أو بويضات) تحتوي على عدد خاطئ من الكروموسومات.</p>
+                <ul class="list-disc ml-5 mt-3 text-sm font-semibold text-gray-800">
+                    <li>Trisomic (2n + 1): Extra chromosome. (زائد)</li>
+                    <li>Monosomic (2n - 1): Missing chromosome. (ناقص)</li>
+                </ul>
+            </div>
+
+            <!-- The 4 Syndromes Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <!-- Triple X -->
+                <div class="bg-white p-6 rounded-xl shadow-md syndrome-card border-pink-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-bold text-pink-600">Triple X Syndrome</h4>
+                        <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full font-bold">47, XXX</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Sex:</strong> Female Only.</li>
+                        <li><strong>Incidence:</strong> 1 in 1,000.</li>
+                        <li><strong>Symptoms:</strong>
+                            <ul class="list-disc pl-4 mt-1 text-gray-600">
+                                <li>Taller than average, thin build.</li>
+                                <li>Often no symptoms (Asymptomatic).</li>
+                                <li>Normal sexual development & fertility.</li>
+                                <li>Possible learning disabilities or seizures (rare).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="ar-text text-right text-sm text-gray-500 mt-4 pt-2 border-t">أنثى، طويلة ونحيفة، غالباً طبيعية وخصبة، قد تعاني صعوبات تعلم.</p>
+                </div>
+
+                <!-- Klinefelter -->
+                <div class="bg-white p-6 rounded-xl shadow-md syndrome-card border-blue-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-bold text-blue-600">Klinefelter Syndrome</h4>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold">47, XXY</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Sex:</strong> Male Only.</li>
+                        <li><strong>Incidence:</strong> 1 in 500.</li>
+                        <li><strong>Symptoms:</strong>
+                            <ul class="list-disc pl-4 mt-1 text-gray-600">
+                                <li>Taller than average.</li>
+                                <li><strong>Gynecomastia:</strong> Breast enlargement.</li>
+                                <li>Reduced facial/body hair.</li>
+                                <li><strong>Infertility</strong> (Impaired testosterone).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="ar-text text-right text-sm text-gray-500 mt-4 pt-2 border-t">ذكر، طويل، تثدي (كير بالثدي)، شعر جسم قليل، وعقيم غالباً.</p>
+                </div>
+
+                <!-- Turner -->
+                <div class="bg-white p-6 rounded-xl shadow-md syndrome-card border-purple-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-bold text-purple-600">Turner Syndrome</h4>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-bold">45, XO</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Sex:</strong> Female Only (Monosomy).</li>
+                        <li><strong>Incidence:</strong> 1 in 2,500.</li>
+                        <li><strong>Symptoms:</strong>
+                            <ul class="list-disc pl-4 mt-1 text-gray-600">
+                                <li>Short stature (قصيرة القامة).</li>
+                                <li>Webbed neck (رقبة عريضة).</li>
+                                <li><strong>Infertility</strong> (No secondary sex characteristics).</li>
+                                <li>Heart/Kidney defects.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="ar-text text-right text-sm text-gray-500 mt-4 pt-2 border-t">أنثى، قصيرة، رقبة عريضة، عقيمة، مشاكل في القلب/الكلى.</p>
+                </div>
+
+                <!-- Jacob's (XYY) -->
+                <div class="bg-white p-6 rounded-xl shadow-md syndrome-card border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-bold text-gray-700">Jacob's Syndrome</h4>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full font-bold">47, XYY</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Sex:</strong> Male Only.</li>
+                        <li><strong>Symptoms:</strong>
+                            <ul class="list-disc pl-4 mt-1 text-gray-600">
+                                <li>Normal male phenotype.</li>
+                                <li>Fertile (can reproduce).</li>
+                                <li>Taller than average, grow faster.</li>
+                                <li>Old studies suggested aggression/antisocial behavior (Debated).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="ar-text text-right text-sm text-gray-500 mt-4 pt-2 border-t">ذكر، طويل جداً، خصب، قد يكون لديه مشاكل سلوكية (عدوانية).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. X-Inactivation (Barr Bodies) -->
+        <section class="bg-gray-100 p-6 rounded-xl border border-gray-300">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Why is extra X less harmful? (لماذا زيادة X أقل ضرراً؟)</h3>
+            <p class="mb-4">Because of <strong>X-Inactivation</strong>.</p>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1">
+                    <p class="text-sm text-gray-700">
+                        In females (or males with extra X), one X chromosome is randomly compacted into a dense structure called a <strong>Barr Body</strong> to stop gene expression. This is "Dosage Compensation".
+                    </p>
+                    <ul class="mt-2 text-xs font-mono bg-white p-3 rounded border">
+                        <li>XX Female → 1 Barr Body</li>
+                        <li>XXX Female → 2 Barr Bodies</li>
+                        <li>XXY Male → 1 Barr Body</li>
+                        <li>XY Male → 0 Barr Bodies</li>
+                    </ul>
+                </div>
+                <div class="flex-1 border-l-2 border-gray-300 pl-4 ar-text text-right">
+                    <p class="text-sm text-gray-700">
+                        يتم تعطيل كروموسومات X الزائدة وتحويلها إلى جسم خامد يسمى <strong>"جسم بار"</strong>. هذا يقلل من الضرر الناتج عن الجينات الزائدة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Sex Inheritance Patterns (Detailed) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-teal-200 pb-2">
+                <h3 class="text-2xl font-bold text-teal-900">4. Patterns of Sex Inheritance</h3>
+                <span class="ar-text text-lg text-teal-700 font-bold">أنماط الوراثة الجنسية</span>
+            </div>
+
+            <!-- A. Sex-Linked -->
+            <div class="mb-8 bg-white p-6 rounded-xl shadow-sm border-l-4 border-teal-500">
+                <h4 class="text-lg font-bold text-teal-800 mb-2">A. Sex-Linked Traits (مرتبطة بالجنس)</h4>
+                <p class="text-sm text-gray-600 mb-4">Genes located ON the sex chromosomes (X or Y).</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-teal-50 p-3 rounded">
+                        <strong class="block mb-1">X-Linked Recessive (Human Examples)</strong>
+                        <ul class="list-disc pl-4">
+                            <li>Color Blindness (عمى الألوان).</li>
+                            <li>Hemophilia (سيولة الدم).</li>
+                        </ul>
+                        <p class="mt-2 text-xs"><strong>Rule:</strong> Males (XY) are more affected because they have only ONE X. Females (XX) are usually carriers.</p>
+                    </div>
+                    <div class="bg-teal-50 p-3 rounded">
+                        <strong class="block mb-1">Drosophila Eye Color</strong>
+                        <ul class="list-disc pl-4">
+                            <li>Discovered by Thomas Hunt Morgan (1910).</li>
+                            <li>Red (X<sup>W</sup>) is Dominant.</li>
+                            <li>White (X<sup>w</sup>) is Recessive.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B. Sex-Limited vs Sex-Influenced (Crucial Table) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">B. Autosomal Traits Affected by Sex (صفات جسدية تتأثر بالجنس)</h4>
+                
+                <table class="w-full text-left border-collapse mb-8">
+                    <thead>
+                        <tr class="bg-gray-800 text-white">
+                            <th class="p-3 w-1/3">Feature</th>
+                            <th class="p-3 w-1/3">Sex-Limited (محددة بالجنس)</th>
+                            <th class="p-3 w-1/3">Sex-Influenced (متأثرة بالجنس)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Gene Location</td>
+                            <td class="p-3">Autosomal (جسدية)</td>
+                            <td class="p-3">Autosomal (جسدية)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Expression</td>
+                            <td class="p-3 text-red-600 font-bold">Expressed in ONE sex only.<br><span class="ar-text font-normal text-xs text-black">تظهر في جنس واحد فقط.</span></td>
+                            <td class="p-3 text-blue-600 font-bold">Expressed in BOTH, but differently.<br><span class="ar-text font-normal text-xs text-black">تظهر في الجنسين ولكن بشكل مختلف.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Penetrance</td>
+                            <td class="p-3">100% in one sex, 0% in other.</td>
+                            <td class="p-3">Dominant in one, Recessive in other.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Examples</td>
+                            <td class="p-3">Milk Production (Females only), Bird Plumage color.</td>
+                            <td class="p-3"><strong>Pattern Baldness</strong> (الصلع الوراثي), Horns in sheep.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- IMPORTANT: Baldness Rules Table -->
+                <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-300">
+                    <h5 class="text-center font-bold text-yellow-800 mb-3 text-lg">THE RULES: Pattern Baldness (B = Baldness Gene)</h5>
+                    <p class="text-center text-xs text-gray-600 mb-4">This is a Sex-Influenced Trait. B behaves as Dominant in Males, Recessive in Females.</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center bg-white rounded-lg shadow-sm">
+                            <thead class="bg-yellow-200 text-yellow-900">
+                                <tr>
+                                    <th class="p-2">Genotype</th>
+                                    <th class="p-2">Phenotype in MALE (ذكر)</th>
+                                    <th class="p-2">Phenotype in FEMALE (أنثى)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-yellow-100">
+                                <tr>
+                                    <td class="p-2 font-mono font-bold text-lg">BB</td>
+                                    <td class="p-2 font-bold text-red-600">Bald (أصلع)</td>
+                                    <td class="p-2 font-bold text-red-600">Bald/Thin Hair (صلعاء)</td>
+                                </tr>
+                                <tr class="bg-yellow-50">
+                                    <td class="p-2 font-mono font-bold text-lg">Bb</td>
+                                    <td class="p-2 font-bold text-red-600">Bald (أصلع) <br><span class="text-xs text-gray-500">(Dominant here)</span></td>
+                                    <td class="p-2 font-bold text-green-600">Normal Hair (شعر عادي) <br><span class="text-xs text-gray-500">(Recessive here)</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-mono font-bold text-lg">bb</td>
+                                    <td class="p-2 font-bold text-green-600">Normal Hair (شعر عادي)</td>
+                                    <td class="p-2 font-bold text-green-600">Normal Hair (شعر عادي)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Epigenetics Mention (Briefly from end of PDF) -->
+        <footer class="mt-8 text-center text-gray-500 text-sm p-6 border-t">
+            <p><strong>Genomic Imprinting:</strong> Genes expression depends on parental origin (Methylation stamps). Reversible.</p>
+            <p class="mt-2">Based on Lecture 5 Genetics.pdf</p>
+        </footer>
+
+    </main>
+</body>
+</html>
