@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetics Lecture 9 - Cancer Biology (Complete)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #9f1239 0%, #be123c 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        th, td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header class="gradient-header text-white py-12 mb-8 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Genetics Lecture 9: Cancer Biology</h1>
+            <h2 class="text-2xl md:text-3xl ar-text font-bold text-gray-200">بيولوجيا السرطان - النسخة الكاملة والموسعة</h2>
+            <p class="mt-4 text-lg opacity-90">Detailed Mechanisms, Hallmarks, Gene Classifications, and Therapies</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pb-20 space-y-12">
+
+        <!-- 1. Introduction: Mechanism & DNA Damage Sources -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-red-200 pb-2">
+                <h3 class="text-2xl font-bold text-red-900">1. How Cancer Propagates & DNA Damage</h3>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow border-l-4 border-red-600 mb-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Mechanism -->
+                    <div>
+                        <h4 class="font-bold text-lg text-red-700 mb-2">The Mechanism</h4>
+                        <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                            <li><strong>Root Cause:</strong> Mutation in one or more genes.</li>
+                            <li><strong>Effect:</strong> Incorrect proteins are translated.</li>
+                            <li><strong>Result:</strong> Uncontrollable multiplication -> Cancerous cells.</li>
+                            <li><strong>Timeline:</strong> A single mutation is rarely enough. Multiple mutations must accumulate over a lifetime (Explains why older people are at higher risk).</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Sources of Damage (Added from Slide 12) -->
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-red-800 mb-2 border-b border-red-200 pb-1">Sources of DNA Damage</h4>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <strong class="block text-red-600">Exogenous (External)</strong>
+                                <ul class="list-disc pl-4 mt-1 text-xs text-gray-600">
+                                    <li>Radiation (UV, X-rays)</li>
+                                    <li>Viral Infections</li>
+                                    <li>Chemicals (Chemo)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="block text-red-600">Endogenous (Internal)</strong>
+                                <ul class="list-disc pl-4 mt-1 text-xs text-gray-600">
+                                    <li>Replication stress</li>
+                                    <li>Oxygen radicals</li>
+                                    <li>Metabolic byproducts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Cell Cycle Control & Irreversible Points -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-blue-200 pb-2">
+                <h3 class="text-2xl font-bold text-blue-900">2. Cell Cycle Control System</h3>
+            </div>
+
+            <!-- The Two Irreversible Points (Added from Slide 3) -->
+            <div class="bg-blue-100 border-l-4 border-blue-600 p-4 mb-6 rounded-r-lg">
+                <h4 class="font-bold text-blue-800 mb-1">Crucial Concept: Two Irreversible Points</h4>
+                <p class="text-sm text-gray-700">There are two points in the cell cycle from which there is no return:</p>
+                <ol class="list-decimal pl-5 mt-2 text-sm font-semibold text-blue-900">
+                    <li>Replication of genetic material (تضاعف المادة الوراثية).</li>
+                    <li>Separation of sister chromatids (انفصال الكروماتيدات الشقيقة).</li>
+                </ol>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-blue-400 text-center">
+                    <div class="font-bold text-xl text-blue-800">G<sub>1</sub> Checkpoint</div>
+                    <p class="text-xs text-gray-600 mt-1">Checks cell size & DNA integrity. If failed -> <strong>G<sub>0</sub> Resting Stage</strong>.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-blue-400 text-center">
+                    <div class="font-bold text-xl text-blue-800">G<sub>2</sub> Checkpoint</div>
+                    <p class="text-xs text-gray-600 mt-1">Checks if DNA replication is complete and correct.</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-blue-400 text-center">
+                    <div class="font-bold text-xl text-blue-800">M Checkpoint</div>
+                    <p class="text-xs text-gray-600 mt-1">Checks chromosome attachment to spindle fibers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. The 9 Hallmarks of Cancer Progression (NEW SECTION) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-orange-200 pb-2">
+                <h3 class="text-2xl font-bold text-orange-900">3. Progression & Hallmarks of Cancer</h3>
+                <span class="ar-text text-lg text-orange-700 font-bold">تطور السرطان (9 مراحل)</span>
+            </div>
+            
+            <p class="text-sm text-gray-600 mb-4">From Slide 9: The sequential development of a tumor.</p>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">1</div>
+                    <div class="text-xs">
+                        <strong>Tumor promoting inflammation</strong><br>
+                        <span class="ar-text text-gray-500">التهاب يعزز الورم ونمو غير منضبط</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">2</div>
+                    <div class="text-xs">
+                        <strong>Angiogenesis</strong><br>
+                        Growth of new blood vessels.<br>
+                        <span class="ar-text text-gray-500">نمو أوعية دموية جديدة لتغذية الورم</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">3</div>
+                    <div class="text-xs">
+                        <strong>Resisting Cell Death</strong><br>
+                        Evading Apoptosis.<br>
+                        <span class="ar-text text-gray-500">مقاومة الموت الخلوي المبرمج</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">4</div>
+                    <div class="text-xs">
+                        <strong>Evasion of suppressors</strong><br>
+                        Ignoring growth inhibitors.<br>
+                        <span class="ar-text text-gray-500">تجاهل مثبطات النمو</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">5</div>
+                    <div class="text-xs">
+                        <strong>Replicative Immortality</strong><br>
+                        Endless division (Telomerase).<br>
+                        <span class="ar-text text-gray-500">الخلود التكاثري (انقسام لا نهائي)</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">6</div>
+                    <div class="text-xs">
+                        <strong>Sustained Signaling</strong><br>
+                        Proliferative signals always ON.<br>
+                        <span class="ar-text text-gray-500">إشارات تكاثر مستمرة</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">7</div>
+                    <div class="text-xs">
+                        <strong>Reprogramming Metabolism</strong><br>
+                        Altered energy production.<br>
+                        <span class="ar-text text-gray-500">تغيير أيض الخلية (لإنتاج طاقة أسرع)</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-orange-100 text-orange-700">8</div>
+                    <div class="text-xs">
+                        <strong>Evading Immune Destruction</strong><br>
+                        Hiding from immune system.<br>
+                        <span class="ar-text text-gray-500">الهروب من تدمير الجهاز المناعي</span>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 flex items-start gap-3">
+                    <div class="step-circle bg-red-600 text-white">9</div>
+                    <div class="text-xs">
+                        <strong>Invasion & Metastasis</strong><br>
+                        Spread to other organs.<br>
+                        <span class="ar-text text-gray-500">الغزو والانتشار لأعضاء أخرى</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Detailed Gene Classification (Gatekeepers vs Caretakers) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-purple-200 pb-2">
+                <h3 class="text-2xl font-bold text-purple-900">4. Types of Genes Linked to Cancer</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Proto-oncogenes -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-orange-600 mb-2">A. Proto-oncogenes</h4>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Role:</strong> Stimulate cell growth (Gas pedal).</p>
+                    <p class="text-sm text-gray-700 mb-2"><strong>Mutation:</strong> Become <em>Oncogenes</em> (Gas pedal stuck). Usually acquired.</p>
+                    <div class="bg-orange-50 p-2 rounded text-xs font-mono text-orange-800">Example: RAS gene</div>
+                </div>
+
+                <!-- Tumor Suppressor Genes (Detailed Classification) -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                    <h4 class="text-xl font-bold text-green-600 mb-2">B. Tumor-Suppressor Genes</h4>
+                    <p class="text-sm text-gray-700 mb-4"><strong>Role:</strong> Inhibit cell division (Brakes). If mutated, brakes fail.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-3 rounded border border-green-100">
+                            <strong class="text-green-800 text-sm block mb-1">1. Gatekeepers</strong>
+                            <p class="text-xs text-gray-600 mb-1">Directly suppress growth.</p>
+                            <ul class="text-xs list-disc pl-3 text-gray-500">
+                                <li>Checkpoint control</li>
+                                <li>Apoptosis genes</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded border border-green-100">
+                            <strong class="text-green-800 text-sm block mb-1">2. Caretakers</strong>
+                            <p class="text-xs text-gray-600 mb-1">Maintain genetic stability.</p>
+                            <ul class="text-xs list-disc pl-3 text-gray-500">
+                                <li>DNA repair proteins</li>
+                                <li>Damage surveillance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-gray-100 p-2 rounded text-xs font-mono text-gray-800">Example: p53, BRCA1, BRCA2</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. p53: The Guardian (With Sequence) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-indigo-200 pb-2">
+                <h3 class="text-2xl font-bold text-indigo-900">5. The Role of p53</h3>
+            </div>
+
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200">
+                <div class="flex flex-col md:flex-row gap-6 items-center">
+                    <div class="flex-1">
+                        <h5 class="font-bold text-indigo-800 mb-3 text-lg">Sequence of Action (Slide 16):</h5>
+                        <ol class="space-y-2 text-sm text-gray-700 list-decimal pl-5 marker:font-bold marker:text-indigo-600">
+                            <li><strong>Stress Signal:</strong> DNA damage or Hypoxia detected.</li>
+                            <li><strong>Activation:</strong> p53 is activated.</li>
+                            <li><strong>Arrest:</strong> Forces cell into <strong>G<sub>1</sub> arrest</strong> or <strong>G<sub>0</sub> resting stage</strong>.</li>
+                            <li><strong>Repair Attempt:</strong> Stimulates repair enzymes.</li>
+                            <li><strong>Decision:</strong>
+                                <ul class="list-disc pl-5 mt-1">
+                                    <li>If fixed -> Restart Cell Cycle.</li>
+                                    <li>If NOT fixed -> <strong>Apoptosis</strong> (Death).</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="flex-1 bg-white p-4 rounded-lg shadow-sm text-center">
+                        <p class="text-red-600 font-bold mb-2">Mutated p53</p>
+                        <p class="text-sm text-gray-600">Cell does NOT stop. Divides with damaged DNA. Mutations accumulate. <br><strong>>50% of cancers involve p53 mutation.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Normal vs Cancer Cells (Detailed Comparison) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-gray-200 pb-2">
+                <h3 class="text-2xl font-bold text-gray-800">6. Comparison: Structure</h3>
+            </div>
+            <div class="overflow-x-auto bg-white rounded-xl shadow-md">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="p-3 w-1/4">Feature</th>
+                            <th class="p-3 w-1/3">Normal Cell</th>
+                            <th class="p-3 w-1/3">Cancer Cell</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Cytoplasm</td>
+                            <td class="p-3">Large</td>
+                            <td class="p-3 font-bold text-red-600">Small</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Nucleus</td>
+                            <td class="p-3">Single</td>
+                            <td class="p-3 font-bold text-red-600">Multiple</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Nucleolus</td>
+                            <td class="p-3">Single</td>
+                            <td class="p-3 font-bold text-red-600">Multiple & Large</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold bg-gray-50">Chromatin</td>
+                            <td class="p-3">Fine (ناعمة)</td>
+                            <td class="p-3 font-bold text-red-600">Coarse (خشنة)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Mechanism of Spread (Metastasis) -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-gray-400 pb-2">
+                <h3 class="text-2xl font-bold text-gray-900">7. The Metastasis Journey</h3>
+                <span class="ar-text text-lg text-gray-700 font-bold">رحلة الانتشار</span>
+            </div>
+            <div class="bg-gray-100 p-5 rounded-xl flex flex-wrap gap-4 justify-center items-center text-center">
+                <div class="bg-white p-3 rounded shadow w-32">Oncogenic Event</div>
+                <div class="text-gray-400">➜</div>
+                <div class="bg-white p-3 rounded shadow w-32">Uncontrolled Proliferation</div>
+                <div class="text-gray-400">➜</div>
+                <div class="bg-white p-3 rounded shadow w-32">Angiogenesis<br><span class="text-[10px] text-gray-500">(New Blood Vessels)</span></div>
+                <div class="text-gray-400">➜</div>
+                <div class="bg-white p-3 rounded shadow w-32">Intravasation<br><span class="text-[10px] text-gray-500">(Enter Blood)</span></div>
+                <div class="text-gray-400">➜</div>
+                <div class="bg-white p-3 rounded shadow w-32 border-2 border-red-500 font-bold">Metastasis<br><span class="text-[10px] text-red-500">(Secondary Tumor)</span></div>
+            </div>
+        </section>
+
+        <!-- 8. Targeted Therapies -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b-2 border-teal-200 pb-2">
+                <h3 class="text-2xl font-bold text-teal-900">8. Targeted Therapies</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-teal-50 p-4 rounded-xl border border-teal-200">
+                    <h4 class="font-bold text-teal-800 mb-2">A. Drug Types</h4>
+                    <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                        <li><strong>Small-molecule drugs:</strong> Enter cells easily. Target inside.</li>
+                        <li><strong>Monoclonal antibodies:</strong> Lab-made proteins. Attach to target ON cell surface.
+                            <ul class="list-circle pl-4 mt-1 text-xs text-gray-500">
+                                <li>Mark for immune destruction.</li>
+                                <li>Stop growth.</li>
+                                <li>Carry toxins.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                    <h4 class="font-bold text-yellow-800 mb-2">B. Challenges</h4>
+                    <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                        <li><strong>Resistance:</strong> Target changes structure OR cancer finds new pathway.</li>
+                        <li><strong>Hard to Develop:</strong> Target structure is complex.</li>
+                        <li><strong>Solution:</strong> Combination Therapy (Targeted + Chemo + Radiation).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
