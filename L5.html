@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 5 | Mycology (Fungi)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffbeb; /* Amber-50 Background */
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #d97706; /* amber-600 */
+            border-radius: 2px;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #78350f 0%, #d97706 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-amber-800 flex items-center">
+                    <i data-lucide="sprout" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 05</span>
+                </span>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#intro" class="hover:text-amber-600">General Properties</a>
+                    <a href="#forms" class="hover:text-amber-600">Forms & Structure</a>
+                    <a href="#nutrition" class="hover:text-amber-600">Nutrition</a>
+                    <a href="#reproduction" class="hover:text-amber-600">Reproduction</a>
+                    <a href="#classification" class="hover:text-amber-600">Classification</a>
+                    <a href="#importance" class="hover:text-amber-600">Importance</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 gradient-header text-white text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Mycology: The Kingdom Fungi</h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 ar-text text-amber-100">علم الفطريات: الخصائص والتصنيف</h2>
+        <p class="text-lg text-amber-50 max-w-3xl mx-auto">
+            Studying Eukaryotic, Spore-bearing, Heterotrophic organisms. From Yeasts to Mushrooms.
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- 1. Introduction & General Characteristics -->
+        <section id="intro">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. What are Fungi?</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-amber-500">
+                    <h4 class="text-xl font-bold text-amber-700 mb-3 flex items-center"><i data-lucide="info" class="mr-2"></i> Definition</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        <strong>Mycology</strong> (Mycota) is the study of fungi. They are a diverse group of <strong>Eukaryotes</strong> (True nucleus) that include yeasts, molds, and mushrooms.
+                    </p>
+                    <p class="text-xs text-gray-500 ar-text mt-3 pt-2 border-t">الفطريات كائنات حقيقية النواة تشمل الخمائر والأعفان وعيش الغراب.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-orange-700 mb-3 flex items-center"><i data-lucide="check-circle" class="mr-2"></i> Key Characteristics</h4>
+                    <ul class="text-sm space-y-2 text-gray-700 list-disc pl-5">
+                        <li><strong>Eukaryotic:</strong> Have organelles & nucleus.</li>
+                        <li><strong>Achlorophyllous:</strong> No Chlorophyll (Not plants).</li>
+                        <li><strong>Cell Wall:</strong> Composed of <strong>Chitin</strong> (not cellulose).</li>
+                        <li><strong>Storage:</strong> Store food as <strong>Glycogen</strong>.</li>
+                        <li><strong>Habitat:</strong> Cosmopolitan (Soil, Water, Plants, Animals).</li>
+                        <li><strong>Respiration:</strong> Aerobic (Require O2 & Water). No obligate anaerobes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Forms & Structure -->
+        <section id="forms">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. Forms & Structure (Thallus)</h3>
+            
+            <!-- Three Forms -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-5 rounded-xl shadow-sm card-hover text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full mx-auto mb-4 flex items-center justify-center text-yellow-600 text-2xl font-bold">1</div>
+                    <h4 class="font-bold text-lg text-gray-800 mb-2">Unicellular (Yeasts)</h4>
+                    <p class="text-sm text-gray-600">Single cells (e.g., <em>Saccharomyces</em>). Reproduce by budding.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm card-hover text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center text-green-600 text-2xl font-bold">2</div>
+                    <h4 class="font-bold text-lg text-gray-800 mb-2">Multicellular (Molds)</h4>
+                    <p class="text-sm text-gray-600">Filamentous fungi. Consist of thread-like <strong>Hyphae</strong> forming a mass called <strong>Mycelium</strong>.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm card-hover text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center text-red-600 text-2xl font-bold">3</div>
+                    <h4 class="font-bold text-lg text-gray-800 mb-2">Dimorphic</h4>
+                    <p class="text-sm text-gray-600">Exist in two forms depending on conditions (Temp/Place).<br> <span class="text-xs bg-red-50 p-1 rounded">Yeast in tissue (37°C) / Mold in soil (25°C).</span></p>
+                </div>
+            </div>
+
+            <!-- Hyphae Structure Detail -->
+            <div class="bg-amber-100 p-6 rounded-2xl border border-amber-200">
+                <h4 class="font-bold text-amber-900 mb-4 flex items-center"><i data-lucide="microscope" class="mr-2"></i> Structure of Molds (Hyphae)</h4>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <strong class="block text-amber-800 mb-2">Based on Septation (Cross-walls):</strong>
+                        <ul class="text-sm space-y-2 text-gray-700 list-disc pl-5">
+                            <li><strong>Septate:</strong> Divided by cross-walls (septum) with pores. (Higher fungi).</li>
+                            <li><strong>Non-septate (Coenocytic):</strong> Continuous tube, multi-nucleated. (Lower fungi like Zygomycetes).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="block text-amber-800 mb-2">Based on Function:</strong>
+                        <ul class="text-sm space-y-2 text-gray-700 list-disc pl-5">
+                            <li><strong>Vegetative Mycelium:</strong> Penetrates substrate to absorb food.</li>
+                            <li><strong>Aerial (Reproductive) Mycelium:</strong> Projects above surface to produce spores.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Nutrition -->
+        <section id="nutrition">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Nutrition</h3>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
+                <h4 class="text-xl font-bold text-emerald-700 mb-3">Absorptive Heterotrophs</h4>
+                <p class="text-sm text-gray-700 mb-4">Fungi cannot make their own food. They secrete enzymes (Exoenzymes) to digest food <strong>outside</strong> their body, then absorb the nutrients.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-emerald-50 p-3 rounded">
+                        <strong class="block text-emerald-800">1. Saprophytic</strong>
+                        <span class="text-gray-600">Feed on dead organic matter (Decomposers).</span>
+                    </div>
+                    <div class="bg-red-50 p-3 rounded">
+                        <strong class="block text-red-800">2. Parasitic</strong>
+                        <span class="text-gray-600">Feed on living hosts (cause disease).</span>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded">
+                        <strong class="block text-blue-800">3. Symbiotic</strong>
+                        <span class="text-gray-600">Mutual benefit (e.g., Lichens = Fungi + Algae).</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Reproduction -->
+        <section id="reproduction">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. Reproduction</h3>
+            <p class="mb-6 text-gray-600">Fungi reproduce by Spores (Asexual & Sexual). The spore is the unit of dispersal.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Asexual -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h4 class="text-lg font-bold text-purple-700 mb-3">A. Asexual Reproduction (Anamorph)</h4>
+                    <p class="text-xs text-gray-500 mb-3">Common. Occurs by mitosis.</p>
+                    <ul class="text-sm space-y-2 list-disc pl-5 text-gray-700">
+                        <li><strong>Budding:</strong> In Yeasts (unequal division).</li>
+                        <li><strong>Fragmentation:</strong> Hyphae break into pieces.</li>
+                        <li><strong>Spore Formation:</strong>
+                            <ul class="list-circle pl-5 mt-1 text-xs text-gray-600">
+                                <li><em>Sporangiospores:</em> Inside a sac (Sporangium). Endogenous.</li>
+                                <li><em>Conidia:</em> Naked on tip of conidiophore. Exogenous.</li>
+                                <li><em>Chlamydospores:</em> Thick-walled resting spores.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sexual -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h4 class="text-lg font-bold text-rose-700 mb-3">B. Sexual Reproduction (Teleomorph)</h4>
+                    <p class="text-xs text-gray-500 mb-3">Occurs under stress. Fusion of two nuclei.</p>
+                    <div class="bg-rose-50 p-3 rounded mb-3">
+                        <strong class="block text-rose-800 text-xs mb-1">Steps:</strong>
+                        <ol class="list-decimal pl-4 text-xs text-gray-700">
+                            <li><strong>Plasmogamy:</strong> Fusion of cytoplasm (n + n).</li>
+                            <li><strong>Karyogamy:</strong> Fusion of nuclei (2n Zygote).</li>
+                            <li><strong>Meiosis:</strong> Reduction division (Restore n).</li>
+                        </ol>
+                    </div>
+                    <ul class="text-sm space-y-1 list-disc pl-5 text-gray-700">
+                        <li><strong>Zygospores</strong> (Resistant).</li>
+                        <li><strong>Ascospores</strong> (In Ascus sac).</li>
+                        <li><strong>Basidiospores</strong> (On Basidium club).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center text-sm text-gray-500 bg-gray-50 p-2 rounded">
+                <strong>Fungi Imperfecti (Deuteromycetes):</strong> Fungi with NO known sexual stage.
+            </div>
+        </section>
+
+        <!-- 5. Classification -->
+        <section id="classification">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">5. Classification</h3>
+            <p class="mb-6 text-gray-600">Based on the type of <strong>Sexual Spore</strong>.</p>
+            
+            <div class="overflow-x-auto rounded-xl border border-gray-200">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-amber-800 text-white">
+                        <tr>
+                            <th class="p-4">Division</th>
+                            <th class="p-4">Sexual Spore</th>
+                            <th class="p-4">Hyphae</th>
+                            <th class="p-4">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="border-b">
+                            <td class="p-4 font-bold text-amber-900">1. Zygomycotina</td>
+                            <td class="p-4">Zygospore</td>
+                            <td class="p-4">Non-septate (Coenocytic)</td>
+                            <td class="p-4"><em>Rhizopus</em> (Bread mold)</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold text-amber-900">2. Ascomycotina</td>
+                            <td class="p-4">Ascospore (in Ascus)</td>
+                            <td class="p-4">Septate</td>
+                            <td class="p-4"><em>Penicillium</em>, Yeasts, Truffles</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold text-amber-900">3. Basidiomycotina</td>
+                            <td class="p-4">Basidiospore (on Basidium)</td>
+                            <td class="p-4">Septate</td>
+                            <td class="p-4">Mushrooms, Rusts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold text-gray-600">4. Deuteromycotina</td>
+                            <td class="p-4 text-gray-500">None (Absent)</td>
+                            <td class="p-4">Septate</td>
+                            <td class="p-4"><em>Alternaria</em> (Fungi Imperfecti)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. Importance -->
+        <section id="importance" class="bg-gray-900 text-white -mx-4 px-4 py-12 rounded-3xl mt-12">
+            <h3 class="text-3xl font-bold mb-8 section-title after:bg-white">6. Importance</h3>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Beneficial -->
+                <div>
+                    <h4 class="text-xl font-bold text-green-400 mb-4 flex items-center"><i data-lucide="thumbs-up" class="mr-2"></i> Beneficial Effects</h4>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li><strong class="text-white">Decomposition:</strong> Nature's recyclers (Nutrient recycling).</li>
+                        <li><strong class="text-white">Industry:</strong>
+                            <ul class="list-disc pl-5 mt-1 text-gray-400">
+                                <li>Antibiotics (Penicillin, Cephalosporin).</li>
+                                <li>Food (Mushrooms, Cheese, Bread, Alcohol).</li>
+                                <li>Enzymes & Acids (Citric acid).</li>
+                            </ul>
+                        </li>
+                        <li><strong class="text-white">Research:</strong> Model organisms for genetics.</li>
+                    </ul>
+                </div>
+
+                <!-- Harmful -->
+                <div>
+                    <h4 class="text-xl font-bold text-red-400 mb-4 flex items-center"><i data-lucide="skull" class="mr-2"></i> Harmful Effects</h4>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li><strong class="text-white">Destruction:</strong> Spoilage of food, paper, cloth, lumber.</li>
+                        <li><strong class="text-white">Diseases (Mycoses):</strong>
+                            <ul class="list-disc pl-5 mt-1 text-gray-400">
+                                <li><strong>Superficial:</strong> Top skin/hair.</li>
+                                <li><strong>Cutaneous:</strong> Skin, hair, nails (Ringworm).</li>
+                                <li><strong>Subcutaneous:</strong> Under skin.</li>
+                                <li><strong>Systemic:</strong> Deep organs (Serious).</li>
+                                <li><strong>Opportunistic:</strong> In weak immunity (Candidiasis).</li>
+                            </ul>
+                        </li>
+                        <li><strong class="text-white">Toxins:</strong> Poisonous mushrooms, Mycotoxins (Aflatoxin).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-amber-900 text-amber-100 py-10 text-center">
+        <p class="mb-2 font-bold">Microbiology Lecture 05 - Full Course</p>
+        <p class="text-sm opacity-70">Faculty of Science - Helwan University</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
