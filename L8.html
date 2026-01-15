@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 8 | Antimicrobial Drugs</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff; /* Sky-50 Background */
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #0284c7; /* sky-600 */
+            border-radius: 2px;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+        }
+        .action-card:hover {
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-sky-800 flex items-center">
+                    <i data-lucide="pill" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 08</span>
+                </span>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#intro" class="hover:text-sky-600">Intro & Definitions</a>
+                    <a href="#classification" class="hover:text-sky-600">Classification</a>
+                    <a href="#action" class="hover:text-sky-600">Modes of Action</a>
+                    <a href="#resistance" class="hover:text-sky-600">Resistance</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 gradient-header text-white text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Antimicrobial Drugs & Chemotherapy</h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 ar-text text-sky-100">المضادات الحيوية والعلاج الكيميائي</h2>
+        <p class="text-lg text-sky-50 max-w-3xl mx-auto">
+            The final frontier: Understanding how we fight microbes (Antibiotics), how they work (Mechanisms), and how microbes fight back (Resistance).
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- 1. Definitions & Principles -->
+        <section id="intro">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. Definitions & Principles</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Definitions -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-sky-500">
+                    <h4 class="text-xl font-bold text-sky-700 mb-4 flex items-center"><i data-lucide="book-open" class="mr-2"></i> Key Terms</h4>
+                    <ul class="space-y-4 text-sm text-gray-700">
+                        <li class="bg-sky-50 p-3 rounded">
+                            <strong>Chemotherapeutic Drug:</strong> Any chemical used in treatment/prophylaxis of disease.
+                        </li>
+                        <li class="bg-sky-50 p-3 rounded">
+                            <strong>Antibiotics:</strong> Natural substances produced by microorganisms (like fungi/bacteria) to inhibit others.
+                        </li>
+                        <li class="bg-sky-50 p-3 rounded">
+                            <strong>Synthetic Drugs:</strong> Made in lab (e.g., Sulfa drugs).
+                        </li>
+                        <li class="bg-sky-50 p-3 rounded">
+                            <strong>Semisynthetic:</strong> Natural antibiotics chemically modified in lab.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Selective Toxicity -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-green-500">
+                    <h4 class="text-xl font-bold text-green-700 mb-4 flex items-center"><i data-lucide="target" class="mr-2"></i> Core Principle: Selective Toxicity</h4>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        The drug must kill or inhibit the microbial target <strong>without damaging the host</strong> (human cells).
+                    </p>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <strong class="block text-green-800 text-sm mb-1 ar-text">السمية الانتقائية:</strong>
+                        <p class="text-xs text-green-700 ar-text">الدواء المثالي يقتل الميكروب الضار دون أن يسبب أذى لخلايا جسم الإنسان.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Classification -->
+        <section id="classification">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. Classification of Antimicrobials</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- By Spectrum -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-2 rounded-full mr-3 text-purple-600"><i data-lucide="activity"></i></div>
+                        <h4 class="text-xl font-bold text-gray-800">A. Spectrum of Activity</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-purple-300 pl-4">
+                            <strong class="text-purple-700">Narrow Spectrum</strong>
+                            <p class="text-sm text-gray-600">Effective against specific group (e.g., Only Gram-positive like Penicillin G).</p>
+                        </div>
+                        <div class="border-l-4 border-purple-600 pl-4">
+                            <strong class="text-purple-700">Broad Spectrum</strong>
+                            <p class="text-sm text-gray-600">Effective against wide range (Gram +ve & -ve) like Tetracycline.</p>
+                            <p class="text-xs text-red-500 mt-1">Disadvantage: Kills normal flora -> Superinfection (e.g., <em>Candida</em>).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- By Effect -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-2 rounded-full mr-3 text-red-600"><i data-lucide="skull"></i></div>
+                        <h4 class="text-xl font-bold text-gray-800">B. Mechanism of Effect</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <strong class="text-red-700">Bactericidal</strong>
+                            <p class="text-sm text-gray-600">Kills the bacteria directly (Irreversible).</p>
+                            <p class="text-xs text-gray-400 ar-text">قاتل للبكتيريا.</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <strong class="text-yellow-700">Bacteriostatic</strong>
+                            <p class="text-sm text-gray-600">Inhibits growth (Reversible). Host immune system finishes the job.</p>
+                            <p class="text-xs text-gray-400 ar-text">مثبط للنمو (يوقف التكاثر).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Modes of Action (The 5 Targets) -->
+        <section id="action">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Modes of Action</h3>
+            <p class="mb-8 text-gray-600">Antimicrobials target essential structures or functions in the bacterial cell.</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1. Cell Wall -->
+                <div class="bg-white p-5 rounded-xl border-t-4 border-blue-600 shadow-sm action-card">
+                    <div class="text-blue-600 font-bold text-lg mb-2">1. Cell Wall Synthesis</div>
+                    <p class="text-sm text-gray-600 mb-3">Prevents Peptidoglycan formation (Weak wall -> Lysis).</p>
+                    <div class="bg-blue-50 p-2 rounded text-xs text-blue-800">
+                        <strong>Examples:</strong><br>
+                        • Penicillins (Beta-lactams)<br>
+                        • Cephalosporins<br>
+                        • Bacitracin<br>
+                        • Vancomycin
+                    </div>
+                </div>
+
+                <!-- 2. Protein Synthesis -->
+                <div class="bg-white p-5 rounded-xl border-t-4 border-green-600 shadow-sm action-card">
+                    <div class="text-green-600 font-bold text-lg mb-2">2. Protein Synthesis</div>
+                    <p class="text-sm text-gray-600 mb-3">Targets 70S Ribosomes (30S or 50S subunit).</p>
+                    <div class="bg-green-50 p-2 rounded text-xs text-green-800">
+                        <strong>Examples:</strong><br>
+                        • Chloramphenicol (50S)<br>
+                        • Erythromycin (50S)<br>
+                        • Tetracyclines (30S)<br>
+                        • Streptomycin (30S)
+                    </div>
+                </div>
+
+                <!-- 3. Nucleic Acid -->
+                <div class="bg-white p-5 rounded-xl border-t-4 border-purple-600 shadow-sm action-card">
+                    <div class="text-purple-600 font-bold text-lg mb-2">3. Nucleic Acid</div>
+                    <p class="text-sm text-gray-600 mb-3">Inhibits DNA replication or mRNA transcription.</p>
+                    <div class="bg-purple-50 p-2 rounded text-xs text-purple-800">
+                        <strong>Examples:</strong><br>
+                        • Quinolones/Ciprofloxacin (Inhibit DNA Gyrase)<br>
+                        • Rifampin (Inhibits mRNA)
+                    </div>
+                </div>
+
+                <!-- 4. Plasma Membrane -->
+                <div class="bg-white p-5 rounded-xl border-t-4 border-orange-600 shadow-sm action-card">
+                    <div class="text-orange-600 font-bold text-lg mb-2">4. Plasma Membrane</div>
+                    <p class="text-sm text-gray-600 mb-3">Causes injury/leakage. Useful against Gram-negative.</p>
+                    <div class="bg-orange-50 p-2 rounded text-xs text-orange-800">
+                        <strong>Examples:</strong><br>
+                        • Polymyxin B<br>
+                        (Note: Can be toxic to humans)
+                    </div>
+                </div>
+
+                <!-- 5. Essential Metabolites -->
+                <div class="bg-white p-5 rounded-xl border-t-4 border-red-600 shadow-sm action-card">
+                    <div class="text-red-600 font-bold text-lg mb-2">5. Essential Metabolites</div>
+                    <p class="text-sm text-gray-600 mb-3">Competitive inhibition of enzymes (e.g., Folic acid synthesis).</p>
+                    <div class="bg-red-50 p-2 rounded text-xs text-red-800">
+                        <strong>Examples:</strong><br>
+                        • Sulfanilamide<br>
+                        • Trimethoprim
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Antibiotic Resistance -->
+        <section id="resistance">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. Antibiotic Resistance</h3>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Mechanisms of Resistance -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                    <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><i data-lucide="shield-alert" class="mr-2 text-red-600"></i> How Bacteria Resist?</h4>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <span class="font-bold text-red-600 mr-2">1.</span>
+                            <div><strong>Enzymatic Destruction:</strong> Producing enzymes like <em>Beta-lactamase</em> (Penicillinase) that destroy the drug.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold text-red-600 mr-2">2.</span>
+                            <div><strong>Prevention of Penetration:</strong> Modifying surface receptors/porins so drug can't enter (Reduced Permeability).</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold text-red-600 mr-2">3.</span>
+                            <div><strong>Alteration of Target Site:</strong> Changing the ribosome or enzyme shape so drug can't bind.</div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold text-red-600 mr-2">4.</span>
+                            <div><strong>Efflux Pumps:</strong> Actively pumping the drug OUT of the cell.</div>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="font-bold text-red-600 mr-2">5.</span>
+                            <div><strong>Metabolic Bypass:</strong> Using alternative pathways to avoid the blocked enzyme.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Combat Strategies -->
+                <div class="bg-sky-50 p-6 rounded-2xl border border-sky-200">
+                    <h4 class="text-xl font-bold text-sky-800 mb-4 flex items-center"><i data-lucide="shield-check" class="mr-2"></i> Strategies to Combat Resistance</h4>
+                    <ul class="space-y-4 text-sm text-gray-700">
+                        <li class="bg-white p-3 rounded shadow-sm">
+                            <strong class="block text-sky-700">Antimicrobial Stewardship</strong>
+                            Using drugs only when necessary and prescribed appropriately.
+                        </li>
+                        <li class="bg-white p-3 rounded shadow-sm">
+                            <strong class="block text-sky-700">Combination Therapy</strong>
+                            Using multiple drugs (e.g., Antibiotic + Beta-lactamase inhibitor) to overcome resistance.
+                        </li>
+                        <li class="bg-white p-3 rounded shadow-sm">
+                            <strong class="block text-sky-700">Vaccines</strong>
+                            Preventing infections reduces the need for antibiotics.
+                        </li>
+                        <li class="bg-white p-3 rounded shadow-sm">
+                            <strong class="block text-sky-700">Research (New Drugs)</strong>
+                            Developing novel compounds.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-sky-900 text-sky-100 py-10 text-center">
+        <p class="mb-2 font-bold">Microbiology Lecture 08 - Course Completed!</p>
+        <p class="text-sm opacity-70">Faculty of Science - Helwan University</p>
+        <div class="mt-4 text-xs opacity-50">
+            Good Luck with your Exams!
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
