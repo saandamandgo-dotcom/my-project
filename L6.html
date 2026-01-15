@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 6 | Microbial Growth</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0fdfa; /* Teal-50 Background */
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #0d9488; /* teal-600 */
+            border-radius: 2px;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #115e59 0%, #0d9488 100%);
+        }
+        .phase-card {
+            transition: all 0.3s ease;
+        }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-teal-800 flex items-center">
+                    <i data-lucide="bar-chart-2" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 06</span>
+                </span>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#growth" class="hover:text-teal-600">Growth & Division</a>
+                    <a href="#curve" class="hover:text-teal-600">Growth Curve</a>
+                    <a href="#temp" class="hover:text-teal-600">Temperature</a>
+                    <a href="#ph" class="hover:text-teal-600">pH & Oxygen</a>
+                    <a href="#osmosis" class="hover:text-teal-600">Osmotic Pressure</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 gradient-header text-white text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Microbial Growth</h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 ar-text text-teal-100">نمو الميكروبات والعوامل المؤثرة</h2>
+        <p class="text-lg text-teal-50 max-w-3xl mx-auto">
+            Understanding Binary Fission, Generation Time, The Growth Curve, and Environmental Factors (Temp, pH, O2).
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- 1. Definition & Binary Fission -->
+        <section id="growth">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. Growth & Division</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-teal-500">
+                    <h4 class="text-xl font-bold text-teal-700 mb-3 flex items-center"><i data-lucide="info" class="mr-2"></i> Definition</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed mb-2">
+                        In microbiology, <strong>Growth</strong> refers to the increase in the <strong>number of cells</strong> (population), not the size of a single cell.
+                    </p>
+                    <p class="text-xs text-gray-500 ar-text mt-3 pt-2 border-t">النمو في الميكروبيولوجي يعني زيادة عدد الخلايا (التكاثر) وليس حجم الخلية الواحدة.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-cyan-500">
+                    <h4 class="text-xl font-bold text-cyan-700 mb-3 flex items-center"><i data-lucide="copy" class="mr-2"></i> Binary Fission</h4>
+                    <p class="text-sm text-gray-700 mb-2">Bacteria reproduce by <strong>Binary Fission</strong> (One cell divides into two identical cells).</p>
+                    <ol class="text-xs text-gray-600 list-decimal pl-4 space-y-1">
+                        <li><strong>DNA Replication:</strong> Chromosome copies itself.</li>
+                        <li><strong>Elongation:</strong> Cell grows, chromosomes separate.</li>
+                        <li><strong>Septum Formation:</strong> Cross wall forms.</li>
+                        <li><strong>Separation:</strong> Two daughter cells separate.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Generation Time -->
+            <div class="bg-teal-50 p-6 rounded-2xl border border-teal-200 text-center">
+                <h4 class="text-lg font-bold text-teal-800 mb-2">Generation Time (Doubling Time)</h4>
+                <p class="text-sm text-gray-700 mb-4">Time required for a population to double in number.</p>
+                <div class="inline-block bg-white px-4 py-2 rounded border border-teal-300 shadow-sm font-mono text-teal-600">
+                    Nt = N0 × 2ⁿ
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Example: <em>E. coli</em> generation time is ~20 minutes.</p>
+            </div>
+        </section>
+
+        <!-- 2. The Growth Curve -->
+        <section id="curve">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. The Bacterial Growth Curve</h3>
+            <p class="mb-8 text-gray-600">Growth of bacteria in a closed system (Batch Culture) follows 4 phases.</p>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <!-- Lag Phase -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-gray-400 phase-card">
+                    <div class="text-2xl font-bold text-gray-500 mb-2">1. Lag</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Adaptation Phase</h4>
+                    <p class="text-xs text-gray-600">No increase in cell number. Cells are active, synthesizing enzymes and DNA.</p>
+                    <p class="text-xs text-gray-400 ar-text mt-2 pt-1 border-t">طور التأقلم: لا زيادة في العدد، فقط نشاط داخلي.</p>
+                </div>
+
+                <!-- Log Phase -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-green-500 phase-card">
+                    <div class="text-2xl font-bold text-green-500 mb-2">2. Log</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Exponential Phase</h4>
+                    <p class="text-xs text-gray-600">Maximum growth rate. Population doubles at constant rate. Most sensitive to antibiotics.</p>
+                    <p class="text-xs text-gray-400 ar-text mt-2 pt-1 border-t">الطور اللوغاريتمي: أقصى سرعة للنمو والتضاعف.</p>
+                </div>
+
+                <!-- Stationary Phase -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-yellow-500 phase-card">
+                    <div class="text-2xl font-bold text-yellow-500 mb-2">3. Stationary</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Equilibrium Phase</h4>
+                    <p class="text-xs text-gray-600">Growth rate = Death rate. Nutrients deplete, toxins accumulate.</p>
+                    <p class="text-xs text-gray-400 ar-text mt-2 pt-1 border-t">طور الثبات: معدل النمو يساوي معدل الموت.</p>
+                </div>
+
+                <!-- Death Phase -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-red-500 phase-card">
+                    <div class="text-2xl font-bold text-red-500 mb-2">4. Death</div>
+                    <h4 class="font-bold text-gray-800 mb-2">Decline Phase</h4>
+                    <p class="text-xs text-gray-600">Cells die exponentially. Death rate > Growth rate.</p>
+                    <p class="text-xs text-gray-400 ar-text mt-2 pt-1 border-t">طور الموت: تتناقص الخلايا بسرعة.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Factors: Temperature -->
+        <section id="temp">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Temperature</h3>
+            <p class="mb-6 text-gray-600">Bacteria have Minimum, Optimum, and Maximum growth temperatures.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 text-center">
+                    <div class="mx-auto w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center text-blue-700 mb-3"><i data-lucide="snowflake"></i></div>
+                    <h4 class="font-bold text-blue-900">Psychrophiles</h4>
+                    <p class="text-sm text-blue-800 font-bold mb-1">Cold Lovers</p>
+                    <span class="text-xs bg-white px-2 py-1 rounded border border-blue-200">-5°C to 15°C</span>
+                    <p class="text-xs text-gray-600 mt-2">Grow in refrigerator, cause food spoilage.</p>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-2xl border border-green-200 text-center transform scale-105 shadow-md">
+                    <div class="mx-auto w-12 h-12 bg-green-200 rounded-full flex items-center justify-center text-green-700 mb-3"><i data-lucide="sun"></i></div>
+                    <h4 class="font-bold text-green-900">Mesophiles</h4>
+                    <p class="text-sm text-green-800 font-bold mb-1">Moderate Lovers</p>
+                    <span class="text-xs bg-white px-2 py-1 rounded border border-green-200">20°C to 45°C</span>
+                    <p class="text-xs text-gray-600 mt-2">Most human pathogens (Body temp 37°C).</p>
+                    <div class="mt-2 text-xs text-red-500 font-bold">Danger Zone: 15-50°C</div>
+                </div>
+
+                <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 text-center">
+                    <div class="mx-auto w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center text-orange-700 mb-3"><i data-lucide="flame"></i></div>
+                    <h4 class="font-bold text-orange-900">Thermophiles</h4>
+                    <p class="text-sm text-orange-800 font-bold mb-1">Heat Lovers</p>
+                    <span class="text-xs bg-white px-2 py-1 rounded border border-orange-200">45°C to 80°C</span>
+                    <p class="text-xs text-gray-600 mt-2">Hot springs, compost.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Factors: pH & Oxygen -->
+        <section id="ph">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. pH & Oxygen</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- pH -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-purple-500">
+                    <h4 class="text-xl font-bold text-purple-700 mb-4">pH (Acidity)</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center justify-between">
+                            <span><strong>Acidophiles:</strong> Grow at low pH (Acidic).</span>
+                            <span class="text-xs bg-purple-100 px-2 py-1 rounded">pH < 5.5</span>
+                        </li>
+                        <li class="flex items-center justify-between bg-purple-50 p-2 rounded">
+                            <span><strong>Neutrophiles:</strong> Most bacteria & pathogens.</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">pH 6.5 - 7.5</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span><strong>Alkaliphiles:</strong> Grow at high pH (Basic).</span>
+                            <span class="text-xs bg-purple-100 px-2 py-1 rounded">pH > 8.5</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Oxygen -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-sky-500">
+                    <h4 class="text-xl font-bold text-sky-700 mb-4">Oxygen Requirement</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="border-b pb-2">
+                            <strong class="text-gray-800">Obligate Aerobes:</strong>
+                            <span class="text-gray-500 text-xs block">Require O2 (Grow at top of tube).</span>
+                        </div>
+                        <div class="border-b pb-2">
+                            <strong class="text-gray-800">Obligate Anaerobes:</strong>
+                            <span class="text-gray-500 text-xs block">Killed by O2 (Grow at bottom). Ex: <em>Clostridium</em>.</span>
+                        </div>
+                        <div class="border-b pb-2">
+                            <strong class="text-gray-800">Facultative Anaerobes:</strong>
+                            <span class="text-gray-500 text-xs block">Grow better with O2, but can grow without it. Ex: <em>E. coli</em>.</span>
+                        </div>
+                        <div>
+                            <strong class="text-gray-800">Microaerophiles:</strong>
+                            <span class="text-gray-500 text-xs block">Need low concentration of O2.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Factors: Osmotic Pressure -->
+        <section id="osmosis">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">5. Osmotic Pressure</h3>
+            <p class="mb-6 text-gray-600">Effect of salt and sugar concentrations (Water activity).</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Isotonic -->
+                <div class="bg-white p-5 rounded-xl text-center border border-gray-100">
+                    <strong class="block text-green-600 mb-2">Isotonic</strong>
+                    <div class="h-20 flex items-center justify-center bg-gray-50 rounded mb-2 text-xs text-gray-400">Normal Cell</div>
+                    <p class="text-xs text-gray-600">Solute inside = Solute outside. No change.</p>
+                </div>
+
+                <!-- Hypertonic -->
+                <div class="bg-white p-5 rounded-xl text-center border border-gray-100">
+                    <strong class="block text-red-600 mb-2">Hypertonic (High Salt)</strong>
+                    <div class="h-20 flex items-center justify-center bg-gray-50 rounded mb-2 text-xs text-gray-400">Shriveled Cell</div>
+                    <p class="text-xs text-gray-600">Water leaves cell -> <strong>Plasmolysis</strong> (Cytoplasm shrinks). Used in food preservation (Salting).</p>
+                    <p class="text-xs text-gray-400 ar-text mt-1">يسبب انكماش السيتوبلازم (Plasmolysis).</p>
+                </div>
+
+                <!-- Halophiles -->
+                <div class="bg-white p-5 rounded-xl text-center border border-gray-100">
+                    <strong class="block text-purple-600 mb-2">Halophiles</strong>
+                    <div class="h-20 flex items-center justify-center bg-gray-50 rounded mb-2 text-xs text-gray-400">Happy in Salt</div>
+                    <p class="text-xs text-gray-600">Bacteria that require high salt (e.g., in Dead Sea).<br><strong>Facultative Halophiles:</strong> Tolerate salt (<em>Staph. aureus</em>).</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-teal-900 text-teal-100 py-10 text-center">
+        <p class="mb-2 font-bold">Microbiology Lecture 06 - Full Course</p>
+        <p class="text-sm opacity-70">Faculty of Science - Helwan University</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
