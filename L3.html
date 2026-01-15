@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 3 | Bacteriology (Complete)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ecfdf5;
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #059669;
+            border-radius: 2px;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-emerald-800 flex items-center">
+                    <i data-lucide="microscope" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 03</span>
+                </span>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#properties" class="hover:text-emerald-600">Life Properties</a>
+                    <a href="#shapes" class="hover:text-emerald-600">Shapes</a>
+                    <a href="#wall" class="hover:text-emerald-600">Cell Wall</a>
+                    <a href="#membrane" class="hover:text-emerald-600">Membrane</a>
+                    <a href="#transport" class="hover:text-emerald-600">Transport</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 gradient-header text-white text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Bacteriology & Cell Structure</h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 ar-text text-emerald-100">البكتيريا وتركيب الخلية (شامل)</h2>
+        <p class="text-lg text-emerald-50 max-w-3xl mx-auto">
+            Covering Properties of Life, Evolution, Shapes, Peptidoglycan Structure, Membrane Functions, and Transport Systems.
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- 1. Properties of Cellular Life & Evolution -->
+        <section id="properties">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. Properties of Cellular Life</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- All Cells -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-emerald-500">
+                    <h4 class="text-xl font-bold text-emerald-700 mb-4 flex items-center"><i data-lucide="globe" class="mr-2"></i> Universal Properties (All Cells)</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><strong>1. Metabolism:</strong> Open system (Nutrients in -> Wastes out).</li>
+                        <li><strong>2. Growth:</strong> Increase in cell number (Division).</li>
+                        <li><strong>3. Evolution:</strong> Genetic changes selected for fitness.</li>
+                    </ul>
+                </div>
+
+                <!-- Some Cells -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-blue-500">
+                    <h4 class="text-xl font-bold text-blue-700 mb-4 flex items-center"><i data-lucide="star" class="mr-2"></i> Special Properties (Some Cells)</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><strong>1. Motility:</strong> Self-propulsion.</li>
+                        <li><strong>2. Differentiation:</strong> Forming spores (Survival).</li>
+                        <li><strong>3. Communication:</strong> Chemical signals (Quorum sensing).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Evolution Detail -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <h4 class="font-bold text-lg mb-2 text-purple-700">Evolution & Phylogeny Details</h4>
+                <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-700">
+                    <div>
+                        <strong>Mutations (Raw Material):</strong>
+                        <p>Occasional errors in DNA replication. Since bacteria are <strong>Haploid</strong> (single chromosome), mutations are expressed immediately, allowing rapid evolution (e.g., Antibiotic Resistance).</p>
+                    </div>
+                    <div>
+                        <strong>Phylogeny (Tree of Life):</strong>
+                        <p>Relationships determined by sequencing <strong>rRNA genes</strong>. Divides life into 3 Domains: Bacteria, Archaea, Eukarya.</p>
+                        <p class="text-xs text-gray-500 ar-text mt-1">يتم التصنيف بناءً على تحليل الـ rRNA.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Prokaryotes vs Eukaryotes -->
+        <section>
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. Prokaryotes vs Eukaryotes</h3>
+            <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="p-4">Feature</th>
+                            <th class="p-4 text-emerald-400">Prokaryotes (Bacteria)</th>
+                            <th class="p-4 text-blue-400">Eukaryotes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">Nucleus</td>
+                            <td class="p-4">Nucleoid (No membrane)</td>
+                            <td class="p-4">True Nucleus</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">DNA</td>
+                            <td class="p-4">Circular, Single (Haploid), Plasmids</td>
+                            <td class="p-4">Linear, Multiple (Diploid)</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">Cell Wall</td>
+                            <td class="p-4">Peptidoglycan</td>
+                            <td class="p-4">Chitin/Cellulose (If present)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold">Ribosomes</td>
+                            <td class="p-4">70S</td>
+                            <td class="p-4">80S</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. Bacterial Shapes & Arrangements -->
+        <section id="shapes">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Bacterial Morphology</h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Cocci -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-2xl text-pink-500 mb-2">●</div>
+                    <h4 class="font-bold">Cocci (Spherical)</h4>
+                    <ul class="text-xs text-left mt-2 space-y-1 text-gray-600">
+                        <li>• Diplo (Pairs) e.g., <em>Neisseria</em></li>
+                        <li>• Strepto (Chains)</li>
+                        <li>• Staphylo (Clusters/Grape-like)</li>
+                        <li>• <strong>Tetrads</strong> (Packets of 4)</li>
+                        <li>• <strong>Sarcina</strong> (Packets of 8/16/32)</li>
+                    </ul>
+                </div>
+
+                <!-- Bacilli -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-2xl text-blue-500 mb-2">▬</div>
+                    <h4 class="font-bold">Bacilli (Rods)</h4>
+                    <ul class="text-xs text-left mt-2 space-y-1 text-gray-600">
+                        <li>• Diplo / Strepto</li>
+                        <li>• Coccobacilli (Short)</li>
+                        <li>• <strong>Palisades</strong> (Fence-like) e.g., <em>Corynebacteria</em></li>
+                        <li>• Spore-forming rods</li>
+                    </ul>
+                </div>
+
+                <!-- Spirilla -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-2xl text-yellow-500 mb-2">⌇</div>
+                    <h4 class="font-bold">Spirilla</h4>
+                    <ul class="text-xs text-left mt-2 space-y-1 text-gray-600">
+                        <li>• Vibrio (Curved/Comma)</li>
+                        <li>• Spirochetes (Coiled/Flexible)</li>
+                        <li>• Spirilla (Rigid twist)</li>
+                    </ul>
+                </div>
+
+                <!-- Others -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <div class="text-2xl text-purple-500 mb-2">⸙</div>
+                    <h4 class="font-bold">Others</h4>
+                    <ul class="text-xs text-left mt-2 space-y-1 text-gray-600">
+                        <li>• Appendaged (Stalks/Hypha)</li>
+                        <li>• Filamentous (Mold-like) e.g., <em>Streptomyces</em></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Cell Wall (Detailed) -->
+        <section id="wall">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. Cell Wall & Peptidoglycan</h3>
+            
+            <!-- Peptidoglycan Structure -->
+            <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 mb-8">
+                <h4 class="font-bold text-amber-900 mb-3 flex items-center"><i data-lucide="layers" class="mr-2"></i> Peptidoglycan Structure (Murein)</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <strong class="block text-sm text-amber-800">Composition:</strong>
+                        <p class="text-sm text-gray-700">Polysaccharide chains composed of repeating units:</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 mt-1">
+                            <li><strong>NAG:</strong> N-acetylglucosamine</li>
+                            <li><strong>NAM:</strong> N-acetylmuramic acid</li>
+                            <li><strong>Glycan Tetrapeptide:</strong> 4 amino acids attached to NAM.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="block text-sm text-amber-800">Bonds & Cross-links:</strong>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 mt-1">
+                            <li><strong>Beta-1,4 Glycosidic bond:</strong> Connects NAM-NAG. This bond is <strong>Lysozyme-sensitive</strong>.</li>
+                            <li><strong>Peptide Cross-links:</strong> Connect chains together (Rigidity).</li>
+                        </ul>
+                        <p class="text-xs text-gray-500 ar-text mt-2">إنزيم الليزوزيم يكسر الرابطة بيتا-1،4 بين وحدات السكر.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gram + vs Gram - -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Gram Positive -->
+                <div class="border-2 border-indigo-100 rounded-xl p-5 bg-indigo-50/50">
+                    <h4 class="text-xl font-bold text-indigo-800 mb-2">Gram-Positive (+)</h4>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li><span class="bg-indigo-200 px-2 rounded text-xs font-bold">Thick</span> Peptidoglycan (90%).</li>
+                        <li>Contains <strong>Teichoic Acids</strong> (Negative charge) & Lipoteichoic acids.</li>
+                        <li>No Outer Membrane.</li>
+                        <li>No Periplasmic space (usually).</li>
+                        <li>Color: <strong>Purple</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- Gram Negative -->
+                <div class="border-2 border-red-100 rounded-xl p-5 bg-red-50/50">
+                    <h4 class="text-xl font-bold text-red-800 mb-2">Gram-Negative (-)</h4>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li><span class="bg-red-200 px-2 rounded text-xs font-bold">Thin</span> Peptidoglycan (10%).</li>
+                        <li>Has <strong>Outer Membrane</strong> (LPS, Porins).</li>
+                        <li>Has <strong>Periplasm</strong>.</li>
+                        <li>Color: <strong>Pink/Red</strong>.</li>
+                    </ul>
+                    
+                    <!-- LPS Detail -->
+                    <div class="mt-3 bg-white p-3 rounded border border-red-200 text-xs">
+                        <strong>LPS (Lipopolysaccharide):</strong>
+                        <br>1. Lipid A (Endotoxin)
+                        <br>2. Core Polysaccharide
+                        <br>3. O-Antigen (Protection/Specificity)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Periplasm Detail -->
+            <div class="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                <strong class="text-blue-800 block mb-1">The Periplasm (Gram -ve):</strong>
+                <p class="text-sm text-gray-700">Space between Cytoplasmic & Outer Membrane (15nm). Contains:</p>
+                <ul class="list-disc pl-5 text-sm text-gray-600 grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                    <li><strong>Hydrolytic Enzymes:</strong> Degrade food.</li>
+                    <li><strong>Binding Proteins:</strong> Transport substrates.</li>
+                    <li><strong>Chemoreceptors:</strong> Chemotaxis response.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. Cytoplasmic Membrane -->
+        <section id="membrane">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">5. Cytoplasmic Membrane</h3>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg text-teal-700 mb-2">Structure</h4>
+                        <ul class="text-sm space-y-2 list-disc pl-5 text-gray-600">
+                            <li><strong>Phospholipid Bilayer:</strong> Fluid Mosaic Model.</li>
+                            <li><strong>Hopanoids:</strong> Strengthen membrane (like cholesterol in eukaryotes).</li>
+                            <li><strong>Proteins:</strong> Integral, Transmembrane, Peripheral.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-teal-700 mb-2">Functions</h4>
+                        <ol class="text-sm space-y-2 list-decimal pl-5 text-gray-600">
+                            <li><strong>Permeability Barrier:</strong> Prevents leakage.</li>
+                            <li><strong>Protein Anchor:</strong> Transport & Bioenergetics.</li>
+                            <li><strong>Energy Conservation:</strong> Generation of <strong>Proton Motive Force (PMF)</strong>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Transport & Secretion -->
+        <section id="transport">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">6. Transport & Secretion</h3>
+            
+            <!-- Transport Types -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-4 rounded-xl border-l-4 border-yellow-400 shadow-sm">
+                    <strong class="block text-yellow-600 mb-1">1. Simple Transport</strong>
+                    <p class="text-xs text-gray-600">Driven by <strong>Proton Motive Force (H+)</strong>. <br>(Symport, Antiport, Uniport).</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-orange-400 shadow-sm">
+                    <strong class="block text-orange-600 mb-1">2. Group Translocation</strong>
+                    <p class="text-xs text-gray-600">Chemical modification. Driven by <strong>PEP</strong>. <br>Ex: Phosphotransferase (Glucose).</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-4 border-red-400 shadow-sm">
+                    <strong class="block text-red-600 mb-1">3. ABC Transporter</strong>
+                    <p class="text-xs text-gray-600">Periplasmic binding proteins + <strong>ATP</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Protein Secretion -->
+            <div class="bg-purple-50 p-5 rounded-xl border border-purple-200">
+                <h4 class="font-bold text-purple-800 mb-2">Protein Export (Translocases)</h4>
+                <p class="text-sm text-gray-700 mb-3">Bacteria secrete <strong>Exoenzymes</strong> (e.g., Amylase to digest starch) and Toxins.</p>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white p-3 rounded">
+                        <strong>Sec System:</strong> General export/insertion into membrane.
+                    </div>
+                    <div class="bg-white p-3 rounded">
+                        <strong>Type III Secretion:</strong> "Syringe-like" system. Injects toxins <em>directly</em> into host cell.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-900 text-emerald-100 py-10 text-center">
+        <p class="mb-2 font-bold">Microbiology Lecture 03 - Full Course</p>
+        <p class="text-sm opacity-70">Faculty of Science - Helwan University</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
