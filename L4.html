@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 4 | Surface Structures & Inclusions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff; /* Light Sky Background */
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #0284c7; /* sky-600 */
+            border-radius: 2px;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-sky-800 flex items-center">
+                    <i data-lucide="microscope" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 04</span>
+                </span>
+                <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#surface" class="hover:text-sky-600">Surface Layers</a>
+                    <a href="#appendages" class="hover:text-sky-600">Fimbriae & Pili</a>
+                    <a href="#flagella" class="hover:text-sky-600">Flagella</a>
+                    <a href="#inclusions" class="hover:text-sky-600">Inclusions</a>
+                    <a href="#endospores" class="hover:text-sky-600">Endospores</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 gradient-header text-white text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Cell Surface & Inclusions</h1>
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 ar-text text-sky-100">تراكيب السطح والمحتويات الداخلية</h2>
+        <p class="text-lg text-sky-50 max-w-3xl mx-auto">
+            Exploring S-layers, Capsules, Flagella motility, Storage granules, and the survival mechanism of Endospores.
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- 1. Cell Surface Structures (Capsule & S-layer) -->
+        <section id="surface">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. Cell Surface Layers</h3>
+            <p class="mb-8 text-gray-600">Structures external to the cell wall that provide protection and attachment.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- S-layer -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-indigo-500 card-hover">
+                    <h4 class="text-xl font-bold text-indigo-700 mb-3 flex items-center"><i data-lucide="shield" class="mr-2"></i> S-Layer (Paracrystalline)</h4>
+                    <p class="text-sm text-gray-700 mb-2">Interlocking protein or glycoprotein molecules. Common in <strong>Archaea</strong>.</p>
+                    <ul class="text-sm space-y-1 list-disc pl-5 text-gray-600">
+                        <li>Protection from osmosis.</li>
+                        <li>Selective sieve (filter).</li>
+                        <li>Retains proteins near cell surface.</li>
+                    </ul>
+                    <p class="text-xs text-gray-400 ar-text mt-3 pt-2 border-t">طبقة بروتينية بلورية توجد غالباً في الأركيا للحماية والترشيح.</p>
+                </div>
+
+                <!-- Capsule vs Slime -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-sky-500 card-hover">
+                    <h4 class="text-xl font-bold text-sky-700 mb-3 flex items-center"><i data-lucide="cloud" class="mr-2"></i> Capsule & Slime Layer</h4>
+                    <p class="text-sm text-gray-700 mb-2">Sticky polysaccharide or protein layers.</p>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div class="bg-sky-50 p-3 rounded">
+                            <strong class="block text-sky-800 text-sm">Capsule</strong>
+                            <span class="text-xs text-gray-600">Tight matrix, firmly attached, excludes particles (India ink).</span>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded">
+                            <strong class="block text-gray-800 text-sm">Slime Layer</strong>
+                            <span class="text-xs text-gray-600">Loose, easily deformed, difficult to see.</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-700 bg-yellow-50 p-2 rounded border border-yellow-200">
+                        <strong>Functions:</strong>
+                        1. Protection from Phagocytosis (Immune cells).<br>
+                        2. Protection from Desiccation (Drying).<br>
+                        3. Attachment to surfaces (Biofilms).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Fimbriae & Pili -->
+        <section id="appendages">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. Fimbriae & Pili</h3>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Comparison -->
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-pink-100 p-3 rounded-full mr-4 text-pink-600"><i data-lucide="align-justify"></i></div>
+                        <div>
+                            <h4 class="text-lg font-bold text-pink-700">Fimbriae (Short)</h4>
+                            <p class="text-sm text-gray-600">Filamentous protein structures. <strong>Short and numerous</strong>.</p>
+                            <p class="text-sm font-semibold text-gray-700 mt-1">Function: Adhesion (sticking) to surfaces or tissues.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4 text-blue-600"><i data-lucide="minus"></i></div>
+                        <div>
+                            <h4 class="text-lg font-bold text-blue-700">Pili (Long)</h4>
+                            <p class="text-sm text-gray-600"><strong>Longer and fewer</strong> (1-10 per cell).</p>
+                            <ul class="text-sm text-gray-700 mt-1 list-disc pl-5">
+                                <li><strong>Genetic Exchange:</strong> "Sex Pili" for Conjugation.</li>
+                                <li><strong>Motility:</strong> Type IV pili (Twitching motility).</li>
+                                <li><strong>Adhesion:</strong> Specific attachment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Graphic Representation -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-center">
+                    <div class="relative w-48 h-32 mx-auto bg-emerald-200 rounded-full border-4 border-emerald-600 flex items-center justify-center">
+                        <span class="font-bold text-emerald-800">Bacterium</span>
+                        <!-- Fimbriae -->
+                        <div class="absolute -top-2 left-4 h-4 w-1 bg-pink-400"></div>
+                        <div class="absolute -top-3 left-10 h-4 w-1 bg-pink-400"></div>
+                        <div class="absolute -top-2 right-4 h-4 w-1 bg-pink-400"></div>
+                        <div class="absolute -bottom-2 left-6 h-4 w-1 bg-pink-400"></div>
+                        <!-- Pili -->
+                        <div class="absolute top-1/2 -right-10 w-16 h-2 bg-blue-600 transform -translate-y-1/2"></div>
+                        <span class="absolute top-1/2 -right-24 text-xs font-bold text-blue-600">Pilus</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-8">Fimbriae (Pink, Many) vs Pili (Blue, Long, Few)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Flagella & Motility -->
+        <section id="flagella">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Flagella & Motility</h3>
+            
+            <!-- Structure -->
+            <div class="mb-10 bg-white p-6 rounded-2xl shadow-sm border-t-4 border-orange-500">
+                <h4 class="text-xl font-bold text-orange-700 mb-4">Flagellar Structure (Bacterial Propeller)</h4>
+                <div class="grid md:grid-cols-3 gap-6 text-sm">
+                    <div>
+                        <strong class="block text-orange-800">1. Filament:</strong>
+                        <span class="text-gray-600">Rigid, hollow, helical. Made of <strong>Flagellin</strong> protein.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-orange-800">2. Hook:</strong>
+                        <span class="text-gray-600">Connects filament to the motor.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-orange-800">3. Motor (Basal Body):</strong>
+                        <span class="text-gray-600">Embedded in membrane. Powered by <strong>Proton Motive Force (PMF)</strong>.</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-orange-50 text-orange-900 text-xs rounded">
+                    <strong>Note:</strong> Flagella rotate like a propeller (Rotor/Stator), they do not whip like eukaryotic flagella.
+                </div>
+            </div>
+
+            <!-- Distribution Types -->
+            <h4 class="font-bold text-lg mb-4 text-gray-700">Flagellar Arrangements</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-10">
+                <div class="p-4 bg-gray-100 rounded-lg hover:bg-white hover:shadow transition">
+                    <strong class="block text-sm text-gray-800">Monotrichous</strong>
+                    <span class="text-xs text-gray-500">Single polar flagellum</span>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg hover:bg-white hover:shadow transition">
+                    <strong class="block text-sm text-gray-800">Lophotrichous</strong>
+                    <span class="text-xs text-gray-500">Tuft at one end</span>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg hover:bg-white hover:shadow transition">
+                    <strong class="block text-sm text-gray-800">Amphitrichous</strong>
+                    <span class="text-xs text-gray-500">Both ends</span>
+                </div>
+                <div class="p-4 bg-gray-100 rounded-lg hover:bg-white hover:shadow transition">
+                    <strong class="block text-sm text-gray-800">Peritrichous</strong>
+                    <span class="text-xs text-gray-500">All around cell</span>
+                </div>
+            </div>
+
+            <!-- Taxis -->
+            <div class="bg-gray-800 text-white p-6 rounded-xl">
+                <h4 class="text-xl font-bold mb-2">Taxis: Directed Movement</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <strong class="text-green-400">Chemotaxis:</strong>
+                        <p class="text-sm text-gray-300">Response to chemicals. "Run" (CCW rotation) and "Tumble" (CW rotation). Move towards attractants (food) or away from repellents.</p>
+                    </div>
+                    <div>
+                        <strong class="text-yellow-400">Phototaxis:</strong>
+                        <p class="text-sm text-gray-300">Response to light (e.g., in Phototrophic bacteria).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Cell Inclusions -->
+        <section id="inclusions">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. Cell Inclusions</h3>
+            <p class="mb-6 text-gray-600">Energy reserves and building blocks stored inside the cell (Granules).</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <strong class="block text-sky-700 mb-1">Carbon Storage</strong>
+                    <ul class="text-xs text-gray-600 list-disc pl-4">
+                        <li><strong>PHB:</strong> Poly-β-hydroxybutyrate (Lipid).</li>
+                        <li><strong>Glycogen:</strong> Glucose polymer.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <strong class="block text-purple-700 mb-1">Inorganic Storage</strong>
+                    <ul class="text-xs text-gray-600 list-disc pl-4">
+                        <li><strong>Polyphosphate:</strong> Source of Phosphate/Energy.</li>
+                        <li><strong>Sulfur Granules:</strong> In sulfur bacteria.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <strong class="block text-red-700 mb-1">Magnetosomes</strong>
+                    <p class="text-xs text-gray-600">Magnetic iron oxides ($Fe_3O_4$). Allow orientation in magnetic fields (Magnetotaxis).</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <strong class="block text-green-700 mb-1">Gas Vesicles</strong>
+                    <p class="text-xs text-gray-600">Spindle-shaped, gas-filled. Confer <strong>Buoyancy</strong> (float) in planktonic bacteria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Endospores (Detailed) -->
+        <section id="endospores" class="bg-red-50 -mx-4 px-4 py-12 rounded-3xl border border-red-100">
+            <h3 class="text-3xl font-bold text-red-900 section-title after:bg-red-600 mb-8">5. Endospores</h3>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Definition & Properties -->
+                <div>
+                    <h4 class="text-xl font-bold text-red-800 mb-4">Survival Structures</h4>
+                    <p class="text-sm text-gray-700 mb-4">Highly differentiated cells resistant to heat, harsh chemicals, and radiation. Formed by <em>Bacillus</em> and <em>Clostridium</em> during nutrient limitation.</p>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-red-200">
+                        <strong class="block text-red-700 mb-2">Why are they resistant?</strong>
+                        <ul class="text-sm space-y-2 list-disc pl-5 text-gray-700">
+                            <li><strong>Dehydrated Core:</strong> 10-25% water (inactivates enzymes).</li>
+                            <li><strong>DPA + Ca²⁺:</strong> Dipicolinic Acid complexed with Calcium (stabilizes DNA).</li>
+                            <li><strong>SASPs:</strong> Small Acid-Soluble Proteins (bind DNA, protect from UV).</li>
+                            <li><strong>Thick Coat & Cortex.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Structure Layers -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3">Spore Structure (Out to In)</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><span class="w-20 font-bold text-gray-500">Exosporium:</span> <span class="text-gray-700">Thin protein outer covering.</span></li>
+                        <li class="flex items-center"><span class="w-20 font-bold text-gray-500">Spore Coat:</span> <span class="text-gray-700">Layers of spore-specific proteins (Chemical resistance).</span></li>
+                        <li class="flex items-center"><span class="w-20 font-bold text-gray-500">Cortex:</span> <span class="text-gray-700">Loosely cross-linked Peptidoglycan.</span></li>
+                        <li class="flex items-center"><span class="w-20 font-bold text-red-600">Core:</span> <span class="text-red-700 font-bold">Contains Core wall, Membrane, DNA, Ribosomes, SASPs, DPA.</span></li>
+                    </ul>
+                    <p class="text-xs text-gray-400 ar-text mt-4 pt-2 border-t text-center">اللب (Core) هو أهم جزء ويحتوي على المادة الوراثية ووسائل الحماية.</p>
+                </div>
+            </div>
+
+            <!-- Cycle: Sporulation vs Germination -->
+            <div class="mt-10 bg-white p-6 rounded-xl border-l-8 border-red-600 shadow-sm">
+                <h4 class="font-bold text-lg mb-4">Life Cycle</h4>
+                <div class="grid md:grid-cols-2 gap-8 text-sm">
+                    <div>
+                        <strong class="text-red-700 block mb-1">Sporulation (Formation)</strong>
+                        <p class="text-gray-600">Triggered by stress (lack of food). Takes ~8 hours. Complex genetic process (Stages I - VII). Asymmetric cell division.</p>
+                    </div>
+                    <div>
+                        <strong class="text-green-700 block mb-1">Germination (Return to life)</strong>
+                        <p class="text-gray-600">Triggered by nutrients (amino acids/sugars). Rapid process (minutes).</p>
+                        <ol class="list-decimal pl-4 mt-1 text-xs text-gray-500">
+                            <li>Activation (Heat shock).</li>
+                            <li>Germination (Loss of resistance/refractility).</li>
+                            <li>Outgrowth (Swelling & Synthesis).</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-sky-900 text-sky-100 py-10 text-center">
+        <p class="mb-2 font-bold">Microbiology Lecture 04 - Full Course</p>
+        <p class="text-sm opacity-70 mb-4">Faculty of Science - Helwan University</p>
+        <div class="flex justify-center space-x-4 text-xs opacity-50">
+            <span>Surface</span><span>|</span><span>Motility</span><span>|</span><span>Inclusions</span><span>|</span><span>Endospores</span>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
