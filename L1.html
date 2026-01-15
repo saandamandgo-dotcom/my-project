@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 1 | Full Course</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #10b981; /* emerald-500 */
+            border-radius: 2px;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e5e7eb;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-emerald-700 flex items-center">
+                    <i data-lucide="microscope" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 01</span>
+                </span>
+                <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#definition" class="hover:text-emerald-600">Definition</a>
+                    <a href="#scope" class="hover:text-emerald-600">Scope</a>
+                    <a href="#importance" class="hover:text-emerald-600">Importance</a>
+                    <a href="#classification" class="hover:text-emerald-600">Classification</a>
+                    <a href="#history" class="hover:text-emerald-600">History</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-32 pb-20 bg-gradient-to-br from-emerald-50 to-teal-100 text-center px-4">
+        <h1 class="text-5xl font-bold text-emerald-900 mb-4">Introduction to Microbiology</h1>
+        <h2 class="text-3xl text-emerald-700 ar-text font-bold mb-6">مقدمة وخلفية تاريخية</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            The study of the "Invisible World": Organisms too small to be seen by the naked eye.
+        </p>
+        <p class="text-lg text-gray-500 mt-2 ar-text">دراسة "العالم غير المرئي": كائنات صغيرة جدًا لا يمكن رؤيتها بالعين المجردة.</p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- 1. Definition & Size -->
+        <section id="definition">
+            <div class="mb-8">
+                <h3 class="text-3xl font-bold text-gray-800 section-title">1. What is Microbiology?</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h4 class="text-xl font-bold text-emerald-600 mb-3 flex items-center"><i data-lucide="info" class="mr-2"></i> Definition</h4>
+                    <p class="mb-4">Science studying living things < 1mm (germs/bugs). Includes Bacteria, Viruses, Fungi (Yeast/Mold), Algae, Protozoa, and Prions.</p>
+                    <div class="bg-gray-50 p-4 rounded-lg ar-text text-right border-r-4 border-emerald-400">
+                        العلم الذي يدرس كائنات حية أقل من 1 مم (جراثيم). تشمل البكتيريا، الفيروسات، الفطريات، الطحالب، الأوليات، والبريونات.
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h4 class="text-xl font-bold text-blue-600 mb-3 flex items-center"><i data-lucide="ruler" class="mr-2"></i> Scale</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between"><span>Human Eye:</span> <span class="font-mono">> 1 mm</span></li>
+                        <li class="flex justify-between text-emerald-600 font-bold bg-emerald-50 px-2 rounded"><span>Light Microscope:</span> <span class="font-mono">1 µm - 100 µm (Bacteria/Cells)</span></li>
+                        <li class="flex justify-between text-purple-600 font-bold bg-purple-50 px-2 rounded"><span>Electron Microscope:</span> <span class="font-mono">1 nm - 100 nm (Viruses)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Scope & Fields -->
+        <section id="scope">
+            <h3 class="text-3xl font-bold text-gray-800 section-title mb-8">2. Scope & Fields</h3>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Basic Fields -->
+                <div class="border rounded-xl p-5 hover:shadow-md transition">
+                    <h4 class="font-bold text-lg text-indigo-700 mb-2 border-b pb-2">Basic Microbiology (علوم أساسية)</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <span>• Bacteriology (Bacteria)</span>
+                        <span>• Virology (Viruses)</span>
+                        <span>• Mycology (Fungi)</span>
+                        <span>• Phycology (Algae)</span>
+                        <span>• Protozoology (Protozoa)</span>
+                        <span>• Immunology (Immune system)</span>
+                    </div>
+                </div>
+                <!-- Applied Fields -->
+                <div class="border rounded-xl p-5 hover:shadow-md transition">
+                    <h4 class="font-bold text-lg text-teal-700 mb-2 border-b pb-2">Applied Microbiology (علوم تطبيقية)</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <span>• Medical / Public Health</span>
+                        <span>• Pharmaceutical</span>
+                        <span>• Industrial / Biotech</span>
+                        <span>• Food & Dairy</span>
+                        <span>• Agricultural / Veterinary</span>
+                        <span>• Environmental</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Importance (Detailed) -->
+        <section id="importance" class="bg-emerald-50 -mx-4 px-4 py-12 rounded-3xl">
+            <h3 class="text-3xl font-bold text-gray-800 section-title mb-8">3. Importance of Microorganisms</h3>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Evolution -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-4 font-bold">1</div>
+                    <h4 class="font-bold mb-2">The Progenitor (Evolution)</h4>
+                    <p class="text-sm text-gray-600">First bacteria appeared ~3.5 billion years ago. Ancestors of all life.</p>
+                    <p class="text-xs text-gray-400 mt-2 ar-text">أول بكتيريا ظهرت قبل 3.5 مليار سنة، وهي أصل الحياة.</p>
+                </div>
+
+                <!-- Environment -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 font-bold">2</div>
+                    <h4 class="font-bold mb-2">Environment Balance</h4>
+                    <ul class="text-sm list-disc pl-4 text-gray-600 space-y-1">
+                        <li><strong>Photosynthesis:</strong> Produce >50% of Earth's oxygen (Algae/Cyanobacteria).</li>
+                        <li><strong>Decomposition:</strong> Recycle nutrients (N2 fixation).</li>
+                    </ul>
+                </div>
+
+                <!-- Bio-Applications -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 font-bold">3</div>
+                    <h4 class="font-bold mb-2">Industrial Uses</h4>
+                    <ul class="text-sm list-disc pl-4 text-gray-600 space-y-1">
+                        <li><strong>Bioleaching:</strong> Extracting metals from ores using microbes.</li>
+                        <li><strong>Bioremediation:</strong> Cleaning oil spills/sewage.</li>
+                        <li><strong>Synthesis:</strong> Drugs, enzymes, alcohol.</li>
+                    </ul>
+                </div>
+
+                <!-- Food -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-4 font-bold">4</div>
+                    <h4 class="font-bold mb-2">Food Industry</h4>
+                    <p class="text-sm text-gray-600">Production of Vinegar, Yogurt, Cheese, Bread, Pickles.</p>
+                    <p class="text-xs text-gray-400 mt-2 ar-text">إنتاج الخل، الزبادي، الجبن، الخبز.</p>
+                </div>
+
+                <!-- Modern Biotech -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4 font-bold">5</div>
+                    <h4 class="font-bold mb-2">Biotechnology</h4>
+                    <ul class="text-sm list-disc pl-4 text-gray-600 space-y-1">
+                        <li><strong>Genetic Engineering:</strong> Recombinant DNA.</li>
+                        <li><strong>Products:</strong> Human Insulin, Vaccines.</li>
+                        <li><strong>Gene Therapy:</strong> Replacing defective genes.</li>
+                    </ul>
+                </div>
+
+                <!-- Microbiome -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-emerald-200">
+                    <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center mb-4 font-bold">6</div>
+                    <h4 class="font-bold mb-2">The Microbiome</h4>
+                    <p class="text-sm text-gray-600 mb-2">"Microbiota": Microbes living on/in us.</p>
+                    <ul class="text-sm list-disc pl-4 text-gray-600 space-y-1">
+                        <li>Aid digestion.</li>
+                        <li>Synthesize Vitamins (B, K).</li>
+                        <li>Prevent pathogen growth.</li>
+                        <li>Train immune system.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Harmful Effects Alert -->
+            <div class="mt-8 bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl">
+                <h4 class="text-red-800 font-bold mb-2 flex items-center"><i data-lucide="alert-triangle" class="mr-2"></i> Harmful Effects (الأضرار)</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <strong class="block text-red-700">Infectious Diseases:</strong>
+                        <p class="text-sm text-gray-700">Malaria, TB, AIDS, Hepatitis. (Responsible for significant % of global deaths).</p>
+                    </div>
+                    <div>
+                        <strong class="block text-red-700">Other Harms:</strong>
+                        <p class="text-sm text-gray-700">Food Spoilage (Economic loss), Antibiotic resistance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Nomenclature & Classification -->
+        <section id="classification">
+            <h3 class="text-3xl font-bold text-gray-800 section-title mb-8">4. Nomenclature & Classification</h3>
+            
+            <!-- Naming -->
+            <div class="mb-8 p-5 bg-gray-50 rounded-xl border border-gray-200">
+                <h4 class="font-bold text-lg mb-3">Binomial Nomenclature (Carolus Linnaeus)</h4>
+                <p class="text-sm mb-2">System: <span class="font-mono bg-white px-1 border">Genus species</span> (Italicized or Underlined). Genus capitalized, species lowercase.</p>
+                <div class="flex gap-4">
+                    <div class="bg-white px-3 py-2 border rounded shadow-sm text-sm">
+                        <em>Staphylococcus aureus</em><br>
+                        <span class="text-xs text-gray-500">Staphylo (clustered) + coccus (spheres) + aureus (golden)</span>
+                    </div>
+                    <div class="bg-white px-3 py-2 border rounded shadow-sm text-sm">
+                        <em>Escherichia coli</em><br>
+                        <span class="text-xs text-gray-500">Theodor Escherich + coli (colon)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prokaryotes vs Eukaryotes -->
+            <div class="overflow-x-auto mb-10">
+                <table class="w-full text-sm text-left text-gray-500 border rounded-lg overflow-hidden">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-3">Feature</th>
+                            <th class="px-6 py-3 text-emerald-700">Prokaryotes (Bacteria)</th>
+                            <th class="px-6 py-3 text-blue-700">Eukaryotes (Fungi/Plants/Animals)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b">
+                            <td class="px-6 py-4 font-medium text-gray-900">Nucleus</td>
+                            <td class="px-6 py-4">Poorly defined, No membrane (Nucleoid)</td>
+                            <td class="px-6 py-4">Well defined, Nuclear membrane present</td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-6 py-4 font-medium text-gray-900">Organelles</td>
+                            <td class="px-6 py-4">Absent (No Mitochondria/Golgi)</td>
+                            <td class="px-6 py-4">Present (Mitochondria, Golgi, etc.)</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-6 py-4 font-medium text-gray-900">Cellularity</td>
+                            <td class="px-6 py-4">Mostly Unicellular</td>
+                            <td class="px-6 py-4">Mostly Multicellular</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3 Domains -->
+            <div class="grid md:grid-cols-4 gap-4 text-center">
+                <div class="p-4 bg-emerald-100 rounded-lg">
+                    <strong class="block text-emerald-800">Bacteria</strong>
+                    <span class="text-xs">Peptidoglycan wall. Prokaryotes.</span>
+                </div>
+                <div class="p-4 bg-teal-100 rounded-lg">
+                    <strong class="block text-teal-800">Archaea</strong>
+                    <span class="text-xs">Extreme environments (Methanogens, Halophiles). No Peptidoglycan.</span>
+                </div>
+                <div class="p-4 bg-blue-100 rounded-lg">
+                    <strong class="block text-blue-800">Eukarya</strong>
+                    <span class="text-xs">Protists, Fungi, Plants, Animals.</span>
+                </div>
+                <div class="p-4 bg-gray-200 rounded-lg border-2 border-dashed border-gray-400">
+                    <strong class="block text-gray-700">Viruses?</strong>
+                    <span class="text-xs">Acellular (DNA/RNA + Protein coat). Not in 3 domains.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. History (Timeline) -->
+        <section id="history" class="relative">
+            <h3 class="text-3xl font-bold text-gray-800 section-title mb-12">5. History of Microbiology</h3>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="timeline-line"></div>
+
+                <!-- Hooke -->
+                <div class="relative mb-8 md:ml-1/2 md:w-1/2 pl-8 md:pl-12">
+                    <span class="absolute left-0 md:-left-3 top-0 bg-gray-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1665</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-gray-500">
+                        <h4 class="font-bold text-lg">Robert Hooke</h4>
+                        <p class="text-sm">Cell Theory: Observed cork, coin "Cells" (Little boxes).</p>
+                    </div>
+                </div>
+
+                <!-- Leeuwenhoek -->
+                <div class="relative mb-8 md:w-1/2 md:pr-12 md:text-right">
+                    <span class="absolute left-0 md:left-auto md:-right-3 top-0 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1673</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 md:border-l-0 md:border-r-4 border-emerald-500">
+                        <h4 class="font-bold text-lg">Antonie van Leeuwenhoek</h4>
+                        <p class="text-sm">First to see living microbes ("Animalcules") using simple microscope.</p>
+                    </div>
+                </div>
+
+                <!-- Redi -->
+                <div class="relative mb-8 md:ml-1/2 md:w-1/2 pl-8 md:pl-12">
+                    <span class="absolute left-0 md:-left-3 top-0 bg-orange-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1668</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-orange-500">
+                        <h4 class="font-bold text-lg">Francesco Redi (Vs Spontaneous Gen.)</h4>
+                        <p class="text-sm">Opposed "Abiogenesis". Experiment: Meat in jars (Open vs Covered). Maggots came from flies, not meat.</p>
+                        <p class="text-xs text-gray-500 mt-1 ar-text">عارض التوالد التلقائي بتجربة اللحم والذباب.</p>
+                    </div>
+                </div>
+
+                <!-- Pasteur -->
+                <div class="relative mb-8 md:w-1/2 md:pr-12 md:text-right">
+                    <span class="absolute left-0 md:left-auto md:-right-3 top-0 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1861</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 md:border-l-0 md:border-r-4 border-blue-500">
+                        <h4 class="font-bold text-lg">Louis Pasteur (Father of Micro)</h4>
+                        <ul class="text-sm list-none space-y-1">
+                            <li>• <strong>Disproved Spontaneous Gen:</strong> Swan-neck flask experiment.</li>
+                            <li>• <strong>Pasteurization:</strong> Heat to kill microbes (Wine/Milk).</li>
+                            <li>• <strong>Fermentation:</strong> Caused by yeast.</li>
+                            <li>• <strong>Vaccines:</strong> Rabies & Anthrax.</li>
+                            <li>• <strong>Aseptic Tech:</strong> Cotton plugs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Lister -->
+                <div class="relative mb-8 md:ml-1/2 md:w-1/2 pl-8 md:pl-12">
+                    <span class="absolute left-0 md:-left-3 top-0 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1860s</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-purple-500">
+                        <h4 class="font-bold text-lg">Joseph Lister</h4>
+                        <p class="text-sm"><strong>Antiseptic Surgery:</strong> Used Phenol (Carbolic acid) to clean wounds. Reduced infection.</p>
+                    </div>
+                </div>
+
+                <!-- Koch -->
+                <div class="relative mb-8 md:w-1/2 md:pr-12 md:text-right">
+                    <span class="absolute left-0 md:left-auto md:-right-3 top-0 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1876</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 md:border-l-0 md:border-r-4 border-red-500">
+                        <h4 class="font-bold text-lg">Robert Koch (Germ Theory)</h4>
+                        <p class="text-sm mb-2">Linked specific microbe to specific disease (Anthrax).</p>
+                        <div class="text-xs bg-red-50 p-2 rounded text-left md:text-right">
+                            <strong>Koch's Postulates:</strong><br>
+                            1. Microbe present in all sick hosts.<br>
+                            2. Isolated in pure culture.<br>
+                            3. Causes disease in healthy host.<br>
+                            4. Re-isolated again.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ehrlich & Fleming -->
+                <div class="relative mb-8 md:ml-1/2 md:w-1/2 pl-8 md:pl-12">
+                    <span class="absolute left-0 md:-left-3 top-0 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full border-4 border-white shadow">1900s</span>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-indigo-500">
+                        <h4 class="font-bold text-lg">Chemotherapy Era</h4>
+                        <p class="text-sm mb-1"><strong>Paul Ehrlich:</strong> "Magic Bullet" (Salvarsan) for Syphilis.</p>
+                        <p class="text-sm"><strong>Alexander Fleming (1928):</strong> Discovered Penicillin (First Antibiotic).</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10 text-center">
+        <p class="mb-2">Microbiology Lecture 01</p>
+        <p class="text-sm opacity-60">Faculty of Science - Helwan University</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
