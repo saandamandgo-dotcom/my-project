@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lecture 2 | Viruses (Full Detailed)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f3ff;
+            scroll-behavior: smooth;
+        }
+        .ar-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #7c3aed;
+            border-radius: 2px;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16 items-center">
+                <span class="font-bold text-xl text-violet-700 flex items-center">
+                    <i data-lucide="dna" class="mr-2"></i> MicroBio <span class="text-gray-500 text-sm ml-2 font-normal">Lec 02: Viruses</span>
+                </span>
+                <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#intro" class="hover:text-violet-600">Intro</a>
+                    <a href="#structure" class="hover:text-violet-600">Structure</a>
+                    <a href="#replication" class="hover:text-violet-600">Replication</a>
+                    <a href="#bacteriophage" class="hover:text-violet-600">Phages</a>
+                    <a href="#cancer" class="hover:text-violet-600">Cancer</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="intro" class="pt-32 pb-20 gradient-bg text-white text-center px-4 relative overflow-hidden">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-white opacity-10 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 bg-purple-400 opacity-20 rounded-full blur-xl"></div>
+
+        <h1 class="text-5xl font-bold mb-4 relative z-10">The World of Viruses</h1>
+        <h2 class="text-3xl font-bold mb-6 ar-text text-violet-100 relative z-10">عالم الفيروسات (محاضرة 2)</h2>
+        <p class="text-xl max-w-2xl mx-auto text-violet-100 relative z-10">
+            Comprehensive guide covering Definition, Structure, Replication, Bacteriophages, and Oncogenic Viruses.
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- 1. Definition & Characteristics -->
+        <section>
+            <h3 class="text-3xl font-bold text-gray-800 section-title">1. What is a Virus?</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Definition -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-violet-500">
+                    <h4 class="text-xl font-bold text-violet-700 mb-3 flex items-center"><i data-lucide="info" class="mr-2"></i> Meaning & Science</h4>
+                    <p class="text-sm mb-2">Word derived from Latin <strong>"Venom"</strong> (poisonous fluid). The science is <strong>Virology</strong> (branch of Microbiology).</p>
+                    <p class="text-sm text-gray-500 ar-text border-t pt-2">كلمة فيروس مشتقة من كلمة لاتينية تعني "السم". العلم يسمى "علم الفيروسات".</p>
+                </div>
+
+                <!-- Main Characters -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-fuchsia-500">
+                    <h4 class="text-xl font-bold text-fuchsia-700 mb-3 flex items-center"><i data-lucide="list" class="mr-2"></i> Key Characteristics</h4>
+                    <ul class="text-sm space-y-2 list-disc pl-4 text-gray-700">
+                        <li><strong>Obligate intracellular parasites:</strong> Only function inside a living cell.</li>
+                        <li><strong>Acellular:</strong> Not a cell. No metabolism. Do not grow. Do not respire.</li>
+                        <li><strong>Nucleic Acid:</strong> DNA <em>OR</em> RNA (Never both).</li>
+                        <li><strong>Size:</strong> 20-300 nm (Much smaller than bacteria). Detected by Electron Microscope.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Living vs Non-Living -->
+            <div class="mt-8 bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h4 class="font-bold text-center text-lg mb-4">Living vs Non-living? (بين الحياة والجماد)</h4>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <span class="block text-green-700 font-bold mb-1">Inside Host (Living)</span>
+                        <span class="text-xs text-gray-600">Multiplication, Genetic Material.</span>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <span class="block text-red-700 font-bold mb-1">Outside Host (Non-living)</span>
+                        <span class="text-xs text-gray-600">Crystallizable, No metabolism.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Structure & Shapes -->
+        <section id="structure">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">2. Structure & Shapes</h3>
+            
+            <!-- Structure Components -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-blue-500">
+                    <h4 class="font-bold text-lg mb-2">1. Capsid (Protein Coat)</h4>
+                    <p class="text-xs text-gray-600">Made of protein subunits called <strong>Capsomeres</strong>. Protects genome & determines host specificity.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-red-500">
+                    <h4 class="font-bold text-lg mb-2">2. Nucleic Acid (Core)</h4>
+                    <p class="text-xs text-gray-600">Central core. DNA or RNA. Responsible for the <strong>infective nature</strong>.</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border-t-4 border-orange-500">
+                    <h4 class="font-bold text-lg mb-2">3. Envelope (Optional)</h4>
+                    <p class="text-xs text-gray-600">Outer lipid layer with Spikes. (Enveloped vs Naked/Non-enveloped viruses).</p>
+                    <p class="text-xs text-gray-500 mt-1"><strong>Nucleocapsid:</strong> Capsid + Nucleic acid.</p>
+                </div>
+            </div>
+
+            <div class="bg-violet-50 p-3 mb-8 rounded text-sm text-center">
+                <strong>Virion:</strong> A virus particle which is non-replicating outside a host cell.
+            </div>
+
+            <!-- Shapes Table -->
+            <h4 class="font-bold text-xl mb-4">Virus Morphologies (الأشكال)</h4>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center text-sm mb-12">
+                <div class="p-3 bg-white border rounded shadow-sm">
+                    <span class="block font-bold text-violet-600">Spherical</span>
+                    <span class="text-xs">Influenza</span>
+                </div>
+                <div class="p-3 bg-white border rounded shadow-sm">
+                    <span class="block font-bold text-violet-600">Rod (Helical)</span>
+                    <span class="text-xs">TMV (Tobacco Mosaic)</span>
+                </div>
+                <div class="p-3 bg-white border rounded shadow-sm">
+                    <span class="block font-bold text-violet-600">Polyhedral</span>
+                    <span class="text-xs">Adenovirus (Cuboid)</span>
+                </div>
+                <div class="p-3 bg-white border rounded shadow-sm">
+                    <span class="block font-bold text-violet-600">Complex</span>
+                    <span class="text-xs">Bacteriophage (Tadpole)</span>
+                </div>
+                <div class="p-3 bg-white border rounded shadow-sm">
+                    <span class="block font-bold text-violet-600">Filamentous</span>
+                    <span class="text-xs">Ebola-like</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Classification & Specificity -->
+        <section>
+            <h3 class="text-3xl font-bold text-gray-800 section-title">3. Host & Specificity</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold text-lg text-violet-700 mb-2">Host Specificity</h4>
+                    <ul class="text-sm space-y-2 list-disc pl-5 text-gray-700">
+                        <li><strong>Animal Viruses:</strong> Hepatitis, Influenza.</li>
+                        <li><strong>Plant Viruses.</strong></li>
+                        <li><strong>Mycophages:</strong> Infect Fungi.</li>
+                        <li><strong>Bacteriophages:</strong> Infect Bacteria.</li>
+                        <li><strong>Cyanophages:</strong> Infect Algae.</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-blue-50 text-blue-800 text-xs rounded border border-blue-200">
+                        <strong>Tissue Tropism:</strong> Viruses infect specific tissues (e.g., Flu -> Respiratory tract). Specificity depends on surface proteins binding to host receptors.
+                    </div>
+                </div>
+
+                <!-- Detailed SARS-CoV-2 Structure -->
+                <div class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg relative">
+                    <h4 class="font-bold text-xl text-red-400 mb-4 border-b border-gray-600 pb-2">Example: SARS-CoV-2 (COVID-19)</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <strong class="text-yellow-400 block">Structure Proteins:</strong>
+                            <ul class="list-disc pl-4 text-gray-300 text-xs space-y-1">
+                                <li><strong>S (Spike):</strong> Binds to ACE2 receptor.</li>
+                                <li><strong>N (Nucleocapsid):</strong> Protects RNA.</li>
+                                <li><strong>M (Membrane).</strong></li>
+                                <li><strong>E (Envelope).</strong></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-green-400 block">Characteristics:</strong>
+                            <ul class="list-disc pl-4 text-gray-300 text-xs space-y-1">
+                                <li>Enveloped, RNA virus.</li>
+                                <li>Size: 75-150 nm.</li>
+                                <li><strong>Inactivation:</strong> 70% Ethanol, Soap, UV, Heat (>Cooking temp).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- Transmission -->
+             <div class="mt-8">
+                <h4 class="font-bold text-sm mb-2 text-gray-500 uppercase">Modes of Transmission</h4>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1 bg-gray-200 rounded-full text-xs">Aerosols</span>
+                    <span class="px-3 py-1 bg-gray-200 rounded-full text-xs">Ingestion</span>
+                    <span class="px-3 py-1 bg-gray-200 rounded-full text-xs">Injection</span>
+                    <span class="px-3 py-1 bg-gray-200 rounded-full text-xs">Sexual Contact</span>
+                    <span class="px-3 py-1 bg-gray-200 rounded-full text-xs">Bites</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Replication & Cultivation -->
+        <section id="replication">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">4. Replication & Cultivation</h3>
+
+            <!-- Replication Steps -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mb-8">
+                <h4 class="font-bold text-lg mb-4 text-violet-700">Viral Replication Steps (Animal Viruses)</h4>
+                <div class="space-y-3">
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">1</span>
+                        <p class="text-sm"><strong>Adsorption:</strong> Specific attachment to receptors.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">2</span>
+                        <p class="text-sm"><strong>Penetration (Viropexis):</strong> Virus enters the cell.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">3</span>
+                        <div class="text-sm">
+                            <strong>Uncoating:</strong> Release of genetic material.
+                            <span class="block text-xs text-red-500 mt-1">Note: Removal of capsid is done by <strong>lysosomal proteases</strong> enzymes.</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">4</span>
+                        <p class="text-sm"><strong>Replication:</strong> Synthesis of viral parts (Nucleic acid then Protein coat).</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">5</span>
+                        <p class="text-sm"><strong>Assembly:</strong> Putting parts together.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="font-bold text-gray-400">6</span>
+                        <p class="text-sm"><strong>Release:</strong> Lysis (bursting) or Budding (for enveloped).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cultivation Details -->
+            <div class="bg-yellow-50 p-5 rounded-xl border border-yellow-200">
+                <h4 class="font-bold text-yellow-800 mb-2 flex items-center"><i data-lucide="flask-conical" class="mr-2"></i> Cultivation Methods</h4>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                        <strong>1. Living Animals</strong><br>
+                        <span class="text-xs text-gray-600">Inoculation into mice, rabbits, etc.</span>
+                    </div>
+                    <div>
+                        <strong>2. Embryonated Eggs</strong><br>
+                        <span class="text-xs text-gray-600">Inoculation into specific sites:</span>
+                        <ul class="list-disc pl-4 text-xs text-gray-600 mt-1">
+                            <li>Yolk sac</li>
+                            <li>Amniotic cavity</li>
+                            <li>Allantoic cavity</li>
+                            <li>Chorioallantoic membrane</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>3. Tissue Culture</strong><br>
+                        <span class="text-xs text-gray-600">Cells grown in lab media.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Bacteriophages -->
+        <section id="bacteriophage">
+            <h3 class="text-3xl font-bold text-gray-800 section-title">5. Bacteriophages</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <p class="mb-4 text-sm">Viruses that infect bacteria. Potential use: <strong>Phage Therapy</strong> (Alternative to antibiotics).</p>
+                    
+                    <div class="bg-violet-100 p-4 rounded-lg mb-4">
+                        <h5 class="font-bold text-violet-800 text-sm mb-2">Structure (Detailed):</h5>
+                        <ul class="list-disc pl-4 text-xs text-violet-900 grid grid-cols-2 gap-1">
+                            <li>Capsid Head</li>
+                            <li>Nucleic Acid</li>
+                            <li>Collar</li>
+                            <li>Whiskers</li>
+                            <li>Sheath</li>
+                            <li>Base Plate</li>
+                            <li>Tail Fibers</li>
+                            <li>Spikes</li>
+                        </ul>
+                    </div>
+
+                    <h5 class="font-bold text-gray-700 text-sm mt-4">Life Cycles:</h5>
+                    <div class="space-y-2 mt-2 text-sm">
+                        <div class="p-2 border-l-4 border-red-500 bg-white shadow-sm">
+                            <strong>1. Lytic Cycle (Virulent):</strong> Virus attaches, enters, replicates, and bursts (lyses) the cell.
+                        </div>
+                        <div class="p-2 border-l-4 border-blue-500 bg-white shadow-sm">
+                            <strong>2. Lysogenic Cycle (Temperate):</strong> Virus integrates into host DNA as a <strong>Prophage</strong>. Replicates with bacteria. Can turn Lytic.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SVG Visualization -->
+                <div class="flex justify-center items-center bg-gray-50 rounded-xl p-4">
+                    <svg width="200" height="300" viewBox="0 0 200 300">
+                        <path d="M50 50 L100 20 L150 50 L150 100 L100 130 L50 100 Z" fill="#8b5cf6" stroke="#4c1d95" stroke-width="2" />
+                        <text x="100" y="80" text-anchor="middle" fill="white" font-size="10">Head</text>
+                        <rect x="90" y="130" width="20" height="10" fill="#4c1d95" /> <!-- Collar -->
+                        <rect x="92" y="140" width="16" height="80" fill="#a78bfa" stroke="#4c1d95" /> <!-- Sheath -->
+                        <rect x="80" y="220" width="40" height="10" fill="#4c1d95" /> <!-- Base Plate -->
+                        <line x1="80" y1="225" x2="40" y2="280" stroke="#6d28d9" stroke-width="3" /> <!-- Legs -->
+                        <line x1="120" y1="225" x2="160" y2="280" stroke="#6d28d9" stroke-width="3" />
+                        <line x1="90" y1="225" x2="70" y2="280" stroke="#6d28d9" stroke-width="3" />
+                        <line x1="110" y1="225" x2="130" y2="280" stroke="#6d28d9" stroke-width="3" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Cancer & Treatment -->
+        <section id="cancer" class="bg-gray-900 text-white -mx-4 px-4 py-12 rounded-3xl mt-12">
+            <h3 class="text-3xl font-bold mb-8 section-title before:bg-white">6. Viruses & Cancer</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-pink-400 mb-2">Oncogenic Viruses</h4>
+                    <p class="text-gray-300 text-sm mb-4">Integrate genetic material into host DNA, disrupting <strong>Oncogenes</strong> or <strong>Tumor Suppressor Genes</strong>.</p>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                        <strong class="block text-white mb-2 text-sm">Cancer Signs:</strong>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li><strong>1. Hyperplasia:</strong> Uncontrolled proliferation.</li>
+                            <li><strong>2. Anaplasia:</strong> Structural abnormality.</li>
+                            <li><strong>3. Metastasis:</strong> Spread to other sites.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-teal-400 mb-2">Treatment Strategies</h4>
+                    <div class="mb-4">
+                        <strong class="block text-white text-sm">Antiviral Drugs:</strong>
+                        <p class="text-xs text-gray-400">Target: Entry, Nucleic acid synthesis, or Assembly/Release.</p>
+                    </div>
+                    <div>
+                        <strong class="block text-white text-sm">Vaccines:</strong>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded border border-gray-600">Live-Attenuated</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded border border-gray-600">Inactivated (Killed)</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded border border-gray-600">Subunit</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded border border-gray-600">mRNA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-violet-900 text-violet-200 py-10 text-center">
+        <p class="mb-2">Microbiology Lecture 02 - Full Course</p>
+        <p class="text-sm opacity-60">Faculty of Science - Helwan University</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
