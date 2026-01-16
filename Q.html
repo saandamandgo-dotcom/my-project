@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Microbiology Quiz (300 Questions)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f3f4f6; }
+        .ar-text { font-family: 'Cairo', sans-serif; }
+        
+        /* Styles for results */
+        .correct-answer {
+            background-color: #d1fae5 !important; /* Green-100 */
+            border-color: #10b981 !important; /* Green-500 */
+            position: relative;
+        }
+        .correct-answer::after {
+            content: "✔ Correct / الإجابة الصحيحة";
+            display: block;
+            font-size: 0.75rem;
+            color: #047857;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .wrong-answer {
+            background-color: #fee2e2 !important; /* Red-100 */
+            border-color: #ef4444 !important; /* Red-500 */
+            opacity: 0.7;
+        }
+        
+        .btn-option:hover { background-color: #f9fafb; }
+        
+        .selected-option {
+            background-color: #e0f2fe; /* Blue-100 */
+            border-color: #3b82f6; /* Blue-500 */
+        }
+        
+        /* Hide radio dots visual adjustments */
+        .selection-dot { transition: all 0.2s; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <!-- Header -->
+    <header class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold">Microbiology Mega Quiz</h1>
+                <p class="text-xs md:text-sm opacity-80 ar-text">بنك أسئلة شامل (Lectures 1-8)</p>
+            </div>
+            <div id="score-board" class="hidden bg-white text-blue-900 px-4 py-2 rounded-lg font-bold shadow-sm">
+                Score: <span id="score-val">0</span> / <span id="total-val">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto p-4 mt-4">
+        
+        <!-- Intro Card -->
+        <div id="intro-card" class="bg-white rounded-xl shadow-lg p-8 text-center mb-6 border-t-8 border-blue-600">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Microbiology Exam Simulator</h2>
+            <div class="space-y-4 mb-8">
+                <p class="text-gray-600 ar-text text-lg">هذا الاختبار يحتوي على بنك أسئلة ضخم يغطي جميع المحاضرات.</p>
+                <ul class="text-sm text-gray-500 text-left mx-auto max-w-md list-disc pl-5 space-y-1">
+                    <li>Lecture 1: Introduction & History</li>
+                    <li>Lecture 2: Viruses</li>
+                    <li>Lecture 3: Nutrients & Transport</li>
+                    <li>Lecture 4: Cell Structure (Prokaryotes)</li>
+                    <li>Lecture 5: Fungi (Mycology)</li>
+                    <li>Lecture 6: Bacterial Growth Factors</li>
+                    <li>Lecture 7: Growth Measurements</li>
+                    <li>Lecture 8: Antibiotics & Control</li>
+                </ul>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+                <div class="bg-blue-50 p-3 rounded-lg">
+                    <span class="block text-2xl font-bold text-blue-600" id="q-count-intro">0</span>
+                    <span class="text-xs text-blue-800">Questions</span>
+                </div>
+                <div class="bg-blue-50 p-3 rounded-lg">
+                    <span class="block text-2xl font-bold text-blue-600">∞</span>
+                    <span class="text-xs text-blue-800">Time Limit</span>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-xl text-lg">
+                Start Challenge / ابدأ التحدي
+            </button>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="hidden space-y-8">
+            <!-- Questions injected here -->
+        </div>
+
+        <!-- Floating Submit Button -->
+        <div id="submit-section" class="hidden fixed bottom-6 right-0 left-0 flex justify-center z-40 px-4 pointer-events-none">
+            <button onclick="submitQuiz()" class="pointer-events-auto bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-2xl text-lg flex items-center transition duration-300 transform hover:-translate-y-1 border-2 border-white">
+                <span class="mr-2">Check Answers / تصحيح</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+        </div>
+
+        <!-- Restart Section -->
+        <div id="restart-section" class="hidden text-center mt-12 mb-12">
+            <div class="p-6 bg-white rounded-lg shadow-md inline-block">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Quiz Completed!</h3>
+                <p class="text-gray-600 mb-4 ar-text">راجع إجاباتك أعلاه (باللون الأخضر والأحمر)</p>
+                <button onclick="location.reload()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-lg">
+                    New Attempt / إعادة
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // ==========================================
+        // HUGE QUESTIONS DATABASE
+        // ==========================================
+        const questions = [
+            // --- Lecture 1: Intro & History ---
+            {
+                id: 1,
+                question: "Microbiology is the study of organisms that are usually less than ___ in diameter.",
+                translation: "علم الأحياء الدقيقة هو دراسة الكائنات التي يقل قطرها عادة عن ___.",
+                options: ["1 cm", "1 mm", "1 meter", "10 cm"],
+                correct: 1,
+                explanation: "Microorganisms are generally defined as being less than 1 millimeter in diameter, requiring a microscope to be seen."
+            },
+            {
+                id: 2,
+                question: "Which of the following is NOT a cellular microorganism?",
+                translation: "أي مما يلي لا يعتبر كائنًا حيًا دقيقًا خلويًا؟",
+                options: ["Bacteria", "Fungi", "Protozoa", "Viruses"],
+                correct: 3,
+                explanation: "Viruses are acellular (not composed of cells); they are genetic material wrapped in protein."
+            },
+            {
+                id: 3,
+                question: "Who developed the first single-lens microscope and observed 'animalcules'?",
+                translation: "من الذي طور أول مجهر أحادي العدسة ولاحظ 'الحيوانات الدقيقة'؟",
+                options: ["Robert Hooke", "Anton van Leeuwenhoek", "Louis Pasteur", "Robert Koch"],
+                correct: 1,
+                explanation: "Leeuwenhoek is considered the father of microbiology for his detailed observations of bacteria and protozoa."
+            },
+            {
+                id: 4,
+                question: "The theory that life can arise spontaneously from non-living matter is called:",
+                translation: "النظرية القائلة بأن الحياة يمكن أن تنشأ تلقائيًا من مواد غير حية تسمى:",
+                options: ["Germ theory", "Biogenesis", "Spontaneous generation", "Cell theory"],
+                correct: 2,
+                explanation: "Spontaneous generation (abiogenesis) was the belief that life could arise from decaying matter, which was later disproven."
+            },
+            {
+                id: 5,
+                question: "Who finally disproved the theory of spontaneous generation using swan-neck flasks?",
+                translation: "من الذي دحض أخيرًا نظرية التولد التلقائي باستخدام قوارير عنق البجعة؟",
+                options: ["Francesco Redi", "Louis Pasteur", "John Needham", "Lazzaro Spallanzani"],
+                correct: 1,
+                explanation: "Pasteur's swan-neck flask experiment showed that microbes in the air caused contamination, not the air itself."
+            },
+            {
+                id: 6,
+                question: "Koch's postulates are a series of criteria used to:",
+                translation: "فرضيات كوخ هي سلسلة من المعايير المستخدمة لـ:",
+                options: ["Classify bacteria", "Prove a specific microbe causes a specific disease", "Develop vaccines", "Sterilize surgical instruments"],
+                correct: 1,
+                explanation: "Robert Koch developed these steps to link a specific pathogen to a specific disease (Etiology)."
+            },
+            {
+                id: 7,
+                question: "Which scientist discovered Penicillin?",
+                translation: "من هو العالم الذي اكتشف البنسلين؟",
+                options: ["Alexander Fleming", "Paul Ehrlich", "Joseph Lister", "Edward Jenner"],
+                correct: 0,
+                explanation: "Fleming discovered the antibiotic properties of the Penicillium mold in 1928."
+            },
+            {
+                id: 8,
+                question: "Who introduced the use of antiseptics (phenol) in surgery?",
+                translation: "من أدخل استخدام المطهرات (الفينول) في الجراحة؟",
+                options: ["Ignaz Semmelweis", "Joseph Lister", "Florence Nightingale", "Robert Koch"],
+                correct: 1,
+                explanation: "Joseph Lister applied Pasteur's germ theory to surgery, using phenol to prevent infections."
+            },
+            {
+                id: 9,
+                question: "The formal system for naming and classifying organisms (Binomial Nomenclature) was established by:",
+                translation: "النظام الرسمي لتسمية وتصنيف الكائنات الحية (التسمية الثنائية) تم تأسيسه بواسطة:",
+                options: ["Carolus Linnaeus", "Carl Woese", "Pasteur", "Darwin"],
+                correct: 0,
+                explanation: "Linnaeus established the system of Genus and species naming."
+            },
+            {
+                id: 10,
+                question: "Which domain of life includes the 'true bacteria' with peptidoglycan cell walls?",
+                translation: "أي نطاق من الحياة يشمل 'البكتيريا الحقيقية' ذات الجدران الخلوية المكونة من الببتيدوجليكان؟",
+                options: ["Archaea", "Eukarya", "Bacteria", "Protista"],
+                correct: 2,
+                explanation: "Domain Bacteria includes prokaryotes with peptidoglycan walls."
+            },
+             {
+                id: 11,
+                question: "Prions are infectious agents composed entirely of:",
+                translation: "البريونات هي عوامل معدية تتكون بالكامل من:",
+                options: ["DNA", "RNA", "Protein", "Lipids"],
+                correct: 2,
+                explanation: "Prions are misfolded proteins that cause neurodegenerative diseases; they have no genetic material."
+            },
+            {
+                id: 12,
+                question: "The 'Golden Age of Microbiology' occurred roughly between:",
+                translation: "حدث 'العصر الذهبي للميكروبيولوجي' تقريبًا بين:",
+                options: ["1600-1650", "1857-1914", "1950-2000", "1700-1750"],
+                correct: 1,
+                explanation: "This period saw the major discoveries by Pasteur and Koch regarding germ theory and disease."
+            },
+            {
+                id: 13,
+                question: "Mycology is the study of:",
+                translation: "علم الفطريات (Mycology) هو دراسة:",
+                options: ["Bacteria", "Viruses", "Fungi", "Algae"],
+                correct: 2,
+                explanation: "Mycology focuses on fungi (yeasts, molds, mushrooms)."
+            },
+            {
+                id: 14,
+                question: "Prokaryotic cells differ from Eukaryotic cells in that Prokaryotes lack:",
+                translation: "تختلف الخلايا بدائية النواة عن حقيقية النواة في أن البدائيات تفتقر إلى:",
+                options: ["Cell membrane", "Ribosomes", "A membrane-bound nucleus", "DNA"],
+                correct: 2,
+                explanation: "The defining feature of prokaryotes is the absence of a true, membrane-bound nucleus."
+            },
+
+            // --- Lecture 2: Viruses ---
+            {
+                id: 15,
+                question: "Viruses are obligate intracellular parasites, meaning:",
+                translation: "الفيروسات طفيليات داخل خلوية إجبارية، مما يعني:",
+                options: ["They can grow on artificial media", "They only replicate inside a living host cell", "They feed on dead matter", "They are free-living"],
+                correct: 1,
+                explanation: "They lack the machinery to replicate on their own and must hijack a host cell."
+            },
+            {
+                id: 16,
+                question: "A complete viral particle is known as a:",
+                translation: "يُعرف الجسيم الفيروسي الكامل باسم:",
+                options: ["Capsomer", "Virion", "Viroid", "Prion"],
+                correct: 1,
+                explanation: "A virion is the complete, infective form of a virus outside a host cell."
+            },
+            {
+                id: 17,
+                question: "The protein coat surrounding the viral nucleic acid is called the:",
+                translation: "يسمى الغلاف البروتيني المحيط بالحمض النووي الفيروسي:",
+                options: ["Capsid", "Envelope", "Sheath", "Spike"],
+                correct: 0,
+                explanation: "The capsid protects the genome and is made of subunits called capsomeres."
+            },
+            {
+                id: 18,
+                question: "Some viruses have a lipid membrane outside the capsid called the:",
+                translation: "بعض الفيروسات لها غشاء دهني خارج الكابسيد يسمى:",
+                options: ["Cell wall", "Envelope", "Cortex", "Slime layer"],
+                correct: 1,
+                explanation: "The envelope is derived from the host cell membrane during viral release (budding)."
+            },
+            {
+                id: 19,
+                question: "Viral spikes (glycoproteins) are primarily used for:",
+                translation: "تستخدم الأشواك الفيروسية (Glycoproteins) بشكل أساسي لـ:",
+                options: ["Digestion", "Attachment to host cells", "Protection from heat", "Energy production"],
+                correct: 1,
+                explanation: "Spikes bind to specific receptors on the host cell surface."
+            },
+            {
+                id: 20,
+                question: "Which of the following genomes is NOT found in viruses?",
+                translation: "أي من الجينومات التالية لا يوجد في الفيروسات؟",
+                options: ["Double-stranded DNA", "Single-stranded RNA", "DNA and RNA together", "Single-stranded DNA"],
+                correct: 2,
+                explanation: "Viruses contain either DNA or RNA, but never both functioning together like in cells."
+            },
+            {
+                id: 21,
+                question: "A virus that infects bacteria is called a:",
+                translation: "الفيروس الذي يصيب البكتيريا يسمى:",
+                options: ["Bacteriophage", "Virophage", "Macrophage", "Plasmid"],
+                correct: 0,
+                explanation: "Bacteriophages (or phages) are viruses specific to bacterial hosts."
+            },
+            {
+                id: 22,
+                question: "The first step in the viral replication cycle is:",
+                translation: "الخطوة الأولى في دورة التكاثر الفيروسي هي:",
+                options: ["Penetration", "Uncoating", "Adsorption (Attachment)", "Synthesis"],
+                correct: 2,
+                explanation: "The virus must first attach (adsorb) to the host cell surface."
+            },
+            {
+                id: 23,
+                question: "During the 'Uncoating' stage of viral replication:",
+                translation: "خلال مرحلة 'Uncoating' من التكاثر الفيروسي:",
+                options: ["The virus leaves the cell", "The viral capsid is removed, releasing the genome", "Proteins are synthesized", "DNA is replicated"],
+                correct: 1,
+                explanation: "Uncoating exposes the viral nucleic acid to the host's machinery."
+            },
+            {
+                id: 24,
+                question: "Oncogenic viruses can cause cancer by:",
+                translation: "الفيروسات المسرطنة يمكن أن تسبب السرطان عن طريق:",
+                options: ["Killing the cell immediately", "Integrating into host DNA and affecting cell cycle control", "Depleting nutrients", "Releasing toxins"],
+                correct: 1,
+                explanation: "They often activate oncogenes or inhibit tumor suppressor genes."
+            },
+            {
+                id: 25,
+                question: "Which of the following is an example of a latent viral infection?",
+                translation: "أي مما يلي مثال على عدوى فيروسية كامنة؟",
+                options: ["Flu", "Herpes Simplex (Cold sores)", "Common cold", "Ebola"],
+                correct: 1,
+                explanation: "Herpes viruses can remain dormant in nerve cells and reactivate later."
+            },
+            {
+                id: 26,
+                question: "Viroids are infectious agents that consist only of:",
+                translation: "الفيرويدات هي عوامل معدية تتكون فقط من:",
+                options: ["Protein", "Naked RNA", "DNA", "Lipids"],
+                correct: 1,
+                explanation: "Viroids are short pieces of naked RNA that infect plants."
+            },
+            {
+                id: 27,
+                question: "The size range of most viruses is:",
+                translation: "يتراوح حجم معظم الفيروسات بين:",
+                options: ["20 - 300 nm", "1 - 10 mm", "10 - 100 micrometers", "0.1 - 0.5 nm"],
+                correct: 0,
+                explanation: "Viruses are nanometer-scale entities, much smaller than bacteria."
+            },
+            {
+                id: 28,
+                question: "Which step follows 'Synthesis' in the viral replication cycle?",
+                translation: "أي خطوة تلي 'التصنيع' (Synthesis) في دورة التكاثر الفيروسي؟",
+                options: ["Adsorption", "Uncoating", "Assembly (Maturation)", "Penetration"],
+                correct: 2,
+                explanation: "After parts are made (synthesis), they are assembled into complete virions."
+            },
+            {
+                id: 29,
+                question: "Retroviruses, like HIV, use which enzyme to convert their RNA into DNA?",
+                translation: "تستخدم الفيروسات القهقرية، مثل فيروس نقص المناعة البشرية، أي إنزيم لتحويل الحمض النووي الريبي (RNA) إلى حمض نووي (DNA)؟",
+                options: ["DNA polymerase", "RNA polymerase", "Reverse Transcriptase", "Ligase"],
+                correct: 2,
+                explanation: "Reverse Transcriptase allows them to make a DNA copy from their RNA template."
+            },
+
+            // --- Lecture 3: Nutrients & Transport ---
+            {
+                id: 30,
+                question: "Nutrients required in large amounts for cell structure and metabolism are called:",
+                translation: "تسمى المغذيات المطلوبة بكميات كبيرة لبنية الخلية والتمثيل الغذائي:",
+                options: ["Micronutrients", "Macronutrients", "Trace elements", "Growth factors"],
+                correct: 1,
+                explanation: "Examples include Carbon, Nitrogen, Oxygen."
+            },
+            {
+                id: 31,
+                question: "Which element constitutes the highest percentage of a cell's dry weight?",
+                translation: "أي عنصر يشكل النسبة الأكبر من الوزن الجاف للخلية؟",
+                options: ["Nitrogen", "Carbon", "Sulfur", "Iron"],
+                correct: 1,
+                explanation: "Carbon is approx 50% of the dry weight."
+            },
+            {
+                id: 32,
+                question: "Trace elements (Micronutrients) mainly function as:",
+                translation: "تعمل العناصر النزرة (المغذيات الدقيقة) بشكل أساسي كـ:",
+                options: ["Energy sources", "Cofactors for enzymes", "Structural components of cell wall", "Solvents"],
+                correct: 1,
+                explanation: "They (e.g., Zn, Cu, Mn) help enzymes assume the correct shape or catalyze reactions."
+            },
+            {
+                id: 33,
+                question: "An organism that uses CO2 as its sole carbon source is called an:",
+                translation: "الكائن الذي يستخدم ثاني أكسيد الكربون كمصدر وحيد للكربون يسمى:",
+                options: ["Autotroph", "Heterotroph", "Saprophyte", "Parasite"],
+                correct: 0,
+                explanation: "Autotrophs (self-feeders) fix CO2."
+            },
+            {
+                id: 34,
+                question: "An organism that gets carbon from organic molecules is a:",
+                translation: "الكائن الذي يحصل على الكربون من الجزيئات العضوية هو:",
+                options: ["Autotroph", "Heterotroph", "Lithotroph", "Phototroph"],
+                correct: 1,
+                explanation: "Heterotrophs rely on pre-formed organic matter."
+            },
+            {
+                id: 35,
+                question: "Movement of molecules from high to low concentration WITHOUT a carrier protein is:",
+                translation: "حركة الجزيئات من التركيز العالي إلى المنخفض بدون بروتين حامل هي:",
+                options: ["Active transport", "Group translocation", "Simple (Passive) Diffusion", "Facilitated Diffusion"],
+                correct: 2,
+                explanation: "Simple diffusion (e.g., oxygen, water) happens directly through the membrane."
+            },
+            {
+                id: 36,
+                question: "Facilitated diffusion differs from active transport in that facilitated diffusion:",
+                translation: "يختلف الانتشار الميسر عن النقل النشط في أن الانتشار الميسر:",
+                options: ["Requires ATP", "Moves against the gradient", "Does NOT require energy", "Does not use proteins"],
+                correct: 2,
+                explanation: "Facilitated diffusion uses carriers but is passive (down the gradient, no ATP)."
+            },
+            {
+                id: 37,
+                question: "Active transport is characterized by:",
+                translation: "يتميز النقل النشط بـ:",
+                options: ["Movement down the gradient", "No energy requirement", "Movement against concentration gradient + ATP", "Only water transport"],
+                correct: 2,
+                explanation: "It pumps nutrients into the cell even when external concentration is low."
+            },
+            {
+                id: 38,
+                question: "Group translocation is unique because:",
+                translation: "النقل الجماعي (Group translocation) فريد لأنه:",
+                options: ["It occurs in eukaryotes only", "The substance is chemically modified during transport", "It requires no protein", "It uses light energy"],
+                correct: 1,
+                explanation: "Example: The Phosphotransferase system phosphorylates sugars as they enter."
+            },
+            {
+                id: 39,
+                question: "Siderophores are secreted by bacteria to harvest:",
+                translation: "تفرز البكتيريا حاملات الحديد (Siderophores) لحصاد:",
+                options: ["Carbon", "Nitrogen", "Iron", "Magnesium"],
+                correct: 2,
+                explanation: "Iron is scarce in the environment; siderophores bind it tightly and bring it into the cell."
+            },
+            {
+                id: 40,
+                question: "Osmosis is the movement of ___ across a semi-permeable membrane.",
+                translation: "الاسموزية هي حركة ___ عبر غشاء شبه منفذ.",
+                options: ["Solutes", "Proteins", "Water", "Salts"],
+                correct: 2,
+                explanation: "Osmosis specifically refers to water movement to equilibrate concentrations."
+            },
+            {
+                id: 41,
+                question: "If a cell is placed in a hypertonic solution, water will:",
+                translation: "إذا وضعت خلية في محلول عالي التوتر (Hypertonic)، فإن الماء سوف:",
+                options: ["Enter the cell", "Leave the cell", "Stay in equilibrium", "Freeze"],
+                correct: 1,
+                explanation: "Water rushes out to dilute the high solute concentration outside, causing plasmolysis."
+            },
+            {
+                id: 42,
+                question: "Phagocytosis is a type of endocytosis where the cell engulfs:",
+                translation: "البلعمة هي نوع من الإدخال الخلوي حيث تبتلع الخلية:",
+                options: ["Liquids", "Solid particles/cells", "Gases", "Ions"],
+                correct: 1,
+                explanation: "Phagocytosis = 'Cell eating' (solids). Pinocytosis = 'Cell drinking' (liquids)."
+            },
+            {
+                id: 43,
+                question: "Growth factors are organic compounds that:",
+                translation: "عوامل النمو هي مركبات عضوية:",
+                options: ["Can be synthesized by the organism", "Cannot be synthesized by the organism and must be provided", "Are inorganic", "Are toxic"],
+                correct: 1,
+                explanation: "Examples include vitamins and amino acids that the cell cannot make itself."
+            },
+
+            // --- Lecture 4: Cell Structure ---
+            {
+                id: 44,
+                question: "The bacterial capsule is usually composed of:",
+                translation: "تتكون الكبسولة البكتيرية عادة من:",
+                options: ["Protein", "Polysaccharide", "Lipid", "Nucleic acid"],
+                correct: 1,
+                explanation: "Most capsules are slime-like sugar polymers (polysaccharides)."
+            },
+            {
+                id: 45,
+                question: "Which structure prevents phagocytosis by white blood cells?",
+                translation: "أي تركيب يمنع البلعمة بواسطة خلايا الدم البيضاء؟",
+                options: ["Flagella", "Ribosome", "Capsule", "Pili"],
+                correct: 2,
+                explanation: "The slippery, thick capsule prevents immune cells from gripping and eating the bacteria."
+            },
+            {
+                id: 46,
+                question: "A slime layer differs from a capsule in that the slime layer is:",
+                translation: "تختلف الطبقة اللزجة (Slime layer) عن الكبسولة في أن الطبقة اللزجة:",
+                options: ["Tightly attached", "Loosely attached and unorganized", "Made of protein", "Only found in viruses"],
+                correct: 1,
+                explanation: "Slime layers are easily washed off; capsules are firmly attached."
+            },
+            {
+                id: 47,
+                question: "The S-layer is a common feature in:",
+                translation: "طبقة S-layer هي سمة شائعة في:",
+                options: ["Fungi", "Animals", "Archaea", "Viruses"],
+                correct: 2,
+                explanation: "It is a crystalline protein armor often serving as the cell wall in Archaea."
+            },
+            {
+                id: 48,
+                question: "Bacterial flagella are primarily used for:",
+                translation: "تستخدم الأسواط البكتيرية بشكل أساسي لـ:",
+                options: ["Attachment", "Motility", "DNA transfer", "Protection"],
+                correct: 1,
+                explanation: "Flagella rotate like propellers to move the bacterium."
+            },
+            {
+                id: 49,
+                question: "A bacterium with a single flagellum at one end is called:",
+                translation: "البكتيريا ذات السوط الواحد في أحد طرفيها تسمى:",
+                options: ["Monotrichous", "Lophotrichous", "Amphitrichous", "Peritrichous"],
+                correct: 0,
+                explanation: "Mono = One."
+            },
+            {
+                id: 50,
+                question: "Movement towards a chemical attractant is called:",
+                translation: "الحركة نحو مادة كيميائية جاذبة تسمى:",
+                options: ["Phototaxis", "Chemotaxis", "Magnetotaxis", "Osmotaxis"],
+                correct: 1,
+                explanation: "Chemotaxis is movement in response to chemical signals."
+            },
+            {
+                id: 51,
+                question: "Fimbriae are short appendages used for:",
+                translation: "الأهداب (Fimbriae) هي زوائد قصيرة تستخدم لـ:",
+                options: ["Motility", "Attachment to surfaces/cells", "DNA exchange", "Storage"],
+                correct: 1,
+                explanation: "They act like velcro to stick to tissues or surfaces."
+            },
+            {
+                id: 52,
+                question: "Sex pili are involved in:",
+                translation: "شعيرات الجنس (Sex pili) تشارك في:",
+                options: ["Motility", "Conjugation (DNA transfer)", "Digestion", "Sporulation"],
+                correct: 1,
+                explanation: "They connect two bacteria to transfer plasmid DNA."
+            },
+            {
+                id: 53,
+                question: "Endospores are produced by genera such as:",
+                translation: "تنتج الأبواغ الداخلية بواسطة أجناس مثل:",
+                options: ["Escherichia and Salmonella", "Bacillus and Clostridium", "Staphylococcus and Streptococcus", "Mycobacterium"],
+                correct: 1,
+                explanation: "Bacillus (aerobic) and Clostridium (anaerobic) are the classic spore formers."
+            },
+            {
+                id: 54,
+                question: "The process of spore formation is called:",
+                translation: "تسمى عملية تكوين الأبواغ:",
+                options: ["Germination", "Sporulation", "Binary fission", "Budding"],
+                correct: 1,
+                explanation: "Sporulation occurs when conditions become unfavorable."
+            },
+            {
+                id: 55,
+                question: "What chemical in the endospore core confers heat resistance?",
+                translation: "ما المادة الكيميائية الموجودة في قلب البوغ الداخلي التي تمنحه مقاومة للحرارة؟",
+                options: ["Dipicolinic acid (DPA)", "Acetic acid", "Amino acid", "Hydrochloric acid"],
+                correct: 0,
+                explanation: "Calcium-DPA complex dehydrates the core, protecting DNA."
+            },
+            {
+                id: 56,
+                question: "The return of an endospore to its vegetative state is called:",
+                translation: "عودة البوغ الداخلي إلى حالته الخضرية (النشطة) تسمى:",
+                options: ["Sporulation", "Germination", "Replication", "Translation"],
+                correct: 1,
+                explanation: "Germination happens when favorable conditions return."
+            },
+            {
+                id: 57,
+                question: "Poly-beta-hydroxybutyrate (PHB) granules are used for:",
+                translation: "تستخدم حبيبات PHB لـ:",
+                options: ["Carbon/Energy storage", "Motility", "DNA replication", "Antibiotic resistance"],
+                correct: 0,
+                explanation: "They are inclusion bodies that store excess carbon for later use."
+            },
+
+            // --- Lecture 5: Fungi ---
+            {
+                id: 58,
+                question: "Fungi are:",
+                translation: "الفطريات هي:",
+                options: ["Prokaryotic", "Eukaryotic", "Acellular", "Plants"],
+                correct: 1,
+                explanation: "They have a true nucleus and organelles."
+            },
+            {
+                id: 59,
+                question: "Which of the following is NOT a characteristic of fungi?",
+                translation: "أي مما يلي ليس من خصائص الفطريات؟",
+                options: ["Cell wall made of Chitin", "Heterotrophic", "Photosynthetic", "Spore-bearing"],
+                correct: 2,
+                explanation: "Fungi are NOT photosynthetic; they lack chlorophyll."
+            },
+            {
+                id: 60,
+                question: "Yeasts are typically:",
+                translation: "الخمائر عادة ما تكون:",
+                options: ["Unicellular", "Multicellular", "Filamentous", "Motile"],
+                correct: 0,
+                explanation: "Yeasts are single-celled fungi."
+            },
+            {
+                id: 61,
+                question: "Molds consist of long filaments called:",
+                translation: "تتكون الأعفان من خيوط طويلة تسمى:",
+                options: ["Hyphae", "Spores", "Buds", "Cysts"],
+                correct: 0,
+                explanation: "A mass of hyphae is called a mycelium."
+            },
+            {
+                id: 62,
+                question: "Hyphae that lack cross-walls (septa) are called:",
+                translation: "الخيوط الفطرية التي تفتقر إلى الجدران العرضية (Hohae) تسمى:",
+                options: ["Septate", "Coenocytic (Aseptate)", "Vegetative", "Aerial"],
+                correct: 1,
+                explanation: "Coenocytic hyphae are continuous tubes with multiple nuclei."
+            },
+            {
+                id: 63,
+                question: "Asexual reproduction in yeasts is mostly by:",
+                translation: "التكاثر اللاجنسي في الخمائر يتم في الغالب عن طريق:",
+                options: ["Binary fission", "Budding", "Fragmentation", "Meiosis"],
+                correct: 1,
+                explanation: "A small bud forms on the parent cell and pinches off."
+            },
+            {
+                id: 64,
+                question: "Which of the following is an ASEXUAL spore?",
+                translation: "أي مما يلي هو بوغ لاجنسي؟",
+                options: ["Zygospore", "Ascospore", "Basidiospore", "Sporangiospore"],
+                correct: 3,
+                explanation: "Sporangiospores and Conidiospores are asexual; the others are sexual."
+            },
+            {
+                id: 65,
+                question: "Fungal diseases that affect the hair, skin, and nails are called:",
+                translation: "الأمراض الفطرية التي تصيب الشعر والجلد والأظافر تسمى:",
+                options: ["Systemic mycoses", "Cutaneous mycoses (Dermatomycoses)", "Opportunistic mycoses", "Subcutaneous mycoses"],
+                correct: 1,
+                explanation: "Commonly known as ringworm or tinea."
+            },
+            {
+                id: 66,
+                question: "Candida albicans is an example of an:",
+                translation: "المبيضات البيضاء (Candida albicans) مثال على:",
+                options: ["Obligate pathogen", "Opportunistic pathogen", "Autotroph", "Virus"],
+                correct: 1,
+                explanation: "It is part of normal flora but causes infection if the immune system weakens."
+            },
+            {
+                id: 67,
+                question: "Fungi that feed on dead organic matter are:",
+                translation: "الفطريات التي تتغذى على المواد العضوية الميتة هي:",
+                options: ["Parasites", "Saprophytes", "Symbionts", "Predators"],
+                correct: 1,
+                explanation: "Saprophytes are the recyclers of nature."
+            },
+            {
+                id: 68,
+                question: "Thermal dimorphism means the fungus grows as a ___ at body temperature (37°C).",
+                translation: "ثنائية الشكل الحرارية تعني أن الفطر ينمو كـ ___ عند درجة حرارة الجسم (37 درجة مئوية).",
+                options: ["Mold", "Yeast", "Mushroom", "Spore"],
+                correct: 1,
+                explanation: "Mold in the cold (25°C), Yeast in the beast (37°C)."
+            },
+
+            // --- Lecture 6: Growth ---
+            {
+                id: 69,
+                question: "Generation time is:",
+                translation: "وقت الجيل هو:",
+                options: ["Time for nuclear division", "Time required for a population to double", "Time to reach death phase", "Time to produce spores"],
+                correct: 1,
+                explanation: "Also known as doubling time."
+            },
+            {
+                id: 70,
+                question: "In the Lag phase:",
+                translation: "في مرحلة التأخر (Lag phase):",
+                options: ["Cells divide rapidly", "Cells adapt, synthesize enzymes, but don't divide yet", "Death exceeds growth", "Nutrients are depleted"],
+                correct: 1,
+                explanation: "Cells are gearing up for division."
+            },
+            {
+                id: 71,
+                question: "Antibiotics are most effective during which phase?",
+                translation: "المضادات الحيوية تكون أكثر فعالية خلال أي مرحلة؟",
+                options: ["Lag", "Log (Exponential)", "Stationary", "Death"],
+                correct: 1,
+                explanation: "Because active synthesis of wall/protein is happening rapidly."
+            },
+            {
+                id: 72,
+                question: "Organisms that grow best at human body temperature (37°C) are:",
+                translation: "الكائنات التي تنمو بشكل أفضل عند درجة حرارة جسم الإنسان (37 درجة مئوية) هي:",
+                options: ["Psychrophiles", "Mesophiles", "Thermophiles", "Hyperthermophiles"],
+                correct: 1,
+                explanation: "Mesophiles (middle lovers) range approx 20-45°C."
+            },
+            {
+                id: 73,
+                question: "Psychrophiles prefer:",
+                translation: "الكائنات المحبة للبرودة (Psychrophiles) تفضل:",
+                options: ["Heat", "Cold", "Salt", "Acid"],
+                correct: 1,
+                explanation: "They grow at 0°C to 15°C."
+            },
+            {
+                id: 74,
+                question: "Organisms that require high salt concentrations are called:",
+                translation: "الكائنات التي تتطلب تركيزات عالية من الملح تسمى:",
+                options: ["Halophiles", "Acidophiles", "Barophiles", "Xerophiles"],
+                correct: 0,
+                explanation: "Halo = salt."
+            },
+            {
+                id: 75,
+                question: "Obligate Anaerobes:",
+                translation: "اللاهوائيات الإجبارية:",
+                options: ["Need Oxygen", "Can live with or without Oxygen", "Are killed by Oxygen", "Prefer low Oxygen"],
+                correct: 2,
+                explanation: "They lack enzymes (catalase/SOD) to detoxify oxygen radicals."
+            },
+            {
+                id: 76,
+                question: "Facultative Anaerobes:",
+                translation: "اللاهوائيات الاختيارية:",
+                options: ["Grow better with Oxygen but can grow without it", "Die in Oxygen", "Require low Oxygen", "Only ferment"],
+                correct: 0,
+                explanation: "They use oxygen if available (more energy) but switch to fermentation if not."
+            },
+            {
+                id: 77,
+                question: "Acidophiles grow best at pH:",
+                translation: "تنمو الكائنات المحبة للحموضة بشكل أفضل عند درجة حموضة:",
+                options: ["pH 7", "pH > 8", "pH < 5.5", "pH 14"],
+                correct: 2,
+                explanation: "They thrive in acidic environments."
+            },
+
+            // --- Lecture 7: Measurement ---
+            {
+                id: 78,
+                question: "Plate counts (CFU) assume that:",
+                translation: "تفترض عد الأطباق (CFU) أن:",
+                options: ["Each colony arises from a single bacterium", "All bacteria are dead", "Bacteria cannot grow on agar", "Viruses form colonies"],
+                correct: 0,
+                explanation: "Colony Forming Unit (CFU) represents a viable cell that divided to form a visible colony."
+            },
+            {
+                id: 79,
+                question: "To count bacteria in a very dilute sample (like lake water), use:",
+                translation: "لعد البكتيريا في عينة مخففة للغاية (مثل مياه البحيرة)، استخدم:",
+                options: ["Streak plate", "Filtration method", "Turbidity", "Dry weight"],
+                correct: 1,
+                explanation: "Pass large volume through a filter, then place filter on agar."
+            },
+            {
+                id: 80,
+                question: "Turbidity is measured using a:",
+                translation: "يتم قياس العكارة باستخدام:",
+                options: ["Microscope", "Spectrophotometer", "Thermometer", "Balance"],
+                correct: 1,
+                explanation: "It measures light absorbance/scattering."
+            },
+            {
+                id: 81,
+                question: "Direct microscopic count involves using:",
+                translation: "العد المجهري المباشر يتضمن استخدام:",
+                options: ["Petroff-Hausser chamber", "Agar plate", "Filter paper", "Broth"],
+                correct: 0,
+                explanation: "A special slide grid to count cells directly."
+            },
+            {
+                id: 82,
+                question: "Serial dilution is performed to:",
+                translation: "يتم إجراء التخفيف المتسلسل لـ:",
+                options: ["Kill bacteria", "Reduce bacterial numbers to a countable range", "Identify bacteria", "Increase growth"],
+                correct: 1,
+                explanation: "To get 30-300 colonies per plate."
+            },
+
+            // --- Lecture 8: Antibiotics ---
+            {
+                id: 83,
+                question: "Bacteriostatic drugs:",
+                translation: "الأدوية المثبطة للبكتيريا (Bacteriostatic):",
+                options: ["Kill bacteria", "Inhibit bacterial growth", "Kill viruses", "Cause lysis"],
+                correct: 1,
+                explanation: "They stop growth, allowing the immune system to clear the infection."
+            },
+            {
+                id: 84,
+                question: "Bactericidal drugs:",
+                translation: "الأدوية القاتلة للبكتيريا (Bactericidal):",
+                options: ["Inhibit growth only", "Kill the bacteria", "Do nothing", "Enhance growth"],
+                correct: 1,
+                explanation: "Cidal = Kill."
+            },
+            {
+                id: 85,
+                question: "Broad-spectrum antibiotics affect:",
+                translation: "المضادات الحيوية واسعة الطيف تؤثر على:",
+                options: ["Only Gram-positive", "Only Gram-negative", "Both Gram-positive and Gram-negative", "Only Viruses"],
+                correct: 2,
+                explanation: "They cover a wide range of bacteria."
+            },
+            {
+                id: 86,
+                question: "Beta-lactams (like Penicillin) target:",
+                translation: "تستهدف البيتا لاكتام (مثل البنسلين):",
+                options: ["Ribosomes (Protein synthesis)", "Cell wall synthesis", "DNA replication", "Cell membrane"],
+                correct: 1,
+                explanation: "They inhibit peptidoglycan cross-linking."
+            },
+            {
+                id: 87,
+                question: "Aminoglycosides and Tetracyclines target:",
+                translation: "تستهدف الأمينوجليكوزيدات والتتراسيكلين:",
+                options: ["Cell wall", "Protein synthesis (Ribosomes)", "Cell membrane", "Folic acid"],
+                correct: 1,
+                explanation: "They bind to the 30S or 50S ribosomal subunits."
+            },
+            {
+                id: 88,
+                question: "Sulfa drugs work by inhibiting:",
+                translation: "تعمل أدوية السلفا عن طريق تثبيط:",
+                options: ["Cell wall", "Folic acid synthesis", "Protein synthesis", "DNA gyrase"],
+                correct: 1,
+                explanation: "They are competitive inhibitors of essential metabolic pathways."
+            },
+            {
+                id: 89,
+                question: "Drug resistance due to 'enzymatic destruction' is best exemplified by:",
+                translation: "مقاومة الدواء بسبب 'التدمير الإنزيمي' تتمثل في:",
+                options: ["Efflux pumps", "Beta-lactamase (Penicillinase)", "Thick cell wall", "Mutation"],
+                correct: 1,
+                explanation: "The enzyme cleaves the drug molecule."
+            },
+            {
+                id: 90,
+                question: "The MIC (Minimum Inhibitory Concentration) is:",
+                translation: "الحد الأدنى للتركيز المثبط (MIC) هو:",
+                options: ["Lowest dose to kill patient", "Lowest concentration of drug that prevents visible growth", "Highest dose tolerated", "None of above"],
+                correct: 1,
+                explanation: "Determined by tube dilution method."
+            },
+
+            // --- FILLERS for Variety and Depth (Covering nuances) ---
+            { id: 91, question: "Lipopolysaccharide (LPS) is found in:", translation: "يوجد عديد السكاريد الشحمي (LPS) في:", options: ["Gram Positive wall", "Gram Negative outer membrane", "Fungal wall", "Viral capsid"], correct: 1, explanation: "LPS is the endotoxin of Gram Negatives." },
+            { id: 92, question: "Teichoic acids are found in:", translation: "توجد أحماض التيكويك في:", options: ["Gram Positive wall", "Gram Negative wall", "Spores", "Capsules"], correct: 0, explanation: "They stabilize the thick peptidoglycan of Gram Positives." },
+            { id: 93, question: "Mycoplasmas are unique bacteria because they lack:", translation: "الميكوبلازما بكتيريا فريدة لأنها تفتقر إلى:", options: ["Cell wall", "Cell membrane", "Ribosomes", "DNA"], correct: 0, explanation: "They have sterols in their membrane instead." },
+            { id: 94, question: "The process of heating food to kill pathogens is:", translation: "عملية تسخين الطعام لقتل مسببات الأمراض هي:", options: ["Sterilization", "Pasteurization", "Sanitization", "Filtration"], correct: 1, explanation: "Pasteurization reduces load but doesn't sterilize." },
+            { id: 95, question: "A chemical used on living tissue to reduce microbes is:", translation: "مادة كيميائية تستخدم على الأنسجة الحية لتقليل الميكروبات هي:", options: ["Disinfectant", "Antiseptic", "Sterilant", "Antibiotic"], correct: 1, explanation: "Antiseptics are safe for skin (e.g., Iodine)." },
+            { id: 96, question: "A disinfectant is used on:", translation: "يستخدم المطهر (Disinfectant) على:", options: ["Living skin", "Inanimate objects (surfaces)", "Internal organs", "Food"], correct: 1, explanation: "Too toxic for living tissue (e.g., Bleach)." },
+            { id: 97, question: "UV radiation kills microbes by damaging:", translation: "تقتل الأشعة فوق البنفسجية الميكروبات عن طريق إتلاف:", options: ["Proteins", "DNA (Thymine dimers)", "Cell wall", "Membranes"], correct: 1, explanation: "It causes abnormal bonds in DNA." },
+            { id: 98, question: "Which filtration pore size is commonly used to remove bacteria?", translation: "ما هو حجم مسام الترشيح المستخدم عادة لإزالة البكتيريا؟", options: ["10 µm", "0.22 µm or 0.45 µm", "1 mm", "100 nm"], correct: 1, explanation: "Most bacteria are >0.5 µm." },
+            { id: 99, question: "HEPA filters are used to remove microbes from:", translation: "تستخدم مرشحات HEPA لإزالة الميكروبات من:", options: ["Water", "Air", "Blood", "Food"], correct: 1, explanation: "High Efficiency Particulate Air filters." },
+            { id: 100, question: "The enzyme Lysozyme damages bacteria by:", translation: "يقوم إنزيم الليزوزيم بإتلاف البكتيريا عن طريق:", options: ["Breaking peptidoglycan bonds", "Inhibiting protein synthesis", "Dissolving lipids", "Stopping DNA rep"], correct: 0, explanation: "Found in tears and saliva, it cuts the sugar backbone." },
+            
+            // --- Rapid Fire Mix (101-150) ---
+            { id: 101, question: "Which phase of growth is a straight line on a semi-log plot?", translation: "أي مرحلة نمو تكون خطًا مستقيمًا على الرسم البياني شبه اللوغاريتمي؟", options: ["Lag", "Log", "Stationary", "Decline"], correct: 1, explanation: "Exponential growth implies a straight line on log scale." },
+            { id: 102, question: "Biofilms are:", translation: "الأغشية الحيوية (Biofilms) هي:", options: ["Planktonic cells", "Community of bacteria attached to a surface", "Dead bacteria", "Viral coats"], correct: 1, explanation: "They are resistant communities in slime." },
+            { id: 103, question: "Quorum sensing is:", translation: "استشعار النصاب (Quorum sensing) هو:", options: ["Bacteria counting nutrients", "Chemical communication between bacteria based on density", "Sensing light", "Sensing magnetic fields"], correct: 1, explanation: "Bacteria 'talk' to coordinate behavior." },
+            { id: 104, question: "Agar is derived from:", translation: "يُستخرج الآجار من:", options: ["Bacteria", "Red Algae (Seaweed)", "Fungi", "Plants"], correct: 1, explanation: "It's a solidifying agent." },
+            { id: 105, question: "Differential media allows:", translation: "الوسائط التفريقية (Differential media) تسمح بـ:", options: ["Growth of only one type", "Distinguishing between different types of microbes", "Killing all microbes", "Virus growth"], correct: 1, explanation: "Visual differences (colors) appear." },
+            { id: 106, question: "Selective media:", translation: "الوسائط الانتقائية (Selective media):", options: ["Encourage all growth", "Suppress unwanted microbes and encourage desired ones", "Are liquid only", "Have no nutrients"], correct: 1, explanation: "Contains inhibitors like salt or antibiotics." },
+            { id: 107, question: "MacConkey agar is:", translation: "آجار ماكونكي هو:", options: ["Selective only", "Differential only", "Both Selective and Differential", "Enriched"], correct: 2, explanation: "Selects for Gram Neg, Differentiates Lactose fermenters." },
+            { id: 108, question: "Blood agar is an example of:", translation: "آجار الدم مثال على:", options: ["Selective media", "Enriched and Differential media", "Synthetic media", "Reducing media"], correct: 1, explanation: "Shows hemolysis (alpha, beta, gamma)." },
+            { id: 109, question: "Aerotolerant anaerobes:", translation: "اللاهوائيات المتحملة للهواء:", options: ["Use oxygen", "Don't use oxygen but tolerate it", "Die in oxygen", "Require high CO2"], correct: 1, explanation: "They ferment only, but aren't poisoned by O2." },
+            { id: 110, question: "Microaerophiles require:", translation: "تتطلب محبات الهواء القليل (Microaerophiles):", options: ["No oxygen", "High oxygen", "Low oxygen concentration (2-10%)", "High CO2 only"], correct: 2, explanation: "Atmospheric oxygen (21%) is toxic to them." },
+            { id: 111, question: "Superoxide dismutase (SOD) neutralizes:", translation: "يعادل إنزيم SOD:", options: ["Hydrogen peroxide", "Superoxide radicals", "Hydroxyl radical", "Ozone"], correct: 1, explanation: "Crucial for aerobic survival." },
+            { id: 112, question: "Catalase converts Hydrogen Peroxide into:", translation: "يحول الكاتلاز بيروكسيد الهيدروجين إلى:", options: ["Water and Oxygen", "Acid", "Alcohol", "Superoxide"], correct: 0, explanation: "Bubbles seen in the test are O2 gas." },
+            { id: 113, question: "Capnophiles grow best in:", translation: "تنمو الكائنات المحبة لثاني أكسيد الكربون (Capnophiles) بشكل أفضل في:", options: ["Low CO2", "High CO2", "No CO2", "High Nitrogen"], correct: 1, explanation: "Like Neisseria." },
+            { id: 114, question: "Lyophilization is:", translation: "التجفيد (Lyophilization) هو:", options: ["Boiling", "Freeze-drying", "Radiation", "Filtration"], correct: 1, explanation: "Used for long-term preservation." },
+            { id: 115, question: "Tincture of Iodine means Iodine mixed with:", translation: "صبغة اليود تعني اليود مخلوطًا بـ:", options: ["Water", "Alcohol", "Oil", "Acid"], correct: 1, explanation: "Alcohol enhances efficacy." },
+            { id: 116, question: "Triclosan is a common agent found in:", translation: "التريكلوسان هو عامل شائع موجود في:", options: ["Antibacterial soaps", "Bleach", "Autoclaves", "Vaccines"], correct: 0, explanation: "A phenolic compound." },
+            { id: 117, question: "Autoclaving conditions are typically:", translation: "شروط الأوتوكلاف عادة ما تكون:", options: ["100°C for 1 hour", "121°C at 15 psi for 15 mins", "60°C for 30 mins", "150°C dry heat"], correct: 1, explanation: "Steam under pressure kills spores." },
+            { id: 118, question: "Dry heat sterilization (Oven) requires:", translation: "التعقيم بالحرارة الجافة (الفرن) يتطلب:", options: ["Lower temp, shorter time", "Higher temp, longer time than moist heat", "Same as moist heat", "Pressure"], correct: 1, explanation: "Air doesn't carry heat as well as steam (e.g. 170°C for 2 hrs)." },
+            { id: 119, question: "Which virus shape is a hollow cylinder?", translation: "أي شكل فيروسي هو اسطوانة مجوفة؟", options: ["Polyhedral", "Helical", "Complex", "Spherical"], correct: 1, explanation: "Like Tobacco Mosaic Virus." },
+            { id: 120, question: "Which virus shape has 20 triangular faces?", translation: "أي شكل فيروسي له 20 وجهًا مثلثًا؟", options: ["Helical", "Icosahedral (Polyhedral)", "Complex", "Linear"], correct: 1, explanation: "Efficient structure." },
+            { id: 121, question: "Complex viruses include:", translation: "الفيروسات المعقدة تشمل:", options: ["Adenovirus", "Bacteriophages", "TMV", "Polio"], correct: 1, explanation: "They have heads, tails, plates." },
+            { id: 122, question: "Lysogeny refers to:", translation: "Lysogeny تشير إلى:", options: ["Immediate lysis of host", "Integration of phage DNA into host genome", "Viral death", "Release"], correct: 1, explanation: "The virus sleeps in the genome (Prophage)." },
+            { id: 123, question: "A prophage is:", translation: "الـ Prophage هو:", options: ["A new virus", "Phage DNA inserted into bacterial DNA", "A capsid", "An enzyme"], correct: 1, explanation: "Result of lysogenic cycle." },
+            { id: 124, question: "Lysogenic conversion:", translation: "التحول الليسوجيني (Lysogenic conversion):", options: ["Bacteria die", "Bacteria acquire new properties from the phage", "Phage dies", "None"], correct: 1, explanation: "E.g., Diphtheria toxin is coded by a phage." },
+            { id: 125, question: "CPE (Cytopathic Effects) are:", translation: "تأثيرات CPE هي:", options: ["Visible changes in infected host cells", "Viral proteins", "Antibiotics", "Mutations"], correct: 0, explanation: "Used to diagnose viral infections in culture." },
+            { id: 126, question: "Inclusion bodies are:", translation: "أجسام الاشتمال (Inclusion bodies) هي:", options: ["Bacteria", "Aggregates of viral parts in a cell", "Food storage", "Waste"], correct: 1, explanation: "Sign of viral infection (e.g., Negri bodies in Rabies)." },
+            { id: 127, question: "A persistent viral infection:", translation: "العدوى الفيروسية المستمرة:", options: ["Kills quickly", "Lasts for years", "Is acute", "Never happens"], correct: 1, explanation: "Slow release over time (e.g., Measles)." },
+            { id: 128, question: "Antiviral drugs often target:", translation: "تستهدف الأدوية المضادة للفيروسات غالبًا:", options: ["Cell wall", "Ribosomes", "Viral replication enzymes", "Peptidoglycan"], correct: 2, explanation: "Like Reverse Transcriptase inhibitors." },
+            { id: 129, question: "Interferons are:", translation: "الانترفيرونات هي:", options: ["Viruses", "Host proteins that warn neighbors of viral infection", "Antibiotics", "Fungal toxins"], correct: 1, explanation: "Natural antiviral defense." },
+            { id: 130, question: "Fungal cell membrane contains:", translation: "يحتوي غشاء الخلية الفطرية على:", options: ["Cholesterol", "Ergosterol", "Peptidoglycan", "LPS"], correct: 1, explanation: "Target for antifungals like Amphotericin B." },
+            
+            // --- Random Advanced & Application (131-180) ---
+            { id: 131, question: "Azoles (e.g., Fluconazole) work by:", translation: "تعمل الآزولات (مثل الفلوكونازول) عن طريق:", options: ["Inhibiting Ergosterol synthesis", "Binding to DNA", "Destroying cell wall", "Blocking ribosomes"], correct: 0, explanation: "Disrupts membrane stability." },
+            { id: 132, question: "Aflatoxin is produced by:", translation: "ينتج الأفلاتوكسين بواسطة:", options: ["Bacteria", "Aspergillus flavus (Fungus)", "Virus", "Algae"], correct: 1, explanation: "Carcinogenic toxin on peanuts/corn." },
+            { id: 133, question: "Lichens are a symbiotic relationship between:", translation: "الأشنات هي علاقة تكافلية بين:", options: ["Fungus and Algae/Cyanobacteria", "Bacteria and Virus", "Root and Fungus", "Two fungi"], correct: 0, explanation: "Fungus houses, Algae feeds." },
+            { id: 134, question: "Mycorrhizae are:", translation: "الجذور الفطرية (Mycorrhizae) هي:", options: ["Pathogens", "Symbiosis between fungi and plant roots", "Algae", "Lichens"], correct: 1, explanation: "Help plants absorb water/phosphorus." },
+            { id: 135, question: "Pneumocystis jirovecii causes pneumonia primarily in:", translation: "Pneumocystis jirovecii يسبب الالتهاب الرئوي أساسًا في:", options: ["Healthy people", "Immunocompromised (AIDS) patients", "Children", "Animals"], correct: 1, explanation: "An opportunistic fungus." },
+            { id: 136, question: "The main prokaryotic division method is:", translation: "طريقة الانقسام الرئيسية في بدائيات النوى هي:", options: ["Mitosis", "Binary Fission", "Meiosis", "Fusion"], correct: 1, explanation: "Simple splitting." },
+            { id: 137, question: "Metachromatic granules (Volutin) store:", translation: "تخزن حبيبات الميتاكروماتيك (Volutin):", options: ["Carbon", "Phosphate", "Sulfur", "Iron"], correct: 1, explanation: "Diagnostic for Corynebacterium diphtheriae." },
+            { id: 138, question: "Gas vacuoles are used for:", translation: "تستخدم الفجوات الغازية لـ:", options: ["Respiration", "Buoyancy in water", "Storage", "Toxicity"], correct: 1, explanation: "Help aquatic bacteria float to light." },
+            { id: 139, question: "Plasmids are:", translation: "البلازميدات هي:", options: ["Main Chromosome", "Extrachromosomal DNA", "Ribosomes", "Proteins"], correct: 1, explanation: "Carry non-essential genes (e.g., resistance)." },
+            { id: 140, question: "Curing a plasmid means:", translation: "معالجة (Curing) البلازميد تعني:", options: ["Fixing it", "Loss of the plasmid", "Duplicating it", "Transferring it"], correct: 1, explanation: "Bacteria loses the plasmid." },
+            { id: 141, question: "Transformation involves:", translation: "التحول (Transformation) يتضمن:", options: ["Phage transfer", "Uptake of naked DNA from environment", "Sex pili", "Cell fusion"], correct: 1, explanation: "Griffith's experiment." },
+            { id: 142, question: "Transduction involves:", translation: "Transduction يتضمن:", options: ["Naked DNA", "Virus (Bacteriophage) transferring DNA", "Direct contact", "Plasmids"], correct: 1, explanation: "Phage mistake." },
+            { id: 143, question: "Conjugation involves:", translation: "الاقتران (Conjugation) يتضمن:", options: ["Phages", "Direct cell-to-cell contact via Pili", "Naked DNA", "Spore"], correct: 1, explanation: "Bacterial mating." },
+            { id: 144, question: "An Hfr cell is one where:", translation: "خلية Hfr هي التي:", options: ["Plasmid is free", "Plasmid is integrated into chromosome", "No plasmid", "Dead"], correct: 1, explanation: "High Frequency of Recombination." },
+            { id: 145, question: "Transposons are:", translation: "الترانسبوزونات هي:", options: ["Viruses", "Jumping genes", "Proteins", "Sugars"], correct: 1, explanation: "Segments of DNA that move." },
+            { id: 146, question: "Vancomycin targets:", translation: "يستهدف الفانكومايسين:", options: ["Ribosomes", "Peptidoglycan (D-Ala-D-Ala)", "Membrane", "DNA"], correct: 1, explanation: "Last resort for Gram Positives." },
+            { id: 147, question: "MRSA stands for:", translation: "MRSA تعني:", options: ["Methicillin Resistant Staphylococcus aureus", "Many Resistant Staph", "Mild Staph", "Mutant Staph"], correct: 0, explanation: "Major hospital pathogen." },
+            { id: 148, question: "VRE stands for:", translation: "VRE تعني:", options: ["Very Rare Enterococcus", "Vancomycin Resistant Enterococcus", "Viral RNA", "None"], correct: 1, explanation: "Serious resistant bug." },
+            { id: 149, question: "Polymyxin B targets:", translation: "يستهدف بوليميكسين ب:", options: ["Cell wall", "Plasma membrane", "DNA", "Ribosome"], correct: 1, explanation: "Acts like a detergent; toxic." },
+            { id: 150, question: "Quinolones (e.g., Ciprofloxacin) inhibit:", translation: "تثبط الكينولونات (مثل سيبروفلوكساسين):", options: ["DNA Gyrase/Replication", "Ribosomes", "Cell wall", "Folic acid"], correct: 0, explanation: "Stops DNA uncoiling." },
+            
+            // --- Final Stretch (151-200+) ---
+            { id: 151, question: "Rifampin acts by inhibiting:", translation: "يعمل ريفامبين عن طريق تثبيط:", options: ["RNA Polymerase (mRNA synthesis)", "DNA Polymerase", "Ribosome", "Wall"], correct: 0, explanation: "Used for TB; turns tears orange." },
+            { id: 152, question: "Synergism means:", translation: "التآزر (Synergism) يعني:", options: ["Drugs cancel each other", "Effect of two drugs is greater than sum of parts", "One drug works", "Resistance"], correct: 1, explanation: "1+1 = 5." },
+            { id: 153, question: "Antagonism means:", translation: "التضاد (Antagonism) يعني:", options: ["Drugs work well together", "Drugs interfere with each other", "Resistance", "Allergy"], correct: 1, explanation: "Don't mix cidal and static." },
+            { id: 154, question: "Therapeutic Index (TI) is:", translation: "المؤشر العلاجي (TI) هو:", options: ["Toxic dose / Therapeutic dose", "Therapeutic / Toxic", "Cost", "Duration"], correct: 0, explanation: "Higher is safer." },
+            { id: 155, question: "An example of an Acid-Fast bacterium is:", translation: "مثال على البكتيريا المقاومة للحمض:", options: ["E. coli", "Mycobacterium tuberculosis", "Staph aureus", "Bacillus"], correct: 1, explanation: "Has waxy mycolic acid wall." },
+            { id: 156, question: "Mycolic acid makes bacteria:", translation: "حمض الميكوليك يجعل البكتيريا:", options: ["Easy to stain", "Resistant to drying and chemicals", "Motile", "Photosynthetic"], correct: 1, explanation: "Waxy coat." },
+            { id: 157, question: "Periplasmic space is found:", translation: "توجد المساحة المحيطة بالبلازما (Periplasmic space):", options: ["In all bacteria", "Between inner and outer membrane of Gram Negatives", "Inside nucleus", "In viruses"], correct: 1, explanation: "Contains digestive enzymes." },
+            { id: 158, question: "Gram Positive walls have:", translation: "تحتوي جدران إيجابية الجرام على:", options: ["Thin peptidoglycan", "Thick peptidoglycan", "Outer membrane", "LPS"], correct: 1, explanation: "Retains purple stain." },
+            { id: 159, question: "Gram Negative walls have:", translation: "تحتوي جدران سلبية الجرام على:", options: ["Thick peptidoglycan", "Thin peptidoglycan + Outer membrane", "No wall", "Chitin"], correct: 1, explanation: "Lose purple, take pink counterstain." },
+            { id: 160, question: "The counterstain in Gram stain is:", translation: "الصبغة المضادة في صبغة جرام هي:", options: ["Crystal Violet", "Iodine", "Safranin", "Alcohol"], correct: 2, explanation: "Stains Gram Negatives pink/red." },
+            { id: 161, question: "The mordant in Gram stain is:", translation: "المثبت (Mordant) في صبغة جرام هو:", options: ["Iodine", "Alcohol", "Safranin", "Water"], correct: 0, explanation: "Complexes with Crystal Violet." },
+            { id: 162, question: "If you forget Iodine in Gram stain, Gram Positives will appear:", translation: "إذا نسيت اليود في صبغة جرام، ستظهر إيجابيات الجرام:", options: ["Purple", "Pink", "Colorless", "Black"], correct: 1, explanation: "The dye washes out, they take counterstain." },
+            { id: 163, question: "Scanning Electron Microscope (SEM) shows:", translation: "المجهر الإلكتروني الماسح (SEM) يظهر:", options: ["Internal details", "3D surface details", "Color", "Atoms"], correct: 1, explanation: "Scans the surface." },
+            { id: 164, question: "Transmission Electron Microscope (TEM) shows:", translation: "المجهر الإلكتروني النافذ (TEM) يظهر:", options: ["3D surface", "Internal ultra-structure", "Live cells", "Color"], correct: 1, explanation: "Electrons pass through." },
+            { id: 165, question: "Resolution is:", translation: "الدقة (Resolution) هي:", options: ["Magnification", "Ability to distinguish two points as separate", "Contrast", "Size"], correct: 1, explanation: "Clarity." },
+            { id: 166, question: "Immersion oil is used to:", translation: "يستخدم زيت الغمر لـ:", options: ["Clean lens", "Prevent light refraction/scattering", "Color the slide", "Kill bacteria"], correct: 1, explanation: "Directs more light into objective." },
+            { id: 167, question: "Darkfield microscopy makes the specimen appear:", translation: "المجهر ذو المجال المظلم يجعل العينة تبدو:", options: ["Dark on light background", "Light on dark background", "Colored", "Invisible"], correct: 1, explanation: "Good for spirochetes (Syphilis)." },
+            { id: 168, question: "Fluorescence microscopy uses:", translation: "يستخدم المجهر الفلوري:", options: ["Visible light", "UV light", "Electrons", "X-rays"], correct: 1, explanation: "Dyes glow." },
+            { id: 169, question: "Koch's first postulate:", translation: "فرضية كوخ الأولى:", options: ["Isolate microbe", "Microbe must be present in every case of disease", "Infect host", "Re-isolate"], correct: 1, explanation: "Constant association." },
+            { id: 170, question: "Exceptions to Koch's postulates include:", translation: "استثناءات فرضيات كوخ تشمل:", options: ["Can't grow on media (Leprosy)", "Unethical to infect humans", "Multiple causes", "All of the above"], correct: 3, explanation: "Some bugs are picky." },
+            { id: 171, question: "A colony is:", translation: "المستعمرة (Colony) هي:", options: ["One cell", "A visible mass of cells arising from one cell", "A virus", "A liquid"], correct: 1, explanation: "Clonal population." },
+            { id: 172, question: "Pure culture contains:", translation: "المزرعة النقية تحتوي على:", options: ["Many species", "Only one species", "Bacteria and Fungi", "Unknowns"], correct: 1, explanation: "Critical for identification." },
+            { id: 173, question: "Streak plate method is for:", translation: "طريقة التخطيط الطبقي تستخدم لـ:", options: ["Isolation of pure colonies", "Counting", "Killing", "Storing"], correct: 0, explanation: "Dilutes cells across surface." },
+            { id: 174, question: "Lyophilization involves:", translation: "التجفيد يتضمن:", options: ["Freezing then vacuum drying", "Boiling", "Salting", "Sugaring"], correct: 0, explanation: "Sublimation of water." },
+            { id: 175, question: "Deep freezing stores bacteria at:", translation: "التجميد العميق يخزن البكتيريا عند:", options: ["0°C", "-20°C", "-50°C to -95°C", "4°C"], correct: 2, explanation: "With glycerol." },
+            { id: 176, question: "Standard bacterial growth curve uses a ___ system.", translation: "يستخدم منحنى النمو البكتيري القياسي نظام ___.", options: ["Closed (Batch)", "Open (Continuous)", "Solid", "Gas"], correct: 0, explanation: "Nutrients run out, waste builds up." },
+            { id: 177, question: "Chemostat is used for:", translation: "يستخدم الـ Chemostat لـ:", options: ["Batch culture", "Continuous culture", "Killing", "Staining"], correct: 1, explanation: "Keeps bacteria in Log phase." },
+            { id: 178, question: "Spectrophotometer reads 'Absorbance' or 'OD'. High OD means:", translation: "يقرأ مقياس الطيف 'الامتصاص'. الامتصاص العالي يعني:", options: ["Few cells", "Many cells (High growth)", "Clear liquid", "No cells"], correct: 1, explanation: "More bugs block more light." },
+            { id: 179, question: "Most Probable Number (MPN) is widely used for:", translation: "يستخدم MPN على نطاق واسع لـ:", options: ["Blood test", "Water quality (Coliforms)", "Air test", "Soil test"], correct: 1, explanation: "Statistical estimation." },
+            { id: 180, question: "Coliforms are indicators of:", translation: "القولونيات هي مؤشرات لـ:", options: ["Fecal contamination", "Air pollution", "Oil spills", "Heavy metals"], correct: 0, explanation: "E. coli family." },
+            { id: 181, question: "The effectiveness of a disinfectant depends on:", translation: "تعتمد فعالية المطهر على:", options: ["Concentration", "Time of exposure", "Organic matter presence", "All of the above"], correct: 3, explanation: "Context matters." },
+            { id: 182, question: "Decimal Reduction Time (D-value) is time to kill ___ of population.", translation: "وقت التخفيض العشري (D-value) هو الوقت اللازم لقتل ___ من السكان.", options: ["10%", "50%", "90%", "100%"], correct: 2, explanation: "Drops one log." },
+            { id: 183, question: "Moist heat kills by:", translation: "الحرارة الرطبة تقتل عن طريق:", options: ["Oxidation", "Denaturing proteins", "Mutation", "Drying"], correct: 1, explanation: "Coagulation." },
+            { id: 184, question: "Dry heat kills by:", translation: "الحرارة الجافة تقتل عن طريق:", options: ["Oxidation/Burning", "Hydrolysis", "Freezing", "Radiation"], correct: 0, explanation: "Ashes to ashes." },
+            { id: 185, question: "Pasteurization of milk (HTST) is:", translation: "بسترة الحليب (HTST) هي:", options: ["63°C for 30 min", "72°C for 15 sec", "140°C for 4 sec", "100°C"], correct: 1, explanation: "High Temp Short Time." },
+            { id: 186, question: "UHT (Ultra High Temp) treatment allows milk to be stored:", translation: "تسمح معالجة UHT بتخزين الحليب:", options: ["In fridge", "At room temperature (Shelf stable)", "Frozen", "Only 1 day"], correct: 1, explanation: "Sterilizes it." },
+            { id: 187, question: "Ionizing radiation (X-rays, Gamma) causes:", translation: "الإشعاع المؤين (أشعة X، جاما) يسبب:", options: ["Thymine dimers", "Ionization of water forming hydroxyl radicals", "Heat", "Vibration"], correct: 1, explanation: "Breaks DNA backbone." },
+            { id: 188, question: "Microwaves kill by:", translation: "أفران الميكروويف تقتل عن طريق:", options: ["Radiation", "Heat (from water friction)", "Chemicals", "Sound"], correct: 1, explanation: "Uneven killing." },
+            { id: 189, question: "Alcohols (Ethanol) work best at:", translation: "تعمل الكحوليات (الإيثانول) بشكل أفضل عند:", options: ["100%", "70%", "10%", "50%"], correct: 1, explanation: "Needs water to denature proteins." },
+            { id: 190, question: "Heavy metals (Ag, Hg, Cu) are:", translation: "المعادن الثقيلة (Ag, Hg, Cu) هي:", options: ["Oligodynamic", "Nutrients", "Gases", "Harmless"], correct: 0, explanation: "Toxic in tiny amounts." },
+            { id: 191, question: "Quats (Quaternary Ammonium Compounds) are:", translation: "مركبات الأمونيوم الرباعية (Quats) هي:", options: ["Acids", "Detergents/Surfactants", "Gases", "Dyes"], correct: 1, explanation: "Disrupt membranes." },
+            { id: 192, question: "Aldehydes (Formaldehyde) are:", translation: "الألدهيدات (الفورمالديهايد) هي:", options: ["Soaps", "Sterilizing agents (can kill spores)", "Weak", "Foods"], correct: 1, explanation: "Crosslink proteins." },
+            { id: 193, question: "Ethylene Oxide is a:", translation: "أكسيد الإيثيلين هو:", options: ["Liquid", "Sterilizing Gas", "Solid", "Metal"], correct: 1, explanation: "Penetrates plastics/mattresses." },
+            { id: 194, question: "Hydrogen Peroxide is good for:", translation: "بيروكسيد الهيدروجين جيد لـ:", options: ["Deep wounds", "Inanimate objects/Surface disinfection", "Drinking", "Eyes"], correct: 1, explanation: "Catalase in wounds inactivates it." },
+            { id: 195, question: "Disk-diffusion method is also called:", translation: "تسمى طريقة انتشار القرص أيضًا:", options: ["Kirby-Bauer test", "PCR", "ELISA", "Gram stain"], correct: 0, explanation: "Measures Zone of Inhibition." },
+            { id: 196, question: "E-test is used to determine:", translation: "يستخدم اختبار E لـ:", options: ["MIC", "Motility", "pH", "Sugar"], correct: 0, explanation: "Gradient strip." },
+            { id: 197, question: "Antibiotic resistance plasmids are called:", translation: "تسمى بلازميدات مقاومة المضادات الحيوية:", options: ["F factors", "R factors", "Vir plasmids", "Col plasmids"], correct: 1, explanation: "Resistance factors." },
+            { id: 198, question: "Superinfection is:", translation: "العدوى المضاعفة (Superinfection) هي:", options: ["Viral infection", "Overgrowth of resistant flora after antibiotic use", "First infection", "None"], correct: 1, explanation: "e.g., Candida or C. diff after drugs." },
+            { id: 199, question: "Penicillinase-resistant penicillins include:", translation: "تشمل البنسلينات المقاومة للبنسليناز:", options: ["Methicillin/Oxacillin", "Penicillin G", "Amoxicillin", "Ampicillin"], correct: 0, explanation: "Designed to beat the enzyme." },
+            { id: 200, question: "Carbapenems are:", translation: "الكاربابينيمات هي:", options: ["Weak", "Broad spectrum, last resort Beta-lactams", "Narrow", "Antifungal"], correct: 1, explanation: "Very potent." },
+            { id: 201, question: "Isoniazid (INH) inhibits:", translation: "يعمل Isoniazid (INH) على تثبيط:", options: ["Mycolic acid synthesis", "Protein", "DNA", "Wall"], correct: 0, explanation: "Primary TB drug." },
+            { id: 202, question: "Flagellar arrangement 'Amphitrichous' means:", translation: "ترتيب الأسواط 'Amphitrichous' يعني:", options: ["One at each end", "Tuft at one end", "All over", "None"], correct: 0, explanation: "Amphi = both sides." },
+            { id: 203, question: "Lophotrichous means:", translation: "Lophotrichous يعني:", options: ["One flagellum", "Tuft/Cluster of flagella at one/both ends", "All over", "Inside"], correct: 1, explanation: "Like a ponytail." },
+            { id: 204, question: "Axial filaments (Endoflagella) are found in:", translation: "توجد الخيوط المحورية (Endoflagella) في:", options: ["Cocci", "Spirochetes", "Bacilli", "Viruses"], correct: 1, explanation: "Corkscrew motion." }
+        ];
+
+        // ==========================================
+        // APP LOGIC
+        // ==========================================
+        
+        let userAnswers = {}; 
+        let quizSubmitted = false;
+        
+        // DOM Elements
+        const quizContainer = document.getElementById('quiz-container');
+        const introCard = document.getElementById('intro-card');
+        const submitSection = document.getElementById('submit-section');
+        const restartSection = document.getElementById('restart-section');
+        const scoreBoard = document.getElementById('score-board');
+
+        // Init Intro Data
+        document.getElementById('q-count-intro').innerText = questions.length;
+
+        function startQuiz() {
+            // Hide intro, show quiz
+            introCard.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            submitSection.classList.remove('hidden');
+            scoreBoard.classList.remove('hidden');
+            
+            renderQuestionsLazy(); 
+        }
+
+        function renderQuestionsLazy() {
+            // Render all questions at once (modern browsers handle 200 DOM nodes easily)
+            quizContainer.innerHTML = questions.map((q, index) => `
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500 relative transition duration-300 hover:shadow-lg" id="card-${q.id}">
+                    
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-bold text-blue-500 bg-blue-100 px-2 py-1 rounded">Q ${index + 1}</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 leading-snug">${q.question}</h3>
+                    <p class="text-gray-600 mt-2 text-right ar-text border-t pt-2 text-lg dir-rtl" dir="rtl">${q.translation}</p>
+
+                    <div class="space-y-3 mt-6">
+                        ${q.options.map((opt, i) => `
+                            <button 
+                                onclick="selectOption(${q.id}, ${i})" 
+                                id="btn-${q.id}-${i}"
+                                class="btn-option w-full text-left p-4 rounded-lg border border-gray-200 transition-all duration-200 flex items-center group relative overflow-hidden"
+                            >
+                                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0 option-circle">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-blue-500 hidden selection-dot"></div>
+                                </div>
+                                <span class="text-gray-700 font-medium z-10 relative">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <!-- Feedback Section -->
+                    <div id="explain-${q.id}" class="hidden mt-6 bg-blue-50 p-4 rounded-lg border border-blue-100 animation-fade-in">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">💡</span>
+                            <div>
+                                <h4 class="font-bold text-blue-800 text-sm uppercase">Explanation / الشرح</h4>
+                                <p class="text-gray-800 text-sm mt-1 leading-relaxed">${q.explanation}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Icon -->
+                    <div id="status-${q.id}" class="absolute top-4 right-4 hidden"></div>
+                </div>
+            `).join('');
+            
+            document.getElementById('total-val').innerText = questions.length;
+        }
+
+        function selectOption(qId, optionIndex) {
+            if (quizSubmitted) return; 
+
+            userAnswers[qId] = optionIndex;
+
+            // Visual update
+            const questionData = questions.find(q => q.id === qId);
+            questionData.options.forEach((_, i) => {
+                const btn = document.getElementById(`btn-${qId}-${i}`);
+                const dot = btn.querySelector('.selection-dot');
+                const circle = btn.querySelector('.option-circle');
+
+                btn.classList.remove('selected-option', 'ring-2', 'ring-blue-400');
+                dot.classList.add('hidden');
+                circle.classList.remove('border-blue-500');
+            });
+
+            const selectedBtn = document.getElementById(`btn-${qId}-${optionIndex}`);
+            selectedBtn.classList.add('selected-option', 'ring-2', 'ring-blue-400');
+            selectedBtn.querySelector('.selection-dot').classList.remove('hidden');
+            selectedBtn.querySelector('.option-circle').classList.add('border-blue-500');
+        }
+
+        function submitQuiz() {
+            // No confirmation dialog - direct submission
+            quizSubmitted = true;
+            let score = 0;
+
+            questions.forEach(q => {
+                const userChoice = userAnswers[q.id];
+                const isCorrect = userChoice === q.correct;
+                const statusDiv = document.getElementById(`status-${q.id}`);
+                const explainDiv = document.getElementById(`explain-${q.id}`);
+                const card = document.getElementById(`card-${q.id}`);
+
+                // Reveal Explanation
+                explainDiv.classList.remove('hidden');
+
+                // Determine State
+                if (userChoice !== undefined) {
+                    // User Answered
+                    if (isCorrect) {
+                        score++;
+                        markCorrect(q.id, userChoice);
+                        statusDiv.innerHTML = `<span class="text-green-500 text-3xl">✔</span>`;
+                    } else {
+                        markWrong(q.id, userChoice);
+                        markCorrect(q.id, q.correct); // Show correct one too
+                        statusDiv.innerHTML = `<span class="text-red-500 text-3xl">✘</span>`;
+                    }
+                } else {
+                    // User Skipped -> Mark as Wrong but Show Correct
+                    markCorrect(q.id, q.correct);
+                    statusDiv.innerHTML = `<span class="text-orange-400 text-sm font-bold bg-orange-100 px-2 py-1 rounded">Skipped</span>`;
+                    card.classList.add('border-orange-300'); // Highlight skipped cards slightly
+                }
+                statusDiv.classList.remove('hidden');
+            });
+
+            // Update Score
+            document.getElementById('score-val').innerText = score;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // UI Changes
+            submitSection.classList.add('hidden');
+            restartSection.classList.remove('hidden');
+            
+            // Notification
+            const percentage = Math.round((score / questions.length) * 100);
+            alert(`Quiz Done!\nScore: ${score} / ${questions.length} (${percentage}%)`);
+        }
+
+        function markCorrect(qId, index) {
+            const btn = document.getElementById(`btn-${qId}-${index}`);
+            btn.classList.add('correct-answer');
+            btn.classList.remove('selected-option'); // Override blue selection
+        }
+
+        function markWrong(qId, index) {
+            const btn = document.getElementById(`btn-${qId}-${index}`);
+            btn.classList.add('wrong-answer');
+        }
+
+    </script>
+</body>
+</html>
