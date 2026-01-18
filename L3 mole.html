@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Biology: RNA Structure & Functions | بيولوجيا جزيئية: بنية ووظائف الـ RNA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.7;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            border-right: 5px solid #e74c3c;
+            padding-right: 15px;
+        }
+
+        .english-content {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-right: 5px solid #3498db;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .arabic-translation {
+            font-size: 1.05em;
+            color: #2c3e50;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1, #d5dbdb);
+            border-radius: 10px;
+            border-right: 5px solid #27ae60;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .structure-card {
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .rna-card {
+            background: linear-gradient(135deg, #e17055, #d63031);
+        }
+
+        .mrna-card {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .trna-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .rrna-card {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .mirna-card {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .key-points {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #ffeaa7;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .compare-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .cloverleaf-diagram {
+            font-family: monospace;
+            font-size: 1.2em;
+            line-height: 1.8;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            direction: ltr;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .codon-table {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .codon-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .amino-acid-box {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .structure-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Molecular Biology: RNA Structure & Functions</h1>
+            <p>بيولوجيا جزيئية: بنية ووظائف الـ RNA</p>
+            <div style="font-size: 3em; margin: 10px;">🧬🎀🎯</div>
+        </header>
+
+        <section class="section">
+            <h2>🎯 RNA: The Versatile Molecule</h2>
+            
+            <div class="english-content">
+                RNA (Ribonucleic Acid) is a <strong>single-stranded nucleic acid</strong> that plays crucial roles in gene expression. Unlike DNA, RNA contains <span class="highlight">ribose sugar and uracil</span> instead of thymine. It's inherently more unstable than DNA, which allows for rapid turnover and regulation.
+            </div>
+            <div class="arabic-translation">
+                RNA (حمض الريبونووكليك) هو <strong>حمض نووي أحادي السلسلة</strong> يلعب أدواراً حاسمة في التعبير الجيني. على عكس DNA، يحتوي RNA على <span class="highlight">سكر الريبوز واليوراسيل</span> بدلاً من الثايمين. هو أقل استقراراً من DNA، مما يسمح بدورة سريعة وتنظيم.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎀 RNA Nucleotide Structure | بنية نيوكليوتيد RNA</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 400px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; text-align: left; font-family: monospace;">
+                        <div style="background: #e74c3c; color: white; padding: 8px; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">N</div>
+                        <div><strong>Nitrogenous Base</strong> (A, G, C, U)</div>
+                        
+                        <div style="background: #3498db; color: white; padding: 8px; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">S</div>
+                        <div><strong>Ribose Sugar</strong> (with OH at 2')</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 8px; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">P</div>
+                        <div><strong>Phosphate Group</strong> (links 3'→5')</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Key Differences from DNA | الفروقات الرئيسية عن DNA:</h4>
+                <ul>
+                    <li><strong>Sugar:</strong> Ribose (has OH at 2') vs Deoxyribose | سكر الريبوز يحتوي على OH في الموقع 2'</li>
+                    <li><strong>Base:</strong> Uracil (U) replaces Thymine (T) | اليوراسيل يحل محل الثايمين</li>
+                    <li><strong>Structure:</strong> Single-stranded (can form hairpins) vs Double-stranded | أحادي السلسلة (يمكن أن يكون هياكل شعرية)</li>
+                    <li><strong>Stability:</strong> Easily degraded vs Very stable | يسهل تحلله بسرعة</li>
+                    <li><strong>Location:</strong> Cytoplasm mainly vs Nucleus | يوجد أساساً في السيتوبلازم</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚖️ RNA vs DNA: Detailed Comparison</h2>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Feature | الميزة</th>
+                        <th>RNA</th>
+                        <th>DNA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Structure | البنية</strong></td>
+                        <td>Single-stranded (can form ds regions) | أحادي (يمكن أن يكون مناطق مزدوجة)</td>
+                        <td>Double-stranded | مزدوج باستمرار</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sugar | السكر</strong></td>
+                        <td>Ribose (OH at 2') | ريبوز (OH في 2')</td>
+                        <td>Deoxyribose (H at 2') | ديوكسي ريبوز (H في 2')</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bases | القواعد</strong></td>
+                        <td>A, G, C, U (Uracil) | اليوراسيل</td>
+                        <td>A, G, C, T (Thymine) | الثايمين</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chargaff's Rule | قاعدة شارجيف</strong></td>
+                        <td>Does NOT follow (single-stranded) | لا يتبع (أحادي)</td>
+                        <td>Follows (A=T, G=C) | يتبع</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alkali Stability | ثبات القلويات</strong></td>
+                        <td>Easily destroyed (forms cyclic diesters) | يتحلل بسهولة</td>
+                        <td>Resistant (no 2' OH) | مقاوم</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Molecule Stability | استقرار الجزيء</strong></td>
+                        <td>Labile, degrades easily | غير مستقر، يتحلل سريعاً</td>
+                        <td>Very stable for years | مستقر جداً لسنوات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location | الموقع</strong></td>
+                        <td>Mainly cytoplasm, also nucleus | أساساً سيتوبلازم، أيضاً نواة</td>
+                        <td>Mainly nucleus, mitochondria | أساساً نواة، أيضاً ميتوكوندريا</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Size | الحجم</strong></td>
+                        <td>100-5,000 bases | 100-5000 قاعدة</td>
+                        <td>Millions of base pairs | ملايين من أزواج القواعد</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Types | الأنواع</strong></td>
+                        <td>Many types (mRNA, tRNA, rRNA, miRNA, etc.) | أنواع كثيرة</td>
+                        <td>Mainly one type | نوع واحد أساساً</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Function | الوظيفة</strong></td>
+                        <td>Multiple functions (messenger, adapter, catalytic) | وظائف متعددة</td>
+                        <td>Storage and transfer of genetic info | تخزين ونقل المعلومات الجينية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Self-Replication | التضاعف الذاتي</strong></td>
+                        <td>Cannot replicate (except in some viruses) | لا يمكنه التضاعف</td>
+                        <td>Can replicate (DNA→DNA) via replication | يمكنه التضاعف</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Copies per Cell | النسخ لكل خلية</strong></td>
+                        <td>Many copies | نسخ كثيرة</td>
+                        <td>Single copy per cell | نسخة واحدة لكل خلية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>🧬 Central Dogma: DNA → RNA → Protein</h2>
+            
+            <div class="english-content">
+                RNA serves as the crucial intermediate between DNA and protein. The process involves:
+                <strong>1. Transcription:</strong> DNA template → RNA copy
+                <strong>2. Translation:</strong> RNA sequence → Amino acid sequence
+            </div>
+            <div class="arabic-translation">
+                RNA يعمل كوسيط حاسم بين DNA والبروتين. تتضمن العملية: <strong>1. النسخ:</strong> قالب DNA → نسخة RNA، <strong>2. الترجمة:</strong> تسلسل RNA → تسلسل أحماض أمينية.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔄 The Flow of Genetic Information | التدفق المعلوماتي الجيني</h4>
+                <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div style="background: #e74c3c; color: white; padding: 25px; border-radius: 15px;">
+                        <div style="font-size: 3em;">🧬</div>
+                        <h4>DNA</h4>
+                        <p>GENE | جين</p>
+                    </div>
+                    <div style="font-size: 2em; color: #2c3e50;">→</div>
+                    <div style="background: #3498db; color: white; padding: 25px; border-radius: 15px;">
+                        <div style="font-size: 3em;">🎀</div>
+                        <h4>TRANSCRIPTION</h4>
+                        <p>RNA Polymerase | بوليميريز RNA</p>
+                    </div>
+                    <div style="font-size: 2em; color: #2c3e50;">→</div>
+                    <div style="background: #27ae60; color: white; padding: 25px; border-radius: 15px;">
+                        <div style="font-size: 3em;">🎯</div>
+                        <h4>mRNA</h4>
+                        <p>Messenger | رسول</p>
+                    </div>
+                    <div style="font-size: 2em; color: #2c3e50;">→</div>
+                    <div style="background: #f39c12; color: white; padding: 25px; border-radius: 15px;">
+                        <div style="font-size: 3em;">🏭</div>
+                        <h4>TRANSLATION</h4>
+                        <p>Ribosome | ريبوسوم</p>
+                    </div>
+                    <div style="font-size: 2em; color: #2c3e50;">→</div>
+                    <div style="background: #9b59b6; color: white; padding: 25px; border-radius: 15px;">
+                        <div style="font-size: 3em;">🧵</div>
+                        <h4>PROTEIN</h4>
+                        <p>Functional Product | منتج وظيفي</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Key Concepts | مفاهيم رئيسية:</h4>
+                <ul>
+                    <li><strong>Codon:</strong> 3-nucleotide sequence in mRNA specifying an amino acid | تسلسل 3 نيوكليوتيدات في mRNA يحدد حمضاً أمينياً</li>
+                    <li><strong>Anticodon:</strong> Complementary 3-base sequence in tRNA | تسلسل 3 قواعد متكامل في tRNA</li>
+                    <li><strong>Reading Frame:</strong> mRNA read in groups of 3 bases | mRNA تقرأ على شكل مجموعات من 3 قواعد</li>
+                    <li><strong>Genetic Code:</strong> Degenerate (redundant) and universal | الشفرة الجينية: متكررة وعالمية</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Types of RNA: The Major Players</h2>
+            
+            <div class="english-content">
+                Cells contain several types of RNA, each with specific functions. The three main classes are mRNA, tRNA, and rRNA, which work together in protein synthesis.
+            </div>
+            <div class="arabic-translation">
+                تحتوي الخلايا على عدة أنواع من RNA، كل منها بوظائف محددة. الأصناف الثلاثة الرئيسية هي mRNA و tRNA و rRNA، التي تعمل معاً في تخليق البروتين.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card mrna-card">
+                    <h4>🎯 mRNA (Messenger RNA)</h4>
+                    <p><strong>%:</strong> 1-5% of total RNA<br>
+                    <strong>Function:</strong> Carries genetic code from DNA to ribosome<br>
+                    <strong>Stability:</strong> Very short-lived (minutes to hours)<br>
+                    <strong>Size:</strong> Heterogeneous (varies by gene)<br>
+                    <strong>Key Features:</strong> 5' cap, 3' poly-A tail, coding region</p>
+                </div>
+                <div class="structure-card trna-card">
+                    <h4>🍀 tRNA (Transfer RNA)</h4>
+                    <p><strong>%:</strong> 15% of total RNA<br>
+                    <strong>Function:</strong> Transfers amino acids to ribosome<br>
+                    <strong>Stability:</strong> Metabolically stable<br>
+                    <strong>Size:</strong> 74-95 nucleotides<br>
+                    <strong>Key Features:</strong> Cloverleaf structure, anticodon</p>
+                </div>
+                <div class="structure-card rrna-card">
+                    <h4>⚙️ rRNA (Ribosomal RNA)</h4>
+                    <p><strong>%:</strong> 80% of total RNA<br>
+                    <strong>Function:</strong> Forms ribosome structure & catalyzes peptide bond formation<br>
+                    <strong>Stability:</strong> Very stable<br>
+                    <strong>Size:</strong> Large (16S, 18S, 23S, 28S, etc.)<br>
+                    <strong>Key Features:</strong> GC-rich, ribozyme activity</p>
+                </div>
+                <div class="structure-card mirna-card">
+                    <h4>🎛️ miRNA (Micro RNA)</h4>
+                    <p><strong>%:</strong> Small amount but crucial<br>
+                    <strong>Function:</strong> Gene regulation (post-transcriptional)<br>
+                    <strong>Stability:</strong> Moderately stable<br>
+                    <strong>Size:</strong> ~22 nucleotides<br>
+                    <strong>Key Features:</strong> Short non-coding, regulates mRNA</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎭 RNA Family Tree | شجرة عائلة RNA</h4>
+                <div style="background: white; padding: 30px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div style="grid-column: span 3; background: #667eea; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🧬</div>
+                            <h3>RNA TYPES</h3>
+                        </div>
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🎯</div>
+                            <p>mRNA</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🍀</div>
+                            <p>tRNA</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">⚙️</div>
+                            <p>rRNA</p>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🔬</div>
+                            <p>snRNA</p>
+                        </div>
+                        <div style="background: #9b59b6; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🎛️</div>
+                            <p>miRNA</p>
+                        </div>
+                        <div style="background: #e67e22; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🛡️</div>
+                            <p>siRNA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Messenger RNA (mRNA) Structure</h2>
+            
+            <div class="english-content">
+                mRNA is the template for protein synthesis. Its structure is optimized for stability, translation, and regulation.
+            </div>
+            <div class="arabic-translation">
+                mRNA هو القالب لتخليق البروتين. تم تحسين بنيته للاستقرار والترجمة والتنظيم.
+            </div>
+
+            <h3>📐 Structural Components | المكونات البنائية:</h3>
+            
+            <div class="diagram-container">
+                <h4>🎯 mRNA Structure Diagram | مخطط بنية mRNA</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; font-family: monospace; direction: ltr; max-width: 700px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center;">
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🧢</div>
+                            <div>5' Cap</div>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px; text-align: center;">
+                            <div style="background: #3498db; color: white; padding: 5px; margin: 2px; border-radius: 5px; display: inline-block;">AUG</div>
+                            <div style="background: #27ae60; color: white; padding: 5px; margin: 2px; border-radius: 5px; display: inline-block;">GCA</div>
+                            <div style="background: #f39c12; color: white; padding: 5px; margin: 2px; border-radius: 5px; display: inline-block;">UAU</div>
+                            <div style="background: #9b59b6; color: white; padding: 5px; margin: 2px; border-radius: 5px; display: inline-block;">GAG</div>
+                            <div style="display: block; font-size: 0.8em; margin-top: 5px;">[CODING REGION | منطقة التكويد]</div>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">➰</div>
+                            <div>Poly-A Tail</div>
+                        </div>
+                        <div style="grid-column: span 3; text-align: center; margin-top: 10px;">
+                            <div style="background: #e74c3c; color: white; padding: 5px; border-radius: 5px; display: inline-block;">5' UTR</div>
+                            <div style="background: #27ae60; color: white; padding: 5px; border-radius: 5px; display: inline-block;">3' UTR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card mrna-card">
+                    <h4>🧢 5' Cap (7-methylguanosine)</h4>
+                    <p><strong>Structure:</strong> 7-methylguanosine triphosphate linked via 5'-5' bridge<br>
+                    <strong>Function:</strong> Recognized by ribosome, protects from 5' exonucleases<br>
+                    <strong>Importance:</strong> Essential for translation initiation</p>
+                </div>
+                <div class="structure-card mrna-card">
+                    <h4>➰ 3' Poly-A Tail</h4>
+                    <p><strong>Structure:</strong> 20-250 adenylate residues<br>
+                    <strong>Function:</strong> Prevents 3' exonuclease attack<br>
+                    <strong>Importance:</strong> Increases stability and export from nucleus</p>
+                </div>
+                <div class="structure-card mrna-card">
+                    <h4>📚 Coding Region (Open Reading Frame)</h4>
+                    <p><strong>Structure:</strong> Sequence between UTRs<br>
+                    <strong>Function:</strong> Encodes amino acid sequence<br>
+                    <strong>Feature:</strong> Read as codons (3-base units)</p>
+                </div>
+                <div class="structure-card mrna-card">
+                    <h4>📖 Untranslated Regions (UTRs)</h4>
+                    <p><strong>5' UTR:</strong> Before start codon, contains regulatory elements<br>
+                    <strong>3' UTR:</strong> After stop codon, contains miRNA binding sites<br>
+                    <strong>Function:</strong> Regulation of translation and stability</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🔍 hnRNA to mRNA Processing | معالجة hnRNA إلى mRNA:</h4>
+                <ul>
+                    <li><strong>1. Capping:</strong> Addition of 7-methylguanosine cap | إضافة غطاء ميثيلي</li>
+                    <li><strong>2. Tailing:</strong> Addition of poly-A tail | إضافة ذيل بولي-A</li>
+                    <li><strong>3. Splicing:</strong> Removal of introns, ligation of exons | إزالة الإنترونات الربط الإكسونات</li>
+                    <li><strong>4. Base Modification:</strong> RNA editing | تعديل القواعد</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🍀 Transfer RNA (tRNA) Structure</h2>
+            
+            <div class="english-content">
+                tRNA is the smallest of the three major RNA species (74-95 nucleotides). It acts as an <strong>adapter molecule</strong> that translates mRNA codons into specific amino acids. Its cloverleaf secondary structure is stabilized by extensive intrachain base pairing.
+            </div>
+            <div class="arabic-translation">
+                tRNA هو أصغر الأصناف الرئيسية الثلاثة لـ RNA (74-95 نيوكليوتيد). يعمل كـ <strong>جزيء محول</strong> يترجم كودونات mRNA إلى أحماض أمينية محددة. يتم تثبيت بنيته الثانوية على شكل ورقة نبات البرسيم بواسطة تزاوج قواعد واسع داخل السلسلة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🍀 tRNA Cloverleaf Structure | بنية tRNA على شكل ورقة البرسيم</h4>
+                <div class="cloverleaf-diagram">
+                    <div style="text-align: center;">
+                        <div style="background: #e74c3c; color: white; padding: 8px; border-radius: 8px; display: inline-block; margin: 5px;">ACCEPTOR ARM<br>7 base pairs | 7 أزواج قواعد</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.2em;">🍀</div>
+                            <p><strong>D ARM</strong><br>DHU loop | حلقة DHU</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.2em;">🎯</div>
+                            <p><strong>ANTICODON ARM</strong><br>Anticodon loop | حلقة الكودون المضاد</p>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.2em;">🍀</div>
+                            <p><strong>T ARM</strong><br>TΨC loop | حلقة TΨC</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <div style="background: #9b59b6; color: white; padding: 8px; border-radius: 8px; display: inline-block; margin: 5px;">EXTRA ARM<br>Variable | متغير</div>
+                    </div>
+                    <div style="border-top: 2px dashed #666; margin: 15px 0;"></div>
+                    <div style="text-align: center;">
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 8px; display: inline-block;">
+                            <div style="font-size: 1.2em;">3'</div>
+                            <p><strong>CCA END</strong><br>Amino acid attachment | مكان ارتباط الحمض الأميني</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔍 Key Features of tRNA Arms | المميزات الرئيسية لأذرع tRNA:</h3>
+            
+            <div class="structure-grid">
+                <div class="structure-card trna-card">
+                    <h4>🤝 Acceptor Arm</h4>
+                    <p><strong>Location:</strong> 3' end<br>
+                    <strong>Structure:</strong> 7 base pairs, ends with CCA<br>
+                    <strong>Function:</strong> Binds amino acid via 3' OH of adenine<br>
+                    <strong>Result:</strong> Aminoacyl-tRNA complex</p>
+                </div>
+                <div class="structure-card trna-card">
+                    <h4>🎯 Anticodon Arm</h4>
+                    <p><strong>Location:</strong> Middle of tRNA<br>
+                    <strong>Structure:</strong> 5-base anticodon loop<br>
+                    <strong>Function:</strong> Base-pairs with mRNA codons<br>
+                    <strong>Specificity:</strong> Ensures correct amino acid placement</p>
+                </div>
+                <div class="structure-card trna-card">
+                    <h4>🍀 D Arm (DHU Loop)</h4>
+                    <p><strong>Contains:</strong> Dihydrouridine (modified base)<br>
+                    <strong>Function:</strong> Structural stability & ribosome binding<br>
+                    <strong>Importance:</strong> Helps in tRNA folding</p>
+                </div>
+                <div class="structure-card trna-card">
+                    <h4>🍀 T Arm (TΨC Loop)</h4>
+                    <p><strong>Contains:</strong> Pseudouridine (Ψ) and ribothymidine<br>
+                    <strong>Function:</strong> Ribosome binding & recognition<br>
+                    <strong>Universality:</strong> Present in all tRNAs</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Codon-Anticodon Pairing | تزاوج الكودون-الكودون المضاد</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center;">
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em;">🎯</div>
+                            <h4>mRNA Codon</h4>
+                            <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 5px;">A U G</div>
+                        </div>
+                        <div style="font-size: 2em;">↔️</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em;">🍀</div>
+                            <h4>tRNA Anticodon</h4>
+                            <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 5px;">U A C</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <p style="font-style: italic;">AUG (Start codon) pairs with UAC anticodon | يزاوج كودون البدء مع الكودون المضاد</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🧩 Wobble Hypothesis | فرضية الحركة الجزرية:</h4>
+                <ul>
+                    <li>Third base of codon can pair with multiple anticodon bases | القاعدة الثالثة من الكودون يمكن أن تزاوج مع قواعد متعددة من الكودون المضاد</li>
+                    <li>Allows 61 codons to be read by only 45 tRNAs | تسمح بقراءة 61 كودون بواسطة 45 tRNA فقط</li>
+                    <li>Inosine (I) in tRNA can pair with A, U, or C | الإنوسين في tRNA يمكن أن يزاوج مع A أو U أو C</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚙️ Ribosomal RNA (rRNA)</h2>
+            
+            <div class="english-content">
+                rRNA constitutes ~80% of total cellular RNA and forms the structural and catalytic core of ribosomes. rRNA molecules fold into complex three-dimensional structures through extensive base pairing.
+            </div>
+            <div class="arabic-translation">
+                rRNA يشكل ~80% من إجمالي RNA الخلوي ويشكل النواة البنائية والمحفزة للريبوسومات. تطوي جزيئات rRNA هياكل ثلاثية الأبعاد معقدة من خلال تزاو قواعد واسع.
+            </div>
+
+            <h3>📊 rRNA Sizes in Different Organisms | أحجام rRNA في كائنات مختلفة:</h3>
+            
+            <div class="diagram-container">
+                <h4>⚙️ Ribosomal Subunits Comparison | مقارنة الوحدات الريبوسومية</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 700px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>🦠 Prokaryotes | بدائيات النواة</h4>
+                            <div style="background: #c0392b; padding: 10px; border-radius: 5px; margin: 5px 0;">
+                                <strong>30S Small Subunit:</strong><br>16S rRNA + 21 proteins
+                            </div>
+                            <div style="background: #c0392b; padding: 10px; border-radius: 5px; margin: 5px 0;">
+                                <strong>50S Large Subunit:</strong><br>23S rRNA + 5S rRNA + 34 proteins
+                            </div>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>🧬 Eukaryotes | حقيقيات النواة</h4>
+                            <div style="background: #2980b9; padding: 10px; border-radius: 5px; margin: 5px 0;">
+                                <strong>40S Small Subunit:</strong><br>18S rRNA + 33 proteins
+                            </div>
+                            <div style="background: #2980b9; padding: 10px; border-radius: 5px; margin: 5px 0;">
+                                <strong>60S Large Subunit:</strong><br>28S rRNA + 5.8S rRNA + 5S rRNA + 50 proteins
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card rrna-card">
+                    <h4>🔧 Functions of rRNA | وظائف rRNA:</h4>
+                    <p><strong>Structural:</strong> Forms ribosome scaffold<br>
+                    <strong>Catalytic:</strong> Peptidyl transferase activity (ribozyme)<br>
+                    <strong>Binding:</strong> mRNA and tRNA binding sites<br>
+                    <strong>Proofreading:</strong> Ensures correct codon-anticodon pairing</p>
+                </div>
+                <div class="structure-card rrna-card">
+                    <h4>🎯 Ribozyme Activity | نشاط الريبوزيم:</h4>
+                    <p>23S rRNA in prokaryotes catalyzes peptide bond formation. This is a <strong>ribozyme</strong> - an RNA molecule with enzymatic activity, proving that RNA can be both genetic material and enzyme.</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🧬 Svedberg (S) Units | وحدات سفيدبيرغ:</h4>
+                <ul>
+                    <li>"S" measures sedimentation rate in centrifugation | تقيس معدل الترسيب في الطرد المركزي</li>
+                    <li>Higher S = larger molecule and faster sedimentation | S أعلى = جزيء أكبر وترسيب أسرع</li>
+                    <li>Not directly proportional to molecular weight | غير متناسبة مباشرة مع الوزن الجزيئي</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎛️ Regulatory RNAs: miRNA, siRNA, lncRNA</h2>
+            
+            <div class="english-content">
+                Small non-coding RNAs regulate gene expression at the post-transcriptional level. They are present in all living organisms and regulate at least half of all human genes.
+            </div>
+            <div class="arabic-translation">
+                RNA صغير غير المكود ينظم التعبير الجيني على المستوى ما بعد النسخ. هي موجودة في جميع الكائنات الحية وتنظم على الأقل نصف جينات الإنسان.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card mirna-card">
+                    <h4>🎛️ miRNA (Micro RNA)</h4>
+                    <p><strong>Size:</strong> ~22 nucleotides<br>
+                    <strong>Function:</strong> Fine-tune gene expression<br>
+                    <strong>Mechanism:</strong> Binds 3' UTR of mRNA → blocks translation or causes degradation<br>
+                    <strong>Importance:</strong> Development, differentiation, disease</p>
+                </div>
+                <div class="structure-card mirna-card">
+                    <h4>🛡️ siRNA (Small Interfering RNA)</h4>
+                    <p><strong>Size:</strong> 21-23 nucleotides<br>
+                    <strong>Function:</strong> Gene silencing (RNA interference)<br>
+                    <strong>Mechanism:</strong> Perfect match with mRNA → mRNA cleavage<br>
+                    <strong>Application:</strong> Antiviral defense, experimental gene knockdown</p>
+                </div>
+                <div class="structure-card mirna-card">
+                    <h4>📏 lncRNA (Long Non-coding RNA)</h4>
+                    <p><strong>Size:</strong> >200 nucleotides<br>
+                    <strong>Function:</strong> Epigenetic regulation, transcription control<br>
+                    <strong>Mechanism:</strong> Scaffold for proteins, chromatin remodeling<br>
+                    <strong>Examples:</strong> Xist (X-chromosome inactivation)</p>
+                </div>
+                <div class="structure-card mirna-card">
+                    <h4>🔬 snRNA (Small Nuclear RNA)</h4>
+                    <p><strong>Function:</strong> RNA splicing (spliceosome)<br>
+                    <strong>Mechanism:</strong> Recognizes splice sites, removes introns<br>
+                    <strong>Importance:</strong> Essential for mRNA maturation</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎛️ miRNA Mechanism | آلية miRNA</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em;">🎛️</div>
+                            <p><strong>miRNA</strong><br>~22 nt</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em;">🎯</div>
+                            <p><strong>mRNA 3' UTR</strong><br>Binding site</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em;">🛑</div>
+                            <p><strong>Result</strong><br>Translation blocked</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; background: #f8f9fa; padding: 10px; border-radius: 8px;">
+                        <p style="font-style: italic;">Partial complementarity → translation inhibition | تكامل جزئي → تثبيط الترجمة</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="important-notes">
+                <h4>🔬 Clinical Applications | التطبيقات السريرية:</h4>
+                <p><strong>miRNA as Biomarkers:</strong> miRNA-29a, miRNA-200, miRNA-335, miRNA-21 are studied as biomarkers for hepatocellular carcinoma (HCC) | تُدرس كعلامات بيولوجية لسرطان الكبد</p>
+                <p><strong>Therapeutic Potential:</strong> siRNA can be used to silence disease genes | يمكن استخدام siRNA لإسكات الجينات المرضية</p>
+                <p><strong>NAFLD Marker:</strong> miRNA-34 shows promise for non-alcoholic fatty liver disease diagnosis | miRNA-34 واعد لتشخيص مرض الكبد الدهني غير الكحولي</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📊 RNA Summary Table | جدول ملخص RNA</h2>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>RNA Type | النوع</th>
+                        <th>Major Role | الدور الرئيسي</th>
+                        <th>Location | الموقع</th>
+                        <th>Key Function | الوظيفة الرئيسية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>mRNA</strong></td>
+                        <td>Carries genetic code | ينقل الشفرة الجينية</td>
+                        <td>Nucleus → Cytoplasm | نواة → سيتوبلازم</td>
+                        <td>Template for protein synthesis | قالب لتخليق البروتين</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tRNA</strong></td>
+                        <td>Transfers amino acids | ينقل الأحماض الأمينية</td>
+                        <td>Cytoplasm | سيتوبلازم</td>
+                        <td>Decodes mRNA codons | يفك كودونات mRNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>rRNA</strong></td>
+                        <td>Forms ribosomes | يشكل الريبوسومات</td>
+                        <td>Nucleolus & Cytoplasm | نويات & سيتوبلازم</td>
+                        <td>Catalyzes peptide bond formation | يحفز تكوين رابط الببتيد</td>
+                    </tr>
+                    <tr>
+                        <td><strong>snRNA</strong></td>
+                        <td>RNA splicing | تقطيع RNA</td>
+                        <td>Nucleus | نواة</td>
+                        <td>Removes introns | يزيل الإنترونات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>miRNA</strong></td>
+                        <td>Gene regulation | تنظيم الجينات</td>
+                        <td>Cytoplasm | سيتوبلازم</td>
+                        <td>Inhibits translation | يثبط الترجمة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>siRNA</strong></td>
+                        <td>Gene silencing | إسكات الجينات</td>
+                        <td>Cytoplasm | سيتوبلازم</td>
+                        <td>Degrades target mRNA | يحلل mRNA المستهدف</td>
+                    </tr>
+                    <tr>
+                        <td><strong>lncRNA</strong></td>
+                        <td>Epigenetic control | التحكم الوراثي</td>
+                        <td>Nucleus & Cytoplasm | نواة & سيتوبلازم</td>
+                        <td>Transcriptional regulation | تنظيم النسخ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>🧠 Memory Aids & Mnemonics | وسائل مساعدة للحفظ</h2>
+            
+            <div class="key-points">
+                <h4>🤔 Remember RNA Types | تذكر أنواع RNA:</h4>
+                <ul>
+                    <li><strong>"Make The Ribosome":</strong> mRNA, tRNA, rRNA | اصنع الريبوسوم</li>
+                    <li><strong>Size order:</strong> rRNA (largest) > mRNA (medium) > tRNA (smallest) | الترتيب حسب الحجم</li>
+                    <li><strong>Abundance:</strong> rRNA (80%) > tRNA (15%) > mRNA (5%) | الترتيب حسب الوفرة</li>
+                    <li><strong>Functions:</strong> rRNA=Factory, tRNA=Truck, mRNA=Message | الوظائف: مصنع، شاحنة، رسالة</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Genetic Code Mnemonic | شفرة الجينية المساعدة:</h4>
+                <div class="codon-table">
+                    <div class="codon-box">AUG<br><small>START<br>🏁</small></div>
+                    <div class="codon-box">UAA<br><small>STOP<br>⛔</small></div>
+                    <div class="codon-box">UAG<br><small>STOP<br>⛔</small></div>
+                    <div class="codon-box">UGA<br><small>STOP<br>⛔</small></div>
+                </div>
+                <p style="margin-top: 10px; font-style: italic;">AUG = Methionine (Start) | UAA, UAG, UGA = Stop codons</p>
+            </div>
+
+            <div class="important-notes">
+                <h4>🎓 Exam Tips | نصائح الامتحان:</h4>
+                <p>• <strong>RNA instability:</strong> Due to 2' OH group, susceptible to alkaline hydrolysis | عدم استقرار RNA بسبب مجموعة OH في الموقع 2'</p>
+                <p>• <strong>tRNA identity:</strong> Each tRNA has unique anticodon for specific amino acid | كل tRNA له كودون مضاد فريد لحمض أميني محدد</p>
+                <p>• <strong>rRNA catalysis:</strong> Proves RNA can be enzymatic (ribozyme) | يثبت أن RNA يمكن أن يكون إنزيمياً</p>
+                <p>• <strong>miRNA binding:</strong> 3' UTR of mRNA is the main target | المنطقة 3' UTR من mRNA هي الهدف الرئيسي</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Molecular Biology Lecture - RNA Structure & Functions</p>
+            <p>Designed for Biotechnology & Genetic Engineering Students</p>
+            <div style="font-size: 3em; margin-top: 20px;">🧬🎀🎯⚙️🎛️</div>
+        </footer>
+    </div>
+</body>
+</html>
