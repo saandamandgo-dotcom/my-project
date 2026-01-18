@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Biology: DNA Structure & Organization | بيولوجيا جزيئية: بنية وتنظيم الـ DNA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.7;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            border-right: 5px solid #e74c3c;
+            padding-right: 15px;
+        }
+
+        .english-content {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-right: 5px solid #3498db;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .arabic-translation {
+            font-size: 1.05em;
+            color: #2c3e50;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1, #d5dbdb);
+            border-radius: 10px;
+            border-right: 5px solid #27ae60;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .dna-helix {
+            font-family: monospace;
+            font-size: 1.5em;
+            line-height: 1.8;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .structure-card {
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .helix-card {
+            background: linear-gradient(135deg, #e17055, #d63031);
+        }
+
+        .bonds-card {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .protein-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .key-points {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #ffeaa7;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .chargaff-box {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .compare-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .molecular-symbol {
+            font-size: 2em;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .structure-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Molecular Biology: DNA Structure & Organization</h1>
+            <p>بيولوجيا جزيئية: بنية وتنظيم الـ DNA</p>
+            <div class="molecular-symbol">🧬</div>
+        </header>
+
+        <section class="section">
+            <h2>🏗️ DNA Structure Overview</h2>
+            
+            <div class="english-content">
+                DNA (Deoxyribonucleic Acid) is a <strong>linear polymer</strong> that exists as a <strong>double-stranded molecule</strong> in its native state. It consists of nucleotides linked together by phosphodiester bonds between the 3' and 5' sites of deoxyribose sugar.
+            </div>
+            <div class="arabic-translation">
+                DNA (حمض الديوكسي ريبونووكليك) هو <strong>بوليمر خطي</strong> يوجد كجزيء <strong>مزدوج السلسلة</strong> في حالته الطبيعية. يتكون من نيوكليوتيدات مرتبطة معاً بروابط فوسفودايستر بين المواقع 3' و 5' من سكر الديوكسي ريبوز.
+            </div>
+
+            <div class="key-points">
+                <h4>📏 Size Scale | مقياس الحجم:</h4>
+                <ul>
+                    <li>Viral DNA: Few thousand residues | DNA فيروسي: بضعة آلاف من الوحدات</li>
+                    <li>Bacterial DNA: ~10⁶ residues | DNA بكتيري: حوالي مليون وحدة</li>
+                    <li>Human DNA: ~10⁹ residues | DNA بشري: حوالي مليار وحدة</li>
+                    <li>Single bacterial DNA molecule: ~1mm long | جزيء DNA بكتيري واحد: حوالي 1 مليمتر</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 DNA Double Helix Schematic | مخطط الحلزون المزدوج</h4>
+                <div class="dna-helix">
+                    <div>5' --- P-S-B --- P-S-B --- P-S-B --- 3'</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+                    <div>&nbsp;&nbsp;&nbsp;H-bonds&nbsp;&nbsp;&nbsp;H-bonds&nbsp;&nbsp;&nbsp;H-bonds</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+                    <div>3' --- B-S-P --- B-S-P --- B-S-P --- 5'</div>
+                    <div style="font-size: 0.7em; margin-top: 10px;">
+                        P=Phosphate, S=Sugar, B=Base | P=فوسفات, S=سكر, B=قاعدة
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧮 Chargaff's Rules | قواعد شارجيف</h2>
+            
+            <div class="english-content">
+                Erwin Chargaff discovered that in double-stranded DNA, the amount of <span class="highlight">purines equals pyrimidines</span>, and specifically <span class="highlight">A = T</span> and <span class="highlight">G = C</span>. This led to the concept of complementary base pairing.
+            </div>
+            <div class="arabic-translation">
+                اكتشف إروين شارجيف أن في DNA المزدوج السلسلة، كمية <span class="highlight">البورينات تساوي البيريميدينات</span>، وتحديداً <span class="highlight">A = T</span> و <span class="highlight">G = C</span>. هذا أدى إلى مفهوم تزاوج القواعد المتكامل.
+            </div>
+
+            <div class="chargaff-box">
+                <h4>🧮 Example Problem | مثال:</h4>
+                <p>If a DNA segment has 20% Adenine, what is the percentage of Guanine?</p>
+                <p><strong>Solution | الحل:</strong> A = 20% → T = 20% → Total A+T = 40% → G+C = 60% → <strong>G = 30%</strong></p>
+            </div>
+
+            <div class="diagram-container">
+                <h4>⚖️ Base Pairing Complementarity | تكامل القواعد</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto;">
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 12px;">
+                        <h4>🅰️ Adenine (A)</h4>
+                        <div style="font-size: 2em;">=</div>
+                        <h4>🅱️ Thymine (T)</h4>
+                        <p>2 Hydrogen Bonds<br>2 رابطتي هيدروجين</p>
+                    </div>
+                    <div style="background: #27ae60; color: white; padding: 20px; border-radius: 12px;">
+                        <h4>🇬 Guanine (G)</h4>
+                        <div style="font-size: 2em;">=</div>
+                        <h4>🇨 Cytosine (C)</h4>
+                        <p>3 Hydrogen Bonds<br>3 روابط هيدروجين</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔬 Watson & Crick Model | نموذج واتسون وكريك</h2>
+            
+            <h3>🏆 Major Features | المميزات الرئيسية:</h3>
+            <div class="english-content">
+                James Watson and Francis Crick proposed the double helix model in 1953 based on Rosalind Franklin's X-ray diffraction data (Photo 51). The model revolutionized our understanding of genetic material.
+            </div>
+            <div class="arabic-translation">
+                اقترح جيمس واتسون وفرانسيس كريك نموذج الحلزون المزدوج عام 1953 بناءً على بيانات حيود الأشعة السينية لروزاليند فرانكلين (صورة 51). غيّر النموذج فهمنا للمادة الجينية.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card helix-card">
+                    <h4>1️⃣ Double Helix</h4>
+                    <p>Two antiparallel polynucleotide chains coil around a central axis forming a right-handed double helix.</p>
+                </div>
+                <div class="structure-card helix-card">
+                    <h4>2️⃣ Antiparallel Strands</h4>
+                    <p>Chains run in opposite directions (5'→3' and 3'→5') allowing base pairing.</p>
+                </div>
+                <div class="structure-card helix-card">
+                    <h4>3️⃣ Base Stacking</h4>
+                    <p>Bases are flat, stacked 3.4Å (0.34 nm) apart, perpendicular to the axis, forming hydrophobic core.</p>
+                </div>
+                <div class="structure-card bonds-card">
+                    <h4>4️⃣ Complementary Pairing</h4>
+                    <p>A-T (2 H-bonds) and G-C (3 H-bonds). Purine-purine or pyrimidine-pyrimidine pairs are rejected.</p>
+                </div>
+                <div class="structure-card bonds-card">
+                    <h4>5️⃣ Helix Dimensions</h4>
+                    <p>Each turn = 34Å (3.4 nm) = 10 base pairs. Diameter = 20Å (2.0 nm). Major and minor grooves.</p>
+                </div>
+                <div class="structure-card protein-card">
+                    <h4>6️⃣ Stability</h4>
+                    <p>H-bonds provide stability (weak individually, strong collectively). Base stacking and hydrophobic effect enhance stability.</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>📐 Helix Geometry | هندسة الحلزون</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                        <h4>📏 Length</h4>
+                        <p>34Å/turn<br>3.4Å/bp</p>
+                    </div>
+                    <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                        <h4>📐 Diameter</h4>
+                        <p>20Å<br>(2 nm)</p>
+                    </div>
+                    <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                        <h4>🌀 Turns</h4>
+                        <p>10 bp/turn<br>Right-handed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="important-notes">
+                <h4>⚠️ Why A-G and C-T Pairings Are Rejected | لماذا يُرفض تزاوج A-G و C-T:</h4>
+                <p>• <strong>Purine-Purine (A-G):</strong> Makes helix too wide (&gt;20Å)<br>
+                • <strong>Pyrimidine-Pyrimidine (C-T):</strong> Makes helix too narrow (&lt;20Å)<br>
+                • <strong>A-C and G-T:</strong> Geometric mismatch prevents proper H-bond alignment</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔄 Alternative DNA Forms | أشكال DNA البديلة</h2>
+            
+            <div class="english-content">
+                While B-DNA is the biologically relevant form, other conformations exist under different conditions:
+            </div>
+            <div class="arabic-translation">
+                بينما B-DNA هو الشكل البيولوجي الملائم، توجد تكوينات أخرى في ظروف مختلفة:
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Feature | الميزة</th>
+                        <th>B-DNA | الشكل البيولوجي</th>
+                        <th>A-DNA</th>
+                        <th>Z-DNA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Helix Type | نوع الحلزون</strong></td>
+                        <td>Right-handed | يميني</td>
+                        <td>Right-handed | يميني</td>
+                        <td>Left-handed | يساري</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Base Pairs/Turn | أزواج قواعد/دورة</strong></td>
+                        <td>~10.4</td>
+                        <td>~11</td>
+                        <td>~12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Helix Diameter | قطر الحلزون</strong></td>
+                        <td>~19 Å</td>
+                        <td>~23 Å</td>
+                        <td>~18 Å</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conditions | الظروف</strong></td>
+                        <td>Low salt, aqueous | ملح منخفض، مائي</td>
+                        <td>High salt / dehydration | ملح عالي / جفاف</td>
+                        <td>High salt, GC-rich | ملح عالي، غني بـ GC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biological Role | الدور البيولوجي</strong></td>
+                        <td>Most common | الأكثر شيوعاً</td>
+                        <td>Rare in vivo | نادر في الخلايا</td>
+                        <td>Possible gene regulation | تنظيم جيني محتمل</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🔄 Helix Comparison | مقارنة الحلزونات</h4>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                    <div style="background: #3498db; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">⟲</div>
+                        <h4>B-DNA</h4>
+                        <p>Normal | طبيعي</p>
+                    </div>
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">⟳</div>
+                        <h4>A-DNA</h4>
+                        <p>Dehydrated | مجفف</p>
+                    </div>
+                    <div style="background: #27ae60; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">↺</div>
+                        <h4>Z-DNA</h4>
+                        <p>Left-handed | يساري</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔥 DNA Denaturation | تفكك DNA</h2>
+            
+            <div class="english-content">
+                Denaturation is the separation of DNA strands due to disruption of hydrogen bonds. This can be caused by increasing temperature, changing pH, or adding chemicals like urea or formamide. Phosphodiester bonds remain intact.
+            </div>
+            <div class="arabic-translation">
+                التفكك هو انفصال سلاسل DNA بسبب تكسير روابط الهيدروجين. يمكن أن يحدث بزيادة درجة الحرارة أو تغيير pH أو إضافة مواد كيميائية مثل اليوريا. تبقى روابط الفوسفودايستر سليمة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🌡️ Denaturation Process | عملية التفكك</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: center; max-width: 600px; margin: 0 auto;">
+                    <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                        <div style="font-size: 2em;">🧬</div>
+                        <p>Native DNA<br>DNA أصلي</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                        <div style="font-size: 2em;">🔥</div>
+                        <p>Heat | حرارة</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #f39c12; color: white; padding: 15px; border-radius: 10px; grid-column: span 2;">
+                        <div style="font-size: 2em;">〰️〰️</div>
+                        <p>Single Strands<br>سلاسل منفردة</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>📊 Melting Temperature (Tm) | درجة انصهار DNA:</h4>
+                <ul>
+                    <li>Tm is the temperature where 50% of DNA is denatured</li>
+                    <li><strong>GC-rich DNA:</strong> Higher Tm (more H-bonds to break)</li>
+                    <li><strong>AT-rich DNA:</strong> Lower Tm (fewer H-bonds)</li>
+                    <li>Used in techniques like PCR and hybridization</li>
+                </ul>
+            </div>
+
+            <div class="chargaff-box">
+                <h4>🎯 Example | مثال:</h4>
+                <p>DNA with 70% GC content has Tm ~85°C</p>
+                <p>DNA with 30% GC content has Tm ~70°C</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📦 DNA Packaging in Chromosomes | تغليف DNA في الكروموسومات</h2>
+            
+            <h3>🧮 The Packaging Problem | مشكلة التغليف:</h3>
+            <div class="english-content">
+                Human cells contain 46 chromosomes (23 pairs), each a single DNA molecule. Each chromosome contains ~<span class="highlight">1.3 × 10⁹ base pairs</span>. If unwound, total DNA length would be ~2 meters! DNA must be packaged into a nucleus only ~10 µm in diameter - a <strong>10,000-fold compaction</strong>.
+            </div>
+            <div class="arabic-translation">
+                تحتوي الخلايا البشرية على 46 كروموسوم (23 زوج)، كل منها جزيء DNA واحد. يحتوي كل كروموسوم على ~<span class="highlight">1.3 × 10⁹ زوج قاعدي</span>. إذا فُكّ، سيكون طول DNA الإجمالي ~2 متر! يجب تغليف DNA في نواة قطرها ~10 ميكرومتر فقط - <strong>تكثيف 10,000 مرة</strong>.
+            </div>
+
+            <div class="diagram-container">
+                <h4>📏 Size Comparison | مقارنة الأحجام</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 12px;">
+                        <div style="font-size: 3em;">🧵</div>
+                        <h4>Unwound DNA</h4>
+                        <p>~2 meters<br>~2 متر</p>
+                    </div>
+                    <div style="background: #f39c12; color: white; padding: 20px; border-radius: 12px;">
+                        <div style="font-size: 3em;">⚗️</div>
+                        <h4>Nucleus</h4>
+                        <p>~10 µm<br>~10 ميكرومتر</p>
+                    </div>
+                    <div style="background: #27ae60; color: white; padding: 20px; border-radius: 12px;">
+                        <div style="font-size: 3em;">📦</div>
+                        <h4>Compaction</h4>
+                        <p>10,000×<br>10,000 مرة</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🧬 Levels of DNA Packaging | مستويات تغليف DNA:</h3>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Level | المستوى</th>
+                        <th>Description | الوصف</th>
+                        <th>Compaction | التكثيف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. DNA Double Helix</strong></td>
+                        <td>Linear sequence of nucleotides</td>
+                        <td>1× (baseline)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Nucleosome</strong></td>
+                        <td>DNA wrapped around histone octamer (~147 bp)</td>
+                        <td>~7×</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. 30-nm Fiber</strong></td>
+                        <td>Nucleosomes coiled into solenoid structure</td>
+                        <td>~40×</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Looped Domains</strong></td>
+                        <td>Chromatin loops attached to scaffold proteins</td>
+                        <td>~1,000×</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Metaphase Chromosome</strong></td>
+                        <td>Highly condensed, visible during cell division</td>
+                        <td>~10,000×</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🏗️ Packaging Hierarchy | التسلسل الهرمي</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                    <div style="background: #3498db; color: white; padding: 15px; margin: 5px; border-radius: 10px;">
+                        <div style="font-size: 1.5em;">🧬</div>
+                        <p>DNA</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #e74c3c; color: white; padding: 15px; margin: 5px; border-radius: 10px;">
+                        <div style="font-size: 1.5em;">🫧</div>
+                        <p>Nucleosome</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #f39c12; color: white; padding: 15px; margin: 5px; border-radius: 10px;">
+                        <div style="font-size: 1.5em;">🧶</div>
+                        <p>30-nm Fiber</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #27ae60; color: white; padding: 15px; margin: 5px; border-radius: 10px;">
+                        <div style="font-size: 1.5em;">🔄</div>
+                        <p>Loops</p>
+                    </div>
+                    <div style="font-size: 2em;">→</div>
+                    <div style="background: #9b59b6; color: white; padding: 15px; margin: 5px; border-radius: 10px;">
+                        <div style="font-size: 1.5em;">X</div>
+                        <p>Chromosome</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🫧 Nucleosome: The Basic Unit | النيوكليوسوم: الوحدة الأساسية</h2>
+            
+            <div class="english-content">
+                A nucleosome consists of a <strong>histone octamer core</strong> (2 each of H2A, H2B, H3, H4) wrapped by ~<strong>147 base pairs</strong> of DNA (1.65 turns). Histone H1 acts as a <strong>linker histone</strong> binding to DNA outside the core.
+            </div>
+            <div class="arabic-translation">
+                يتكون النيوكليوسوم من <strong>لب أوكتمري من الهيستون</strong> (2 من كل من H2A, H2B, H3, H4) ملفوفة حوله ~<strong>147 زوج قاعدي</strong> من DNA (1.65 دورة). يعمل الهيستون H1 كـ <strong>هيستون رابط</strong> يرتبط بـDNA خارج اللب.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🫧 Nucleosome Structure | بنية النيوكليوسوم</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; text-align: left;">
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5em;">🧬</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;"><strong>~147 bp DNA</strong> wrapped 1.65 turns | ملفوف 1.65 دورة</div>
+                        
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">H2A</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;">Histone H2A (2 copies) | هيستون H2A (2 نسخة)</div>
+                        
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">H2B</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;">Histone H2B (2 copies) | هيستون H2B (2 نسخة)</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">H3</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;">Histone H3 (2 copies) | هيستون H3 (2 نسخة)</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">H4</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;">Histone H4 (2 copies) | هيستون H4 (2 نسخة)</div>
+                        
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">H1</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;"><strong>Linker Histone</strong> binds outside | هيستون رابط يرتبط خارجياً</div>
+                        
+                        <div style="background: #9b59b6; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">🔗</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 8px;"><strong>Linker DNA</strong> ~20-80 bp connects nucleosomes | يربط النيوكليوسومات</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Nucleosome Functions | وظائف النيوكليوسوم:</h4>
+                <ul>
+                    <li><strong>DNA Packaging:</strong> Compacts DNA to fit in nucleus | تغليف DNA ليلائم النواة</li>
+                    <li><strong>Gene Regulation:</strong> Controls transcription access | ينظم الوصول للنسخ</li>
+                    <li><strong>Epigenetic Modifications:</strong> Histone tail modifications affect gene expression | تعديلات الذيل تؤثر على التعبير الجيني</li>
+                    <li><strong>Chromatin Structure:</strong> First level of organization | أول مستوى من التنظيم</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧶 Chromatin: Euchromatin vs Heterochromatin</h2>
+            
+            <div class="english-content">
+                Chromatin exists in two major forms. <strong>Euchromatin</strong> is loosely packed and transcriptionally active. <strong>Heterochromatin</strong> is densely packed and transcriptionally inactive.
+            </div>
+            <div class="arabic-translation">
+                يوجد الكروماتين في شكلين رئيسيين. <strong>الكروماتين الفاتح</strong> (Euchromatin) فضفاض النسيج ونشط نسخياً. <strong>الكروماتين الكثيف</strong> (Heterochromatin) مضغوط النسيج وغير نشط نسخياً.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                    <h4>🟦 Euchromatin</h4>
+                    <p>• Light staining | صبغة فاتحة<br>
+                    • Loosely packed | تغليف فضفاض<br>
+                    • Transcriptionally active | نشط نسخياً<br>
+                    • Early replication | تضاعف مبكر<br>
+                    • Contains active genes | يحتوي على جينات نشطة</p>
+                </div>
+                <div class="structure-card" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+                    <h4>⬛ Heterochromatin</h4>
+                    <p>• Dark staining | صبغة داكنة<br>
+                    • Densely packed | تغليف كثيف<br>
+                    • Transcriptionally inactive | غير نشط نسخياً<br>
+                    • Late replication | تضاعف متأخر<br>
+                    • Contains repetitive DNA | يحتوي على DNA متكرر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧬 Telomeres: Chromosome Ends | التيلوميرات: أطراف الكروموسومات</h2>
+            
+            <div class="english-content">
+                Telomeres are repetitive DNA sequences (TTAGGG in humans) at chromosome ends that protect genetic data. They prevent chromosome deterioration and fusion. Telomeres shorten with each cell division, contributing to aging and cellular senescence.
+            </div>
+            <div class="arabic-translation">
+                التيلوميرات هي تسلسلات DNA متكررة (TTAGGG في البشر) في أطراف الكروموسومات تحمي البيانات الجينية. تمنع تدهور الكروموسومات واندماجها. تتقصر التيلوميرات مع كل انقسام خلوي، مما يساهم في الشيخوخة والشيخوخة الخلوية.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 Telomere Structure | بنية التيلومير</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; font-family: monospace; direction: ltr;">
+                    <div style="font-size: 1.2em; letter-spacing: 5px;">
+                        <span style="color: #e74c3c;">===CHROMOSOME BODY===</span> → 
+                        <span style="color: #3498db;">TTAGGG TTAGGG TTAGGG ...</span> → 
+                        <span style="color: #27ae60;">[SHELTERIN PROTEINS]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🧬 Telomere Functions | وظائف التيلوميرات:</h4>
+                <ul>
+                    <li>Protect chromosome ends from degradation | تحمي أطراف الكروموسوم من التدهور</li>
+                    <li>Prevent end-to-end fusion | تمنع الاندماج الطرفي</li>
+                    <li>Enable complete DNA replication | تتيح تضاعف DNA الكامل</li>
+                    <li>Act as cellular aging clock | تعمل كساعة شيخوخة خلوية</li>
+                    <li>Maintained by telomerase enzyme في الخلايا الجذعية والسرطانية | يتم صيانتها بواسطة إنزيم التيلوميريز</li>
+                </ul>
+            </div>
+
+            <div class="important-notes">
+                <h4>🔬 Telomerase Enzyme | إنزيم التيلوميريز:</h4>
+                <p>• Contains RNA template to add telomere repeats | يحتوي على قالب RNA لإضافة تكرارات التيلومير<br>
+                • Active in stem cells and cancer cells | نشط في الخلايا الجذعية والسرطانية<br>
+                • Inactive in most somatic cells | غير نشط في معظم الخلايا الجسمية</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔬 Extrachromosomal DNA | DNA خارج الكروموسومي</h2>
+            
+            <div class="english-content">
+                Extrachromosomal DNA (ecDNA) exists outside the main chromosome. This includes:
+            </div>
+            <div class="arabic-translation">
+                DNA خارج الكروموسومي (ecDNA) موجود خارج الكروموسوم الرئيسي. يشمل:
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                    <h4>🦠 Plasmids</h4>
+                    <p>Circular DNA in bacteria. Carry antibiotic resistance genes. Used in genetic engineering.</p>
+                </div>
+                <div class="structure-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <h4>🦠 Viral DNA</h4>
+                    <p>Phage DNA infects bacteria. Can integrate into host genome or exist independently.</p>
+                </div>
+                <div class="structure-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                    <h4>⚡ Mitochondrial DNA</h4>
+                    <p>Circular DNA in mitochondria. Maternal inheritance. Contains genes for energy production.</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔁 ecDNA Types | أنواع DNA خارج الكروموسومي</h4>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">⭕</div>
+                        <h4>Bacterial Plasmid</h4>
+                        <p>Circular, 5-500 kb<br>يحمل جينات مقاومة</p>
+                    </div>
+                    <div style="background: #9b59b6; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">⚡</div>
+                        <h4>Mitochondrial DNA</h4>
+                        <p>Circular, 16.6 kb (human)<br>وراثة أمومية</p>
+                    </div>
+                    <div style="background: #27ae60; color: white; padding: 20px; border-radius: 15px; margin: 10px;">
+                        <div style="font-size: 3em;">🦠</div>
+                        <h4>Viral DNA</h4>
+                        <p>Linear or circular<br>يفتقر للبروتينات</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔬 Techniques for Nucleic Acid Separation | تقنيات فصل الأحماض النووية</h2>
+            
+            <div class="english-content">
+                Various techniques separate nucleic acids based on size, charge, or specific properties:
+            </div>
+            <div class="arabic-translation">
+                تقنيات مختلفة تفصل الأحماض النووية بناءً على الحجم، الشحنة، أو الخصائص المحددة:
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Technique | التقنية</th>
+                        <th>Principle | المبدأ</th>
+                        <th>Applications | التطبيقات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Agarose Gel Electrophoresis (AGE)</strong></td>
+                        <td>Separation by size/charge in agarose matrix</td>
+                        <td>Routine DNA/RNA analysis, PCR products</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Polyacrylamide Gel (PAGE)</strong></td>
+                        <td>Higher resolution for small fragments</td>
+                        <td>Sequencing, RNA analysis, small differences</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pulsed-Field Gel (PFGE)</strong></td>
+                        <td>Alternating fields separate very large DNA</td>
+                        <td>Chromosomal DNA, plasmids, microbial typing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Capillary Electrophoresis</strong></td>
+                        <td>High voltage in narrow capillaries</td>
+                        <td>DNA sequencing, fragment analysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Density Gradient Centrifugation</strong></td>
+                        <td>Separation by buoyant density</td>
+                        <td>Purification of plasmid DNA, RNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chromatography (HPLC)</strong></td>
+                        <td>Binding interactions or charge</td>
+                        <td>Purification, contaminant removal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blotting (Southern/Northern)</strong></td>
+                        <td>Gel → Membrane → Probe hybridization</td>
+                        <td>Specific DNA/RNA detection</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>⚡ Electrophoresis Principle | مبدأ الترحيل الكهربائي</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 400px; margin: 0 auto;">
+                    <div style="border: 3px solid #3498db; padding: 15px; border-radius: 10px; font-family: monospace;">
+                        <div style="text-align: center; background: #3498db; color: white; padding: 5px;">➕ Anode (+)</div>
+                        <div style="padding: 20px 0;">
+                            <div style="background: #e74c3c; color: white; padding: 5px; margin: 5px 0; border-radius: 5px;">DNA Fragment 1 (Large) | بطيء</div>
+                            <div style="background: #f39c12; color: white; padding: 5px; margin: 5px 0; border-radius: 5px;">DNA Fragment 2 (Medium) | متوسط</div>
+                            <div style="background: #27ae60; color: white; padding: 5px; margin: 5px 0; border-radius: 5px;">DNA Fragment 3 (Small) | سريع</div>
+                        </div>
+                        <div style="text-align: center; background: #e74c3c; color: white; padding: 5px;">➖ Cathode (-)</div>
+                    </div>
+                    <p style="margin-top: 10px; font-style: italic;">Negative DNA moves toward positive pole | DNA السالبية تتحرك نحو القطب الموجب</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Molecular Biology Lecture - DNA Structure & Organization</p>
+            <p>Designed for Biotechnology & Genetic Engineering Students</p>
+            <div class="molecular-symbol" style="margin-top: 20px;">🧬⚛️🔬</div>
+        </footer>
+    </div>
+</body>
+</html>
