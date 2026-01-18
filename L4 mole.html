@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Biology: DNA Replication | بيولوجيا جزيئية: تضاعف DNA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.7;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            border-right: 5px solid #e74c3c;
+            padding-right: 15px;
+        }
+
+        .english-content {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-right: 5px solid #3498db;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .arabic-translation {
+            font-size: 1.05em;
+            color: #2c3e50;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1, #d5dbdb);
+            border-radius: 10px;
+            border-right: 5px solid #27ae60;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .structure-card {
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .enzyme-card {
+            background: linear-gradient(135deg, #e17055, #d63031);
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .key-points {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #ffeaa7;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .compare-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .step-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .step-arrow {
+            font-size: 2em;
+            color: #e74c3c;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: #2c3e50;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .important-box {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .structure-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Molecular Biology: DNA Replication</h1>
+            <p>بيولوجيا جزيئية: تضاعف DNA والمشكلات الرئيسية</p>
+            <div style="font-size: 3em; margin: 10px;">🧬⚡🔄</div>
+        </header>
+
+        <section class="section">
+            <h2>⚠️ Major Problems in DNA Replication | المشكلات الرئيسية في تضاعف DNA</h2>
+            
+            <div class="english-content">
+                DNA replication faces several mechanical and chemical challenges that must be solved by specific enzymes. These problems arise from the structure of DNA and the chemistry of polymerization.
+            </div>
+            <div class="arabic-translation">
+                يواجه تضاعف DNA عدة تحديات ميكانيكية وكيميائية يجب حلها بواسطة إنزيمات محددة. تنشأ هذه المشكلات من بنية DNA وكيمياء البلمرة.
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Problem | المشكلة</th>
+                        <th>Solution | الحل</th>
+                        <th>Key Enzyme | الإنزيم الرئيسي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🌀 Helix unwinding | فك الحلزون</strong></td>
+                        <td>Break hydrogen bonds between base pairs | كسر روابط الهيدروجين بين أزواج القواعد</td>
+                        <td>Helicase + Topoisomerase</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🧵 Strand stabilization | تثبيت السلاسل المنفردة</strong></td>
+                        <td>Prevent reannealing & secondary structures | منع إعادة التزاوج والهياكل الثانوية</td>
+                        <td>SSB Proteins</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🚀 Starting synthesis | بدء التخليق</strong></td>
+                        <td>Provide free 3'-OH group | توفير مجموعة 3'-OH حرة</td>
+                        <td>Primase</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⏮️ Lagging strand synthesis | تخليق السلسلة المتأخرة</strong></td>
+                        <td>Synthesize in short fragments | التخليق في قطع قصيرة</td>
+                        <td>Okazaki Fragments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🔗 Primer removal & sealing | إزالة البادئ والربط</strong></td>
+                        <td>Remove RNA primers & fill gaps | إزالة بادئات RNA وملء الفجوات</td>
+                        <td>DNA Pol I + Ligase</td>
+                    </tr>
+                    <tr>
+                        <td><strong>✅ Proofreading | التصحيح</strong></td>
+                        <td>Remove mismatched nucleotides | إزالة النيوكليوتيدات غير المتطابقة</td>
+                        <td>DNA Pol III (ε subunit)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⏹️ Termination | الإنهاء</strong></td>
+                        <td>Stop replication at specific sites | إيقاف التضاعف في مواقع محددة</td>
+                        <td>Tus/Ter sites or Telomerase</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚡ Energy Requirements | متطلبات الطاقة:</h4>
+                <p>Most replication enzymes require ATP: Helicase, Topoisomerase II, Primase, and DNA polymerases use nucleoside triphosphates as both substrates and energy sources.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🌀 DNA Helicase | إنزيم الهيليكيز</h2>
+            
+            <div class="english-content">
+                DNA helicase is an essential enzyme that unwinds the double-stranded DNA into two single strands. It breaks hydrogen bonds between complementary base pairs (A–T and G–C) and uses ATP hydrolysis to supply energy for strand separation.
+            </div>
+            <div class="arabic-translation">
+                DNA helicase هو إنزيم أساسي يفك DNA المزدوج السلسلة إلى سلاسل منفردة. يكسر روابط الهيدروجين بين أزواج القواعد المتكاملة (A–T و G–C) ويستخدم تحلل ATP لتوفير الطاقة لفصل السلاسل.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔄 Helicase Mechanism | آلية عمل الهيليكيز</h4>
+                <div class="step-diagram">
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🧬</div>
+                        <h4>Step 1 | الخطوة الأولى</h4>
+                        <p>Binds to origin of replication | يرتبط بموقع بدء التضاعف</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">⚡</div>
+                        <h4>Step 2 | الخطوة الثانية</h4>
+                        <p>Uses ATP to break H-bonds | يستخدم ATP لكسر روابط H</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">〰️</div>
+                        <h4>Step 3 | الخطوة الثالثة</h4>
+                        <p>Unwinds DNA 5'→3' | يفك DNA في اتجاه 5'→3'</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">Y</div>
+                        <h4>Result | النتيجة</h4>
+                        <p>Creates replication fork | ينشئ شوكة التضاعف</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Key Features | المميزات الرئيسية:</h4>
+                <ul>
+                    <li><strong>Direction:</strong> Moves 5'→3' along the lagging strand template | يتحرك في اتجاه 5'→3' على قالب السلسلة المتأخرة</li>
+                    <li><strong>Structure:</strong> Hexameric ring-shaped enzyme | إنزيم حلقي سداسي</li>
+                    <li><strong>Energy:</strong> ATP hydrolysis powers unwinding | تحلل ATP يمد بالطاقة</li>
+                    <li><strong>Result:</strong> Creates replication fork for other enzymes | ينشئ شوكة تضاعف للإنزيمات الأخرى</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔗 Topoisomerase | توبوييزوميريز</h2>
+            
+            <div class="english-content">
+                Topoisomerase relieves supercoiling (torsional strain) ahead of the replication fork by cutting and rejoining DNA strands. There are two main types with different mechanisms.
+            </div>
+            <div class="arabic-translation">
+                توبوييزوميريز يخفف اللفائف الفائقة (الإجهاد الالتوائي) أمام شوكة التضاعف عن طريق قطع وإعادة ربط سلاسل DNA. يوجد نوعان رئيسيان بآليات مختلفة.
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Type | النوع</th>
+                        <th>Main Function | الوظيفة الرئيسية</th>
+                        <th>Mechanism | الآلية</th>
+                        <th>ATP Requirement | حاجة ATP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Topoisomerase I</strong></td>
+                        <td>Relieves supercoiling by making single-strand breaks</td>
+                        <td>Cuts one strand → allows rotation → reseals nick</td>
+                        <td>❌ No ATP needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Topoisomerase II</strong><br>(DNA Gyrase in bacteria)</td>
+                        <td>Removes supercoils & separates intertwined DNA</td>
+                        <td>Cuts both strands → passes DNA through → reseals</td>
+                        <td>✅ Requires ATP</td>
+                    </tr>
+                </tbody>
+            </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🔄 Topoisomerase Action | عمل التوبوييزوميريز</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto;">
+                    <div style="background: #3498db; color: white; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 2.5em;">✂️</div>
+                        <h4>Topoisomerase I</h4>
+                        <div style="font-size: 2em; font-family: monospace;">➰</div>
+                        <p>Cuts ONE strand | يقطع سلسلة واحدة</p>
+                        <div style="font-size: 1.5em;">→</div>
+                        <div style="font-size: 2em; font-family: monospace;">O</div>
+                        <p>Allows rotation | يسمح بالدوران</p>
+                    </div>
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 2.5em;">✂️✂️</div>
+                        <h4>Topoisomerase II</h4>
+                        <div style="font-size: 2em; font-family: monospace;">➰➰</div>
+                        <p>Cuts BOTH strands | يقطع كلا السلسلتين</p>
+                        <div style="font-size: 1.5em;">→</div>
+                        <div style="font-size: 2em; font-family: monospace;">↔️</div>
+                        <p>Passes DNA through | يمرر DNA خلاله</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Importance | الأهمية:</h4>
+                <p>Without topoisomerase, positive supercoiling would accumulate ahead of the replication fork, making further unwinding impossible. It's essential for relieving torsional strain.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧬 DNA Polymerases | بوليميريزات DNA</h2>
+            
+            <div class="english-content">
+                DNA polymerases synthesize new DNA strands by adding nucleotides to the 3'-OH end of a growing chain. They require a template and a primer, and most have proofreading activity.
+            </div>
+            <div class="arabic-translation">
+                بوليميريزات DNA تخلق سلاسل DNA جديدة بإضافة نيوكليوتيدات إلى النهاية 3'-OH للسلسلة النامية. تتطلب قالباً وبادئاً، ومعظمها يملك نشاط تصحيح.
+            </div>
+
+            <h3>🦠 Prokaryotic DNA Polymerases | بوليميريزات DNA بدائيات النواة:</h3>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Enzyme | الإنزيم</th>
+                        <th>Main Function | الوظيفة الرئيسية</th>
+                        <th>Key Features | المميزات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pol I</strong></td>
+                        <td>Removes RNA primers, fills gaps | إزالة بادئات RNA، ملء الفجوات</td>
+                        <td>5'→3' exonuclease activity, also 3'→5' proofreading</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol II</strong></td>
+                        <td>DNA repair, proofreading | إصلاح DNA، تصحيح الأخطاء</td>
+                        <td>3'→5' exonuclease (proofreading), restarts stalled forks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol III</strong></td>
+                        <td>Main replication enzyme | الإنزيم الرئيسي للتضاعف</td>
+                        <td>Very high processivity, speed, 3'→5' proofreading (ε subunit)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🧬 Eukaryotic DNA Polymerases | بوليميريزات DNA حقيقيات النواة:</h3>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Enzyme | الإنزيم</th>
+                        <th>Main Function | الوظيفة الرئيسية</th>
+                        <th>Location | الموقع</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pol α (alpha)</strong></td>
+                        <td>Synthesizes RNA-DNA primers | يخلق بادئات RNA-DNA</td>
+                        <td>Nucleus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol δ (delta)</strong></td>
+                        <td>Lagging strand synthesis | تخليق السلسلة المتأخرة</td>
+                        <td>Nucleus (works with PCNA clamp)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol ε (epsilon)</strong></td>
+                        <td>Leading strand synthesis | تخليق السلسلة الرائدة</td>
+                        <td>Nucleus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol β (beta)</strong></td>
+                        <td>Base excision repair | إصلاح الإزالة القاعدية</td>
+                        <td>Nucleus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pol γ (gamma)</strong></td>
+                        <td>Mitochondrial DNA synthesis | تخليق DNA الميتوكوندري</td>
+                        <td>Mitochondria</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🎯 Polymerase Activity | نشاط البوليميريز</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 3px;">3'-OH</div>
+                            <p>Growing strand | السلسلة النامية</p>
+                        </div>
+                        <div style="font-size: 2em; color: #27ae60;">+</div>
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 3px;">dNTP</div>
+                            <p>New nucleotide | نيوكليوتيد جديد</p>
+                        </div>
+                    </div>
+                    <div style="font-size: 2em; color: #3498db; text-align: center; margin: 10px 0;">↓</div>
+                    <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 3px;">3'-OH + dNMP</div>
+                        <p>Extended strand | سلسلة ممتدة</p>
+                    </div>
+                    <div style="font-style: italic; margin-top: 10px; color: #666;">
+                        Synthesis ONLY in 5'→3' direction | التخليق فقط في اتجاه 5'→3'
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🧩 Common Features | المميزات المشتركة:</h4>
+                <ul>
+                    <li><strong>Template-dependent:</strong> Copy DNA sequence | يعتمد على قالب</li>
+                    <li><strong>Primer-dependent:</strong> Cannot start de novo | يحتاج بادئاً</li>
+                    <li><strong>5'→3' synthesis:</strong> Only one direction | اتجاه واحد فقط</li>
+                    <li><strong>Proofreading:</strong> Most have 3'→5' exonuclease activity | معظمها يملك تصحيحاً</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Primase: The Starter Enzyme | بريميز: إنزيم البدء</h2>
+            
+            <div class="english-content">
+                Primase is a specialized RNA polymerase that synthesizes short RNA primers (~10-12 nucleotides) on the DNA template. This provides the free 3'-OH group required by DNA polymerase, which cannot start synthesis de novo.
+            </div>
+            <div class="arabic-translation">
+                بريميز هو بوليميريز RNA متخصص يخلق بادئات RNA قصيرة (~10-12 نيوكليوتيد) على قالب DNA. يوفر هذا مجموعة 3'-OH الحرة المطلوبة من قبل بوليميريز DNA، الذي لا يمكنه بدء التخليق من لا شيء.
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Property | الخاصية</th>
+                        <th>Description | الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🔬 Type</strong></td>
+                        <td>RNA polymerase | بوليميريز RNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🧱 Substrate</strong></td>
+                        <td>Ribonucleoside triphosphates (rNTPs) | ريبونيوكليوتيدات ثلاثية الفوسفات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📦 Product</strong></td>
+                        <td>Short RNA primer (~10-12 nt) | بادئ RNA قصير</td>
+                    </tr>
+                    <tr>
+                        <td><strong>➡️ Direction</strong></td>
+                        <td>5' → 3' synthesis | تخليق في اتجاه 5'→3'</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎯 Template</strong></td>
+                        <td>DNA template strand | قالب DNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⚡ Energy</strong></td>
+                        <td>From rNTP hydrolysis | من تحلل rNTPs</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🎯 Primase Function | وظيفة البريميز</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; text-align: left;">
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">1</div>
+                        <div><strong>Binds to ssDNA:</strong> Near replication fork | يرتبط بـ ssDNA قرب شوكة التضاعف</div>
+                        
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">2</div>
+                        <div><strong>Synthesizes RNA primer:</strong> ~10 nucleotides long | يخلق بادئ RNA بطول ~10 نيوكليوتيد</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">3</div>
+                        <div><strong>Provides 3'-OH:</strong> For DNA polymerase | يوفر 3'-OH لبوليميريز DNA</div>
+                        
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em;">4</div>
+                        <div><strong>Handoff:</strong> DNA Pol extends primer | بوليميريز DNA يمتد من البادئ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Priming Requirements | متطلبات البدء:</h4>
+                <ul>
+                    <li><strong>Leading strand:</strong> Only ONE primer needed | سلسلة واحدة فقط</li>
+                    <li><strong>Lagging strand:</strong> MANY primers needed (one per Okazaki fragment) | بادئ لكل قطعة أوكازاكي</li>
+                    <li><strong>DNA polymerase cannot start without primer!</strong> | لا يمكن بدء التضاعف بدون بادئ</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔑 Key Steps of DNA Replication | الخطوات الرئيسية لتضاعف DNA</h2>
+            
+            <h3>1️⃣ Initiation | البدء:</h3>
+            <div class="english-content">
+                Initiation begins at specific sequences called origins of replication. In prokaryotes, there's a single origin (OriC), while eukaryotes have multiple origins per chromosome.
+            </div>
+            <div class="arabic-translation">
+                يبدأ البدء في تسلسلات محددة تسمى أصول التضاعف. في بدائيات النواة، يوجد أصل واحد (OriC)، بينما حقيقيات النواة لديها أصول متعددة لكل كروموسوم.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Initiation Complex | معقد البدء</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">📍</div>
+                            <p><strong>OriC</strong><br>Origin site | موقع الأصل</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🔓</div>
+                            <p><strong>DnaA</strong><br>Unwinds origin | يفك الأصل</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🌀</div>
+                            <p><strong>DnaB</strong><br>Helicase | الهيليكيز</p>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🛡️</div>
+                            <p><strong>SSBPs</strong><br>Stabilize strands | تثبت السلاسل</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2️⃣ Elongation | الإطالة:</h3>
+            <div class="english-content">
+                DNA polymerase adds nucleotides to the 3'-OH end in the 5'→3' direction. The leading strand is synthesized continuously, while the lagging strand is synthesized discontinuously as Okazaki fragments.
+            </div>
+            <div class="arabic-translation">
+                تضيف بوليميريز DNA نيوكليوتيدات إلى النهاية 3'-OH في اتجاه 5'→3'. تُخلق السلسلة الرائدة بشكل مستمر، بينما تُخلق السلسلة المتأخرة بشكل غير مستمر كقطع أوكازاكي.
+            </div>
+
+            <h3>3️⃣ Primer Removal & Gap Filling | إزالة البادئ وملء الفجوات:</h3>
+            <div class="diagram-container">
+                <h4>🔧 Primer Removal Process | عملية إزالة البادئ</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🎯</div>
+                            <p><strong>RNA Primer</strong> attached to DNA | بادئ RNA مرتبط بـ DNA</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🗑️</div>
+                            <p><strong>DNA Pol I / RNase H</strong> removes primer | يزيل البادئ</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🧱</div>
+                            <p><strong>DNA Pol I / δ</strong> fills gap with DNA | يملء الفجوة بـ DNA</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🔗</div>
+                            <p><strong>DNA Ligase</strong> seals the nick | يسد الشق</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>4️⃣ Termination | الإنهاء:</h3>
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>🦠 Prokaryotes | بدائيات النواة</h4>
+                    <p>Termination occurs at <strong>Ter sites</strong> opposite the origin. <strong>Tus protein</strong> binds Ter sites and blocks helicase movement.</p>
+                </div>
+                <div class="structure-card">
+                    <h4>🧬 Eukaryotes | حقيقيات النواة</h4>
+                    <p>Replication forks meet and terminate naturally. <strong>Telomeres</strong> at chromosome ends require special handling by telomerase.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚖️ Leading vs Lagging Strand | السلسلة الرائدة مقابل المتأخرة</h2>
+            
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Feature | الميزة</th>
+                        <th>Leading Strand | الرائدة</th>
+                        <th>Lagging Strand | المتأخرة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Template Direction | اتجاه القالب</strong></td>
+                        <td>3' → 5'</td>
+                        <td>5' → 3'</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Synthesis Direction | اتجاه التخليق</strong></td>
+                        <td>5' → 3' (same as fork) | نفس اتجاه الشوكة</td>
+                        <td>5' → 3' (opposite fork) | عكس اتجاه الشوكة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Synthesis Pattern | نمط التخليق</strong></td>
+                        <td>Continuous | مستمر</td>
+                        <td>Discontinuous | غير مستمر</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primers Required | عدد البادئات</strong></td>
+                        <td>One primer only | بادئ واحد فقط</td>
+                        <td>Multiple primers (one per Okazaki fragment) | بادئ لكل قطعة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resulting Fragments | النتيجة</strong></td>
+                        <td>One long strand | سلسلة طويلة واحدة</td>
+                        <td>Okazaki fragments (~1000-2000 bp in prokaryotes, ~100-200 bp in eukaryotes) | قطع أوكازاكي</td>
+                    </tr>
+                </tbody>
+            </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <h4>🎯 Replication Fork Visualization | تصور شوكة التضاعف</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 700px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; font-family: monospace;">
+                        <div style="grid-column: span 3; text-align: center; background: #3498db; color: white; padding: 10px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🌀</div>
+                            <p>Replication Fork Moves → | شوكة التضاعف تتحرك</p>
+                        </div>
+                        
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 5px;">3'</div>
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                            <div>🧬 TEMPLATE</div>
+                            <div>Leading Strand Template</div>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 5px;">5'</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 5px;">5'</div>
+                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                            <div>🎯 NEW STRAND</div>
+                            <div>← Leading (Continuous)</div>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 5px;">3'</div>
+                        
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 5px;">5'</div>
+                        <div style="background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                            <div>🧬 TEMPLATE</div>
+                            <div>Lagging Strand Template</div>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 10px; border-radius: 5px;">3'</div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 5px;">3'</div>
+                        <div style="background: #9b59b6; color: white; padding: 10px; border-radius: 5px; text-align: center;">
+                            <div>🎯 NEW STRAND</div>
+                            <div>Lagging (Okazaki) →</div>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 10px; border-radius: 5px;">5'</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>✅ Proofreading & Error Correction | التصحيح وإصلاح الأخطاء</h2>
+            
+            <div class="english-content">
+                DNA polymerases are highly accurate but occasionally insert wrong nucleotides. The <span class="highlight">proofreading function</span> removes mismatched nucleotides before continuing synthesis, increasing accuracy ~100-fold.
+            </div>
+            <div class="arabic-translation">
+                بوليميريزات DNA دقيقة جداً لكنها تدرج نيوكليوتيدات خاطئة أحياناً. تزيل <span class="highlight">وظيفة التصحيح</span> النيوكليوتيدات غير المتطابقة قبل متابعة التخليق، مما يزيد الدقة ~100 مرة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔍 Proofreading Mechanism | آلية التصحيح</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5em; font-family: monospace;">3'-A-T-C-G-G-T-A</div>
+                            <p>Wrong nucleotide inserted | نيوكليوتيد خاطئ مدرج</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 2em;">⏮️</div>
+                            <p>3'→5' exonuclease activity removes mismatch | نشاط 3'→5' ينزيل الخطأ</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5em; font-family: monospace;">3'-A-T-C-G</div>
+                            <p>Correct sequence restored | تم استعادة التسلسل الصحيح</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>📊 Error Rates | معدلات الخطأ:</h4>
+                    <p><strong>Without proofreading:</strong> 1 error per 10⁴ nucleotides<br>
+                    <strong>With proofreading:</strong> 1 error per 10⁶-10⁷ nucleotides<br>
+                    <strong>Final rate:</strong> 1 error per 10⁹ nucleotides (with repair systems)</p>
+                </div>
+                <div class="structure-card">
+                    <h4>🔧 In DNA Pol III:</h4>
+                    <p>The <strong>ε (epsilon) subunit</strong> performs proofreading. Mutations in this subunit increase mutation rates dramatically.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🚨 The End-Replication Problem | مشكلة نهاية التضاعف</h2>
+            
+            <div class="english-content">
+                The end-replication problem refers to the inability of DNA polymerase to fully replicate the 3' ends of the lagging strand. This leads to progressive shortening of chromosomes after each cell division.
+            </div>
+            <div class="arabic-translation">
+                تشير مشكلة نهاية التضاعف إلى عدم قدرة بوليميريز DNA على تضاعف نهايات 3' للسلسلة المتأخرة بالكامل. هذا يؤدي إلى تقصير تدريجي للكروموسومات بعد كل انقسام خلوي.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 Why It Happens | سبب حدوثها</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em; font-family: monospace;">5'-------------------3'</div>
+                            <div style="font-size: 1.5em; font-family: monospace;">3'-------------------5' ← 🎯 RNA Primer</div>
+                            <p>Last primer at 3' end</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🗑️</div>
+                            <p>RNA primer removed | بادئ RNA يُزال</div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em; font-family: monospace; color: #e74c3c;">5'------------------/</div>
+                            <div style="font-size: 1.5em; font-family: monospace;">3'-------------------5'</div>
+                            <p><span class="highlight">Gap cannot be filled!</span> | الفجوة لا يمكن ملؤها!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="important-box">
+                <h4>⚠️ Consequences | العواقب:</h4>
+                <ul>
+                    <li>With each replication cycle, a small portion of telomeric DNA is lost | مع كل دورة تضاعف، تُفقد جزء صغير من DNA التيلوميري</li>
+                    <li>Eventually leads to cellular senescence or apoptosis | يؤدي في النهاية إلى الشيخوخة الخلوية أو الانتحار الخلوي</li>
+                    <li>Limits somatic cells to ~40-60 divisions | يحد الخلايا الجسمية إلى ~40-60 انقسام</li>
+                </ul>
+            </div>
+
+            <div class="key-points">
+                <h4>🧬 Solution: Telomerase | الحل: التيلوميريز</h4>
+                <ul>
+                    <li> Adds repetitive DNA sequences (TTAGGG in humans) to chromosome ends | يضيف تسلسلات DNA متكررة لأطراف الكروموسومات</li>
+                    <li>Solves end-replication problem | يحل مشكلة نهاية التضاعف</li>
+                    <li>Contains its own RNA template | يحتوي على قالب RNA خاص به</li>
+                    <li>Active in germ cells, stem cells, and cancer cells | نشط في الخلايا الجرثومية والجذعية والسرطانية</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧬 Telomeres & Telomerase | التيلوميرات والتيلوميريز</h2>
+            
+            <h3>🧬 Telomeres | التيلوميرات:</h3>
+            <div class="english-content">
+                Telomeres are repetitive nucleotide sequences (TTAGGG in humans, repeated thousands of times) at chromosome ends. They are non-coding DNA bound by protective proteins (shelterin complex).
+            </div>
+            <div class="arabic-translation">
+                التيلوميرات هي تسلسلات نيوكليوتيدية متكررة (TTAGGG في البشر، تتكرر آلاف المرات) في أطراف الكروموسومات. هي DNA غير مكود ترتبط به بروتينات واقية (معقد shelterin).
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>🛡️ Functions of Telomeres | وظائف التيلوميرات:</h4>
+                    <ul style="text-align: left; list-style: none; padding: 0;">
+                        <li>✅ Protect chromosome ends from degradation | تحمي أطراف الكروموسوم من التدهور</li>
+                        <li>✅ Prevent end-to-end fusion | تمنع الاندماج الطرفي</li>
+                        <li>✅ Enable complete DNA replication | تتيح تضاعف DNA الكامل</li>
+                        <li>✅ Act as cellular aging clock | تعمل كساعة شيخوخة خلوية</li>
+                    </ul>
+                </div>
+                <div class="structure-card">
+                    <h4>⚙️ Telomerase Structure | بنية التيلوميريز:</h4>
+                    <ul style="text-align: left; list-style: none; padding: 0;">
+                        <li>🔧 <strong>TERT:</strong> Telomerase Reverse Transcriptase (protein) | البروتين</li>
+                        <li>🎀 <strong>TERC:</strong> Telomerase RNA Component (RNA template) | قالب RNA</li>
+                        <li>🔄 Type of reverse transcriptase | نوع من transcriptase العكسية</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>⚙️ Telomerase Functions | وظائف التيلوميريز:</h3>
+            
+            <div class="diagram-container">
+                <h4>🔄 Telomerase Action | عمل التيلوميريز</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em; font-family: monospace;">3'-------------------5' ← [Short telomere]</div>
+                            <p>Shortened telomere after replication | تيلومير قصير بعد التضاعف</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🎯</div>
+                            <p>Telomerase binds to telomere end | التيلوميريز يرتبط بنهاية التيلومير</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em; font-family: monospace; color: #f39c12;">3'-------------------TTAGGG-5'</div>
+                            <p>Adds TTAGGG repeats | يضيف تكرارات TTAGGG</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Cell Type | نوع الخلية</th>
+                        <th>Telomerase Activity | نشاط التيلوميريز</th>
+                        <th>Reason / Function | السبب / الوظيفة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Germ Cells</strong> (sperm/egg precursors)</td>
+                        <td style="background: #00b894; color: white;">High | مرتفع</td>
+                        <td>Maintain telomeres for next generation | الحفاظ على التيلوميرات للجيل التالي</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stem Cells</strong></td>
+                        <td style="background: #00b894; color: white;">Moderate-High | معتدل-مرتفع</td>
+                        <td>Allow continuous division & tissue renewal | السماح بالانقسام المستمر وتجديد الأنسجة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cancer Cells</strong></td>
+                        <td style="background: #e74c3c; color: white;">Very High | عالي جداً</td>
+                        <td>Become "immortal" - divide indefinitely | تصبح "خالدة" - تنقسم بلا نهاية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Somatic Cells</strong> (normal body cells)</td>
+                        <td style="background: #95a5a6; color: white;">Low/Absent | منخفض/غائب</td>
+                        <td>Limited divisions → aging & death | انقسامات محدودة → شيخوخة وموت</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>🎯 Clinical Significance | الأهمية السريرية:</h4>
+                <p><strong>Cancer Therapy:</strong> Telomerase is reactivated in ~90% of cancers, making it a key target for anti-cancer drugs. Inhibiting telomerase could limit cancer cell division.</p>
+                <p><strong>Aging Research:</strong> Telomere length is associated with cellular aging and age-related diseases. However, artificially extending telomeres may increase cancer risk.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧠 Memory Aids & Exam Tips | وسائل مساعدة للحفظ ونصائح الامتحان</h2>
+            
+            <div class="key-points">
+                <h4>🤔 Mnemonic for Replication Enzymes | حفظ إنزيمات التضاعف:</h4>
+                <ul>
+                    <li><strong>"Please Help The Special Police Locate Criminals":</strong> Primase, Helicase, Topoisomerase, SSB Proteins, Ligase, DNA Polymerase</li>
+                    <li><strong>Leading vs Lagging:</strong> Leading = Continuous (C), Lagging = Discontinuous (D)</li>
+                    <li><strong>Okazaki fragment size:</strong> Prokaryotes (1000-2000 bp), Eukaryotes (100-200 bp) - "E" for Eukaryotes and "E" for smaller (100-200)</li>
+                </ul>
+            </div>
+
+            <div class="important-box">
+                <h4>🎯 Key Exam Points | نقاط اختبار مهمة:</h4>
+                <ul>
+                    <li><strong>DNA polymerase direction:</strong> ALWAYS 5'→3' synthesis, NEVER 3'→5'</li>
+                    <li><strong>Energy source:</strong> dNTPs provide both nucleotides and energy (phosphate bonds)</li>
+                    <li><strong>Proofreading:</strong> 3'→5' exonuclease activity, performed by ε subunit in Pol III</li>
+                    <li><strong>Okazaki fragments:</strong> Only on lagging strand, require ligation by DNA ligase</li>
+                    <li><strong>End-replication problem:</strong> Causes telomere shortening, solved by telomerase in germ/stem cells</li>
+                    <li><strong>Why RNA primer?</strong> DNA polymerase cannot initiate synthesis de novo - needs free 3'-OH</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔄 Summary Flow | التدفق الملخص</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 800px; margin: 0 auto;">
+                    <div class="step-diagram">
+                        <div class="step-box">
+                            <div style="font-size: 2em;">🧬</div>
+                            <p><strong>Unwind</strong><br>Helicase/Topoisomerase</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step-box">
+                            <div style="font-size: 2em;">🎯</div>
+                            <p><strong>Prime</strong><br>Primase</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step-box">
+                            <div style="font-size: 2em;">🧱</div>
+                            <p><strong>Synthesize</strong><br>DNA Pol III/δ/ε</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step-box">
+                            <div style="font-size: 2em;">🗑️</div>
+                            <p><strong>Remove</strong><br>DNA Pol I/RNase H</p>
+                        </div>
+                        <div class="step-arrow">→</div>
+                        <div class="step-box">
+                            <div style="font-size: 2em;">🔗</div>
+                            <p><strong>Seal</strong><br>Ligase</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Molecular Biology Lecture - DNA Replication & Mechanisms</p>
+            <p>Designed for Biotechnology & Genetic Engineering Students</p>
+            <div style="font-size: 3em; margin-top: 20px;">🧬⚡🔄🎯🔗✅</div>
+        </footer>
+    </div>
+</body>
+</html>
