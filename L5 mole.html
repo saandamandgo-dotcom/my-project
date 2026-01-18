@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Biology: Transcription | النسخ من DNA إلى RNA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.7;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            border-right: 5px solid #e74c3c;
+            padding-right: 15px;
+        }
+
+        .english-content {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-right: 5px solid #3498db;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .arabic-translation {
+            font-size: 1.05em;
+            color: #2c3e50;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1, #d5dbdb);
+            border-radius: 10px;
+            border-right: 5px solid #27ae60;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .structure-card {
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .transcription-card {
+            background: linear-gradient(135deg, #e17055, #d63031);
+        }
+
+        .enzyme-card {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .rna-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .key-points {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #ffeaa7;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .compare-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .step-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .step-arrow {
+            font-size: 2em;
+            color: #e74c3c;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: #2c3e50;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .drug-box {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .clinical-box {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .structure-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Molecular Biology: Transcription</h1>
+            <p>بيولوجيا جزيئية: النسخ من DNA إلى RNA</p>
+            <div style="font-size: 3em; margin: 10px;">🎯🎬⏸️</div>
+        </header>
+
+        <section class="section">
+            <h2>🎯 Definition & Overview | التعريف والنظرة العامة</h2>
+            
+            <div class="english-content">
+                Transcription is the synthesis of an RNA molecule from a DNA template. It results in the transfer of genetic information stored in double-stranded DNA into a single-stranded RNA, which the cell uses to direct protein synthesis (translation).
+            </div>
+            <div class="arabic-translation">
+                النسخ هو تخليق جزيء RNA من قالب DNA. ينتج عنه نقل المعلومات الجينية المخزنة في DNA المزدوج السلسلة إلى RNA أحادي السلسلة، الذي تستخدمه الخلية لتوجيه تخليق البروتين (الترجمة).
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Key Concepts | المفاهيم الرئيسية:</h4>
+                <ul>
+                    <li><strong>Gene:</strong> Functional unit of DNA that can be transcribed | الجين: وحدة DNA الوظيفية التي يمكن نسخها</li>
+                    <li><strong>Selective Process:</strong> Only selected regions of DNA are transcribed | عملية انتقائية: فقط مناطق محددة من DNA تُنسخ</li>
+                    <li><strong>Primary Transcript:</strong> Initial RNA product that requires processing | النسخة الأولية: منتج RNA الأولي الذي يحتاج معالجة</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Transcription Flow | تدفق النسخ</h4>
+                <div class="step-diagram">
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🧬</div>
+                        <h4>DNA</h4>
+                        <p>Double-stranded | مزدوج السلسلة</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🎯</div>
+                        <h4>TRANSCRIPTION</h4>
+                        <p>RNA Polymerase | بوليميريز RNA</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🎀</div>
+                        <h4>Primary RNA</h4>
+                        <p>Single-stranded | أحادي السلسلة</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">⚙️</div>
+                        <h4>Processing</h4>
+                        <p>Modifications | تعديلات</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🎀</div>
+                        <h4>Mature RNA</h4>
+                        <p>Functional | وظيفي</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🔧 RNA Polymerase | بوليميريز RNA</h2>
+            
+            <div class="english-content">
+                RNA polymerase (RNAP) is the enzyme that synthesizes RNA from a DNA template. Unlike DNA polymerase, it can start synthesis without a primer.
+            </div>
+            <div class="arabic-translation">
+                بوليميريز RNA هو الإنزيم الذي ينشئ RNA من قالب DNA. على عكس بوليميريز DNA، يمكنه بدء التخليق بدون بادئ.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card enzyme-card">
+                    <h4>🦠 Prokaryotes | بدائيات النواة</h4>
+                    <p><strong>Single RNAP:</strong> Transcribes all RNAs (mRNA, rRNA, tRNA)<br>
+                    <strong>Complex:</strong> Holoenzyme with 5 polypeptide subunits<br>
+                    <strong>Structure:</strong> 2α, 2β, 1 sigma (σ) factor<br>
+                    <strong>Core enzyme:</strong> Without sigma factor | بدون عامل سيجما</p>
+                </div>
+                <div class="structure-card enzyme-card">
+                    <h4>🧬 Eukaryotes | حقيقيات النواة</h4>
+                    <p><strong>Three RNAPs:</strong> I, II, and III<br>
+                    <strong>RNAP I:</strong> rRNA synthesis<br>
+                    <strong>RNAP II:</strong> mRNA and snRNA synthesis<br>
+                    <strong>RNAP III:</strong> tRNA synthesis<br>
+                    <strong>mtRNAP:</strong> Mitochondrial RNA synthesis</p>
+                </div>
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Feature | الميزة</th>
+                        <th>RNA Polymerase | بوليميريز RNA</th>
+                        <th>DNA Polymerase | بوليميريز DNA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primer Requirement</strong></td>
+                        <td>❌ No primer needed | لا يحتاج بادئ</td>
+                        <td>✅ Requires RNA primer | يحتاج بادئ RNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Template Used</strong></td>
+                        <td>DNA template → RNA product | قالب DNA → منتج RNA</td>
+                        <td>DNA template → DNA product | قالب DNA → منتج DNA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proofreading</strong></td>
+                        <td>❌ No proofreading activity | لا يملك تصحيحاً</td>
+                        <td>✅ Has 3'→5' exonuclease activity | يملك تصحيحاً</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>📍 Promoters | مناطق الترويج</h2>
+            
+            <div class="english-content">
+                Promoters are characteristic DNA sequences necessary to initiate transcription. They serve as recognition and binding points for RNA polymerase. Prokaryotes and eukaryotes have different promoter elements.
+            </div>
+            <div class="arabic-translation">
+                مناطق الترويج هي تسلسلات DNA مميزة ضرورية لبدء النسخ. تعمل كمواقع تمييز وارتباط لبوليميريز RNA. بدائيات وحقيقيات النواة لهما عناصر ترويج مختلفة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Eukaryotic Promoters for RNAP II | مناطق الترويج في حقيقيات النواة</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 700px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>TATA Box</h4>
+                            <p>TATAAAA<br>25-30 bp upstream</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>CAAT Box</h4>
+                            <p>CCAAT<br>70-80 bp upstream</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>GC Box</h4>
+                            <p>GGGCGG<br>100 bp upstream</p>
+                        </div>
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 10px;">
+                            <h4>Octamer Box</h4>
+                            <p>ATTTGCAT<br>120-130 bp upstream</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                        <p style="font-style: italic;"><strong>Note:</strong> Mutations in these sequences severely reduce transcription | تقلل الطفرات في هذه التسلسلات النسخ بشدة</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🧬 Promoter Characteristics | خصائص مناطق الترويج:</h4>
+                <ul>
+                    <li><strong>Location:</strong> Upstream from transcription start point | تصيب قبل نقطة بدء النسخ</li>
+                    <li><strong>Function:</strong> Position RNAP to start transcription at correct site | تُحل RNA polymerase في الموقع الصحيح</li>
+                    <li><strong>Variability:</strong> Number, orientation, and distance differ between genes | تختلف بين الجينات</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎬 Steps of Transcription | خطوات النسخ</h2>
+            
+            <h3>1️⃣ Initiation | البدء:</h3>
+            <div class="english-content">
+                Initiation involves binding of RNA polymerase (core enzyme + sigma factor) to the promoter site. The sigma factor facilitates recognition and binding to promoter sequences.
+            </div>
+            <div class="arabic-translation">
+                يتضمن البدء ارتباط بوليميريز RNA (الانزيم الأساسي + عامل سيجما) بموقع الترويج. يسهل عامل سيجما التعرف والارتباط بتسلسلات الترويج.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🎯 Initiation Complex | معقد البدء</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🎯</div>
+                            <p><strong>σ Factor</strong></p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">⚙️</div>
+                            <p><strong>Core Enzyme</strong></p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">📍</div>
+                            <p><strong>Promoter</strong></p>
+                        </div>
+                    </div>
+                    <div style="font-size: 2em; color: #e74c3c; margin: 10px 0;">=</div>
+                    <div style="background: #9b59b6; color: white; padding: 15px; border-radius: 10px;">
+                        <div style="font-size: 2em;">🎬</div>
+                        <p><strong>Holoenzyme Complex</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2️⃣ Elongation | الإطالة:</h3>
+            <div class="english-content">
+                After promoter binding, the sigma factor is released and transcription proceeds. RNA is synthesized 5'→3' antiparallel to the DNA template strand.
+            </div>
+            <div class="arabic-translation">
+                بعد الارتباط بالترويج، يُطلق عامل سيجما ويستمر النسخ. يُخلق RNA في اتجاه 5'→3' متضاداً للسلسلة القالب DNA.
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Elongation Features | مميزات الإطالة:</h4>
+                <ul>
+                    <li><strong>Direction:</strong> RNA synthesized 5'→3' | اتجاه النسخ 5'→3'</li>
+                    <li><strong>Antiparallel:</strong> RNA is complementary to template strand | RNA متكامل للقالب</li>
+                    <li><strong>Substrates:</strong> ATP, GTP, CTP, UTP | المواد الأولية</li>
+                    <li><strong>Release:</strong> Pyrophosphate (PPi) released for each nucleotide added | يُطلق pyrophosphate</li>
+                </ul>
+            </div>
+
+            <h3>3️⃣ Termination | الإنهاء:</h3>
+            <div class="english-content">
+                Two types of termination signals exist in prokaryotes:
+            </div>
+            <div class="arabic-translation">
+                يوجد نوعان من إشارات الإنهاء في بدائيات النواة:
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>🎛️ Rho (ρ)-Dependent Termination</h4>
+                    <p><strong>Mechanism:</strong> Rho protein binds to growing RNA and acts as ATPase to terminate transcription</p>
+                    <p><strong>Function:</strong> Binds to specific sequences (rut sites) in RNA, moves along RNA, and releases RNA polymerase from DNA</p>
+                    <div style="font-size: 2em;">🚫</div>
+                </div>
+                <div class="structure-card">
+                    <h4>➰ Rho-Independent Termination</h4>
+                    <p><strong>Mechanism:</strong> Hairpin formation in newly synthesized RNA causes termination</p>
+                    <p><strong>How:</strong> Palindromes in DNA template cause RNA to fold into hairpin structures that block polymerase</p>
+                    <div style="font-size: 2em;">➰</div>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>➰ Rho-Independent Mechanism | آلية الإنهاء المستقل</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #f39c12; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.2em;">DNA Template</div>
+                            <div style="font-size: 1em; font-family: monospace;">...GCTA...ATCG...</div>
+                            <p>Palindrome sequence | تسلسل متناظر</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🧬</div>
+                            <p>RNA forms hairpin loop | RNA يكون حلقة شعرية</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">⏸️</div>
+                            <p>Polymerase stops termination | يتوقف البوليميريز</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚙️ Post-transcriptional Processing | المعالجة بعد النسخ</h2>
+            
+            <div class="english-content">
+                Primary RNA transcripts are inactive and undergo enzymatic alterations to become functional. These modifications include cleavage, splicing, terminal additions, and base modifications.
+            </div>
+            <div class="arabic-translation">
+                النسخات الأولية لـ RNA غير نشطة وتخضع لتغييرات إنزيمية لتصبح وظيفية. تشمل هذه التعديلات التقطيع، التقطيع واللصق، الإضافات الطرفية، وتعديل القواعد.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🔧 Processing Types | أنواع المعالجة</h4>
+                <div class="step-diagram">
+                    <div class="step-box">
+                        <div style="font-size: 2em;">✂️</div>
+                        <h4>Cleavage</h4>
+                        <p>Cutting large precursors | تقطيع جزيئات كبيرة</p>
+                    </div>
+                    <div class="step-arrow">+</div>
+                    <div class="step-box">
+                        <div style="font-size: 2em;">🧬</div>
+                        <h4>Splicing</h4>
+                        <p>Remove introns | إزالة الإنترونات</p>
+                    </div>
+                    <div class="step-arrow">+</div>
+                    <div class="step-box">
+                        <div style="font-size: 2em;">➕</div>
+                        <h4>Terminal Addition</h4>
+                        <p>Add nucleotides | إضافة نيوكليوتيدات</p>
+                    </div>
+                    <div class="step-arrow">+</div>
+                    <div class="step-box">
+                        <div style="font-size: 2em;">🔄</div>
+                        <h4>Base Modification</h4>
+                        <p>Modify nucleosides | تعديل النيوكليوسيدات</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>🦠 Prokaryotes</h4>
+                    <p><strong>mRNA:</strong> Not post-transcriptionally processed<br>
+                    <strong>Function:</strong> Functional immediately upon synthesis<br>
+                    <strong>Advantage:</strong> Rapid response to environmental changes</p>
+                </div>
+                <div class="structure-card">
+                    <h4>🧬 Eukaryotes</h4>
+                    <p><strong>Primary transcript:</strong> hnRNA (heterogeneous nuclear RNA)<br>
+                    <strong>Processing:</strong> Extensive modifications in nucleus<br>
+                    <strong>Result:</strong> Functional mRNA after processing</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 mRNA Processing in Eukaryotes | معالجة mRNA في حقيقيات النواة</h2>
+            
+            <div class="diagram-container">
+                <h4>🔄 mRNA Processing Steps | خطوات معالجة mRNA</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 700px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center;">
+                        <div style="background: #f39c12; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>hnRNA PRIMARY</h4>
+                            <p>Freshly transcribed | مُنسخ حديثاً</p>
+                            <div style="font-size: 0.8em; font-family: monospace;">Exon-Intron-Exon-Intron...</div>
+                        </div>
+                        <div style="font-size: 2em; color: #e74c3c;">→</div>
+                        <div style="background: #3498db; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>🧢 5' Capping</h4>
+                            <p>7-methylguanosine | غطاء ميثيلي</p>
+                            <div style="font-size: 1.5em;">🧢</div>
+                        </div>
+                        
+                        <div style="background: #27ae60; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>➰ Poly-A Tail</h4>
+                            <p>200-300 A's | 200-300 أ</p>
+                            <div style="font-size: 0.8em; font-family: monospace;">AAAAAA...</div>
+                        </div>
+                        <div style="font-size: 2em; color: #e74c3c;">→</div>
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px;">
+                            <h4>✂️ Splicing</h4>
+                            <p>Remove introns | إزالة الإنترونات</p>
+                            <div style="font-size: 0.8em; font-family: monospace;">Exon1-Exon2-Exon3...</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 2em; color: #3498db; margin: 15px 0; text-align: center;">↓</div>
+                    <div style="background: #9b59b6; color: white; padding: 20px; border-radius: 10px;">
+                        <h4>✨ Mature mRNA</h4>
+                        <p>Functional and exported to cytoplasm | وظيفي ويُصدّر إلى السيتوبلازم</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🧢 1. 5' Capping | الغطاء الطرفي:</h3>
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>Step a: Guanylyltransferase</h4>
+                    <p>Attaches GTP to 5' end by unusual 5'-5' triphosphate linkage</p>
+                    <p><strong>Location:</strong> Inside nucleus</p>
+                </div>
+                <div class="structure-card">
+                    <h4>Step b: Guanine Methyltransferase</h4>
+                    <p>Methylates guanosine using S-adenosylmethionine as donor</p>
+                    <p><strong>Location:</strong> Cytosol</p>
+                </div>
+            </div>
+
+            <h3>➰ 2. Poly-A Tail | ذيل بولي-A:</h3>
+            <div class="english-content">
+                The 3' end of most eukaryotic mRNAs possesses a chain of 200-300 adenine nucleotides. This tail is NOT transcribed from DNA but is added after transcription.
+            </div>
+            <div class="arabic-translation">
+                نهاية 3' لمعظم mRNA في حقيقيات النواة تحتوي على سلسلة من 200-300 نيوكليوتيد أدينين. هذا الذيل لا يُنسخ من DNA بل يُضاف بعد النسخ.
+            </div>
+
+            <h3>✂️ 3. Splicing | التقطيع واللصق:</h3>
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>Exons vs Introns</h4>
+                    <p><strong>Exons:</strong> Coding sequences that code for proteins</p>
+                    <p><strong>Introns:</strong> Non-coding sequences that interrupt genes</p>
+                </div>
+                <div class="structure-card">
+                    <h4>Spliceosome | جهاز القطع</h4>
+                    <p><strong>Components:</strong> snRNPs (snRNA + proteins)</p>
+                    <p><strong>Function:</strong> Excises introns and links exons</p>
+                    <p><strong>Location:</strong> Nuclear processing</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 Splicing Mechanism | آلية القطع</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.2em; font-family: monospace;">5' [Exon1]—[Intron]—[Exon2] 3'</div>
+                            <p>Primary transcript with introns | النسخة الأولية تحتوي على إنترونات</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.5em;">🧬</div>
+                            <p>Spliceosome binds at exon-intron junction | يرتبط spliceosome عند نقطة الالتقاء</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #e74c3c;">↓</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px;">
+                            <div style="font-size: 1.2em; font-family: monospace;">5' [Exon1]—[Exon2] 3'</div>
+                            <p>Intron excised and exons ligated | يُزال الإنترون وتُربط الإكسونات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🚫 Inhibitors of Transcription | مثبطات النسخ</h2>
+            
+            <div class="english-content">
+                Several drugs and toxins inhibit transcription by targeting RNA polymerase or DNA. These have therapeutic applications but can also be highly toxic.
+            </div>
+            <div class="arabic-translation">
+                عدة أدوية وسوم تثبط النسخ باستهداف RNA polymerase أو DNA. لها تطبيقات علاجية لكنها يمكن أن تكون سامة جداً.
+            </div>
+
+            <div class="drug-box">
+                <h4>💊 Rifampicin</h4>
+                <p><strong>Type:</strong> Anti-tuberculosis drug | مضاد للسل</p>
+                <p><strong>Mechanism:</strong> Binds β-subunit of prokaryotic RNAP, inhibits transcription initiation | يرتبط بـ β-subunit لـ RNAP البكتيري</p>
+                <p><strong>Specificity:</strong> No effect on eukaryotic nuclear RNAPs | لا يؤثر على RNAP حقيقية النواة</p>
+                <div style="font-size: 3em; text-align: center;">🦠</div>
+            </div>
+
+            <div class="drug-box">
+                <h4>☠️ Dactinomycin (Actinomycin D)</h4>
+                <p><strong>Use:</strong> Therapeutic agent in some cancers | علاج بعض السرطانات</p>
+                <p><strong>Mechanism:</strong> Binds tightly to double-helical DNA, prevents RNAP movement | يرتبط بالـ DNA المزدوج ويمنع حركة RNAP</p>
+                <p><strong>Result:</strong> Blocks transcription in both prokaryotes and eukaryotes | يمنع النسخ في كلا النوعين</p>
+                <div style="font-size: 3em; text-align: center;">🧬</div>
+            </div>
+
+            <div class="drug-box">
+                <h4>🍄 α-Amanitin</h4>
+                <p><strong>Source:</strong> Toxin from mushroom <em>Amanita phalloides</em> | سم من فطر</p>
+                <p><strong>Mechanism:</strong> Binds tightly to RNAP II of eukaryotes and inhibits transcription | يرتبط بـ RNAP II حقيقية النواة</p>
+                <p><strong>Lethality:</strong> Highly poisonous - inhibits mRNA synthesis | سام جداً - يمنع تخليق mRNA</p>
+                <div style="font-size: 3em; text-align: center;">🍄☠️</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>💉 Clinical Applications | التطبيقات السريرية</h2>
+            
+            <div class="clinical-box">
+                <h4>🎯 Gene Inhibition Therapy | علاج تثبيت الجينات:</h4>
+                <p><strong>Purpose:</strong> Block overproduction of some proteins | منع الإنتاج الزائد للبروتينات</p>
+                <p><strong>Two Types:</strong></p>
+                <ul style="text-align: left;">
+                    <li><strong>🧬 Anti-gene therapy:</strong> Blocks transcription using anti-gene oligonucleotide | يمنع النسخ باستخدام أوليجونيوكليوتيد مضاد للجين</li>
+                    <li><strong>🎯 Antisense therapy:</strong> Blocks translation using antisense oligonucleotide | يمنع الترجمة باستخدام أوليجونيوكليوتيد مضاد للشفرة</li>
+                </ul>
+                <div style="font-size: 2em; text-align: center; margin-top: 15px;">🧬→🚫→🧪→💉</div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Mechanism of Antisense | آلية العلاج المضاد:</h4>
+                <ul>
+                    <li><strong>Anti-gene:</strong> Oligonucleotide binds to DNA, blocks transcription factor access | يرتبط بـ DNA ويمنع وصول عوامل النسخ</li>
+                    <li><strong>Antisense:</strong> Oligonucleotide binds to mRNA, prevents ribosome binding | يرتبط بـ mRNA ويمنع ارتباط الريبوسوم</li>
+                    <li><strong>Applications:</strong> Cancer, viral infections, genetic disorders | سرطان، فيروسات، أمراض وراثية</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧠 Summary & Exam Tips | الملخص ونصائح الامتحان</h2>
+            
+            <div class="key-points">
+                <h4>🤔 Key Differences | الفروقات الرئيسية:</h4>
+                <ul>
+                    <li><strong>Prokaryotes:</strong> Single RNAP, no processing, immediate function | بوليميريز واحد، بدون معالجة، وظيفة فورية</li>
+                    <li><strong>Eukaryotes:</strong> Three RNAPs, extensive processing, nuclear → cytoplasm | ثلاث بوليميريزات، معالجة واسعة، نواة → سيتوبلازم</li>
+                    <li><strong>Sigma factor:</strong> Prokaryotic only, for promoter recognition | فقط في بدائيات النواة</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>🎯 Exam Mnemonics | وسائل حفظ:</h4>
+                <p><strong>"Rifampicin for TB, Dactinomycin for Cancer, Amanitin Kills":</strong> Remember specific inhibitors</p>
+                <p><strong>"TATA is where we START":</strong> TATA box location at -25 to -30 bp</p>
+                <p><strong>"RNAP II for mRNA, RNAP I for rRNA, RNAP III for tRNA":</strong> Eukaryotic polymerases</p>
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Step | الخطوة</th>
+                        <th>Key Event | الحدث الرئيسي</th>
+                        <th>Key Molecule | الجزيء الرئيسي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Initiation</strong></td>
+                        <td>RNAP binds promoter</td>
+                        <td>Sigma factor (prokaryotes)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Elongation</strong></td>
+                        <td>RNA synthesis 5'→3'</td>
+                        <td>RNA polymerase core</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Termination</strong></td>
+                        <td>RNA synthesis stops</td>
+                        <td>Rho factor or hairpin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Processing</strong></td>
+                        <td>mRNA maturation</td>
+                        <td>Spliceosome, enzymes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Molecular Biology Lecture - Transcription & Processing</p>
+            <p>Designed for Biotechnology & Genetic Engineering Students</p>
+            <div style="font-size: 3em; margin-top: 20px;">🎯🎬⏸️✂️🧬</div>
+        </footer>
+    </div>
+</body>
+</html>
