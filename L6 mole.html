@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Biology: Translation (Protein Synthesis) | بيولوجيا جزيئية: الترجمة (تخليق البروتين)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.7;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            color: #4a00e0;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            border-right: 5px solid #e74c3c;
+            padding-right: 15px;
+        }
+
+        .english-content {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-right: 5px solid #3498db;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .arabic-translation {
+            font-size: 1.05em;
+            color: #2c3e50;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1, #d5dbdb);
+            border-radius: 10px;
+            border-right: 5px solid #27ae60;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .structure-card {
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .translation-card {
+            background: linear-gradient(135deg, #e17055, #d63031);
+        }
+
+        .component-card {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .mechanism-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .key-points {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .key-points li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #ffeaa7;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .compare-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .codon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .codon-box {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .step-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .step-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .step-arrow {
+            font-size: 2em;
+            color: #e74c3c;
+        }
+
+        .ribosome-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            font-family: monospace;
+            direction: ltr;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .structure-grid { grid-template-columns: 1fr; }
+            .codon-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Molecular Biology: Translation (Protein Synthesis)</h1>
+            <p>بيولوجيا جزيئية: الترجمة (تخليق البروتين)</p>
+            <div style="font-size: 3em; margin: 10px;">🏭🧬🎯</div>
+        </header>
+
+        <section class="section">
+            <h2>🎯 Definition & Central Dogma | التعريف والمبدأ المركزي</h2>
+            
+            <div class="english-content">
+                Translation is the cellular process where the four-letter nucleotide code (A, G, C, U) of mRNA is biochemically "translated" into the twenty-letter amino acid language of proteins. It represents the final step of gene expression: DNA → RNA → Protein.
+            </div>
+            <div class="arabic-translation">
+                الترجمة هي العملية الخلوية التي يتم فيها "ترجمة" الشفرة الأربعة حروف (A, G, C, U) من mRNA كيميائياً إلى لغة الأحماض الأمينية العشرين حرفاً من البروتينات. تمثل الخطوة النهائية للتعبير الجيني: DNA → RNA → بروتين.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 Central Dogma Flow | تدفق المبدأ المركزي</h4>
+                <div class="step-diagram">
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🧬</div>
+                        <h4>DNA</h4>
+                        <p>In nucleus | في النواة</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🎯</div>
+                        <h4>TRANSCRIPTION</h4>
+                        <p>RNA Polymerase</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🎀</div>
+                        <h4>mRNA</h4>
+                        <p>To cytoplasm | إلى السيتوبلازم</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🏭</div>
+                        <h4>TRANSLATION</h4>
+                        <p>Ribosome + tRNA</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2.5em;">🧵</div>
+                        <h4>PROTEIN</h4>
+                        <p>Functional product</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Key Features | المميزات الرئيسية:</h4>
+                <ul>
+                    <li><strong>Direction:</strong> mRNA read 5'→3', protein synthesized N-terminus to C-terminus | mRNA تُقرأ 5'→3'، البروتين يُخلق من N إلى C</li>
+                    <li><strong>Genetic Code:</strong> 61 codons for amino acids + 3 stop codons | 61 كودون للأحماض الأمينية + 3 كودونات إيقاف</li>
+                    <li><strong>Fidelity:</strong> High accuracy due to proofreading mechanisms | دقة عالية بسبب آليات التصحيح</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧩 Basic Requirements for Translation | المتطلبات الأساسية للترجمة</h2>
+            
+            <div class="structure-grid">
+                <div class="structure-card component-card">
+                    <h4>🎯 mRNA</h4>
+                    <p>Carries genetic code from nucleus<br>
+                    Contains codons specifying amino acids<br>
+                    Has start/stop signals</p>
+                </div>
+                <div class="structure-card component-card">
+                    <h4>🧩 Amino Acids</h4>
+                    <p>20 standard amino acids<br>
+                    Must all be present<br>
+                    If one missing, translation stops</p>
+                </div>
+                <div class="structure-card component-card">
+                    <h4>🍀 tRNA</h4>
+                    <p>Carries specific amino acids<br>
+                    Has anticodon for mRNA pairing<br>
+                    At least 50 species in humans</p>
+                </div>
+                <div class="structure-card component-card">
+                    <h4>⚙️ Ribosomes</h4>
+                    <p>Protein + rRNA complex<br>
+                    Two subunits (large & small)<br>
+                    Catalyzes peptide bond formation</p>
+                </div>
+                <div class="structure-card component-card">
+                    <h4>⚡ ATP & GTP</h4>
+                    <p>Energy for aminoacylation<br>
+                    GTP for ribosome translocation<br>
+                    ATP for tRNA charging</p>
+                </div>
+                <div class="structure-card component-card">
+                    <h4>🔧 Enzymes & Factors</h4>
+                    <p>Aminoacyl-tRNA synthetases<br>
+                    Initiation, elongation, termination factors<br>
+                    Proofreading enzymes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧬 The Genetic Code | الشفرة الجينية</h2>
+            
+            <div class="english-content">
+                The genetic code is universal, specific, non-overlapping, and degenerate (redundant). Most amino acids are specified by more than one codon.
+            </div>
+            <div class="arabic-translation">
+                الشفرة الجينية عالمية، محددة، غير متداخلة، ومتعددة (متكررة). معظم الأحماض الأمينية تحددها أكثر من كودون واحد.
+            </div>
+
+            <div class="structure-grid">
+                <div class="structure-card mechanism-card">
+                    <h4>🌍 1. Universality | العالمية:</h4>
+                    <p>Same codons used in all living organisms<br>
+                    AUG = Methionine in bacteria, humans, plants</p>
+                </div>
+                <div class="structure-card mechanism-card">
+                    <h4>🎯 2. Specificity | التحديدية:</h4>
+                    <p>Each codon codes for ONE specific amino acid<br>
+                    UGG → ONLY Tryptophan</p>
+                </div>
+                <div class="structure-card mechanism-card">
+                    <h4>🔒 3. Non-overlapping | عدم التداخل:</h4>
+                    <p>Read continuously from fixed start point<br>
+                    UUU/CUU/AGA/GGG (not UUU/CUU/AGA/GGG)</p>
+                </div>
+                <div class="structure-card mechanism-card">
+                    <h4>📊 4. Degeneracy | التعدد:</h4>
+                    <p>61 codons encode 20 amino acids<br>
+                    Most amino acids have multiple codons</p>
+                </div>
+            </div>
+
+            <h3>⏹️ Start & Stop Codons | كودونات البدء والإيقاف:</h3>
+            
+            <div class="diagram-container">
+                <h4>🎯 Codon Classification | تصنيف الكودونات</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto;">
+                    <div style="background: #27ae60; color: white; padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em;">🟢</div>
+                        <h4>START Codons</h4>
+                        <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 3px;">
+                            AUG<br><small>(Met/Cys*)</small>
+                        </div>
+                        <p>*Also GUG in bacteria</p>
+                    </div>
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 15px;">
+                        <div style="font-size: 2em;">⛔</div>
+                        <h4>STOP Codons</h4>
+                        <div style="font-size: 1.5em; font-family: monospace; letter-spacing: 3px;">
+                            UAA<br>UAG<br>UGA
+                        </div>
+                        <p>No tRNA recognized | لا يُعرف بواسطة tRNA</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Frameshift Mutations | طفرات الإزاحة الإطارية:</h4>
+                <p><strong>Effect:</strong> Adding/removing 1-2 bases shifts reading frame</p>
+                <p><strong>Example:</strong> UUU CUU AGA GGG → UU UCU UAG AGG</p>
+                <p><strong>Result:</strong> Abnormal or nonfunctional protein | بروتين غير طبيعي</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📊 Genetic Code Table | جدول الشفرة الجينية</h2>
+            
+            <div class="diagram-container">
+                <h4>🧬 Standard Genetic Code | الشفرة الجينية القياسية</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 800px; margin: 0 auto; overflow-x: auto;">
+                    <div class="codon-grid">
+                        <div class="codon-box">UUU<br>Phe</div>
+                        <div class="codon-box">UCU<br>Ser</div>
+                        <div class="codon-box">UAU<br>Tyr</div>
+                        <div class="codon-box">UGU<br>Cys</div>
+                        <div class="codon-box">UUC<br>Phe</div>
+                        <div class="codon-box">UCC<br>Ser</div>
+                        <div class="codon-box">UAC<br>Tyr</div>
+                        <div class="codon-box">UGC<br>Sys</div>
+                        <div class="codon-box">UUA<br>Leu</div>
+                        <div class="codon-box">UCA<br>Ser</div>
+                        <div class="codon-box">UAA<br>⛔</div>
+                        <div class="codon-box">UGA<br>⛔</div>
+                        <div class="codon-box">UUG<br>Leu</div>
+                        <div class="codon-box">UCG<br>Ser</div>
+                        <div class="codon-box">UAG<br>⛔</div>
+                        <div class="codon-box">UGG<br>Trp</div>
+                        
+                        <div class="codon-box">CUU<br>Leu</div>
+                        <div class="codon-box">CCU<br>Pro</div>
+                        <div class="codon-box">CAU<br>His</div>
+                        <div class="codon-box">CGU<br>Arg</div>
+                        <div class="codon-box">CUC<br>Leu</div>
+                        <div class="codon-box">CCC<br>Pro</div>
+                        <div class="codon-box">CAC<br>His</div>
+                        <div class="codon-box">CGC<br>Arg</div>
+                        <div class="codon-box">CUA<br>Leu</div>
+                        <div class="codon-box">CCA<br>Pro</div>
+                        <div class="codon-box">CAA<br>Gln</div>
+                        <div class="codon-box">CGA<br>Arg</div>
+                        <div class="codon-box">CUG<br>Leu</div>
+                        <div class="codon-box">CCG<br>Pro</div>
+                        <div class="codon-box">CAG<br>Gln</div>
+                        <div class="codon-box">CGG<br>Arg</div>
+                        
+                        <div class="codon-box">AUU<br>Ile</div>
+                        <div class="codon-box">ACU<br>Thr</div>
+                        <div class="codon-box">AAU<br>Asn</div>
+                        <div class="codon-box">AGU<br>Ser</div>
+                        <div class="codon-box">AUC<br>Ile</div>
+                        <div class="codon-box">ACC<br>Thr</div>
+                        <div class="codon-box">AAC<br>Asn</div>
+                        <div class="codon-box">AGC<br>Ser</div>
+                        <div class="codon-box">AUA<br>Ile</div>
+                        <div class="codon-box">ACA<br>Thr</div>
+                        <div class="codon-box">AAA<br>Lys</div>
+                        <div class="codon-box">AGA<br>Arg</div>
+                        <div class="codon-box" style="background: #27ae60;">AUG<br>Met*🏁</div>
+                        <div class="codon-box">ACG<br>Thr</div>
+                        <div class="codon-box">AAG<br>Lys</div>
+                        <div class="codon-box">AGG<br>Arg</div>
+                        
+                        <div class="codon-box">GUU<br>Val</div>
+                        <div class="codon-box">GCU<br>Ala</div>
+                        <div class="codon-box">GAU<br>Asp</div>
+                        <div class="codon-box">GGU<br>Gly</div>
+                        <div class="codon-box">GUC<br>Val</div>
+                        <div class="codon-box">GCC<br>Ala</div>
+                        <div class="codon-box">GAC<br>Asp</div>
+                        <div class="codon-box">GGC<br>Sys</div>
+                        <div class="codon-box">GUA<br>Val</div>
+                        <div class="codon-box">GCA<br>Ala</div>
+                        <div class="codon-box">GAA<br>Glu</div>
+                        <div class="codon-box">GGA<br>Gly</div>
+                        <div class="codon-box">GUG<br>Val</div>
+                        <div class="codon-box">GCG<br>Ala</div>
+                        <div class="codon-box">GAG<br>Glu</div>
+                        <div class="codon-box">GGG<br>Gly</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎨 Color Code | رمز الألوان:</h4>
+                <ul>
+                    <li><span style="background: #27ae60; color: white; padding: 5px;">🟢 GREEN</span> = START codon (AUG)</li>
+                    <li><span style="background: #e74c3c; color: white; padding: 5px;">🔴 RED</span> = STOP codons (UAA, UAG, UGA)</li>
+                    <li><span style="background: #3498db; color: white; padding: 5px;">🔵 BLUE</span> = Standard amino acids</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚙️ Ribosome Structure | بنية الريبوسوم</h2>
+            
+            <div class="english-content">
+                Ribosomes are large complexes of protein and rRNA consisting of two subunits (large and small). Their sizes are measured in Svedberg (S) units, which are not strictly additive due to shape and mass considerations.
+            </div>
+            <div class="arabic-translation">
+                الريبوسومات هي معقدات كبيرة من البروتين و rRNA تتكون من وحدتين (كبيرة وصغيرة). تُقاس أحجامها بوحدات سفيدبيرغ (S)، التي ليست إضافية بدقة بسبب الشكل والكتلة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>⚙️ Ribosome Binding Sites | مواقع الارتباط على الريبوسوم</h4>
+                <div style="background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🅰️</div>
+                            <h4>A Site</h4>
+                            <p>Acceptor<br>Aminoacyl-tRNA</p>
+                        </div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🅿️</div>
+                            <h4>P Site</h4>
+                            <p>Peptidyl<br>tRNA with growing chain</p>
+                        </div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em;">🅴️</div>
+                            <h4>E Site</h4>
+                            <p>Exit<br>Empty tRNA exits here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Organism | الكائن</th>
+                        <th>Subunit | الوحدة</th>
+                        <th>S Value</th>
+                        <th>Proteins | بروتينات</th>
+                        <th>rRNA | RNA ريبوسومي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3"><strong>Prokaryotes | بدائيات النواة</strong></td>
+                        <td>Small</td>
+                        <td>30S</td>
+                        <td>21</td>
+                        <td>16S rRNA</td>
+                    </tr>
+                    <tr>
+                        <td>Large</td>
+                        <td>50S</td>
+                        <td>34</td>
+                        <td>5S rRNA, 23S rRNA</td>
+                    </tr>
+                    <tr style="background: #d5dbdb; font-weight: bold;">
+                        <td>Complete</td>
+                        <td>70S</td>
+                        <td>55 total</td>
+                        <td>16S, 5S, 23S</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>Eukaryotes | حقيقيات النواة</strong></td>
+                        <td>Small</td>
+                        <td>40S</td>
+                        <td>33</td>
+                        <td>18S rRNA</td>
+                    </tr>
+                    <tr>
+                        <td>Large</td>
+                        <td>60S</td>
+                        <td>49</td>
+                        <td>5S, 5.8S, 28S rRNA</td>
+                    </tr>
+                    <tr style="background: #d5dbdb; font-weight: bold;">
+                        <td>Complete</td>
+                        <td>80S</td>
+                        <td>82 total</td>
+                        <td>18S, 5S, 5.8S, 28S</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-points">
+                <h4>🎯 Key Differences | فروقات البين أنواع الريبوسومات:</h4>
+                <ul>
+                    <li><strong>S values:</strong> Not additive! 30S + 50S = 70S (not 80S)</li>
+                    <li><strong>Location:</strong> Prokaryotic assembled in cytoplasm | بدائية في السيتوبلازم</li>
+                    <li><strong>Eukaryotic assembly:</strong> Occurs in nucleolus | تجميع حقيقية في النواة</li>
+                    <li><strong>Size difference:</strong> Eukaryotic ribosomes are larger (80S vs 70S)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🛡️ Shine-Dalgarno Sequence | تسلسل شاين-دالجارنو (Prokaryotes)</h2>
+            
+            <div class="english-content">
+                In prokaryotes, the ribosome binds to a purine-rich sequence (Shine-Dalgarno) located 6-10 bases upstream of the start codon. This sequence is complementary to a region in the 16S rRNA of the small ribosomal subunit.
+            </div>
+            <div class="arabic-translation">
+                في بدائيات النواة، يرتبط الريبوسوم بتسلسل غني بالبورين (Shine-Dalgarno) يقع 6-10 قواعد قبل كودون البدء. هذا التسلسل متكامل مع منطقة في 16S rRNA من الوحدة الريبوسومية الصغيرة.
+            </div>
+
+            <div class="diagram-container">
+                <h4>🧬 Shine-Dalgarno Binding | ارتباط شاين-دالجارنو</h4>
+                <div class="ribosome-diagram">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px;">
+                            <h4>16S rRNA (3' end)</h4>
+                            <div style="font-size: 1.2em; font-family: monospace;">5'...AUUCCUCC...3'</div>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #3498db;">↔️</div>
+                        <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px;">
+                            <h4>mRNA (5' end)</h4>
+                            <div style="font-size: 1.2em; font-family: monospace;">3'...UAAGGAGG...5'</div>
+                            <p>Shine-Dalgarno sequence ↑</p>
+                        </div>
+                        <div style="font-size: 2em; text-align: center; color: #27ae60;">→</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 8px;">
+                            <h4>Result | النتيجة</h4>
+                            <p>Ribosome positioned near AUG start codon</p>
+                            <div style="font-size: 1em; font-family: monospace;">AUG = Start codon | كودون البدء</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Eukaryotic Difference | اختلاف حقيقيات النواة:</h4>
+                <p><strong>No SD sequence:</strong> Eukaryotic mRNAs lack Shine-Dalgarno sequence</p>
+                <p><strong>Scanning mechanism:</strong> 40S ribosomal subunit scans mRNA from 5' cap until finding AUG</p>
+                <p><strong>Energy required:</strong> ATP needed for scanning process</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚡ Aminoacyl-tRNA Synthetases | إنزيمات تفعيل الأحماض الأمينية</h2>
+            
+            <div class="english-content">
+                This family of enzymes attaches amino acids to their corresponding tRNAs with extreme specificity. Each enzyme recognizes one specific amino acid and all tRNAs that correspond to it (isoaccepting tRNAs).
+            </div>
+            <div class="arabic-translation">
+                هذه العائلة من الإنزيمات تربط الأحماض الأمينية بـ tRNA الخاصة بها بدقة عالية. كل إنزيم يتعرف على حمض أميني واحد وكل tRNA التي تتوافق معه (tRNA متقبلة متشابهة).
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Two-Step Reaction | التفاعل في خطوتين:</h4>
+                <ul>
+                    <li><strong>Step 1:</strong> Activation - Amino acid + ATP → Aminoacyl-AMP + PPi</li>
+                    <li><strong>Step 2:</strong> Transfer - Aminoacyl-AMP + tRNA → Aminoacyl-tRNA + AMP</li>
+                    <li><strong>Energy:</strong> ATP → AMP + PPi (2 high-energy bonds consumed)</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <h4>⚡ Charging tRNA | تفعيل tRNA</h4>
+                <div class="ribosome-diagram">
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; align-items: center;">
+                        <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em;">🧩</div>
+                            <p>Amino Acid</p>
+                            <p>+ ATP</p>
+                        </div>
+                        <div style="font-size: 2em; color: #3498db;">+</div>
+                        <div style="background: #27ae60; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.5em;">⚙️</div>
+                            <p>Aminoacyl-tRNA Synthetase</p>
+                        </div>
+                    </div>
+                    <div style="font-size: 2em; color: #e74c3c; text-align: center; margin: 10px 0;">↓</div>
+                    <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px;">
+                        <div style="display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center;">
+                            <div style="font-size: 2em;">🍀</div>
+                            <div>
+                                <h4>Aminoacyl-tRNA</h4>
+                                <p><strong>Carboxyl group</strong> of amino acid linked to <strong>3'-OH</strong> of tRNA ribose</p>
+                                <p>Ester linkage in CCA sequence at 3' end | رابط استري في تسلسل CCA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔍 Specificity & Proofreading | التحديدية والتصحيح:</h3>
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>🎯 Extreme Specificity</h4>
+                    <p>Each enzyme differentiates between 20 amino acids<br>
+                    Recognizes correct tRNAs (isoaccepting)<br>
+                    Prevents mischarging errors</p>
+                </div>
+                <div class="structure-card">
+                    <h4>✅ Editing Activity</h4>
+                    <p>Removes incorrect amino acids<br>
+                    Hydrolyzes wrong aminoacyl-AMP<br>
+                    Ensures high fidelity of translation</p>
+                </div>
+            </div>
+
+            <h3>🔧 Two Classes of Synthetases | صنفان من الإنزيمات:</h3>
+            <div class="structure-grid">
+                <div class="structure-card">
+                    <h4>Class I (10 enzymes)</h4>
+                    <p>Attach amino acid to <strong>2'-OH</strong> first<br>
+                    Then trans-esterify to 3'-OH<br>
+                    2'-aminoacyl ester intermediate</p>
+                </div>
+                <div class="structure-card">
+                    <h4>Class II (10 enzymes)</h4>
+                    <p>Attach directly to <strong>3'-OH</strong><br>
+                    3'-esters only<br>
+                    Different structural fold</p>
+                </div>
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Only 3'-esters are substrates for protein synthesis | فقط استرات 3' هي مواد أولية لتخليق البروتين</h4>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Three Phases of Translation | مراحل الترجمة الثلاث</h2>
+            
+            <div class="diagram-container">
+                <h4>🔄 Translation Overview | نظرة عامة على الترجمة</h4>
+                <div class="step-diagram">
+                    <div class="step-box">
+                        <div style="font-size: 2em;">🎯</div>
+                        <h4>1. INITIATION</h4>
+                        <p>AUG codon located<br>30S + 50S assembly</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2em;">🧱</div>
+                        <h4>2. ELONGATION</h4>
+                        <p>Codons read 5'→3'<br>Peptide bonds form</p>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-box">
+                        <div style="font-size: 2em;">⛔</div>
+                        <h4>3. TERMINATION</h4>
+                        <p>STOP codon reached<br>Polypeptide released</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>1️⃣ Initiation | البدء:</h3>
+            <div class="english-content">
+                The small ribosomal subunit binds mRNA and the initiator tRNA (carrying Met or fMet), then the large subunit joins to form the complete ribosome.
+            </div>
+            <div class="arabic-translation">
+                الوحدة الريبوسومية الصغيرة ترتبط بـ mRNA و tRNA المبدئ (يحمل Met أو fMet)، ثم تنضم الوحدة الكبيرة لتكوين الريبوسوم الكامل.
+            </div>
+
+            <div class="key-points">
+                <h4>🎯 Initiation Steps | خطوات البدء:</h4>
+                <ul>
+                    <li><strong>30S subunit</strong> binds mRNA at Shine-Dalgarno sequence (prokaryotes)</li>
+                    <li><strong>Initiator tRNA</strong> (fMet-tRNA) binds P site via AUG codon</li>
+                    <li><strong>50S subunit</strong> joins to form 70S initiation complex</li>
+                    <li><strong>Energy:</strong> GTP hydrolysis required</li>
+                </ul>
+            </div>
+
+            <h3>2️⃣ Elongation | الإطالة:</h3>
+            <div class="english-content">
+                Codons are read sequentially as aminoacyl-tRNAs enter the A site, peptide bonds form, and the ribosome translocates along mRNA.
+            </div>
+            <div class="arabic-translation">
+                تُقرأ الكودونات تسلسلياً بينما تدخل aminoacyl-tRNAs إلى موقع A، تتكون روابط الببتيد، ويتحرك الريبوسوم على طول mRNA.
+            </div>
+
+            <div class="key-points">
+                <h4>🧱 Elongation Cycle | دورة الإطالة:</h4>
+                <ul>
+                    <li><strong>Step 1:</strong> Aminoacyl-tRNA enters A site (GTP hydrolysis)</li>
+                    <li><strong>Step 2:</strong> Peptide bond formation (peptidyl transferase of 23S rRNA)</li>
+                    <li><strong>Step 3:</strong> Ribosome translocates 3 nucleotides (GTP hydrolysis)</li>
+                    <li><strong>Step 4:</strong> Deacylated tRNA moves to E site and exits</li>
+                </ul>
+            </div>
+
+            <h3>3️⃣ Termination | الإنهاء:</h3>
+            <div class="structure-card">
+                <h4>⛔ Termination Codons | كودونات الإنهاء</h4>
+                <p><strong>UAA, UAG, UGA:</strong> Do not code for any amino acid</p>
+                <p><strong>Mechanism:</strong> Release factors recognize STOP codons</p>
+                <p><strong>Action:</strong> Hydrolyze polypeptide from last tRNA</p>
+                <p><strong>Result:</strong> Polypeptide chain released, ribosome disassembles</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🧠 Memory Aids & Clinical Relevance | وسائل الحفظ والأهمية السريرية</h2>
+            
+            <div class="key-points">
+                <h4>🤔 Mnemonics for Translation | حفظ الترجمة:</h4>
+                <ul>
+                    <li><strong>"Start AUG, Stop UAA, UAG, UGA":</strong> Remember start and stop codons</li>
+                    <li><strong>"A P E":</strong> Accept, Peptidyl, Exit (ribosome sites)</li>
+                    <li><strong>"Shine-Dalgarno in Prokaryotes, Scanning in Eukaryotes":</strong> Initiation mechanisms</li>
+                    <li><strong>"ATP for charging, GTP for moving":</strong> Energy usage</li>
+                </ul>
+            </div>
+
+            <div class="clinical-box">
+                <h4>🎯 Antibiotic Targets | أهداف المضادات الحيوية:</h4>
+                <p>Many antibiotics target translation in bacteria (exploiting differences between prokaryotic and eukaryotic ribosomes):</p>
+                <ul style="text-align: left;">
+                    <li><strong>30S inhibitors:</strong> Tetracycline, streptomycin</li>
+                    <li><strong>50S inhibitors:</strong> Erythromycin, chloramphenicol</li>
+                    <li><strong>Selective toxicity:</strong> Target bacterial 70S but not eukaryotic 80S</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Important Clinical Points | نقاط سريرية مهمة:</h4>
+                <p><strong>Dietary importance:</strong> All 20 amino acids must be present for translation to proceed</p>
+                <p><strong>Genetic diseases:</strong> Mutations in aminoacyl-tRNA synthetases cause severe disorders</p>
+                <p><strong>Cancer therapy:</strong> Targeting translation initiation factors is a therapeutic strategy</p>
+                <p><strong>Viral hijacking:</strong> Some viruses use host ribosomes for their protein synthesis</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Molecular Biology Lecture - Translation (Protein Synthesis)</p>
+            <p>Designed for Biotechnology & Genetic Engineering Students</p>
+            <div style="font-size: 3em; margin-top: 20px;">🏭🧬🎯🧩⚙️</div>
+        </footer>
+    </div>
+</body>
+</html>
