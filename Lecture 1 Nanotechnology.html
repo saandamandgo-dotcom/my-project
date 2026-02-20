@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanotechnology & Nanomaterials - Complete Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.3);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient-1: #06b6d4;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .arabic-text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(6, 182, 212, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+        }
+
+        /* Definition Box */
+        .definition-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        .definition-box strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Image Containers */
+        .image-container {
+            margin: 2rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            background: var(--primary);
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--secondary);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gradient-1), var(--gradient-2));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--secondary);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.4rem;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--primary);
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Properties List */
+        .property-list {
+            list-style: none;
+        }
+
+        .property-list li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .property-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Arabic Callout */
+        .arabic-callout {
+            background: rgba(6, 182, 212, 0.05);
+            border-right: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 12px 0 0 12px;
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--accent);
+        }
+
+        /* Comparison Cards */
+        .comparison-card {
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .comparison-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .comparison-card .size {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .timeline { padding-left: 2rem; }
+            .timeline-item::before { left: -2.4rem; }
+        }
+
+        /* Interactive Elements */
+        .interactive-demo {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nano-particle {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #06b6d4, #0891b2);
+            border-radius: 50%;
+            margin: 2rem auto;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .scale-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        .scale-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .scale-line {
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+            margin: 0.5rem 0;
+            border-radius: 2px;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">NANO<span style="color: var(--accent);">TECH</span></div>
+            <ul class="nav-links">
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#history">History</a></li>
+                <li><a href="#colloids">Colloids</a></li>
+                <li><a href="#properties">Properties</a></li>
+                <li><a href="#applications">Applications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Lecture 1 • Complete Guide</div>
+            <h1>Nanotechnology & Nanomaterials</h1>
+            <p class="hero-subtitle">
+                Exploring the world of the infinitely small — where science meets innovation at the nanoscale
+            </p>
+            <p class="arabic-text">
+                استكشاف عالم الصغير جداً — حيث تلتقي العلوم بالابتكار على المستوى النانوي
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <!-- Chapter 1: Introduction -->
+        <section id="intro">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Introduction to Nanotechnology</h2>
+                <p class="section-desc">Definition, scope, and fundamental concepts</p>
+            </div>
+
+            <div class="definition-box">
+                <strong>What is Nanotechnology?</strong>
+                Nanotechnology is the field of science that deals with the synthesis, management, and application of materials with a size smaller than 100nm.
+                <br><br>
+                <span style="color: var(--accent);">A particle with at least one dimension of 1-100 nanometers (nm) is commonly called a nanoparticle (nanomaterial).</span>
+            </div>
+
+            <div class="interactive-demo">
+                <h3 style="margin-bottom: 1rem;">The Nanoscale Visualization</h3>
+                <div class="nano-particle"></div>
+                <p style="color: var(--text-muted);">1 nanometer = 10⁻⁹ meters</p>
+                <p style="color: var(--accent); font-size: 1.2rem; margin-top: 1rem;">
+                    One billion nanometers = 1 meter
+                </p>
+                
+                <div class="scale-bar">
+                    <div class="scale-item">
+                        <div style="font-size: 0.8rem;">Atom</div>
+                        <div class="scale-line" style="width: 5%; margin: 0.5rem auto;"></div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">~0.1 nm</div>
+                    </div>
+                    <div class="scale-item">
+                        <div style="font-size: 0.8rem;">Nanoparticle</div>
+                        <div class="scale-line" style="width: 30%; margin: 0.5rem auto;"></div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">1-100 nm</div>
+                    </div>
+                    <div class="scale-item">
+                        <div style="font-size: 0.8rem;">Red Blood Cell</div>
+                        <div class="scale-line" style="width: 80%; margin: 0.5rem auto;"></div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">~7000 nm</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.sciencelearn.org.nz/9691169c1299deec9b76ee93ef28c3c20b3b3f55" alt="Nanoparticle Size Comparison">
+                <div class="image-caption">
+                    Figure: Nanoparticle size comparison showing relative scales from atoms to biological cells
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">⚡</span>Why Size Matters</h3>
+                <p>The small particle size (or pore size) results in:</p>
+                <ul class="property-list">
+                    <li><strong>Large surface area</strong> or interfacial area</li>
+                    <li><strong>Greater chemical reactivity</strong> compared to bulk materials</li>
+                    <li><strong>Unique optical, electrical, and mechanical properties</strong></li>
+                </ul>
+                <div class="arabic-callout">
+                    كلما قل حجم الجسيمات، زادت المساحة السطحية وبالتالي زادت الفعالية الكيميائية
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><span class="card-icon">🎯</span>Key Applications</h3>
+                    <ul class="property-list">
+                        <li>Environment</li>
+                        <li>Agriculture</li>
+                        <li>Food industry</li>
+                        <li>Biotechnology</li>
+                        <li>Biomedical & Medicine</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><span class="card-icon">🔬</span>Interdisciplinary Nature</h3>
+                    <ul class="property-list">
+                        <li>Nano-chemistry</li>
+                        <li>Nano-physics</li>
+                        <li>Nano-materials science</li>
+                        <li>Nano-biology</li>
+                        <li>Nano-engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 2: History -->
+        <section id="history">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Historical Perspectives</h2>
+                <p class="section-desc">Pioneers who shaped nanotechnology</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">1857</span>
+                    <h3>Michael Faraday</h3>
+                    <p>Prepared aqueous colloidal blends containing gold nanoparticles less than 100nm. He discovered that these nanoparticles have <strong>exceptional optical and electrical properties</strong> that differ significantly from bulk gold.</p>
+                    <div class="image-container" style="margin-top: 1rem;">
+                        <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/4cc5bd269f589d85469b82033bb385e38d666649.jpg" alt="Colloidal Gold Solutions">
+                        <div class="image-caption">Colloidal gold solutions showing different colors based on particle size</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">1925</span>
+                    <h3>Richard Zsigmondy - Nobel Prize</h3>
+                    <p>Measured the dimensions of nanoparticles such as gold colloids and <strong>used the nanoparticles concept for the first time</strong>. His work established the foundation for understanding colloidal systems.</p>
+                    <div class="highlight-box">
+                        <strong>Key Achievement:</strong> Developed the ultramicroscope and established methods for measuring particle sizes in colloidal systems.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 3: Colloidal Systems -->
+        <section id="colloids">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Colloidal Systems</h2>
+                <p class="section-desc">The bridge between bulk materials and nanomaterials</p>
+            </div>
+
+            <div class="definition-box">
+                <strong>What are Colloidal Solutions?</strong>
+                Colloidal solutions are mixtures where particles are dispersed uniformly throughout another substance. The particle size ranges between <strong>1-1000 nm</strong>, making them the historical predecessor to modern nanotechnology.
+                <div class="arabic-callout">
+                    المحاليل الغروية هي مزيج حيث تنتشر الجسيمات بشكل منتظم في مادة أخرى
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="comparison-card">
+                    <h4>Suspension</h4>
+                    <div class="size">>1000 nm</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Particles settle over time. Not stable.</p>
+                </div>
+                <div class="comparison-card" style="border-color: var(--accent);">
+                    <h4 style="color: var(--accent);">Colloidal</h4>
+                    <div class="size" style="color: var(--accent);">1-1000 nm</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Stable dispersion. Shows Tyndall effect.</p>
+                </div>
+                <div class="comparison-card">
+                    <h4>True Solution</h4>
+                    <div class="size"><1 nm</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Molecular level. Transparent.</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 3rem 0 1.5rem; color: var(--accent);">Classification of Colloidal Systems</h3>
+
+            <div class="card">
+                <h3>1. Based on State of Matter</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dispersed Phase</th>
+                                <th>Medium</th>
+                                <th>Type</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Liquid</td>
+                                <td>Gas</td>
+                                <td>Aerosol</td>
+                                <td>Fog, clouds</td>
+                            </tr>
+                            <tr>
+                                <td>Solid</td>
+                                <td>Gas</td>
+                                <td>Aerosol</td>
+                                <td>Smoke</td>
+                            </tr>
+                            <tr>
+                                <td>Gas</td>
+                                <td>Liquid</td>
+                                <td>Foam</td>
+                                <td>Whipped cream, soda</td>
+                            </tr>
+                            <tr>
+                                <td>Liquid</td>
+                                <td>Liquid</td>
+                                <td>Emulsion</td>
+                                <td>Milk, hair cream</td>
+                            </tr>
+                            <tr>
+                                <td>Solid</td>
+                                <td>Liquid</td>
+                                <td>Sol</td>
+                                <td>Paints, cell fluids</td>
+                            </tr>
+                            <tr>
+                                <td>Gas</td>
+                                <td>Solid</td>
+                                <td>Foam</td>
+                                <td>Pumice, plastic foams</td>
+                            </tr>
+                            <tr>
+                                <td>Liquid</td>
+                                <td>Solid</td>
+                                <td>Gel</td>
+                                <td>Jelly, cheese</td>
+                            </tr>
+                            <tr>
+                                <td>Solid</td>
+                                <td>Solid</td>
+                                <td>Solid Sol</td>
+                                <td>Ruby glass</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><span class="card-icon">💧</span>Lyophilic Sols</h3>
+                    <p style="color: var(--accent); margin-bottom: 1rem;">(Solvent-loving)</p>
+                    <ul class="property-list">
+                        <li>High affinity for dispersion medium</li>
+                        <li>Spontaneous tendency to form colloids</li>
+                        <li>Reversible in nature</li>
+                        <li>High viscosity</li>
+                        <li>Lower surface tension</li>
+                        <li>Examples: Starch, gelatin, proteins</li>
+                    </ul>
+                    <div class="arabic-callout">
+                        محاليل محبة للمذيب — تتكون تلقائياً وقابلة للعكس
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">⚡</span>Lyophobic Sols</h3>
+                    <p style="color: var(--gradient-3); margin-bottom: 1rem;">(Solvent-hating)</p>
+                    <ul class="property-list">
+                        <li>No affinity for dispersion medium</li>
+                        <li>No spontaneous tendency to form colloids</li>
+                        <li>Irreversible in nature</li>
+                        <li>Unstable — needs electrolytes</li>
+                        <li>Viscosity similar to medium</li>
+                        <li>Particles carry positive or negative charge</li>
+                    </ul>
+                    <div class="arabic-callout">
+                        محاليل كارهة للمذيب — غير مستقرة وتحتاج إلى إلكتروليتات
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 3rem 0 1.5rem; color: var(--accent);">Types of Colloidal Particles</h3>
+
+            <div class="card">
+                <h3><span class="card-icon">🔬</span>Multimolecular Colloids</h3>
+                <p>Consist of a large number of atoms or smaller molecules aggregated together. Diameter is less than 1nm individually, but they aggregate to form colloidal size particles.</p>
+                <div class="highlight-box" style="margin-top: 1rem;">
+                    Usually <strong>lyophobic</strong> in nature. Example: Gold sol (aggregation of Au atoms).
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">🧬</span>Macromolecular Colloids</h3>
+                <p>Consist of big size molecules (macromolecules) which have sizes comparable to colloidal particles. The molecules themselves are in the colloidal range.</p>
+                <div class="highlight-box" style="margin-top: 1rem;">
+                    Usually <strong>lyophilic</strong> in nature. Examples: Proteins, starch, cellulose.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">🎯</span>Associated Colloids (Micelles)</h3>
+                <p>Molecules contain both lyophilic and lyophobic parts. At low concentration, they behave as normal electrolytes. At high concentration, they form <strong>micelles</strong> — aggregated particles.</p>
+                
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/sciencenotes.org/6175406d2034c69ae5cee103fdbae61bc28bbaae.png" alt="Micelle Structure">
+                    <div class="image-caption">Figure: Micelle structure showing hydrophilic heads and hydrophobic tails</div>
+                </div>
+
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div style="background: rgba(6, 182, 212, 0.1); padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Normal Micelle</h4>
+                        <p style="font-size: 0.9rem;">Hydrophilic heads face outward (aqueous solution), hydrophobic tails inward.</p>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="color: var(--gradient-2); margin-bottom: 0.5rem;">Reverse Micelle</h4>
+                        <p style="font-size: 0.9rem;">Hydrophobic tails face outward (organic solvent), hydrophilic heads inward.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 4: Properties -->
+        <section id="properties">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Properties of Colloids</h2>
+                <p class="section-desc">Unique behaviors at the nanoscale</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">🎲</span>1. Brownian Motion</h3>
+                <p>The continuous, random movement of colloidal particles caused by collision with molecules of the dispersion medium.</p>
+                
+                <div class="highlight-box">
+                    <strong>Factors affecting intensity:</strong>
+                    <ul class="property-list" style="margin-top: 1rem;">
+                        <li><strong>Particle size:</strong> Smaller particles → more vigorous motion</li>
+                        <li><strong>Viscosity:</strong> Less viscous medium → more vigorous motion</li>
+                    </ul>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn1.byjus.com/884cda75bbec09b62ccdf096d266fe8182597d5d.png" alt="Brownian Motion">
+                    <div class="image-caption">Figure: Brownian motion - random zigzag movement of particles</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">💡</span>2. Tyndall Effect</h3>
+                <p>When a strong beam of light passes through a colloidal sol, its path becomes visible due to <strong>scattering of light</strong> by colloidal particles.</p>
+
+                <div class="definition-box">
+                    <strong>Mechanism:</strong> Light passes through a colloid and is absorbed, transmitted, and scattered. The scattered light makes the beam path visible.
+                </div>
+
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn1.byjus.com/884cda75bbec09b62ccdf096d266fe8182597d5d.png" alt="Tyndall Effect Demonstration">
+                    <div class="image-caption">Figure: Tyndall effect demonstration showing light scattering in colloidal solution (right) vs true solution (left)</div>
+                </div>
+
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div style="padding: 1.5rem; background: rgba(6, 182, 212, 0.1); border-radius: 12px; border-left: 3px solid var(--accent);">
+                        <h4 style="color: var(--accent);">Lyophobic Colloids</h4>
+                        <p>Large difference in refractive indices → <strong>Well-defined Tyndall effect</strong></p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(236, 72, 153, 0.1); border-radius: 12px; border-left: 3px solid var(--gradient-3);">
+                        <h4 style="color: var(--gradient-3);">Lyophilic Sols</h4>
+                        <p>Small difference in refractive indices → <strong>Weak Tyndall effect</strong></p>
+                    </div>
+                </div>
+
+                <div class="arabic-callout" style="margin-top: 1rem;">
+                    تأثير تيندال يؤكد الطبيعة غير المتجانسة للمحاليل الغروية
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 5: Nanobiotechnology -->
+        <section id="applications">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>Nanobiotechnology</h2>
+                <p class="section-desc">Where biology meets nanotechnology</p>
+            </div>
+
+            <div class="definition-box">
+                <strong>Interdisciplinary Field:</strong> Nanotechnology combines biology and physics to produce multifunctional systems and devices that are more sensitive, specialized, and efficient.
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><span class="card-icon">🧪</span>Nanobiotechnology</h3>
+                    <p style="color: var(--accent); margin-bottom: 1rem;">Nanotechnology applied to biology</p>
+                    <p>Using tools and techniques from nanotechnology to study biological systems or create devices for biological applications.</p>
+                    
+                    <div class="highlight-box" style="margin-top: 1rem;">
+                        <strong>Example:</strong> Nanoparticles for Drug Delivery
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Tiny nanoparticles (liposomes or dendrimers) carry drugs directly to cancer cells, minimizing side effects and improving efficacy.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">🧬</span>Bionanotechnology</h3>
+                    <p style="color: var(--gradient-2); margin-bottom: 1rem;">Biology inspiring nanotechnology</p>
+                    <p>Using biological principles to guide the development of nanotechnology. Learning from how biological systems work at the nanoscale.</p>
+                    
+                    <div class="highlight-box" style="margin-top: 1rem;">
+                        <strong>Example:</strong> DNA Nanotechnology
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Using DNA as a building block to create molecular machines, scaffolds for drug delivery, gene therapy, or nanoscale electronics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.mdpi.com/63f1d08e6d27a80a7ae91b15217faafdfb2788a1.png" alt="Nanomaterials Applications">
+                <div class="image-caption">Figure: Various applications of nanomaterials across different industries</div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Key Application Areas</h3>
+                <div class="grid-3">
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏥</div>
+                        <h4>Medicine</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Drug delivery, imaging, diagnostics</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌱</div>
+                        <h4>Agriculture</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Pesticides, fertilizers, sensors</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌍</div>
+                        <h4>Environment</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Remediation, water purification</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+                        <h4>Energy</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Solar cells, batteries, fuel cells</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🍎</div>
+                        <h4>Food</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Packaging, safety, preservation</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💄</div>
+                        <h4>Cosmetics</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Sunscreens, anti-aging products</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">✓</div>
+                <h2>Summary</h2>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid var(--accent);">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Key Takeaways</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">Core Concepts:</h4>
+                        <ul class="property-list">
+                            <li>Nanotechnology deals with materials 1-100 nm</li>
+                            <li>High surface area = high reactivity</li>
+                            <li>Colloids (1-1000 nm) are historical predecessors</li>
+                            <li>Lyophilic vs Lyophobic sols</li>
+                            <li>Micelles and associated colloids</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gradient-2); margin-bottom: 1rem;">Important Properties:</h4>
+                        <ul class="property-list">
+                            <li>Brownian motion</li>
+                            <li>Tyndall effect</li>
+                            <li>Classification by state</li>
+                            <li>Classification by particle type</li>
+                            <li>Nanobiotechnology applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="arabic-callout" style="margin-top: 2rem; text-align: center;">
+                    النانوتكنولوجي هو مستقبل العلوم — تطبيقاته لا حصر لها في مجالات متعددة
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Nanotechnology & Nanomaterials</p>
+        <p style="color: var(--text-muted);">Lecture 1 • Complete Interactive Guide</p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">
+            <span style="color: var(--accent);">English</span> with <span style="color: var(--gradient-2);">Arabic</span> supplements
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Dynamic navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
