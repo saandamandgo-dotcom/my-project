@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanoparticle Synthesis Methods - Complete Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.3);
+            --accent-2: #8b5cf6;
+            --accent-3: #10b981;
+            --accent-4: #f59e0b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient-1: #06b6d4;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .arabic-text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(6, 182, 212, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+        }
+
+        /* Definition Box */
+        .definition-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        .definition-box strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Image Containers */
+        .image-container {
+            margin: 2rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            background: var(--primary);
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Comparison Cards */
+        .comparison-card {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-card.top-down {
+            border-color: var(--accent-4);
+        }
+
+        .comparison-card.bottom-up {
+            border-color: var(--accent-3);
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comparison-card.top-down h3 {
+            color: var(--accent-4);
+        }
+
+        .comparison-card.bottom-up h3 {
+            color: var(--accent-3);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--secondary);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        /* Pros/Cons Lists */
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pros, .cons {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .pros {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--accent-3);
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+        }
+
+        .pros h4 {
+            color: var(--accent-3);
+            margin-bottom: 0.5rem;
+        }
+
+        .cons h4 {
+            color: #ef4444;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 150px;
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .process-step .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--primary);
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Property Lists */
+        .property-list {
+            list-style: none;
+        }
+
+        .property-list li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .property-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Arabic Callout */
+        .arabic-callout {
+            background: rgba(6, 182, 212, 0.05);
+            border-right: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 12px 0 0 12px;
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--accent);
+        }
+
+        /* Method Categories */
+        .method-category {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .method-category.physical {
+            border-color: #ef4444;
+        }
+
+        .method-category.chemical {
+            border-color: var(--accent);
+        }
+
+        .method-category.biological {
+            border-color: var(--accent-3);
+        }
+
+        .method-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .method-category.physical h3 {
+            color: #ef4444;
+        }
+
+        .method-category.chemical h3 {
+            color: var(--accent);
+        }
+
+        .method-category.biological h3 {
+            color: var(--accent-3);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .pros-cons { grid-template-columns: 1fr; }
+            .process-step::after { display: none; }
+            .process-flow { flex-direction: column; }
+        }
+
+        /* Interactive Elements */
+        .interactive-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .compare-side {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compare-side.left {
+            border: 2px solid var(--accent-4);
+        }
+
+        .compare-side.right {
+            border: 2px solid var(--accent-3);
+        }
+
+        .compare-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--primary);
+            border: 2px solid var(--accent);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--accent);
+            z-index: 10;
+        }
+
+        /* Stabilization Visual */
+        .stabilization-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stabilization-type {
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stabilization-type.electrostatic {
+            border: 2px solid var(--accent);
+        }
+
+        .stabilization-type.steric {
+            border: 2px solid var(--accent-2);
+        }
+
+        .particle-visual {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent-2));
+            border-radius: 50%;
+            margin: 1rem auto;
+            position: relative;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .charge-layer {
+            position: absolute;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">NANO<span style="color: var(--accent);">SYNTH</span></div>
+            <ul class="nav-links">
+                <li><a href="#approaches">Approaches</a></li>
+                <li><a href="#physical">Physical</a></li>
+                <li><a href="#chemical">Chemical</a></li>
+                <li><a href="#biological">Biological</a></li>
+                <li><a href="#stabilization">Stabilization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Lecture 2 • Synthesis Methods</div>
+            <h1>Nanoparticle Synthesis Methods</h1>
+            <p class="hero-subtitle">
+                From atoms to nanoparticles — exploring the art and science of nanomaterial fabrication
+            </p>
+            <p class="arabic-text">
+                طرق تصنيع الجسيمات النانوية — من الذرات إلى الجسيمات النانوية
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent);">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Synthesis Approaches -->
+        <section id="approaches">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Synthesis Approaches</h2>
+                <p class="section-desc">Two fundamental pathways to create nanomaterials</p>
+            </div>
+
+            <div class="interactive-compare">
+                <div class="compare-side left">
+                    <div class="compare-icon">🔨</div>
+                    <h3 style="color: var(--accent-4); margin-bottom: 1rem;">Top-Down</h3>
+                    <p>Breaking down bulk materials into nanoparticles</p>
+                    <div class="arabic-callout" style="margin-top: 1rem; text-align: right;">
+                        من الأعلى إلى الأسفل — تكسير المواد الكبيرة
+                    </div>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="compare-side right">
+                    <div class="compare-icon">🏗️</div>
+                    <h3 style="color: var(--accent-3); margin-bottom: 1rem;">Bottom-Up</h3>
+                    <p>Building nanoparticles atom by atom</p>
+                    <div class="arabic-callout" style="margin-top: 1rem; text-align: right;">
+                        من الأسفل إلى الأعلى — بناء الذرات واحدة تلو الأخرى
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="comparison-card top-down">
+                    <h3><span class="method-icon">🔨</span>Top-Down Method</h3>
+                    <p>Materials are crushed by <strong>milling or grinding</strong> to reduce size to nanoscale.</p>
+                    
+                    <div class="highlight-box" style="background: rgba(245, 158, 11, 0.1); border-color: var(--accent-4);">
+                        <strong style="color: var(--accent-4);">⚠️ Key Disadvantage:</strong>
+                        <p style="margin-top: 0.5rem;">Surface structure is <strong>not perfect</strong>, which directly affects the physical and surface properties of the materials.</p>
+                    </div>
+                </div>
+
+                <div class="comparison-card bottom-up">
+                    <h3><span class="method-icon">🏗️</span>Bottom-Up Method</h3>
+                    <p>Materials are synthesized <strong>atom by atom, cluster by cluster</strong>, or molecule by molecule.</p>
+                    
+                    <div class="highlight-box" style="background: rgba(16, 185, 129, 0.1); border-color: var(--accent-3);">
+                        <strong style="color: var(--accent-3);">✅ Key Advantage:</strong>
+                        <p style="margin-top: 0.5rem;">Provides <strong>homogeneous morphology, size, shape, and distribution</strong> — making it more advantageous than top-down.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arabic-callout" style="text-align: center; margin-top: 2rem;">
+                الطريقة من الأسفل إلى الأعلى تعطي جسيمات أكثر تجانساً في الحجم والشكل
+            </div>
+        </section>
+
+        <!-- Section 2: Method Categories Overview -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Classification of Methods</h2>
+                <p class="section-desc">Three main categories of synthesis techniques</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="method-category physical">
+                    <h3><span class="category-icon">⚛️</span>Physical Methods</h3>
+                    <ul class="property-list">
+                        <li>Mechanical Method (Ball Milling)</li>
+                        <li>Vapor Methods (PVD)</li>
+                        <li>Laser Ablation</li>
+                        <li>Arc Discharge</li>
+                        <li>Sputtering</li>
+                    </ul>
+                </div>
+
+                <div class="method-category chemical">
+                    <h3><span class="category-icon">⚗️</span>Chemical Methods</h3>
+                    <ul class="property-list">
+                        <li>Sol-Gel Method</li>
+                        <li>Hydrothermal/Solvothermal</li>
+                        <li>Chemical Vapor Deposition (CVD)</li>
+                        <li>Colloidal Method</li>
+                        <li>Spray Pyrolysis</li>
+                    </ul>
+                </div>
+
+                <div class="method-category biological">
+                    <h3><span class="category-icon">🌿</span>Biological Methods</h3>
+                    <ul class="property-list">
+                        <li>Green Synthesis</li>
+                        <li>Plant Extracts</li>
+                        <li>Microbes (Bacteria, Fungi)</li>
+                        <li>Yeast-mediated</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Physical Methods -->
+        <section id="physical">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Physical Methods</h2>
+                <p class="section-desc">Mechanical and vapor-based techniques</p>
+            </div>
+
+            <!-- Ball Milling -->
+            <div class="card">
+                <h3><span class="card-icon">⚙️</span>1. Ball Milling (Mechanical Method)</h3>
+                <p>A mechanical method suitable for various glassy and amorphous materials to produce nanosized metal and metal oxides alloys.</p>
+                
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/iplts.com/a8beabd95b2e94cf7bf41bd485bfb41c75e3764c.png" alt="Ball Milling Process">
+                    <div class="image-caption">Figure: Ball milling process showing grinding media and material reduction</div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Advantages</h4>
+                        <ul style="list-style: none; margin-top: 0.5rem;">
+                            <li>• Cheapest method</li>
+                            <li>• Suitable for mass production</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>❌ Disadvantages</h4>
+                        <ul style="list-style: none; margin-top: 0.5rem;">
+                            <li>• High energy consumption</li>
+                            <li>• Non-homogeneous particle size</li>
+                            <li>• Thermal energy may cause unexpected chemical reactions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physical Vapor Deposition -->
+            <div class="card">
+                <h3><span class="card-icon">💨</span>2. Physical Vapor Deposition (PVD)</h3>
+                <p>Material transitions from a <strong>condensed phase to vapor phase</strong> and then back to a thin film condensed phase.</p>
+
+                <div class="highlight-box">
+                    <strong>Laser Ablation Technique:</strong> Materials like metals and compounds are evaporated using a laser beam to generate nanostructures under high vacuum.
+                </div>
+
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div style="background: rgba(6, 182, 212, 0.1); padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Controllable Parameters</h4>
+                        <ul class="property-list">
+                            <li>Temperature</li>
+                            <li>Pressure</li>
+                            <li>Ambient atmosphere</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="color: var(--accent-2); margin-bottom: 0.5rem;">Suitable Materials</h4>
+                        <ul class="property-list">
+                            <li>Metals & Alloys</li>
+                            <li>Semiconductors</li>
+                            <li>Oxides, Carbides, Hydroxides</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem; background: rgba(239, 68, 68, 0.05);">
+                    <h4 style="color: #ef4444;">⚡ Arc Discharge Method</h4>
+                    <p>Produces high temperature up to <strong>3000°C</strong></p>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Disadvantages: Limited amount of produced material and impurities</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Chemical Methods -->
+        <section id="chemical">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Chemical Methods</h2>
+                <p class="section-desc">Wet chemistry and vapor-phase synthesis</p>
+            </div>
+
+            <!-- Sol-Gel -->
+            <div class="card">
+                <h3><span class="card-icon">🧪</span>1. Sol-Gel Method</h3>
+                <p>Involves <strong>gelation of colloidal solution</strong> by temperature, followed by drying and calcination.</p>
+                
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.mdpi.com/273b1ddc759cee13f670565431d8033012d9628d.png" alt="Sol-Gel Process">
+                    <div class="image-caption">Figure: Sol-gel process showing hydrolysis, condensation, and gelation stages</div>
+                </div>
+
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Precursor</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">+ Solvent + H₂O + Catalyst</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Hydrolysis</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">+ Condensation</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Sol</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Colloidal particles</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Gelation</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">3D network formation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hydrothermal -->
+            <div class="card">
+                <h3><span class="card-icon">🔥</span>2. Hydrothermal / Solvothermal Method</h3>
+                <p>Synthesis of nanoparticles under <strong>high vapor pressure and temperature</strong> using an autoclave.</p>
+                
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.cam-energy.com/706e239a3c113a9ec1162eb7d4a8a6faa4aba16a" alt="Hydrothermal Autoclave">
+                    <div class="image-caption">Figure: Hydrothermal synthesis autoclave reactor with PTFE lined vessel</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Key Advantage:</strong> Hardly soluble reactants can transport to the solution and form complexes with the solvent under hydrothermal conditions.
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Advantages</h4>
+                        <ul style="list-style: none; margin-top: 0.5rem;">
+                            <li>• Simplicity (single step)</li>
+                            <li>• Homogeneous & pure crystalline particles</li>
+                            <li>• Lower crystallization temperature</li>
+                            <li>• Energy and time efficient</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>🔍 Hydrothermal vs Solvothermal</h4>
+                        <ul style="list-style: none; margin-top: 0.5rem;">
+                            <li>• <strong>Hydrothermal:</strong> Water as solvent</li>
+                            <li>• <strong>Solvothermal:</strong> Organic solvents</li>
+                            <li>• Solvothermal produces higher crystallinity</li>
+                            <li>• Narrower particle distribution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CVD -->
+            <div class="card">
+                <h3><span class="card-icon">💨</span>3. Chemical Vapor Deposition (CVD)</h3>
+                <p>Based on the <strong>reaction of a vapor</strong> that deposits a solid nanolayer material on a substrate.</p>
+                
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/news.mit.edu/e85a41e70bb1b450d709f101df58763f93927cec.jpg" alt="CVD Process">
+                    <div class="image-caption">Figure: Chemical Vapor Deposition (CVD) process diagram</div>
+                </div>
+
+                <div class="grid-2">
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--accent-3);">
+                        <h4 style="color: var(--accent-3);">✅ Advantages</h4>
+                        <p>Cost-effective & suitable for mass production</p>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 1.5rem; border-radius: 12px; border-left: 3px solid #ef4444;">
+                        <h4 style="color: #ef4444;">❌ Disadvantages</h4>
+                        <p>Very high temperature may damage the substrate</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <strong>PVD vs CVD:</strong> PVD removes atoms from a solid target and condenses them onto the substrate. CVD uses vaporized liquids/gases that chemically react on or near the substrate surface to form a solid.
+                </div>
+            </div>
+
+            <!-- Colloidal Method -->
+            <div class="card">
+                <h3><span class="card-icon">💧</span>4. Colloidal Method</h3>
+                <p>A chemical precipitation method where different ionic solutions are mixed to produce nanoparticles.</p>
+                
+                <div class="definition-box" style="border-color: var(--accent-2); background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));">
+                    <strong style="color: var(--accent-2);">⚠️ Critical Requirement:</strong>
+                    This method requires a <strong>stabilizer</strong> to prevent agglomeration caused by van der Waals forces between colloidal nanoparticles. Stabilization can be achieved electrically or sterically.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Biological Methods -->
+        <section id="biological">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>Biological Methods (Green Synthesis)</h2>
+                <p class="section-desc">Eco-friendly and sustainable synthesis approaches</p>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border-color: var(--accent-3);">
+                <h3><span class="card-icon">🌿</span>Green Synthesis</h3>
+                <p>An <strong>environment-friendly, cost-effective</strong> process to synthesize nanostructures using biological organisms.</p>
+                
+                <div class="arabic-callout">
+                    التخليق الأخضر — طريقة صديقة للبيئة ومنخفضة التكلفة
+                </div>
+
+                <div class="image-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/ars.els-cdn.com/a7a06b441799ca666b415bde663af90b257ad686.jpg" alt="Green Synthesis Workflow">
+                    <div class="image-caption">Figure: Workflow of green synthesis of nanoparticles using plant leaves</div>
+                </div>
+
+                <h4 style="margin: 1.5rem 0 1rem; color: var(--accent-3);">Biomolecules as Reducing Agents:</h4>
+                <div class="grid-3">
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧬</div>
+                        <p style="font-size: 0.9rem;">Proteins & Amino Acids</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                        <p style="font-size: 0.9rem;">Enzymes</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💊</div>
+                        <p style="font-size: 0.9rem;">Vitamins</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌸</div>
+                        <p style="font-size: 0.9rem;">Terpenoids & Flavonoids</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧪</div>
+                        <p style="font-size: 0.9rem;">Alkaloids</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🍋</div>
+                        <p style="font-size: 0.9rem;">Phenolic Acids</p>
+                    </div>
+                </div>
+
+                <div class="process-flow" style="margin-top: 2rem;">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Plant Material</h4>
+                        <p style="font-size: 0.8rem;">Stems, Leaves, Flowers, Seeds</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Extraction</h4>
+                        <p style="font-size: 0.8rem;">Aqueous extraction</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Mixing</h4>
+                        <p style="font-size: 0.8rem;">+ Metal precursor</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Bio-reduction</h4>
+                        <p style="font-size: 0.8rem;">Magnetic stirring</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h4>Nanoparticles</h4>
+                        <p style="font-size: 0.8rem;">Formation & Characterization</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <strong>Controlling Factors:</strong> Nanoparticle formation depends on various chemical and physical parameters such as <strong>pH, temperature, reaction time, and precursor concentration</strong>.
+                </div>
+            </div>
+
+            <!-- Greener Techniques -->
+            <div class="card">
+                <h3><span class="card-icon">⚡</span>Greener Techniques</h3>
+                
+                <div class="grid-2">
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 2rem; border-radius: 16px; border: 1px solid var(--accent-4);">
+                        <h4 style="color: var(--accent-4); margin-bottom: 1rem;">📡 Microwave Technique</h4>
+                        <p style="margin-bottom: 1rem;">An ideal method with multiple advantages:</p>
+                        <ul class="property-list">
+                            <li>High efficiency</li>
+                            <li>Safety & Energy saving</li>
+                            <li>Easy to control</li>
+                            <li>Higher yield & reaction rate</li>
+                            <li>Shorter reaction time</li>
+                            <li>Modified properties</li>
+                            <li>Simplicity</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(6, 182, 212, 0.1); padding: 2rem; border-radius: 16px; border: 1px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">🔊 Sonochemical Technique</h4>
+                        <p>Uses ultrasound waves to create cavitation bubbles in solution, generating localized high temperature and pressure for nanoparticle synthesis.</p>
+                        <div class="arabic-callout" style="margin-top: 1rem;">
+                            تقنية الموجات فوق الصوتية لتوليد فقاعات التجويف
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Stabilization -->
+        <section id="stabilization">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2>Stabilization Mechanisms</h2>
+                <p class="section-desc">Preventing nanoparticle agglomeration</p>
+            </div>
+
+            <div class="definition-box">
+                <strong>Why Stabilization is Critical:</strong>
+                Nanoparticles tend to agglomerate due to <strong>van der Waals forces</strong>. Stabilization prevents this, maintaining the unique properties of individual nanoparticles.
+                <div class="arabic-callout" style="margin-top: 1rem;">
+                    الجسيمات النانوية تميل إلى التكتل بسبب قوات فان دير فالس — التثبيت يمنع ذلك
+                </div>
+            </div>
+
+            <div class="stabilization-visual">
+                <div class="stabilization-type electrostatic">
+                    <h3 style="color: var(--accent); margin-bottom: 1rem;">⚡ Electrostatic Stabilization</h3>
+                    <div class="particle-visual"></div>
+                    <p>Due to presence of <strong>like charges</strong> on nanoparticles</p>
+                    <ul class="property-list" style="text-align: left; margin-top: 1rem;">
+                        <li>Adsorbed ions of similar charge</li>
+                        <li>Coulombic repulsion > Attraction</li>
+                        <li>Depends on pH (zeta potential)</li>
+                    </ul>
+                </div>
+
+                <div class="stabilization-type steric">
+                    <h3 style="color: var(--accent-2); margin-bottom: 1rem;">🛡️ Steric Stabilization</h3>
+                    <div class="particle-visual" style="background: radial-gradient(circle at 30% 30%, var(--accent-2), #7c3aed);"></div>
+                    <p>Due to presence of <strong>protective layer</strong> around particles</p>
+                    <ul class="property-list" style="text-align: left; margin-top: 1rem;">
+                        <li>Solvent layer (lyophilic systems)</li>
+                        <li>Polymeric layer or surfactant</li>
+                        <li>Entropy hindrance prevents aggregation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.substech.com/95b76a8b7dbc54bc70ddf9ea88528b92e152779c.php" alt="DLVO Theory">
+                <div class="image-caption">Figure: DLVO theory showing the balance between electrostatic repulsion and van der Waals attraction</div>
+            </div>
+
+            <div class="card">
+                <h3><span class="card-icon">📊</span>Isoelectric Point (IEP)</h3>
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(245, 158, 11, 0.1)); border-color: var(--gradient-3);">
+                    <strong style="color: var(--gradient-3);">Definition:</strong> The pH at which the net charge on dispersed particles surface equals zero.
+                </div>
+                
+                <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-color: #ef4444;">
+                    <strong style="color: #ef4444;">⚠️ Critical Point:</strong> At the isoelectric point, the system collapses:
+                    <ul style="margin-top: 0.5rem; margin-left: 1rem;">
+                        <li>Colloidal sol turns into <strong>suspension</strong></li>
+                        <li>Emulsion separates into <strong>two liquids</strong></li>
+                    </ul>
+                </div>
+
+                <div class="arabic-callout">
+                    عند نقطة التعادل الكهربائي (pH معين) يصبح الشحنة الصافية صفر ويحدث تكتل للجسيمات
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">✓</div>
+                <h2>Summary</h2>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid var(--accent);">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Key Takeaways</h3>
+                <div class="grid-3">
+                    <div>
+                        <h4 style="color: #ef4444; margin-bottom: 1rem;">⚛️ Physical Methods</h4>
+                        <ul class="property-list">
+                            <li>Top-down approach</li>
+                            <li>Ball milling, PVD, Laser</li>
+                            <li>Simple but imperfect surfaces</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem;">⚗️ Chemical Methods</h4>
+                        <ul class="property-list">
+                            <li>Bottom-up approach</li>
+                            <li>Sol-gel, CVD, Hydrothermal</li>
+                            <li>Better control over properties</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-3); margin-bottom: 1rem;">🌿 Green Methods</h4>
+                        <ul class="property-list">
+                            <li>Eco-friendly synthesis</li>
+                            <li>Plant extracts & microbes</li>
+                            <li>Biomolecules as reducers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h4 style="text-align: center; margin-bottom: 1rem; color: var(--accent-2);">🛡️ Stabilization is Essential</h4>
+                    <p style="text-align: center;">Electrostatic (charge) or Steric (polymer) stabilization prevents agglomeration and maintains nanoparticle properties.</p>
+                </div>
+
+                <div class="arabic-callout" style="margin-top: 2rem; text-align: center;">
+                    اختيار طريقة التصنيع يعتمد على التطبيق المطلوب، التكلفة، والخصائص المرغوبة — التثبيت ضروري للحفاظ على استقرار الجسيمات
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Nanoparticle Synthesis Methods</p>
+        <p style="color: var(--text-muted);">Lecture 2 • Complete Interactive Guide</p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">
+            <span style="color: var(--accent);">English</span> with <span style="color: var(--gradient-2);">Arabic</span> supplements
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Dynamic navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
