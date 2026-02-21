@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gene Technology - Genetic Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #06b6d4;
+            --accent-light: #67e8f9;
+            --accent-dark: #0891b2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --bg-card: rgba(30, 41, 59, 0.8);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 1rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--secondary);
+            z-index: 1001;
+            padding: 5rem 1.5rem 2rem;
+            transition: right 0.3s ease;
+            border-left: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: var(--text);
+            text-decoration: none;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 1.5rem 3rem;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .arabic-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            direction: rtl;
+            color: var(--accent-light);
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 .icon {
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Tool Cards Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tool-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tool-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card.scissors h4 { color: var(--pink); }
+        .tool-card.glue h4 { color: var(--success); }
+        .tool-card.carrier h4 { color: var(--purple); }
+
+        .tool-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.3rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.3);
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Steps */
+        .step-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--accent);
+            color: var(--primary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-card h3 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Comparison Cards */
+        .compare-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .compare-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .compare-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 2px solid transparent;
+        }
+
+        .compare-card.sticky {
+            border-color: var(--success);
+        }
+
+        .compare-card.blunt {
+            border-color: var(--warning);
+        }
+
+        .compare-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .compare-card.sticky h4 { color: var(--success); }
+        .compare-card.blunt h4 { color: var(--warning); }
+
+        /* Code Block */
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        /* Arabic Callout */
+        .arabic-box {
+            background: rgba(6, 182, 212, 0.1);
+            border-right: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            direction: rtl;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--accent-light);
+            font-size: 0.95rem;
+        }
+
+        /* Image Container */
+        .img-container {
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .img-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Tags */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-light);
+        }
+
+        /* Status Indicators */
+        .status-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .summary-item {
+            padding: 1rem 0.5rem;
+        }
+
+        .summary-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .summary-item h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid rgba(6, 182, 212, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        footer h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Utility */
+        .mt-2 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .text-center { text-align: center; }
+        .text-accent { color: var(--accent); }
+        .text-success { color: var(--success); }
+        .text-warning { color: var(--warning); }
+        .text-danger { color: var(--danger); }
+        .text-purple { color: var(--purple); }
+        .text-pink { color: var(--pink); }
+
+        /* Smooth reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">GENE.TECH</div>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">✕</button>
+        <a href="#history" onclick="toggleMenu()">Historical Discoveries</a>
+        <a href="#tools" onclick="toggleMenu()">Essential Tools</a>
+        <a href="#vectors" onclick="toggleMenu()">Vector Systems</a>
+        <a href="#steps" onclick="toggleMenu()">Cloning Steps</a>
+        <a href="#applications" onclick="toggleMenu()">Applications</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="badge">Lecture 01 // Genetic Engineering</span>
+        <h1>Gene <span>Technology</span></h1>
+        <p class="hero-subtitle">Molecular manipulation, DNA recombination, and synthetic biology fundamentals</p>
+        <p class="arabic-text">تكنولوجيا الجينات والهندسة الوراثية</p>
+        
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Section 1: History -->
+        <section id="history" class="reveal">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Historical Discoveries</h2>
+                <p>Foundation of modern genetic engineering</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="year-badge">1967</span>
+                    <h3>DNA Ligase Discovery</h3>
+                    <p>Scientists discovered DNA ligase, an enzyme that joins two DNA pieces. Essential for building recombinant DNA.</p>
+                    <div class="arabic-box">
+                        إنزيم الربط DNA ligase — يربط قطعتين من الحمض النووي
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="year-badge">1970</span>
+                    <h3>Restriction Enzymes</h3>
+                    <p>Molecular scissors that cut DNA at specific sequences. Enable precise DNA fragment isolation.</p>
+                    <div class="arabic-box">
+                        الإنزيمات القاطعة — مقصات جزيئية تقطع DNA في مواقع محددة
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">💡</span> The Perfect Combination</h3>
+                <p>Restriction enzymes (cut) + DNA ligase (join) + Vectors (carry) = Complete genetic engineering toolkit</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Tools -->
+        <section id="tools" class="reveal">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Essential Toolkit</h2>
+                <p>Three tools for genetic manipulation</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card scissors">
+                    <span class="icon">✂️</span>
+                    <h4>Restriction Enzymes</h4>
+                    <p>Molecular scissors that cut DNA at specific sites</p>
+                </div>
+                <div class="tool-card glue">
+                    <span class="icon">🔗</span>
+                    <h4>DNA Ligase</h4>
+                    <p>Molecular glue that joins DNA fragments</p>
+                </div>
+                <div class="tool-card carrier">
+                    <span class="icon">🚀</span>
+                    <h4>Vectors</h4>
+                    <p>Carriers that transport genes into cells</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">✂️</span> Restriction Enzymes in Action</h3>
+                <p>Cut DNA at specific recognition sequences, producing different end types:</p>
+                
+                <div class="compare-row">
+                    <div class="compare-card sticky">
+                        <h4>🧬 Sticky Ends</h4>
+                        <p>Single-stranded overhangs that easily pair with complementary sequences. Example: EcoRI</p>
+                        <div class="code-block">5'-AATT C-3'<br>3'-G TTCA-5'</div>
+                    </div>
+                    <div class="compare-card blunt">
+                        <h4>⚡ Blunt Ends</h4>
+                        <p>Double-stranded cuts with no overhangs. Example: SmaI</p>
+                        <div class="code-block">5'-CCC GGG-3'<br>3'-GGG CCC-5'</div>
+                    </div>
+                </div>
+
+                <div class="arabic-box">
+                    الأطراف اللزجة تسهل ربط DNA لأنها تتوافق تكاملياً
+                </div>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/faculty.utrgv.edu/a70a243ade0af9c42ff662570c264e1629b64b2e.gif" alt="Restriction enzyme action">
+                    <div class="img-caption">EcoRI cutting pattern producing sticky ends</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Vectors -->
+        <section id="vectors" class="reveal">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Vector Systems</h2>
+                <p>Gene delivery vehicles</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🚀</span> Types of Vectors</h3>
+                <p>Carriers that move genes into host cells:</p>
+                
+                <div class="tag-container">
+                    <span class="tag">🧬 Plasmids</span>
+                    <span class="tag">🦠 Bacteriophages</span>
+                    <span class="tag">📊 BACs</span>
+                    <span class="tag">🍞 YACs</span>
+                    <span class="tag">🐭 MACs</span>
+                </div>
+
+                <ul class="feature-list">
+                    <li><strong>Plasmids:</strong> Small circular DNA in bacteria</li>
+                    <li><strong>Bacteriophages:</strong> Viruses that infect bacteria</li>
+                    <li><strong>BACs:</strong> Bacterial Artificial Chromosomes</li>
+                    <li><strong>YACs:</strong> Yeast Artificial Chromosomes</li>
+                    <li><strong>MACs:</strong> Mammalian Artificial Chromosomes</li>
+                </ul>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/microbenotes.com/dee965bd175b86bc4c6fe17d4160c012b29e60d5.jpeg" alt="Plasmid structure">
+                    <div class="img-caption">Plasmid vector structure with origin, marker genes, and cloning sites</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 5 Steps -->
+        <section id="steps" class="reveal">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Gene Cloning Protocol</h2>
+                <p>5-step process from isolation to expression</p>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Prepare Gene & Vector</h3>
+                <p>Isolate target gene using restriction enzymes or reverse transcriptase (for cDNA from mRNA).</p>
+                
+                <div class="code-block">
+                    RESTRICTION_ENZYME: EcoRI<br>
+                    CUT_VECTOR: yes | CUT_INSERT: yes
+                </div>
+
+                <div class="arabic-box">
+                    عزل الجين المطلوب باستخدام الإنزيمات القاطعة
+                </div>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn1.byjus.com/40da683773a5b38c951f7460ef4f9689b8b9071e.png" alt="Gene isolation">
+                    <div class="img-caption">Isolating gene of interest and preparing vector</div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Ligation</h3>
+                <p>Join gene to vector using DNA ligase. Forms phosphodiester bonds to create recombinant DNA.</p>
+                
+                <div class="arabic-box">
+                    الربط — إنزيم DNA ligase يربط الجين بالناقل
+                </div>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.mun.ca/8f8b601e9727c74f24d4f75df2b3dd9a41613906.gif" alt="DNA ligation">
+                    <div class="img-caption">DNA ligase joining sticky ends</div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Transformation</h3>
+                <p>Introduce recombinant DNA into host cells:</p>
+                
+                <div class="compare-row">
+                    <div class="compare-card" style="border-color: var(--accent);">
+                        <h4 style="color: var(--accent);">🔥 Chemical</h4>
+                        <ul class="feature-list">
+                            <li>CaCl₂ treatment</li>
+                            <li>Heat shock: 42°C</li>
+                            <li>30-90 seconds</li>
+                        </ul>
+                    </div>
+                    <div class="compare-card" style="border-color: var(--purple);">
+                        <h4 style="color: var(--purple);">⚡ Electroporation</h4>
+                        <ul class="feature-list">
+                            <li>Electric pulse</li>
+                            <li>15 kV/cm</li>
+                            <li>5 microseconds</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media.addgene.org/e7d5fad876e9e2645ea62b1f0d3a57d2864fc3ba.png" alt="Transformation">
+                    <div class="img-caption">Bacterial transformation process</div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Selection & Screening</h3>
+                <p>Use antibiotic resistance markers to identify transformed cells.</p>
+                
+                <div class="status-row">
+                    <div class="status-pill">
+                        <div class="status-dot"></div>
+                        <span>Transformed: SURVIVE</span>
+                    </div>
+                    <div class="status-pill">
+                        <div class="status-dot" style="background: var(--danger); animation: none;"></div>
+                        <span>Non-transformed: DIE</span>
+                    </div>
+                </div>
+
+                <div class="arabic-box">
+                    الانتقاء — الخلايا المحولة فقط تنجو من المضاد الحيوي
+                </div>
+
+                <div class="img-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/microbenotes.com/bc15a9a570f7737b8170b91be25ae6e87fbd1d32.jpg" alt="Selection">
+                    <div class="img-caption">Antibiotic resistance selection</div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h3>Purification</h3>
+                <p>Harvest and purify the multiplied rDNA or expressed protein for research, therapeutic, or industrial use.</p>
+                
+                <div class="code-block">
+                    OUTPUT: recombinant_protein<br>
+                    PURITY: >95% | YIELD: HIGH
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Applications -->
+        <section id="applications" class="reveal">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>Applications</h2>
+                <p>Real-world uses of gene cloning</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🎯</span> Main Objectives</h3>
+                <ul class="feature-list">
+                    <li>Identify genes and determine their protein products</li>
+                    <li>Store genes in DNA libraries for preservation</li>
+                    <li>Produce large amounts of specific proteins (insulin, hormones, vaccines)</li>
+                    <li>Create transgenic organisms for agriculture</li>
+                    <li>Gene therapy for genetic diseases</li>
+                </ul>
+
+                <div class="tag-container mt-2">
+                    <span class="tag">💉 Insulin</span>
+                    <span class="tag">🧬 Hormones</span>
+                    <span class="tag">🦠 Vaccines</span>
+                    <span class="tag">⚗️ Enzymes</span>
+                    <span class="tag">🌾 GM Crops</span>
+                    <span class="tag">🧪 Antibodies</span>
+                </div>
+
+                <div class="arabic-box">
+                    تطبيقات: إنتاج الأدوية، العلاج الجيني، المحاصيل المعدلة وراثياً
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary-card mt-2">
+                <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Protocol Complete</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Gene Technology Fundamentals</p>
+                
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="icon">🔧</span>
+                        <h4>TOOLS</h4>
+                        <p>3 Essential</p>
+                    </div>
+                    <div class="summary-item">
+                        <span class="icon">📝</span>
+                        <h4>STEPS</h4>
+                        <p>5 Phases</p>
+                    </div>
+                    <div class="summary-item">
+                        <span class="icon">🎯</span>
+                        <h4>GOALS</h4>
+                        <p>Multiple</p>
+                    </div>
+                </div>
+
+                <div class="arabic-box" style="text-align: center; border-right: none; border: 1px solid var(--accent);">
+                    تكنولوجيا الجينات — أساس الثورة البيولوجية الحديثة
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h3>GENE.TECH</h3>
+        <p>Lecture 01 • Genetic Engineering • 2026</p>
+        <p style="margin-top: 0.5rem;">
+            <span style="color: var(--accent);">English</span> • <span style="color: var(--purple);">العربية</span>
+        </p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.menu-overlay').classList.toggle('active');
+        }
+
+        // Reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Close menu on resize if open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.querySelector('.menu-overlay').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
