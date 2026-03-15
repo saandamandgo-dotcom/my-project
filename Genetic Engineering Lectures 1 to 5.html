@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معمل التقنية الحيوية | شرح الهندسة الوراثية الكامل</title>
+    <!-- Font Awesome 6 (مجاني) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: تاجوج (للعربية) + بوبينس (للإنجليزية) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #f0f5fa 0%, #e6edf5 100%);
+            color: #1a2b4c;
+            line-height: 1.7;
+            padding: 30px 20px;
+        }
+
+        .website-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px 60px 40px 40px;
+            box-shadow: 0 30px 70px rgba(18, 52, 77, 0.25), 0 10px 30px rgba(0,30,50,0.2);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* الهيدر العظيم */
+        .hero-header {
+            background: linear-gradient(120deg, #0A2342, #1B4A6F, #2C7AA0);
+            padding: 50px 60px 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid #FFB347;
+        }
+
+        .hero-header::before {
+            content: "🧬⚗️🔬";
+            font-size: 140px;
+            position: absolute;
+            left: 20px;
+            bottom: -30px;
+            opacity: 0.1;
+            white-space: nowrap;
+            transform: rotate(-5deg);
+            pointer-events: none;
+        }
+
+        .hero-header h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-shadow: 4px 4px 0 #0f3552;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .hero-header h1 span {
+            color: #FFD966;
+            font-size: 2rem;
+            display: block;
+            font-weight: 500;
+            text-shadow: none;
+            letter-spacing: 1px;
+        }
+
+        .hero-header .sub {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            background: rgba(0,0,0,0.2);
+            display: inline-block;
+            padding: 12px 35px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+            border: 1px solid rgba(255,215,120,0.7);
+            margin-top: 10px;
+        }
+
+        .hero-header .sub i {
+            margin-left: 10px;
+            color: #FFB347;
+        }
+
+        .lang-badge {
+            background: #ffffff22;
+            border-radius: 40px;
+            padding: 8px 25px;
+            display: inline-flex;
+            gap: 15px;
+            margin-top: 20px;
+            border: 1px solid #ffffff55;
+        }
+
+        /* شريط المحاضرات */
+        .lecture-strip {
+            display: flex;
+            background: #1F4E79;
+            color: white;
+            padding: 0 25px;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .lecture-strip a {
+            color: white;
+            text-decoration: none;
+            padding: 18px 28px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.25s;
+            border-radius: 0 0 25px 25px;
+            background: #1a3f5c;
+        }
+
+        .lecture-strip a:hover {
+            background: #FFB347;
+            color: #0A2342;
+            transform: translateY(-5px);
+        }
+
+        .lecture-strip a i {
+            font-size: 1.5rem;
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            padding: 45px 50px;
+        }
+
+        .lecture-card {
+            background: white;
+            border-radius: 50px;
+            padding: 40px;
+            margin-bottom: 70px;
+            box-shadow: 0 15px 40px -10px #1f3e5c33, 0 0 0 1px #ffffff inset, 0 0 0 2px #dbeafe inset;
+            transition: 0.3s;
+            border-right: 15px solid #FFB347;
+        }
+
+        .lecture-card:hover {
+            box-shadow: 0 25px 60px -10px #1b4f77;
+        }
+
+        .lec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .lec-number {
+            background: #0A2342;
+            color: white;
+            padding: 12px 45px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            border-radius: 120px;
+            display: inline-block;
+            box-shadow: 0 12px 0 #051a2b;
+            transform: translateY(-3px);
+            border: 2px solid #FFB347;
+        }
+
+        .lec-title-ar {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #134074;
+            margin-right: 20px;
+        }
+
+        .lec-title-en {
+            font-size: 1.8rem;
+            color: #3C6E9C;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            margin: 35px 0;
+        }
+
+        .arabic-box {
+            background: #f7fbff;
+            border-radius: 45px;
+            padding: 30px;
+            border: 2px solid #b6d6f0;
+            box-shadow: 15px 15px 0 #aaccf0;
+        }
+
+        .english-box {
+            background: #f4f9fc;
+            border-radius: 45px;
+            padding: 30px;
+            border: 2px solid #adc9e6;
+            box-shadow: 15px 15px 0 #b7cfec;
+            font-family: 'Poppins', sans-serif;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .english-box h3, .english-box h4 {
+            font-family: 'Poppins', sans-serif;
+            color: #003057;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 4px solid #FFB347;
+            padding-bottom: 8px;
+        }
+
+        h3 i {
+            background: #0A2342;
+            color: #FFB347;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .table-super {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin: 20px 0;
+        }
+
+        .table-super th {
+            background: #0A2342;
+            color: white;
+            font-weight: 600;
+            padding: 15px 10px;
+            font-size: 1.1rem;
+            border-radius: 30px 30px 8px 8px;
+        }
+
+        .table-super td {
+            background: #f0f7fe;
+            padding: 18px 12px;
+            border-radius: 25px;
+            border: 1px solid #b1d2f0;
+        }
+
+        .enzyme-card {
+            background: linear-gradient(145deg, #ffffff, #f0f8ff);
+            border-radius: 40px;
+            padding: 25px 20px;
+            border-right: 12px solid #2C7AA0;
+            margin: 20px 0;
+            box-shadow: 0 12px 25px #c5daf0;
+        }
+
+        .enzyme-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #003f66;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .enzyme-title i {
+            background: #FFB347;
+            padding: 15px;
+            border-radius: 50%;
+            color: #0A2342;
+        }
+
+        .mcq-block {
+            background: #deecf9;
+            border-radius: 50px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .mcq-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 120px;
+            margin: 15px 0;
+            border: 2px solid #87b9e0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mcq-answer {
+            background: #2e7d32;
+            color: white;
+            padding: 8px 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: auto;
+            box-shadow: 0 6px 0 #1b4f1b;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(130deg, #b3daf5, #d9ecfc);
+            border-radius: 60px;
+            padding: 45px 20px;
+            text-align: center;
+            border: 4px dashed #2C7AA0;
+            margin: 30px 0;
+            font-size: 1.5rem;
+            color: #0a3a5c;
+            box-shadow: inset 0 0 30px #addbff;
+        }
+
+        .image-placeholder i {
+            font-size: 5rem;
+            color: #003459;
+            margin-bottom: 20px;
+        }
+
+        .purple-note {
+            background: #f1e2fc;
+            border-right: 15px solid #9b51e0;
+            padding: 25px;
+            border-radius: 50px;
+        }
+
+        footer {
+            background: #0A2342;
+            color: white;
+            padding: 45px 50px;
+            font-size: 1.3rem;
+            text-align: center;
+            border-top: 10px solid #FFB347;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 35px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links span {
+            background: #1f4e79;
+            padding: 12px 30px;
+            border-radius: 60px;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .lec-number { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="website-wrapper">
+    <!-- الهيدر المذهل -->
+    <div class="hero-header">
+        <h1>
+            <span>BGE2210</span>
+            مقدمة في الهندسة الوراثية
+        </h1>
+        <div class="sub"><i class="fas fa-microscope"></i> 2nd year - Biotechnology & Genetic Engineering program</div>
+        <div class="lang-badge">
+            <i class="fas fa-language"></i> المحتوى بالعربية + الإنجليزية (Arabic/English)
+        </div>
+        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+            <span style="background:#FFB347; color:#0A2342; padding:8px 25px; border-radius: 60px; font-weight: bold;"><i class="fas fa-star"></i> د. إلهام رياض سليمان</span>
+            <span style="background:#ffffff33; padding:8px 25px; border-radius: 60px;"><i class="fas fa-dna"></i> 5 محاضرات كاملة</span>
+        </div>
+    </div>
+
+    <!-- قائمة المحاضرات السريعة -->
+    <div class="lecture-strip">
+        <a href="#lec1"><i class="fas fa-history"></i> 1</a>
+        <a href="#lec2"><i class="fas fa-cut"></i> 2</a>
+        <a href="#lec3"><i class="fas fa-cogs"></i> 3</a>
+        <a href="#lec4"><i class="fas fa-link"></i> 4</a>
+        <a href="#lec5"><i class="fas fa-truck"></i> 5</a>
+    </div>
+
+    <!-- بداية المحتوى الرئيسي -->
+    <div class="main-content" id="lec1">
+
+        <!-- ================ المحاضرة الأولى ================ -->
+        <div class="lecture-card">
+            <div class="lec-header">
+                <div class="lec-number">المحاضرة 1</div>
+                <div class="lec-title-ar">المبادئ الأساسية و تاريخ التقنية</div>
+                <div class="lec-title-en">Lecture 1: Foundations & History</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="arabic-box">
+                    <h3><i class="fas fa-clock"></i> البداية</h3>
+                    <p><strong>1967</strong> – اكتشاف إنزيم <span class="highlight">DNA ligase</span> القادر على ربط قطع DNA.</p>
+                    <p><strong>1970</strong> – اكتشاف إنزيمات القطع (restriction enzymes) التي تعمل كمقص جزيئي.</p>
+                    <p>استخدام النواقل (vectors) مثل البلازميدات والفيروسات لحمل الجينات إلى داخل الخلايا.</p>
+                    <p><strong>🔹 الخطوات الأساسية للاستنساخ الجيني:</strong><br>1️⃣ قطع الجين والمتجه (بنفس الإنزيم).<br>2️⃣ الربط بواسطة DNA ligase.<br>3️⃣ الإدخال إلى الخلية (تحول).<br>4️⃣ الانتخاب والتنمية.<br>5️⃣ عزل المنتج.</p>
+                    <div class="image-placeholder"><i class="fas fa-dna"></i><br> plasmid + insert → recombinant DNA</div>
+                </div>
+                <div class="english-box">
+                    <h3><i class="fas fa-flask"></i> Historical milestones</h3>
+                    <p><strong>1967</strong> – DNA ligase discovered (joins DNA).</p>
+                    <p><strong>1970</strong> – Restriction enzymes discovered (molecular scissors).</p>
+                    <p><strong>Vectors:</strong> plasmids, bacteriophages, BACs, YACs – carry foreign DNA into host.</p>
+                    <p><strong>Gene cloning steps:</strong> cut → ligate → transform → select → purify.</p>
+                </div>
+            </div>
+
+            <!-- Assignment link -->
+            <div style="background: #0A2342; color: white; border-radius: 200px; padding: 18px 25px; margin-top: 20px;">
+                <i class="fas fa-pencil-alt" style="color: #FFB347;"></i> واجب المحاضرة الأولى: 
+                <a href="#" style="color: #FFD966; text-decoration: underline;">forms.office.com/r/4SrA3KYK58</a>
+            </div>
+        </div>
+
+        <!-- ================ المحاضرة الثانية ================ -->
+        <div class="lecture-card" id="lec2">
+            <div class="lec-header">
+                <div class="lec-number">المحاضرة 2</div>
+                <div class="lec-title-ar">إنزيمات التعديل: بوليميريز، كيناز، فوسفاتاز</div>
+                <div class="lec-title-en">Lecture 2: DNA modifying enzymes</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="arabic-box">
+                    <h3><i class="fas fa-dna"></i> عائلة البوليميريز</h3>
+                    <div class="enzyme-card">
+                        <div class="enzyme-title"><i class="fas fa-fire"></i> Taq polymerase</div>
+                        <p>من بكتيريا Thermus aquaticus، تتحمل الحرارة العالية (حتى 95°م). تستخدم في PCR. خاصية: إضافة dA في النهاية 3' (تستخدم في TA cloning).</p>
+                    </div>
+                    <div class="enzyme-card">
+                        <div class="enzyme-title"><i class="fas fa-check-double"></i> T4 DNA polymerase</div>
+                        <p>لها نشاط بوليميريز 5'←3' ونشاط إكزونوكلياز 3'←5' (proofreading). تُستخدم لملء الفجوات أو إنتاج نهايات مستوية.</p>
+                    </div>
+                    <div class="enzyme-card">
+                        <div class="enzyme-title"><i class="fas fa-polyad"></i> Poly(A) polymerase</div>
+                        <p>تضيف العديد من أدينوسين أحادي الفوسفات (polyA) إلى نهاية RNA الرسول.</p>
+                    </div>
+                    <div class="enzyme-card">
+                        <div class="enzyme-title"><i class="fas fa-undo-alt"></i> Reverse transcriptase</div>
+                        <p>ينسخ RNA إلى cDNA (DNA تكميلي).</p>
+                    </div>
+                </div>
+                <div class="english-box">
+                    <h3><i class="fas fa-cog"></i> Polymerases & more</h3>
+                    <p><strong>Taq polymerase</strong> – thermostable; adds 3'-dA overhang (TA cloning).</p>
+                    <p><strong>T4 DNA polymerase</strong> – 3'→5' exonuclease (proofreading); blunt‑end generation.</p>
+                    <p><strong>Poly(A) polymerase</strong> – adds polyA tail to mRNA (not DNA).</p>
+                    <p><strong>Reverse transcriptase</strong> – RNA‑directed DNA polymerase.</p>
+                    <h4 style="margin-top: 30px;">Kinases & Phosphatases</h4>
+                    <p><span style="background:#d3f0d3; padding:5px 15px;">كيناز</span> kinase – adds phosphate (uses ATP).<br>
+                    <span style="background:#f9d4d4; padding:5px 15px;">فوسفاتاز</span> phosphatase – removes phosphate.</p>
+                </div>
+            </div>
+
+            <!-- TA cloning شرح -->
+            <div class="purple-note">
+                <i class="fas fa-clone" style="font-size: 2.2rem;"></i>
+                <strong>TA cloning:</strong> Taq polymerase leaves a single 3'-dA overhang; the linearized vector has complementary 3'-dT overhang → high efficiency ligation.
+                <br>في العربية: بوليميريز Taq يضيف A بارزة، والناقل له T بارزة، فيتم الربط بكفاءة.
+            </div>
+
+            <!-- أسئلة (MCQs) -->
+            <div class="mcq-block">
+                <div class="mcq-item">س 1: ناتج PCR باستخدام Taq له نهايات؟ <span class="mcq-answer">3' dA overhangs (ج)</span></div>
+                <div class="mcq-item">س 2: الفوسفاتاز وظيفتها؟ <span class="mcq-answer">إزالة فوسفات (ب)</span></div>
+            </div>
+        </div>
+
+        <!-- ================ المحاضرة الثالثة ================ -->
+        <div class="lecture-card" id="lec3">
+            <div class="lec-header">
+                <div class="lec-number">المحاضرة 3</div>
+                <div class="lec-title-ar">إنزيمات القطع (ريستريكتيز)</div>
+                <div class="lec-title-en">Lecture 3: Restriction Enzymes</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="arabic-box">
+                    <h3><i class="fas fa-cut"></i> أنواع وخصائص</h3>
+                    <p><span style="background: #0A2342; color: white; padding:5px 20px;">Type I</span> يقطع بشكل عشوائي بعيداً (~1000bp)، يحتاج ATP.</p>
+                    <p><span style="background: #0A2342; color: white; padding:5px 20px;">Type II</span> الأكثر استعمالاً في المختبر. يقطع داخل موقع مميز (4-8bp) ويعطي نهايات لزجة أو مستوية. يحتاج فقط Mg²⁺.</p>
+                    <p><span style="background: #0A2342; color: white; padding:5px 20px;">Type III</span> يقطع على بعد 20-30bp.</p>
+                    <p><span style="background: #0A2342; color: white; padding:5px 20px;">Type IV</span> يقطع DNA المعدل (ميثيل).</p>
+                    <p><span style="background: #0A2342; color: white; padding:5px 20px;">Type V (CRISPR)</span> يستخدم RNA لاستهداف DNA.</p>
+
+                    <h4>تسمية الإنزيم: EcoRI</h4>
+                    <p>E = Escherichia, co = coli, R = RY13, I = first enzyme.</p>
+
+                    <table class="table-super">
+                        <tr><th>الإنزيم</th><th>الموقع (5'→3')</th><th>النهايات</th></tr>
+                        <tr><td>EcoRI</td><td>G/AATTC</td><td>لزجة (5')</td></tr>
+                        <tr><td>HindIII</td><td>A/AGCTT</td><td>لزجة</td></tr>
+                        <tr><td>AluI</td><td>AG/CT</td><td>مستوية</td></tr>
+                    </table>
+                </div>
+                <div class="english-box">
+                    <h3><i class="fas fa-shears"></i> RE types</h3>
+                    <ul>
+                        <li><strong>Type I:</strong> cuts randomly far from site (ATP).</li>
+                        <li><strong>Type II (workhorse):</strong> cuts at palindrome, blunt/sticky.</li>
+                        <li><strong>Type III:</strong> cuts 20-30bp away.</li>
+                        <li><strong>Type IV:</strong> cuts methylated DNA.</li>
+                        <li><strong>Type V:</strong> CRISPR-Cas (RNA guided).</li>
+                    </ul>
+                    <p><strong>Naming:</strong> EcoRI = E. coli strain RY13, 1st enzyme.</p>
+                </div>
+            </div>
+
+            <!-- أسماء الانزيمات المهمة + تطبيقات -->
+            <div class="image-placeholder"><i class="fas fa-chart-bar"></i> تطبيقات: استنساخ، بصمة DNA (fingerprinting), southern blot, RFLP</div>
+
+            <!-- أسئلة -->
+            <div class="mcq-block">
+                <div class="mcq-item">س 1: وظيفة إنزيمات القطع في البكتيريا؟ <span class="mcq-answer">الدفاع ضد الDNA الغريب (أ)</span></div>
+                <div class="mcq-item">س 2: النهايات اللزجة تنشأ من قطع؟ <span class="mcq-answer">غير متماثل (ب) asymmetric</span></div>
+            </div>
+        </div>
+
+        <!-- ================ المحاضرة الرابعة ================ -->
+        <div class="lecture-card" id="lec4">
+            <div class="lec-header">
+                <div class="lec-number">المحاضرة 4</div>
+                <div class="lec-title-ar">إنزيم DNA ligase ونصائح الربط</div>
+                <div class="lec-title-en">Lecture 4: DNA ligase & ligation tips</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="arabic-box">
+                    <h3><i class="fas fa-link"></i> الليجاز (T4 DNA ligase)</h3>
+                    <p>يحفز تكوين رابطة فوسفودايستر بين 3'-OH و 5'-phosphate. يستخدم في ربط شظايا DNA.</p>
+                    <p><strong>نصائح لربط فعال (6 نصائح):</strong></p>
+                    <ul style="list-style-type: none;">
+                        <li>✅ 1. تأكد من النهايات: PCR مع Taq يحتاج TA cloning.</li>
+                        <li>✅ 2. النسبة المولية insert:vector تكون 3:1 للأطراف اللزجة، 10:1 للمستوية.</li>
+                        <li>✅ 3. تجنب المثبطات (NaCl, EDTA, فينول).</li>
+                        <li>✅ 4. استخدم aliquots من البffer (لا تكرر التجميد).</li>
+                        <li>✅ 5. أضف PEG 4000 للربط المستوي.</li>
+                        <li>✅ 6. ضع تحكماً (uncut vector, cut vector, ...).</li>
+                    </ul>
+                </div>
+                <div class="english-box">
+                    <h3><i class="fas fa-link"></i> T4 DNA ligase</h3>
+                    <p>Joins DNA fragments; requires 5'-P and 3'-OH.</p>
+                    <p><strong>Sticky ends:</strong> 1–1.5 Weiss units; <strong>blunt ends:</strong> 1.5–5 units + PEG.</p>
+                    <p><strong>Inhibitors:</strong> salts, EDTA, phenol, dATP.</p>
+                    <p><strong>Controls table:</strong> uncut vector → several colonies; cut vector + ligase → few colonies (background).</p>
+                </div>
+            </div>
+
+            <!-- جدول ظروف التفاعل -->
+            <table class="table-super">
+                <tr><th>المكون</th><th>الأطراف اللزجة</th><th>المستوية</th></tr>
+                <tr><td>Vector</td><td>20–100 ng</td><td>20–100 ng</td></tr>
+                <tr><td>Insert</td><td>محسوب بنسبة 3:1</td><td>محسوب 10:1</td></tr>
+                <tr><td>10x buffer</td><td>2 µL</td><td>2 µL</td></tr>
+                <tr><td>PEG 4000</td><td>-</td><td>2 µL</td></tr>
+                <tr><td>T4 ligase</td><td>1-1.5 U</td><td>1.5-5 U</td></tr>
+            </table>
+
+            <!-- سؤال حساب النسبة -->
+            <div style="background:#ffecbf; border-radius: 30px; padding: 25px; margin: 25px 0;">
+                <strong>🧮 مثال حساب insert:vector</strong><br>
+                إذا كان vector 3000 bp و 100 ng، والinsert 1000 bp، النسبة 3:1 تكون كتلة الinsert = (1000×100×3)/(3000×1) = 100 ng.
+            </div>
+
+            <!-- MCQ -->
+            <div class="mcq-item">س: مثبطات تفاعل الليجيشن؟ <span class="mcq-answer">PEG 4000 ليس مثبطاً (ب)</span></div>
+        </div>
+
+        <!-- ================ المحاضرة الخامسة ================ -->
+        <div class="lecture-card" id="lec5">
+            <div class="lec-header">
+                <div class="lec-number">المحاضرة 5</div>
+                <div class="lec-title-ar">نواقل الاستنساخ (البلازميدات)</div>
+                <div class="lec-title-en">Lecture 5: Cloning Vectors (plasmids)</div>
+            </div>
+
+            <div class="grid-2">
+                <div class="arabic-box">
+                    <h3><i class="fas fa-truck"></i> خصائص الناقل المثالي</h3>
+                    <ul>
+                        <li>أصل تكرار (ori) – ذاتي التضاعف.</li>
+                        <li>حجم صغير (يسمح بإدخال حتى 10-20 kb).</li>
+                        <li>معلمات انتخابية (مقاومة مضاد حيوي).</li>
+                        <li>موقع استنساخ متعدد (MCS).</li>
+                        <li>سهولة العزل.</li>
+                    </ul>
+                    <h4>pBR322 (4.361 kb)</h4>
+                    <p>صمم بواسطة Bolivar و Rodriguez. يحتوي على جيني مقاومة: ampicillin (Apᴿ) و tetracycline (Tcᴿ). به 21 موقع قطع.</p>
+                    <h4>pUC series (2.7 kb)</h4>
+                    <p>نسخ عالية، به MCS من 54bp، و جزء lacZα يتيح الفحص الأزرق/الأبيض (blue-white screening). عند إدخال جين يتعطل lacZα ← مستعمرات بيضاء.</p>
+                </div>
+                <div class="english-box">
+                    <h3><i class="fas fa-clipboard-check"></i> Vector features</h3>
+                    <ul>
+                        <li>Origin of replication (ori)</li>
+                        <li>Selectable marker (antibiotic resistance)</li>
+                        <li>Multiple cloning site (MCS)</li>
+                        <li>High copy number (e.g. pUC).</li>
+                    </ul>
+                    <p><strong>pBR322:</strong> Apᴿ, Tcᴿ, 4.36 kb.</p>
+                    <p><strong>pUC19:</strong> high copy, lacZα (α-peptide of β-galactosidase) for blue‑white screening. X‑gal + IPTG → blue = intact lacZα; white = insert.</p>
+                </div>
+            </div>
+
+            <div class="image-placeholder"><i class="fas fa-square"></i> شكل pUC19: MCS داخل lacZα + Ampᴿ</div>
+
+            <!-- بلو وايت بالتفصيل -->
+            <div style="background: #d7f0fd; border-radius: 50px; padding: 30px; margin: 30px 0;">
+                <i class="fas fa-fill-drip" style="font-size: 2.5rem;"></i>
+                <p><strong>آلية الفحص الأزرق/الأبيض (Blue/White screening):</strong> <br>
+                البكتيريا المستخدمة لديها طفرة في lacZ، pUC يحمل α-peptide الذي يكمل النقص (α-complementation). إذا كان MCS خالياً، يتكون β-galactosidase فعال ويحلل X-gal منتجاً لون أزرق. وجود insert يعطل الـ α-peptide ← لا يوجد إنزيم فعال ← مستعمرات بيضاء.</p>
+            </div>
+
+            <!-- أسئلة المحاضرة الخامسة -->
+            <div class="mcq-block">
+                <div class="mcq-item">س 1: الغرض الأساسي من الناقل؟ <span class="mcq-answer">حمل وتضاعف DNA غريب (ب)</span></div>
+                <div class="mcq-item">س 2: pBR322 يحمل مقاومة لـ؟ <span class="mcq-answer">أمبيسلين وتتراسايكلين (ج)</span></div>
+                <div class="mcq-item">س 3: pUC يستخدم طريقة انتخاب؟ <span class="mcq-answer">أزرق/أبيض (ب)</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر العظيم -->
+    <footer>
+        <div>
+            <i class="fas fa-dna" style="font-size: 3rem; color: #FFB347;"></i>
+        </div>
+        <div class="footer-links">
+            <span>🧬 5 محاضرات كاملة</span>
+            <span>⚗️ د. إلهام رياض</span>
+            <span>🔬 2nd year Biotech</span>
+        </div>
+        <p style="font-size: 1.3rem; margin: 30px 0 0 0;">تم إعداد هذا الشرح الشامـل بناءً على ملفات PDF الرسمية. تصميم عصري يجمع بين العربية والإنجليزية ليسهل الفهم.</p>
+        <p style="margin-top: 40px; opacity:0.8;">BGE2210 – Introduction to Genetic Engineering – جميع الحقوق محفوظة للمادة العلمية</p>
+    </footer>
+</div>
+</body>
+</html>
