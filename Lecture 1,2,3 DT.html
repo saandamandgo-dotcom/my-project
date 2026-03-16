@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Systems - Complete Guide | أنظمة المعلومات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5% 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .arabic-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem;
+            color: #c084fc;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.6);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        .section-header .arabic {
+            font-family: 'Cairo', sans-serif;
+            color: #94a3b8;
+            font-size: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        /* Pyramid Container */
+        .pyramid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .pyramid-level {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .pyramid-level:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .pyramid-level::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .level-4 { width: 40%; background: var(--gradient-5); }
+        .level-3 { width: 60%; background: var(--gradient-2); }
+        .level-2 { width: 80%; background: var(--gradient-3); }
+        .level-1 { width: 100%; background: var(--gradient-4); }
+
+        .pyramid-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .pyramid-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pyramid-content .arabic-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .info-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .info-card .arabic-title-card {
+            font-family: 'Cairo', sans-serif;
+            color: #c084fc;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .info-card .arabic-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            border-right: 3px solid var(--accent);
+            padding-right: 1rem;
+            margin-top: 1rem;
+            color: #cbd5e1;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        .features-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .features-list .arabic-item {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            padding-left: 0;
+            padding-right: 1.5rem;
+        }
+
+        .features-list .arabic-item::before {
+            left: auto;
+            right: 0;
+        }
+
+        /* Image Containers */
+        .image-container {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table th {
+            background: var(--gradient-1);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .comparison-table .arabic-cell {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient-1);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 400px;
+            margin: 0 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 10px solid transparent;
+            border-left-color: rgba(255,255,255,0.1);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 10px solid transparent;
+            border-right-color: rgba(255,255,255,0.1);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .pyramid-level {
+                width: 100% !important;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 0 16px 16px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.arabic {
+            direction: rtl;
+            text-align: right;
+            border-left: none;
+            border-right: 4px solid var(--primary);
+            border-radius: 16px 0 0 16px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            margin-top: 0.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-network-wired"></i>
+            IS Guide
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#pyramid">Pyramid</a></li>
+            <li><a href="#systems">Systems</a></li>
+            <li><a href="#careers">Careers</a></li>
+        </ul>
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Information Systems</h1>
+            <div class="arabic-title">أنظمة المعلومات</div>
+            <p class="subtitle">Complete Guide to Computer-Based Information Systems<br>الدليل الشامل لأنظمة المعلومات المعتمدة على الحاسوب</p>
+            <a href="#overview" class="cta-button">Explore Systems استكشف الأنظمة</a>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+        <div class="section-header fade-in">
+            <h2>What is an Information System?</h2>
+            <div class="arabic">ما هو نظام المعلومات؟</div>
+        </div>
+
+        <div class="highlight-box fade-in">
+            <p><strong>An Information System (IS)</strong> is a collection of people, procedures, software, hardware, data, and connectivity that work together to provide information essential to running an organization.</p>
+            <p style="margin-top: 1rem; color: #c084fc;"><strong>نظام المعلومات</strong> هو مجموعة من الأشخاص والإجراءات والبرامج والأجهزة والبيانات والاتصالات التي تعمل معاً لتوفير المعلومات الأساسية لتشغيل المؤسسة.</p>
+        </div>
+
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Components<br>مكونات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Major Types<br>أنواع رئيسية</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Management Levels<br>مستويات الإدارة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Possibilities<br>إمكانيات</div>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <h3>People</h3>
+                <div class="arabic-title-card">الأشخاص</div>
+                <p>The most important part of any system. Users who interact directly or indirectly with the system for entertainment, business, medicine, or education.</p>
+                <div class="arabic-text">
+                    أهم جزء في أي نظام. المستخدمون الذين يتفاعلون بشكل مباشر أو غير مباشر مع النظام للترفيه أو الأعمال أو الطب أو التعليم.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-list-check"></i></div>
+                <h3>Procedures</h3>
+                <div class="arabic-title-card">الإجراءات</div>
+                <p>Rules and guidelines for using software, hardware, and data. Documented in manuals provided by manufacturers in printed or electronic form.</p>
+                <div class="arabic-text">
+                    القواعد والإرشادات لاستخدام البرامج والأجهزة والبيانات. موثقة في كتيبات يقدمها المصنعون بشكل مطبوع أو إلكتروني.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Software</h3>
+                <div class="arabic-title-card">البرامج</div>
+                <p>Set of instructions making the computer behave in specific ways. Includes System Software (OS, utilities) and Application Software (general-purpose, specialized, mobile apps).</p>
+                <div class="arabic-text">
+                    مجموعة من التعليمات تجعل الحاسوب يتصرف بطرق محددة. تشمل برامج النظام (نظام التشغيل، الأدوات) وبرامج التطبيقات (عامة، متخصصة، تطبيقات الجوال).
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-microchip"></i></div>
+                <h3>Hardware</h3>
+                <div class="arabic-title-card">الأجهزة</div>
+                <p>Physical components: System unit (microprocessors, memory), Input/Output devices (keyboard, monitor), Storage (hard disks, SSD), and Communication devices.</p>
+                <div class="arabic-text">
+                    المكونات المادية: وحدة النظام (المعالجات، الذاكرة)، أجهزة الإدخال/الإخراج (لوحة المفاتيح، الشاشة)، التخزين (الأقراص الصلبة، SSD)، وأجهزة الاتصال.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-database"></i></div>
+                <h3>Data</h3>
+                <div class="arabic-title-card">البيانات</div>
+                <p>Raw facts processed into information. Types include: Document files (word processors), Worksheet files (spreadsheets), Database files (structured data), and Presentation files.</p>
+                <div class="arabic-text">
+                    الحقائق الخام التي تُعالج لتصبح معلومات. الأنواع تشمل: ملفات المستندات (معالجات النصوص)، ملفات جداول البيانات، ملفات قواعد البيانات (البيانات المنظمة)، وملفات العروض التقديمية.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-wifi"></i></div>
+                <h3>Connectivity</h3>
+                <div class="arabic-title-card">الاتصال</div>
+                <p>Sharing information through computer networks. The largest network is the Internet, enabling cloud computing and the Internet of Things (IoT).</p>
+                <div class="arabic-text">
+                    مشاركة المعلومات من خلال شبكات الحاسوب. أكبر شبكة هي الإنترنت، مما يتيح الحوسبة السحابية وإنترنت الأشياء (IoT).
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Pyramid Section -->
+    <section id="pyramid" style="background: rgba(0,0,0,0.2);">
+        <div class="section-header fade-in">
+            <h2>The Information Systems Pyramid</h2>
+            <div class="arabic">هرم أنظمة المعلومات</div>
+            <p style="margin-top: 1rem; color: #94a3b8;">Organizational Hierarchy & Information Requirements | التسلسل الهرمي للمؤسسة ومتطلبات المعلومات</p>
+        </div>
+
+        <div class="image-container fade-in">
+            <img src="https://kimi-web-img.moonshot.cn/img/www.conceptdraw.com/b7819c257a8ddc6b1b24f7faa44ffde4a635bcc1.png" alt="Information Systems Pyramid Model">
+            <div class="image-caption">Figure 1: Five-Level Pyramid Model of Information Systems Types | الشكل 1: نموذج الهرم ذو المستويات الخمسة لأنواع أنظمة المعلومات</div>
+        </div>
+
+        <div class="pyramid-container">
+            <div class="pyramid-level level-4 fade-in" onclick="scrollToSection('ess')">
+                <div class="pyramid-content">
+                    <h3><i class="fas fa-crown"></i> Executive Support Systems (ESS)</h3>
+                    <div class="arabic-name">أنظمة دعم المدراء التنفيذيين</div>
+                    <small>Strategic Level | المستوى الاستراتيجي</small>
+                </div>
+            </div>
+            
+            <div class="pyramid-level level-3 fade-in" onclick="scrollToSection('dss')">
+                <div class="pyramid-content">
+                    <h3><i class="fas fa-brain"></i> Decision Support Systems (DSS)</h3>
+                    <div class="arabic-name">أنظمة دعم القرار</div>
+                    <small>Management Level | المستوى الإداري</small>
+                </div>
+            </div>
+            
+            <div class="pyramid-level level-2 fade-in" onclick="scrollToSection('mis')">
+                <div class="pyramid-content">
+                    <h3><i class="fas fa-chart-line"></i> Management Information Systems (MIS)</h3>
+                    <div class="arabic-name">أنظمة معلومات الإدارة</div>
+                    <small>Management Level | المستوى الإداري</small>
+                </div>
+            </div>
+            
+            <div class="pyramid-level level-1 fade-in" onclick="scrollToSection('tps')">
+                <div class="pyramid-content">
+                    <h3><i class="fas fa-exchange-alt"></i> Transaction Processing Systems (TPS)</h3>
+                    <div class="arabic-name">أنظمة معالجة المعاملات</div>
+                    <small>Operational Level | المستوى التشغيلي</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box arabic fade-in">
+            <p><strong>ملاحظة هامة:</strong> كلما صعدت في الهرم، كانت القرارات أقل تنظيماً (Less Structured)، وتركز على الخارج (External Orientation)، وتكون المعلومات أكثر تلخيصاً (Summarized) وموجهة نحو المستقبل (Future Oriented).</p>
+        </div>
+    </section>
+
+    <!-- Detailed Systems Section -->
+    <section id="systems">
+        
+        <!-- TPS Section -->
+        <div id="tps" class="system-detail" style="margin-bottom: 6rem;">
+            <div class="section-header fade-in">
+                <h2 style="color: #43e97b;">Transaction Processing Systems (TPS)</h2>
+                <div class="arabic" style="color: #38f9d7;">أنظمة معالجة المعاملات</div>
+            </div>
+
+            <div class="image-container fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/wallstreetmojocms.recurpro.in/41c42a53183608f36f6ae47e02b4414029ed2ad0.png" alt="Transaction Processing System Diagram">
+                <div class="image-caption">Figure 2: TPS Workflow - Collecting data from source documents and processing through the system | الشكل 2: سير عمل نظام معالجة المعاملات</div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-cash-register"></i>
+                    </div>
+                    <h3>Definition | التعريف</h3>
+                    <p>Computerized systems that perform and record the daily routine transactions necessary to conduct business. Also called Data Processing Systems (DPS).</p>
+                    <div class="arabic-text">
+                        أنظمة حاسوبية تقوم بتنفيذ وتسجيل المعاملات اليومية الروتينية اللازمة لإجراء الأعمال. تُسمى أيضاً أنظمة معالجة البيانات (DPS).
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Level & Users | المستوى والمستخدمون</h3>
+                    <p><strong>Level:</strong> Operational Level<br>
+                    <strong>Users:</strong> Operations personnel, supervisors, frontline staff<br>
+                    <strong>Decision Making:</strong> Highly structured</p>
+                    <div class="arabic-text">
+                        <strong>المستوى:</strong> المستوى التشغيلي<br>
+                        <strong>المستخدمون:</strong> موظفو العمليات، المشرفون، موظفو الخط الأمامي<br>
+                        <strong>اتخاذ القرار:</strong> عالي التنظيم
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-gear"></i>
+                    </div>
+                    <h3>Processing & Output | المعالجة والمخرجات</h3>
+                    <p><strong>Input:</strong> Transactions, events<br>
+                    <strong>Processing:</strong> Updating records in real-time or batch mode<br>
+                    <strong>Output:</strong> Detailed reports, lists, summaries</p>
+                    <div class="arabic-text">
+                        <strong>المدخلات:</strong> المعاملات، الأحداث<br>
+                        <strong>المعالجة:</strong> تحديث السجلات في الوقت الفعلي أو الدفعي<br>
+                        <strong>المخرجات:</strong> تقارير مفصلة، قوائم، ملخصات
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box fade-in" style="border-left-color: #43e97b; background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);">
+                <h4 style="margin-bottom: 1rem; color: #43e97b;"><i class="fas fa-lightbulb"></i> Real-World Examples | أمثلة من الواقع:</h4>
+                <ul class="features-list">
+                    <li>Retail POS systems (Point of Sale) - أنظمة نقاط البيع في التجزئة</li>
+                    <li>Banking ATMs and transaction processing - أجهزة الصراف الآلي ومعالجة المعاملات المصرفية</li>
+                    <li>Airline reservation systems - أنظمة حجز تذاكر الطيران</li>
+                    <li>Payroll systems - أنظمة الرواتب</li>
+                    <li>Inventory control systems - أنظمة التحكم في المخزون</li>
+                    <li>E-commerce order processing - معالجة طلبات التجارة الإلكترونية</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box arabic fade-in" style="border-right-color: #43e97b;">
+                <p><strong>أهمية TPS:</strong> تعتبر TPS المصدر الرئيسي للبيانات لجميع الأنظمة الأخرى في المؤسسة. بدونها، لا يمكن للأنظمة الأعلى (MIS, DSS, ESS) الحصول على البيانات اللازمة للتقرير واتخاذ القرار.</p>
+            </div>
+        </div>
+
+        <!-- MIS Section -->
+        <div id="mis" class="system-detail" style="margin-bottom: 6rem;">
+            <div class="section-header fade-in">
+                <h2 style="color: #4facfe;">Management Information Systems (MIS)</h2>
+                <div class="arabic" style="color: #00f2fe;">أنظمة معلومات الإدارة</div>
+            </div>
+
+            <div class="image-container fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/accountingtool.in/b517fe5f5e2de823bf6428aee6e2abdb5e78972c.jpg" alt="MIS Dashboard Example">
+                <div class="image-caption">Figure 3: MIS Dashboard showing Key Performance Indicators (KPIs) | الشكل 3: لوحة معلومات نظام MIS تظهر مؤشرات الأداء الرئيسية</div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Definition | التعريف</h3>
+                    <p>Information systems at the management level that serve the functions of planning, controlling, and decision making by providing routine summary and exception reports.</p>
+                    <div class="arabic-text">
+                        أنظمة معلومات على المستوى الإداري تخدم وظائف التخطيط والمراقبة واتخاذ القرار من خلال توفير تقارير روتينية ملخصة واستثنائية.
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+                    <h3>Characteristics | الخصائص</h3>
+                    <ul class="features-list">
+                        <li>Support structured decisions at operational and management control levels</li>
+                        <li>Reporting and control oriented (past and present data)</li>
+                        <li>Integrate data from TPS and summarize details</li>
+                        <li>Little analytical capability - relatively inflexible</li>
+                        <li>Internal orientation</li>
+                    </ul>
+                    <ul class="features-list" style="margin-top: 1rem;">
+                        <li class="arabic-item">دعم القرارات المنظمة على مستوى العمليات والرقابة الإدارية</li>
+                        <li class="arabic-item">موجه نحو التقارير والرقابة (البيانات السابقة والحالية)</li>
+                        <li class="arabic-item">تكامل البيانات من TPS وتلخيص التفاصيل</li>
+                        <li class="arabic-item">قدرة تحليلية محدودة - نسبياً جامد</li>
+                        <li class="arabic-item">توجه داخلي</li>
+                    </ul>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-file-lines"></i>
+                    </div>
+                    <h3>Types of Reports | أنواع التقارير</h3>
+                    <p><strong>Periodic Reports:</strong> Scheduled regular reports (daily, weekly, monthly)<br>
+                    <strong>Exception Reports:</strong> Highlight unusual or critical conditions<br>
+                    <strong>Demand Reports:</strong> Generated upon specific request</p>
+                    <div class="arabic-text">
+                        <strong>التقارير الدورية:</strong> تقارير مجدولة منتظمة (يومية، أسبوعية، شهرية)<br>
+                        <strong>تقارير الاستثناء:</strong> تسلط الضوء على الظروف غير العادية أو الحرجة<br>
+                        <strong>التقارير حسب الطلب:</strong> يتم إنشاؤها بناءً على طلب محدد
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box fade-in" style="border-left-color: #4facfe; background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);">
+                <h4 style="margin-bottom: 1rem; color: #4facfe;"><i class="fas fa-info-circle"></i> Key Insight | رؤية أساسية:</h4>
+                <p>MIS summarizes and reports on the company's basic operations using data supplied by TPS. It provides middle managers with the information they need to monitor and control operations.</p>
+                <p style="margin-top: 1rem; color: #cbd5e1;">يلخص MIS ويبلغ عن العمليات الأساسية للشركة باستخدام البيانات المقدمة من TPS. يوفر للمديرين المتوسطين المعلومات اللازمة لمراقبة العمليات والتحكم فيها.</p>
+            </div>
+        </div>
+
+        <!-- DSS Section -->
+        <div id="dss" class="system-detail" style="margin-bottom: 6rem;">
+            <div class="section-header fade-in">
+                <h2 style="color: #f093fb;">Decision Support Systems (DSS)</h2>
+                <div class="arabic" style="color: #f5576c;">أنظمة دعم القرار</div>
+            </div>
+
+            <div class="image-container fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/wallstreetmojo-files.s3.ap-south-1.amazonaws.com/ea4815e17635a1ae0be8dac2dd777553b4ad1e69.png" alt="Decision Support System Components">
+                <div class="image-caption">Figure 4: DSS Architecture showing Data Management, Model Management, and User Interface | الشكل 4: بنية نظام DSS تظهر إدارة البيانات وإدارة النماذج وواجهة المستخدم</div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Definition | التعريف</h3>
+                    <p>Flexible tools for analyzing data for decision-making purposes. They enable managers to get answers to unexpected and generally non-recurring problems.</p>
+                    <div class="arabic-text">
+                        أدوات مرنة لتحليل البيانات لأغراض اتخاذ القرار. تمكن المديرين من الحصول على إجابات للمشكلات غير المتوقعة وغير المتكررة عموماً.
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Components | المكونات</h3>
+                    <ul class="features-list">
+                        <li><strong>User:</strong> Decision-maker (you, managers, professionals)</li>
+                        <li><strong>System Software:</strong> OS that is easy to learn and use</li>
+                        <li><strong>Data:</strong> Internal and external data sources</li>
+                        <li><strong>Decision Models:</strong> Strategic, Tactical, and Operational models</li>
+                    </ul>
+                    <ul class="features-list" style="margin-top: 1rem;">
+                        <li class="arabic-item"><strong>المستخدم:</strong> متخذ القرار (أنت، المديرون، المحترفون)</li>
+                        <li class="arabic-item"><strong>برامج النظام:</strong> نظام تشغيل سهل التعلم والاستخدام</li>
+                        <li class="arabic-item"><strong>البيانات:</strong> مصادر البيانات الداخلية والخارجية</li>
+                        <li class="arabic-item"><strong>نماذج القرار:</strong> نماذج استراتيجية وتكتيكية وتشغيلية</li>
+                    </ul>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3>Decision Models | نماذج القرار</h3>
+                    <p><strong>Strategic Models:</strong> Assist top management in long-range planning<br>
+                    <strong>Tactical Models:</strong> Assist middle-management in controlling work<br>
+                    <strong>Operational Models:</strong> Assist lower-level managers in daily activities</p>
+                    <div class="arabic-text">
+                        <strong>النماذج الاستراتيجية:</strong> تساعد الإدارة العليا في التخطيط طويل المدى<br>
+                        <strong>النماذج التكتيكية:</strong> تساعد الإدارة المتوسطة في التحكم في العمل<br>
+                        <strong>النماذج التشغيلية:</strong> تساعد المديرين على المستوى الأدنى في الأنشطة اليومية
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box fade-in" style="border-left-color: #f093fb; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);">
+                <h4 style="margin-bottom: 1rem; color: #f093fb;"><i class="fas fa-star"></i> DSS Characteristics | خصائص DSS:</h4>
+                <ul class="features-list">
+                    <li>Offer flexibility, adaptability, and quick response</li>
+                    <li>Operate with little or no assistance from professional programmers</li>
+                    <li>Support semi-structured and unstructured decisions</li>
+                    <li>Use sophisticated data analysis and modeling tools</li>
+                    <li>Microsoft Access often used for SQL decision support queries</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box arabic fade-in" style="border-right-color: #f093fb;">
+                <p><strong>الفرق بين MIS و DSS:</strong> MIS يقدم تقارير بصيغة ثابتة ومحددة مسبقاً، بينما DSS يوفر مرونة كاملة في تحليل البيانات للإجابة على أسئلة غير متوقعة. DSS يستخدم البيانات من مصادر داخلية وخارجية، بينما MIS يعتمد بشكل أساسي على البيانات الداخلية.</p>
+            </div>
+        </div>
+
+        <!-- ESS Section -->
+        <div id="ess" class="system-detail" style="margin-bottom: 6rem;">
+            <div class="section-header fade-in">
+                <h2 style="color: #fa709a;">Executive Support Systems (ESS)</h2>
+                <div class="arabic" style="color: #fee140;">أنظمة دعم المدراء التنفيذيين</div>
+            </div>
+
+            <div class="image-container fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/study.com/1f91f3741d18a46967b5d48af19ced1598475410.jpg" alt="Executive Dashboard">
+                <div class="image-caption">Figure 5: Executive Dashboard showing KPIs, trends, and strategic metrics | الشكل 5: لوحة المدير التنفيذي تظهر مؤشرات الأداء الرئيسية والاتجاهات والمقاييس الاستراتيجية</div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Definition | التعريف</h3>
+                    <p>Strategic-level information systems designed for top management. They provide immediate access to a company's key performance indicators (KPIs) through sophisticated but easy-to-use software.</p>
+                    <div class="arabic-text">
+                        أنظمة معلومات على المستوى الاستراتيجي مصممة للإدارة العليا. توفر وصولاً فورياً إلى مؤشرات الأداء الرئيسية للشركة من خلال برامج متطورة ولكن سهلة الاستخدام.
+                    </div>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-gauge-high"></i>
+                    </div>
+                    <h3>Features | المميزات</h3>
+                    <ul class="features-list">
+                        <li>Sophisticated presentation, summarization, and analysis</li>
+                        <li>Specifically designed to be easy-to-use (user-friendly)</li>
+                        <li>Provides immediate access to company KPIs</li>
+                        <li>Uses internal and external data sources</li>
+                        <li>Supports unstructured decision making</li>
+                    </ul>
+                    <ul class="features-list" style="margin-top: 1rem;">
+                        <li class="arabic-item">عرض وتلخيص وتحليل متطور</li>
+                        <li class="arabic-item">مصمم خصيصاً ليكون سهل الاستخدام</li>
+                        <li class="arabic-item">يوفر وصولاً فورياً إلى مؤشرات الأداء الرئيسية</li>
+                        <li class="arabic-item">يستخدم مصادر البيانات الداخلية والخارجية</li>
+                        <li class="arabic-item">يدعم اتخاذ القرار غير المنظم</li>
+                    </ul>
+                </div>
+
+                <div class="info-card fade-in">
+                    <div class="icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); -webkit-background-clip: text;">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Data Filtering | تصفية البيانات</h3>
+                    <p>ESS filters, compresses, and tracks critical data from various sources including MIS and DSS, presenting only the most critical information needed for strategic decisions.</p>
+                    <div class="arabic-text">
+                        يقوم ESS بتصفية وضغط وتتبع البيانات الحرجة من مصادر مختلفة بما في ذلك MIS و DSS، مع تقديم المعلومات الحرجة فقط اللازمة للقرارات الاستراتيجية.
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box fade-in" style="border-left-color: #fa709a; background: linear-gradient(135deg, rgba(250, 112, 154, 0.1) 0%, rgba(254, 225, 64, 0.1) 100%);">
+                <h4 style="margin-bottom: 1rem; color: #fa709a;"><i class="fas fa-chart-line"></i> ESS vs Other Systems | ESS مقابل الأنظمة الأخرى:</h4>
+                <p>While DSS supports decision-making with analytical models, ESS focuses on presenting summarized data in graphical formats (charts, graphs) for quick executive overview. ESS is less analytical but more visual and intuitive.</p>
+                <p style="margin-top: 1rem;">بينما يدعم DSS اتخاذ القرار بالنماذج التحليلية، يركز ESS على تقديم البيانات الملخصة في تنسيقات رسومية (مخططات، رسوم بيانية) للنظرة التنفيذية السريعة. ESS أقل تحليلاً ولكن أكثر بصرية وبديهية.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Other Systems Section -->
+    <section style="background: rgba(0,0,0,0.2);">
+        <div class="section-header fade-in">
+            <h2>Other Information Systems</h2>
+            <div class="arabic">أنظمة المعلومات الأخرى</div>
+        </div>
+
+        <div class="cards-grid">
+            <!-- OAS -->
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Office Automation Systems (OAS)</h3>
+                <div class="arabic-title-card">أنظمة أتمتة المكاتب</div>
+                <p>Support data workers by handling electronic communication, document management, and scheduling. Includes word processing, email, video conferencing, and project management programs.</p>
+                <div class="arabic-text">
+                    تدعم عمال البيانات من خلال التعامل مع الاتصالات الإلكترونية وإدارة المستندات والجدولة. تشمل معالجة النصوص والبريد الإلكتروني ومؤتمرات الفيديو وبرامج إدارة المشاريع.
+                </div>
+                <div class="image-container" style="margin-top: 1rem;">
+                    <img src="https://kimi-web-img.moonshot.cn/img/sourcebit.net/593cca225c9fef5adab32cbfc885883f5f08d067.png" alt="Office Automation System" style="max-height: 200px; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- KWS -->
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Knowledge Work Systems (KWS)</h3>
+                <div class="arabic-title-card">أنظمة عمل المعرفة</div>
+                <p>Support knowledge workers (engineers, doctors, lawyers) with specialized systems like CAD/CAM for engineering design, virtual reality for simulations, and investment workstations.</p>
+                <div class="arabic-text">
+                    تدعم عمال المعرفة (المهندسون، الأطباء، المحامون) بأنظمة متخصصة مثل CAD/CAM للتصميم الهندسي، الواقع الافتراضي للمحاكاة، ومحطات العمل الاستثمارية.
+                </div>
+                <div class="image-container" style="margin-top: 1rem;">
+                    <img src="https://kimi-web-img.moonshot.cn/img/ars.els-cdn.com/52b32676713033c03737ac131d197ae90a1320bb.jpg" alt="Knowledge Work Systems" style="max-height: 200px; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Expert Systems -->
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Expert Systems (AI)</h3>
+                <div class="arabic-title-card">الأنظمة الخبيرة (الذكاء الاصطناعي)</div>
+                <p>Artificial Intelligence systems with a Knowledge Base database. Examples include Oil Spill Advisor, Bird Species Identification, and Midwives Assistant. They mimic human expert decision-making.</p>
+                <div class="arabic-text">
+                    أنظمة ذكاء اصطناعي مع قاعدة بيانات المعرفة. الأمثلة تشمل مستشار التسرب النفطي، تحديد أنواع الطيور، ومساعد القابلات. تحاكي اتخاذ القرار الخبير البشري.
+                </div>
+                <div class="image-container" style="margin-top: 1rem;">
+                    <img src="https://kimi-web-img.moonshot.cn/img/almablog-media.s3.ap-south-1.amazonaws.com/5c3b673fa4c051d6c79aaf31d635a36770bf9882.png" alt="Expert System Architecture" style="max-height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Data vs Knowledge Workers -->
+        <div class="highlight-box fade-in" style="margin-top: 3rem;">
+            <h4 style="margin-bottom: 1.5rem; color: var(--accent);"><i class="fas fa-users"></i> Data Workers vs Knowledge Workers | عمال البيانات مقابل عمال المعرفة</h4>
+            <div class="cards-grid" style="margin-top: 0;">
+                <div style="padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                    <h5 style="color: #4facfe; margin-bottom: 1rem;">Data Workers (عمال البيانات)</h5>
+                    <p>Process and distribute information. Use Office Automation Systems (OAS). Examples: secretaries, accountants, clerks.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #94a3b8;">يعالجون ويوزعون المعلومات. يستخدمون أنظمة أتمتة المكاتب (OAS). أمثلة: السكرتيرون، المحاسبون، الموظفون الإداريون.</p>
+                </div>
+                <div style="padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                    <h5 style="color: #f093fb; margin-bottom: 1rem;">Knowledge Workers (عمال المعرفة)</h5>
+                    <p>Create new knowledge and serve as internal consultants. Use Knowledge Work Systems (KWS). Examples: engineers, doctors, lawyers, researchers.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #94a3b8;">يخلقون معرفة جديدة ويعملون كاستشاريين داخليين. يستخدمون أنظمة عمل المعرفة (KWS). أمثلة: المهندسون، الأطباء، المحامون، الباحثون.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section>
+        <div class="section-header fade-in">
+            <h2>Systems Comparison</h2>
+            <div class="arabic">مقارنة الأنظمة</div>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table class="comparison-table fade-in">
+                <thead>
+                    <tr>
+                        <th>Feature | الميزة</th>
+                        <th>TPS</th>
+                        <th>MIS</th>
+                        <th>DSS</th>
+                        <th>ESS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Level | المستوى</strong></td>
+                        <td>Operational | تشغيلي</td>
+                        <td>Management | إداري</td>
+                        <td>Management | إداري</td>
+                        <td>Strategic | استراتيجي</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Users | المستخدمون</strong></td>
+                        <td>Operations personnel | موظفو العمليات</td>
+                        <td>Middle managers | المديرون المتوسطون</td>
+                        <td>Professionals, staff | المحترفون، الموظفون</td>
+                        <td>Senior executives | المديرون التنفيذيون</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Decision Type | نوع القرار</strong></td>
+                        <td>Highly structured | عالي التنظيم</td>
+                        <td>Structured to semi-structured | منظم إلى شبه منظم</td>
+                        <td>Semi-structured | شبه منظم</td>
+                        <td>Unstructured | غير منظم</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Source | مصدر البيانات</strong></td>
+                        <td>Internal (transactions) | داخلي (معاملات)</td>
+                        <td>Internal (from TPS) | داخلي (من TPS)</td>
+                        <td>Internal & External | داخلي وخارجي</td>
+                        <td>Internal & External | داخلي وخارجي</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Output | المخرجات</strong></td>
+                        <td>Detailed reports | تقارير مفصلة</td>
+                        <td>Summary reports | تقارير ملخصة</td>
+                        <td>Decision analysis | تحليل القرار</td>
+                        <td>Projections, trends | التوقعات، الاتجاهات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time Focus | التركيز الزمني</strong></td>
+                        <td>Historical | تاريخي</td>
+                        <td>Present | حاضر</td>
+                        <td>Future oriented | موجه نحو المستقبل</td>
+                        <td>Future oriented | موجه نحو المستقبل</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" style="background: rgba(0,0,0,0.2);">
+        <div class="section-header fade-in">
+            <h2>Careers in IT</h2>
+            <div class="arabic">الوظائف في مجال تكنولوجيا المعلومات</div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Information Systems Manager</h3>
+                <div class="arabic-title-card">مدير نظم المعلومات</div>
+                <p>Oversees the work of programmers, computer specialists, systems analysts, and other computer professionals.</p>
+                <div class="arabic-text">
+                    يشرف على عمل المبرمجين ومتخصصي الحاسوب ومحللي النظم وغيرهم من محترفي الحاسوب.
+                </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(99, 102, 241, 0.2); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #a5b4fc;">$92,000 - $125,000</div>
+                    <div style="font-size: 0.9rem; color: #94a3b8; font-family: 'Cairo';">الراتب السنوي المتوقع</div>
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Required Skills | المهارات المطلوبة</h3>
+                <div class="arabic-title-card">المتطلبات الوظيفية</div>
+                <ul class="features-list">
+                    <li>Strong technical background | خلفية تقنية قوية</li>
+                    <li>Master's degree preferred | يفضل درجة الماجستير</li>
+                    <li>Strong leadership skills | مهارات قيادية قوية</li>
+                    <li>Communication skills | مهارات التواصل</li>
+                    <li>Project management | إدارة المشاريع</li>
+                </ul>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text;">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Webmasters</h3>
+                <div class="arabic-title-card">مديرو المواقع</div>
+                <p>Develop and maintain websites and resources. Work with marketing to increase site traffic and monitor customer interactions.</p>
+                <div class="arabic-text">
+                    يطورون ويحافظون على مواقع الويب والموارد. يعملون مع التسويق لزيادة حركة الموقع ومراقبة تفاعلات العملاء.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Section -->
+    <section>
+        <div class="section-header fade-in">
+            <h2>A Look to the Future</h2>
+            <div class="arabic">نظرة إلى المستقبل</div>
+        </div>
+
+        <div class="highlight-box fade-in" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-brain" style="font-size: 4rem; background: var(--gradient-1); -webkit-background-clip: text; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="margin-bottom: 1rem;">IBM's Watson</h3>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">As information amounts increase, it becomes more difficult to keep up. Can AI save us?</p>
+            <p style="margin-top: 1rem; font-family: 'Cairo'; color: #94a3b8;">مع زيادة كميات المعلومات، يصبح من الصعب مواكبتها. هل يمكن للذكاء الاصطناعي إنقاذنا؟</p>
+        </div>
+
+        <div class="cards-grid" style="margin-top: 3rem;">
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-car"></i></div>
+                <h3>Connected Cars</h3>
+                <div class="arabic-title-card">السيارات المتصلة</div>
+                <p>Car dashboards as powerful, Internet-connected computing devices with safety and diagnostic features.</p>
+                <div class="arabic-text">
+                    لوحات قيادة السيارات كأجهزة حوسبة قوية متصلة بالإنترنت مع ميزات السلامة والتشخيص.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-cloud"></i></div>
+                <h3>Cloud Computing</h3>
+                <div class="arabic-title-card">الحوسبة السحابية</div>
+                <p>Shifting computing activities from users' desktops to Internet computers, freeing users from maintaining software and data storage.</p>
+                <div class="arabic-text">
+                    نقل أنشطة الحوسبة من أجهزة المستخدمين إلى أجهزة الإنترنت، مما يحرر المستخدمين من صيانة البرامج وتخزين البيانات.
+                </div>
+            </div>
+
+            <div class="info-card fade-in">
+                <div class="icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Security & Privacy</h3>
+                <div class="arabic-title-card">الأمان والخصوصية</div>
+                <p>Increasing focus on protecting data and maintaining privacy in an interconnected world.</p>
+                <div class="arabic-text">
+                    تركيز متزايد على حماية البيانات والحفاظ على الخصوصية في عالم مترابط.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="color: #64748b; margin-bottom: 1rem;">Foundations of Digital Technology | أساسيات التكنولوجيا الرقمية</p>
+        <p style="color: #475569; font-size: 0.9rem;">Dr. Rashad Ragab - Helwan University | د. رشاد رجب - جامعة حلوان</p>
+        <p style="color: #475569; font-size: 0.8rem; margin-top: 2rem;">© 2026 Information Systems Guide. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Add active class to nav links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = '#ec4899';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
