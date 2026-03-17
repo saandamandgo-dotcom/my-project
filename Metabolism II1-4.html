@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Metabolism II · شرح متكامل | د. منار سليم</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Cairo for Arabic + Inter for English -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            background: #f5f9ff;
+            color: #0a1e3c;
+            line-height: 1.6;
+            direction: ltr;
+        }
+        /* bilingual mix: English left, Arabic right */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.2rem;
+        }
+        /* header with dual title */
+        .hero {
+            background: linear-gradient(145deg, #0b2a4f, #133e6f);
+            color: white;
+            padding: 2rem 1.5rem;
+            border-radius: 2.5rem 2.5rem 1rem 1rem;
+            box-shadow: 0 20px 30px -10px rgba(0,40,80,0.4);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "⚕️⚡";
+            font-size: 8rem;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            opacity: 0.1;
+            transform: rotate(-5deg);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .hero h1 small {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+            display: block;
+            margin-top: 0.5rem;
+            border-right: 3px solid #ffb347;
+            padding-right: 1rem;
+        }
+        .lecture-badge {
+            display: inline-block;
+            background: #ffb347;
+            color: #0a1e3c;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .section-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 1.8rem 1.5rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 15px 30px rgba(0,30,60,0.08);
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: all 0.2s;
+        }
+        .section-card:hover {
+            box-shadow: 0 20px 35px rgba(17, 54, 102, 0.15);
+            border-color: #b8d1f3;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .section-title .en {
+            color: #0a3a6b;
+            border-left: 8px solid #ff9f1c;
+            padding-left: 1rem;
+        }
+        .section-title .ar {
+            font-size: 1.9rem;
+            color: #0e4b3a;
+            font-weight: 600;
+            margin-right: auto;
+            padding-right: 1rem;
+            border-right: 8px solid #0e4b3a;
+        }
+        .subsection {
+            margin: 2rem 0 1.5rem 0;
+            padding: 1rem 0.5rem;
+        }
+        .subsection h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #113e6b;
+            display: flex;
+            align-items: center;
+            gap: 0 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px dashed #adc7ec;
+            padding-bottom: 0.5rem;
+        }
+        .subsection h3 span {
+            font-size: 1.6rem;
+            color: #006b4d;
+            margin-left: auto;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 750px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero h1 { font-size: 1.8rem; }
+            .section-title { flex-direction: column; align-items: start; }
+        }
+        .en-box {
+            background: #e5f0ff;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid #b9d3fc;
+            box-shadow: 0 4px 8px rgba(0, 53, 102, 0.05);
+        }
+        .ar-box {
+            background: #ecfdf5;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid #b7e0cd;
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            box-shadow: 0 4px 8px rgba(0, 70, 50, 0.05);
+        }
+        .ar-box p, .ar-box li {
+            font-size: 1.2rem;
+        }
+        .en-box p, .en-box li {
+            font-size: 1.1rem;
+        }
+        .image-placeholder {
+            background: #f0f4fe;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin: 1.8rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            border: 2px dashed #3d7ea6;
+        }
+        .image-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0.8rem;
+            max-width: 280px;
+            box-shadow: 0 10px 15px -8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .image-card i {
+            font-size: 5rem;
+            color: #1d5b8e;
+            margin-bottom: 0.5rem;
+        }
+        .image-card span {
+            display: block;
+            background: #faf0d7;
+            padding: 0.3rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .list-icon {
+            list-style: none;
+            padding: 0;
+        }
+        .list-icon li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .list-icon li i {
+            color: #ff7823;
+            font-size: 1.4rem;
+            min-width: 28px;
+            text-align: center;
+        }
+        .disease-tag {
+            background: #cbdffc;
+            color: #021c38;
+            border-radius: 50px;
+            padding: 0.3rem 1.3rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.4rem 0.2rem;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #a3c6ff, transparent);
+            margin: 2rem 0;
+        }
+        .footer-note {
+            background: #071b36;
+            color: white;
+            border-radius: 3rem 3rem 1.5rem 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 1.2rem;
+        }
+        .footer-note a {
+            color: #ffc107;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HERO section -->
+    <div class="hero">
+        <h1>
+            Metabolism II · BIO 2202 <br>
+            <small>التمثيل الغذائي · المحاضرات 1-4</small>
+        </h1>
+        <div class="lecture-badge">
+            <i class="fas fa-flask"></i> Assoc. Prof. Manar Seleem <i class="fas fa-star"></i>
+        </div>
+        <p style="margin-top: 1.2rem; font-size: 1.3rem;"><i class="fas fa-book-open"></i> 4 محاضرات متكاملة / Complete lectures 1–4</p>
+    </div>
+
+    <!-- LECTURE 1 : Carbohydrate metabolic disorders -->
+    <div class="section-card">
+        <div class="section-title">
+            <span class="en">📘 Lecture 1: Carbohydrate Metabolic Disorders</span>
+            <span class="ar">المحاضرة 1: اضطرابات استقلاب الكربوهيدرات</span>
+        </div>
+        <!-- Intro text bilingual -->
+        <div class="grid-2">
+            <div class="en-box">
+                <h4><i class="fas fa-dna"></i> Genetic mutations & inborn errors</h4>
+                <p>Defects in disaccharidases cause osmotic diarrhea, flatulence. Lactose intolerance affects 75% adults globally.</p>
+                <ul class="list-icon">
+                    <li><i class="fas fa-poop"></i> Osmotic diarrhea due to undigested disaccharides</li>
+                    <li><i class="fas fa-wind"></i> Bacterial fermentation → CO₂, H₂, cramps</li>
+                </ul>
+            </div>
+            <div class="ar-box">
+                <h4><i class="fas fa-dna"></i> الطفرات الوراثية والأخطاء الأيضية</h4>
+                <p>أي خلل في إنزيمات ثنائيات السكاريد يسبب إسهالاً تناضُحياً وانتفاخاً. عدم تحمل اللاكتوز شائع جداً.</p>
+                <ul class="list-icon">
+                    <li><i class="fas fa-poop"></i> إسهال تناضحي بسبب السكريات غير المهضومة</li>
+                    <li><i class="fas fa-wind"></i> تخمر بكتيري ينتج غازات ومغص</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Lactose intolerance + Wernicke -->
+        <div style="background:#fcf2e1; border-radius: 1.8rem; padding: 1.5rem; margin: 1.2rem 0;">
+            <h3>🥛 Lactose intolerance / عدم تحمل اللاكتوز</h3>
+            <div class="grid-2">
+                <div class="en-box"> <p><strong>Cause:</strong> reduced lactase activity (chromosome 2). Common in African, Asian descent. <br> ✅ Treatment: lactose-free products, lactase pills, yogurt.</p> </div>
+                <div class="ar-box"> <p><strong>السبب:</strong> نقص إنزيم اللاكتاز (الكروموسوم 2). شائع في أفريقيا وآسيا.<br> ✅ العلاج: منتجات خالية من اللاكتوز، حبوب اللاكتاز، الزبادي.</p> </div>
+            </div>
+        </div>
+        <!-- Wernicke-Korsakoff -->
+        <div class="subsection">
+            <h3><i class="fas fa-brain"></i> Wernicke-Korsakoff Syndrome <span>متلازمة فيرنيكي كورساكوف</span></h3>
+            <div class="grid-2">
+                <div class="en-box">
+                    <p><span class="disease-tag">thiamine (B1) deficiency</span> due to alcoholism/malnutrition. <br> Affects brain: confusion, ataxia, nystagmus. <br> <i class="fas fa-heart"></i> Heart failure, cognitive decline. </p>
+                </div>
+                <div class="ar-box">
+                    <p>نقص حاد في فيتامين B1 بسبب الكحول أو سوء التغذية. يؤثر على الدماغ: ترنح، ارتباك، حركات عين سريعة. فشل القلب وتدهور إدراكي.</p>
+                </div>
+            </div>
+            <!-- image placeholder for Wernicke -->
+            <div class="image-placeholder">
+                <div class="image-card"><i class="fas fa-brain"></i><span>🧠 Wernicke encephalopathy: mammillary bodies</span></div>
+                <div class="image-card"><i class="fas fa-eye"></i><span>👁️ Nystagmus & ophthalmoplegia</span></div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3>⚡ Pyruvate dehydrogenase deficiency <span>نقص نازعة هيدروجين البيروفات</span></h3>
+            <div class="grid-2">
+                <div class="en-box"><p>E1 defect (X-linked dominant) → lactic acidosis, neurological failure. <br> Treatment: low-carb diet + thiamine.</p></div>
+                <div class="ar-box"><p>خلل في الوحدة E1 (مرتبط بـX) → حمض لاكتيكي، تلف عصبي. العلاج: حمية قليلة الكربوهيدرات وثيامين.</p></div>
+            </div>
+            <h3 style="margin-top:1.5rem;">🧬 Leigh syndrome <span>متلازمة لي</span></h3>
+            <div class="grid-2">
+                <div class="en-box"><p>Mitochondrial disorder (PDH, ETC, ATP synthase). Necrotizing encephalomyelopathy, developmental delay. <br> mtDNA or nuclear mutations.</p></div>
+                <div class="ar-box"><p>مرض ميتوكوندريالي (خلل في PDH أو سلسلة التنفس). التهاب دماغي نخاعي مترق، تأخر تطوري. طفرات في mtDNA أو النواة.</p></div>
+            </div>
+            <div class="image-placeholder">
+                <div class="image-card"><i class="fas fa-dna"></i><span>mitochondrial DNA</span></div>
+                <div class="image-card"><i class="fas fa-child"></i><span>hypotonia, ataxia</span></div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <!-- LECTURE 2 : Glycogen metabolism -->
+    <div class="section-card">
+        <div class="section-title">
+            <span class="en">📗 Lecture 2: Glycogen Synthesis & Degradation</span>
+            <span class="ar">المحاضرة 2: تركيب وتكسير الجليكوجين</span>
+        </div>
+        <div class="grid-2">
+            <div class="en-box">
+                <h4>Structure</h4>
+                <p>Branched polymer (α1→4, α1→6). Main stores: liver (~100g) & muscle (~400g).</p>
+                <h4>Glycogenesis</h4>
+                <p>UDP-glucose + glycogenin primer. Glycogen synthase elongates, branching enzyme makes α1→6.</p>
+            </div>
+            <div class="ar-box">
+                <h4>التركيب</h4>
+                <p>عديد سكاريد متفرع (روابط α1→4 و α1→6). المخزون: كبد (100غ) وعضلات (400غ).</p>
+                <h4>التركيب (Glycogenesis)</h4>
+                <p>UDP-جلوكوز + بروتين glycogenin. إنزيم glycogen synthase يطيل، والفرع يصنع α1→6.</p>
+            </div>
+        </div>
+        <div style="margin:1.2rem 0">
+            <h3>🔁 Glycogenolysis (degradation) / الهدم</h3>
+            <div class="grid-2">
+                <div class="en-box">Glycogen phosphorylase → G1P. Debranching enzyme (4:4 transferase + α1→6 glucosidase) releases free glucose. Lysosomal acid maltase (α1→4) breaks 1–3%.</div>
+                <div class="ar-box">إنزيم phosphorylase يُنتج G1P. إنزيم نزع التفرع (4:4 ترانسفيراز و α1→6 جلوكوزيداز) يعطي جلوكوز حر. إنزيم الليسوسوم acid maltase يكسر 1-3%.</div>
+            </div>
+        </div>
+        <div class="image-placeholder">
+            <div class="image-card"><i class="fas fa-cubes"></i><span>glycogen granule</span></div>
+            <div class="image-card"><i class="fas fa-sitemap"></i><span>branching (α1→6)</span></div>
+        </div>
+    </div>
+
+    <!-- LECTURE 3 : Regulation + GSDs -->
+    <div class="section-card">
+        <div class="section-title">
+            <span class="en">📙 Lecture 3: Regulation & Glycogen Storage Diseases</span>
+            <span class="ar">المحاضرة 3: التنظيم وأمراض اختزان الجليكوجين</span>
+        </div>
+        <!-- cAMP cascade -->
+        <div class="grid-2">
+            <div class="en-box">
+                <h4>cAMP pathway (glucagon/epinephrine)</h4>
+                <p>GPCR → ↑cAMP → PKA → phosphorylase kinase (active) → glycogen phosphorylase (active) → glycogenolysis. <br> Glycogen synthase is phosphorylated (inactive).</p>
+                <p><i class="fas fa-hand"></i> Calcium via calmodulin activates phosphorylase kinase in muscle/liver.</p>
+            </div>
+            <div class="ar-box">
+                <h4>مسار cAMP (جلوكاجون / إبينفرين)</h4>
+                <p>يزيد cAMP → ينشط PKA → فسفرة منشطة لفسفوريلاز الكايناز → فسفوريلاز الجليكوجين النشط. بينما يُثبط glycogen synthase بالفسفرة.</p>
+                <p>الكالسيوم عبر كالموديولين ينشط فسفوريلاز الكايناز في العضلات والكبد.</p>
+            </div>
+        </div>
+        <!-- GSD images and types -->
+        <div style="background:#e2f0fa; border-radius: 1.5rem; padding: 1rem;">
+            <h4>💊 Glycogen storage diseases (GSDs) / أمراض اختزان الجليكوجين</h4>
+            <div class="grid-2">
+                <div class="en-box">
+                    <ul>
+                        <li><b>Type Ia (von Gierke):</b> glucose‑6‑phosphatase deficiency – severe fasting hypoglycemia, hepatomegaly.</li>
+                        <li><b>Type II (Pompe):</b> lysosomal α1→4 glucosidase deficiency – cardiomyopathy, fatal infantile form; only lysosomal GSD.</li>
+                        <li><b>Type IV (Andersen):</b> branching enzyme deficiency – long unbranched chains.</li>
+                    </ul>
+                </div>
+                <div class="ar-box">
+                    <ul>
+                        <li><b>النوع Ia (فون غيرك):</b> نقص جلوكوز-6-فسفاتاز – نقص سكر دم حاد، تضخم كبد.</li>
+                        <li><b>النوع II (بومبي):</b> نقص اللايسوسومال α1→4 جلوكوزيداز – اعتلال عضلة القلب، مميت. الوحيد الذي يخزن في اللايسوسوم.</li>
+                        <li><b>النوع IV (أندرسن):</b> نقص إنزيم التفرع – سلاسل طويلة غير متفرعة.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="image-placeholder">
+            <div class="image-card"><i class="fas fa-liver"></i><span>von Gierke: enlarged liver</span></div>
+            <div class="image-card"><i class="fas fa-heartbeat"></i><span>Pompe: cardiomyopathy</span></div>
+        </div>
+    </div>
+
+    <!-- LECTURE 4 : Lipid metabolic disorders -->
+    <div class="section-card">
+        <div class="section-title">
+            <span class="en">📕 Lecture 4: Lipid Metabolism Disorders</span>
+            <span class="ar">المحاضرة 4: اضطرابات استقلاب الدهون</span>
+        </div>
+        <!-- carnitine deficiencies -->
+        <div class="subsection">
+            <h3><i class="fas fa-fire"></i> Carnitine deficiencies / نقص الكارنيتين</h3>
+            <div class="grid-2">
+                <div class="en-box">
+                    <p>Sources: diet (meat) & synthesis from Lys/Met in liver/kidney. Muscle relies on uptake. <br> Deficiency causes: liver disease, vegans, hemodialysis, genetic CPT deficiencies.</p>
+                    <p><b>CPT-I deficiency (liver):</b> no LCFA oxidation → hypoglycemia, coma. <br> <b>CPT-II deficiency (muscle):</b> myoglobinemia, weakness.</p>
+                </div>
+                <div class="ar-box">
+                    <p>مصادر الكارنيتين: اللحوم وتصنيع داخلي (كبد، كلية). العضلات تعتمد على الامتصاص. النقص يحدث في أمراض الكبد، النباتيين، الغسيل الكلوي، أو خلل جيني في CPT.</p>
+                    <p><b>نقص CPT-I (كبد):</b> لا أكسدة للأحماض الدهنية طويلة السلسلة → نقص سكر وغيبوبة. <br> <b>نقص CPT-II (عضلات):</b> ضعف عضلي، وجود ميوجلوبين في البول.</p>
+                </div>
+            </div>
+            <div class="image-placeholder">
+                <div class="image-card"><i class="fas fa-utensils"></i><span>meat = carnitine</span></div>
+                <div class="image-card"><i class="fas fa-kidneys"></i><span>hemodialysis loss</span></div>
+            </div>
+        </div>
+        <!-- MCAD deficiency -->
+        <div class="subsection">
+            <h3>⚠️ MCAD deficiency <span>نقص نازعة هيدروجين الأسيل-CoA متوسط السلسلة</span></h3>
+            <div class="grid-2">
+                <div class="en-box">
+                    <p>Autosomal recessive; unable to oxidize C6-C10 fatty acids. Fasting → hypoketotic hypoglycemia, dicarboxylic aciduria. Linked to some SIDS. <br> Treatment: avoid fasting.</p>
+                </div>
+                <div class="ar-box">
+                    <p>مرض وراثي جسمي متنحي، عدم أكسدة الأحماض الدهنية متوسطة السلسلة. يسبب نقص سكر مع غياب الكيتونات وحمض ثنائي الكربوكسيل في البول. علاج: تجنب الصيام.</p>
+                </div>
+            </div>
+        </div>
+        <!-- peroxisomal oxidation -->
+        <div style="margin-top:2rem;">
+            <h3>🦠 Peroxisomal β-oxidation & Zellweger / ALD</h3>
+            <div class="grid-2">
+                <div class="en-box">
+                    <p>VLCFA (≥C22) oxidized in peroxisomes → H₂O₂ produced. <br> <b>Zellweger syndrome:</b> peroxisome biogenesis disorder → facial abnormalities, hepatomegaly, seizures. <br> <b>X-ALD:</b> ABCD1 mutation → VLCFA accumulation, demyelination, adrenal insufficiency.</p>
+                </div>
+                <div class="ar-box">
+                    <p>الأحماض الدهنية طويلة جداً تتأكسد في البيروكسيسوم وينتج H₂O₂. متلازمة زيلويغر: خلل في تشكيل البيروكسيسوم → تشوهات وجه، تضخم كبد، صرع. X-ALD: تراكم VLCFA يزيل الميالين.</p>
+                </div>
+            </div>
+            <div class="image-placeholder">
+                <div class="image-card"><i class="fas fa-child"></i><span>Zellweger: broad nose, epicanthus</span></div>
+                <div class="image-card"><i class="fas fa-brain"></i><span>ALD: demyelination</span></div>
+            </div>
+        </div>
+        <!-- Question MCAD -->
+        <div style="background: #d1e6ff; border-radius: 1.5rem; padding: 1.2rem; margin-top:2rem;">
+            <p><i class="fas fa-question-circle"></i> <strong>MCAD clinical case (6-month boy, seizure, hypoglycemia, no ketones, dicarboxylic acids).</strong> <br> The hypoglycemia is due to: decreased acetyl-CoA production → increased glucose demand. Answer: A. decreased acetyl CoA production. (نقص إنتاج الأسيتيل CoA).</p>
+        </div>
+    </div>
+
+    <!-- Summary MCQ from Lecture 2 PDF (last page) -->
+    <div class="section-card">
+        <div class="section-title">
+            <span class="en">🧪 Clinical Pearls</span>
+            <span class="ar">حالات سريرية</span>
+        </div>
+        <div class="grid-2">
+            <div class="en-box">
+                <p><i class="fas fa-teen"></i> Teen on fat-free diet: most deficient in synthesizing prostaglandins (essential fatty acids deficiency) → <strong>E. prostaglandins</strong>.</p>
+            </div>
+            <div class="ar-box">
+                <p><i class="fas fa-teen"></i> مراهق يتبع حمية خالية من الدهون: الأكثر نقصاً في التركيب هو البروستاغلاندينات (لأنه يحتاج أحماض دهنية أساسية).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+        <i class="fas fa-flask"></i> Assoc. Prof. Manar Seleem — Metabolism II (BIO 2202) <br>
+        <span style="font-size:1rem;">مصدر: محاضرات 1-4 • تصميم ثنائي اللغة بالعربية والإنجليزية • 2024-2025</span><br>
+        <a href="#"><i class="fas fa-arrow-up"></i> الرجوع للأعلى</a>
+    </div>
+
+</div> <!-- container -->
+</body>
+</html>
