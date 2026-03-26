@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gog & Saif - Best Friends Forever</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -22,7 +23,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            padding: 15px;
+            overflow-x: hidden;
             position: relative;
         }
         
@@ -32,13 +34,14 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Friendships Icons Floating */
+        /* Floating Icons */
         .floating-icon {
-            position: absolute;
-            font-size: 2rem;
+            position: fixed;
+            font-size: 1.8rem;
             opacity: 0.3;
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
+            z-index: 1;
         }
         
         @keyframes float {
@@ -48,26 +51,28 @@
         
         .container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 50px;
+            border-radius: 25px;
+            padding: 30px 25px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
+            width: 100%;
             max-width: 600px;
             position: relative;
             z-index: 10;
-            border: 5px solid #ffd700;
+            border: 4px solid #ffd700;
         }
         
         .friendship-badge {
             background: linear-gradient(45deg, #FFD700, #FFA500);
             color: white;
-            padding: 10px 30px;
+            padding: 8px 25px;
             border-radius: 50px;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
             animation: pulse 2s infinite;
+            font-size: 0.95rem;
         }
         
         @keyframes pulse {
@@ -77,28 +82,28 @@
         
         h1 {
             color: #764ba2;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         .names {
             color: #667eea;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .question-box {
             background: linear-gradient(135deg, #667eea20, #764ba220);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
             border: 3px dashed #667eea;
         }
         
         .question {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             color: #333;
             font-weight: 700;
             line-height: 1.6;
@@ -111,52 +116,57 @@
         
         .buttons {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 30px;
             position: relative;
-            height: 80px;
+            min-height: 70px;
+            flex-wrap: wrap;
         }
         
         .btn {
-            padding: 15px 50px;
-            font-size: 1.5rem;
+            padding: 12px 40px;
+            font-size: 1.3rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
             transition: all 0.3s;
-            position: absolute;
+            position: relative;
+            min-width: 120px;
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
         
         .btn-yes {
             background: linear-gradient(45deg, #11998e, #38ef7d);
             color: white;
-            right: 20%;
-            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+            order: 2;
         }
         
-        .btn-yes:hover {
+        .btn-yes:hover, .btn-yes:active {
             transform: scale(1.1) rotate(-3deg);
-            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.6);
+            box-shadow: 0 12px 35px rgba(17, 153, 142, 0.6);
         }
         
         .btn-no {
             background: linear-gradient(45deg, #eb3349, #f45c43);
             color: white;
-            left: 20%;
-            box-shadow: 0 10px 30px rgba(235, 51, 73, 0.4);
-            transition: all 0.2s ease-out;
+            box-shadow: 0 8px 25px rgba(235, 51, 73, 0.4);
+            order: 1;
+            transition: transform 0.3s ease-out;
         }
         
         .message {
             display: none;
-            margin-top: 30px;
-            padding: 30px;
+            margin-top: 25px;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea15, #764ba215);
-            border-radius: 20px;
-            border-right: 5px solid #667eea;
+            border-radius: 15px;
+            border-right: 4px solid #667eea;
             text-align: right;
             animation: slideIn 0.8s ease-out;
         }
@@ -174,22 +184,23 @@
         
         .message h3 {
             color: #764ba2;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             text-align: center;
         }
         
         .message p {
             color: #444;
-            font-size: 1.3rem;
-            line-height: 2;
-            margin: 15px 0;
-            padding: 10px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 10px 0;
+            padding: 12px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             animation: fadeInUp 0.5s ease-out forwards;
             opacity: 0;
+            text-align: right;
         }
         
         @keyframes fadeInUp {
@@ -215,7 +226,7 @@
         
         .heart {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.5rem;
             animation: fly 4s ease-in forwards;
             opacity: 0;
         }
@@ -235,7 +246,7 @@
         }
         
         .stars {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -246,7 +257,7 @@
         .star {
             position: absolute;
             color: #FFD700;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             animation: twinkle 2s infinite;
         }
         
@@ -256,8 +267,8 @@
         }
         
         .emoji-decoration {
-            font-size: 3rem;
-            margin: 10px;
+            font-size: 2rem;
+            margin: 5px;
             animation: bounce 2s infinite;
             display: inline-block;
         }
@@ -266,17 +277,91 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+        
+        .signature {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #667eea40;
+            color: #764ba2;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .names {
+                font-size: 1.2rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 10px 30px;
+                font-size: 1.1rem;
+                min-width: 100px;
+            }
+            
+            .message h3 {
+                font-size: 1.3rem;
+            }
+            
+            .message p {
+                font-size: 1rem;
+                padding: 10px;
+                line-height: 1.7;
+            }
+            
+            .floating-icon {
+                font-size: 1.2rem;
+            }
+            
+            .friendship-badge {
+                font-size: 0.85rem;
+                padding: 6px 20px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .question {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 8px 25px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Tablet */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                max-width: 80%;
+            }
+        }
     </style>
 <base target="_blank">
 </head>
 <body>
     <!-- Floating Icons -->
-    <div class="floating-icon" style="top: 10%; left: 10%; animation-delay: 0s;">🤝</div>
-    <div class="floating-icon" style="top: 20%; right: 15%; animation-delay: 1s;">⭐</div>
-    <div class="floating-icon" style="bottom: 20%; left: 20%; animation-delay: 2s;">🎈</div>
-    <div class="floating-icon" style="bottom: 10%; right: 10%; animation-delay: 3s;">🌟</div>
-    <div class="floating-icon" style="top: 50%; left: 5%; animation-delay: 4s;">💫</div>
-    <div class="floating-icon" style="top: 50%; right: 5%; animation-delay: 5s;">✨</div>
+    <div class="floating-icon" style="top: 5%; left: 5%; animation-delay: 0s;">🤝</div>
+    <div class="floating-icon" style="top: 15%; right: 5%; animation-delay: 1s;">⭐</div>
+    <div class="floating-icon" style="bottom: 25%; left: 3%; animation-delay: 2s;">🎈</div>
+    <div class="floating-icon" style="bottom: 10%; right: 5%; animation-delay: 3s;">🌟</div>
+    <div class="floating-icon" style="top: 40%; left: 2%; animation-delay: 4s;">💫</div>
+    <div class="floating-icon" style="top: 60%; right: 3%; animation-delay: 5s;">✨</div>
+    <div class="floating-icon" style="bottom: 40%; left: 8%; animation-delay: 1.5s;">🎯</div>
+    <div class="floating-icon" style="top: 25%; right: 8%; animation-delay: 2.5s;">🔥</div>
     
     <div class="stars" id="stars"></div>
     <div class="hearts" id="hearts"></div>
@@ -292,14 +377,14 @@
                 يا <span class="highlight">Gog</span> الجميلة...<br>
                 انتي عارفة ان <span class="highlight">Saif</span> صحبك واخوك اللي بيحترمك وبيقدرك؟<br>
                 <br>
-                <span style="font-size: 1.2rem; color: #666;">
+                <span style="font-size: 0.95rem; color: #666;">
                     (اللي جابه ربنا واللي مش هيسيبك في حالك أبداً 😄)
                 </span>
             </div>
         </div>
         
-        <div class="buttons">
-            <button class="btn btn-no" id="noBtn" onmouseover="runAway()" onclick="runAway()">
+        <div class="buttons" id="buttonContainer">
+            <button class="btn btn-no" id="noBtn" ontouchstart="runAway(event)" onmouseover="runAway(event)" onclick="runAway(event)">
                 No ❌
             </button>
             <button class="btn btn-yes" onclick="sayYes()">
@@ -311,35 +396,52 @@
             <h3>🌟 ده اللي احنا عايزين نسمعه! 🌟</h3>
             
             <p style="animation-delay: 0.2s;">
-                🎯 <strong>Gog</strong>، انتي مش بس صحبتي... انتي اختي اللي مربطهاش ربطة! 
+                🎯 <strong>Gog</strong>، انتي مش بس صحبتي... انتي اختي اللي مربطهاش ربطة! ودايماً هكون فخور اني اعرفك
             </p>
             
             <p style="animation-delay: 0.4s;">
-                💪 معاكي بقالي وقت، وكل يوم بقول "ربنا يخليكي ليا" عشان الصحبة الصح دي نعمة
+                💪 معاكي بقالي وقت، وكل يوم بقول "ربنا يخليكي ليا" عشان الصحبة الصح دي نعمة مش بتهون
             </p>
             
             <p style="animation-delay: 0.6s;">
-                😎 انا <strong>Saif</strong> وافتخر اني صاحب بنت زيّك - شاطرة، طيبة، ودايماً بتنوري أي مكان
+                😎 انا <strong>Saif</strong> وافتخر اني صاحب بنت زيّك - شاطرة، طيبة، ودايماً بتنوري أي مكان تدخله
             </p>
             
             <p style="animation-delay: 0.8s;">
-                🤝 سوا البنحارب، سوا البنضحك، ولو حد زعلك... خليه يلاقيني! 
+                🤝 سوا البنحارب، سوا البنضحك، ولو حد زعلك... خليه يلاقيني! عشان انا السند اللي مش هيتزحزح
             </p>
             
             <p style="animation-delay: 1.0s;">
-                👑 انتي <strong>الدلعونة</strong> بتاعتي، وانا <strong>السند</strong> بتاعك دايماً
+                👑 انتي <strong>الدلعونة</strong> بتاعتي، وانا <strong>السند</strong> بتاعك دايماً... والاتنين مكملين بعض!
             </p>
             
             <p style="animation-delay: 1.2s;">
-                🎉 "الصحبة الحلوة مش بتتباع... واللي زيك يا Gog بتتجمع مش بتتفرّق! 💎"
+                🎉 "الصحبة الحلوة مش بتتباع... واللي زيك يا <strong>Gog</strong> بتتجمع مش بتتفرّق! 💎"
             </p>
             
-            <div style="margin-top: 20px; font-size: 2rem;">
+            <p style="animation-delay: 1.4s;">
+                💬 افتكري دايماً: مهما حصل، مهما بعدنا، مهما جت ضغوط... <strong>Saif</strong> هيفضل موجود. مش وعد، ده حقيقة!
+            </p>
+            
+            <p style="animation-delay: 1.6s;">
+                🏆 افتخري بنفسك يا صحبتي، عشان انتي استثنائية بكل المقاييس... وانا محظوظ اني جزء من حياتك!
+            </p>
+            
+            <p style="animation-delay: 1.8s;">
+                ⚡ اخر حاجة: لو حد سألك مين <strong>Saif</strong>؟ قوليله ده "اخويا الروحي، صاحبي اللي فوق الراس"! 
+            </p>
+            
+            <div style="margin-top: 20px; font-size: 1.8rem; text-align: center;">
                 <span class="emoji-decoration">🤗</span>
                 <span class="emoji-decoration">💙</span>
                 <span class="emoji-decoration">🌈</span>
                 <span class="emoji-decoration">⚡</span>
                 <span class="emoji-decoration">🔥</span>
+            </div>
+            
+            <div class="signature">
+                مع خالص التقدير والاحترام<br>
+                من أخوك الصحبي: Saif 💎
             </div>
         </div>
     </div>
@@ -348,97 +450,121 @@
         const noBtn = document.getElementById('noBtn');
         const container = document.querySelector('.container');
         let moveCount = 0;
+        let isMobile = window.matchMedia("(max-width: 768px)").matches;
         
-        function runAway() {
+        function runAway(e) {
+            if(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
             const containerRect = container.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
             
-            // Calculate max movement within container bounds
-            const maxX = containerRect.width - btnRect.width - 40;
-            const maxY = 200;
+            // Calculate boundaries relative to viewport
+            const maxMoveX = Math.min(150, window.innerWidth * 0.3);
+            const maxMoveY = 100;
             
-            const randomX = Math.random() * maxX - (maxX/2);
-            const randomY = Math.random() * maxY - (maxY/2);
+            let randomX = (Math.random() - 0.5) * 2 * maxMoveX;
+            let randomY = (Math.random() - 0.5) * 2 * maxMoveY;
+            
+            // Ensure button stays visible
+            const newLeft = btnRect.left + randomX;
+            const newTop = btnRect.top + randomY;
+            
+            if (newLeft < 20) randomX += 50;
+            if (newLeft > window.innerWidth - 100) randomX -= 50;
+            if (newTop < 100) randomY += 50;
+            if (newTop > window.innerHeight - 100) randomY -= 50;
             
             noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
             
-            // Make it faster each time
             moveCount++;
-            if (moveCount > 5) {
+            if (moveCount === 3) {
                 noBtn.innerHTML = "مستحيل! 😅";
-            }
-            if (moveCount > 10) {
-                noBtn.innerHTML = "استسلمت! 🏳️";
+            } else if (moveCount === 6) {
+                noBtn.innerHTML = "ياختي سيبيني! 😂";
+            } else if (moveCount === 10) {
+                noBtn.innerHTML = "خلاص! 🏳️";
+            } else if (moveCount > 12) {
+                noBtn.innerHTML = "Yes! ✅";
+                setTimeout(() => sayYes(), 500);
             }
         }
         
         function sayYes() {
             const message = document.getElementById('message');
-            message.style.display = 'block';
+            const buttons = document.getElementById('buttonContainer');
             
-            // Play success sound
+            message.style.display = 'block';
+            buttons.style.display = 'none';
+            
+            // Play sound
             playSound();
             
-            // Create flying emojis
+            // Create effects
             createFlyingEmojis();
-            
-            // Create stars
             createStars();
             
-            // Hide buttons
-            document.querySelector('.buttons').style.display = 'none';
-            
-            // Scroll to message
-            message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Smooth scroll to message
+            setTimeout(() => {
+                message.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
         
         function playSound() {
-            // Create audio context for a nice chord
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            
-            const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C major chord
-            const now = audioContext.currentTime;
-            
-            frequencies.forEach((freq, index) => {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const frequencies = [523.25, 659.25, 783.99, 1046.50];
+                const now = audioContext.currentTime;
                 
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = freq;
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.3, now + index * 0.1);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, now + index * 0.1 + 1.5);
-                
-                oscillator.start(now + index * 0.1);
-                oscillator.stop(now + index * 0.1 + 1.5);
-            });
+                frequencies.forEach((freq, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.2, now + index * 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + index * 0.1 + 1);
+                    
+                    oscillator.start(now + index * 0.1);
+                    oscillator.stop(now + index * 0.1 + 1);
+                });
+            } catch(e) {
+                console.log('Audio play failed');
+            }
         }
         
         function createFlyingEmojis() {
             const heartsContainer = document.getElementById('hearts');
-            const emojis = ['🤝', '⭐', '✨', '💫', '🎉', '🔥', '💎', '🌟', '🤗', '👊'];
+            const emojis = ['🤝', '⭐', '✨', '💫', '🎉', '🔥', '💎', '🌟', '🤗', '👊', '💪', '🎯'];
+            const count = isMobile ? 20 : 30;
             
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < count; i++) {
                 setTimeout(() => {
                     const emoji = document.createElement('div');
                     emoji.className = 'heart';
                     emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
                     emoji.style.left = Math.random() * 100 + '%';
                     emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                    emoji.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                    emoji.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
                     heartsContainer.appendChild(emoji);
                     
                     setTimeout(() => emoji.remove(), 4000);
-                }, i * 100);
+                }, i * 80);
             }
         }
         
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 20; i++) {
+            const existingStars = starsContainer.querySelectorAll('.star');
+            if(existingStars.length > 15) return;
+            
+            for (let i = 0; i < 15; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.innerHTML = '⭐';
@@ -449,8 +575,13 @@
             }
         }
         
-        // Initial stars
+        // Initialize
         createStars();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            isMobile = window.matchMedia("(max-width: 768px)").matches;
+        });
     </script>
 </body>
 </html>
