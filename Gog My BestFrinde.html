@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gog & Saif - Best Friends Forever</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffd700 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Friendships Icons Floating */
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+            border: 5px solid #ffd700;
+        }
+        
+        .friendship-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            color: #764ba2;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .names {
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+        
+        .question-box {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 3px dashed #667eea;
+        }
+        
+        .question {
+            font-size: 1.6rem;
+            color: #333;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        
+        .highlight {
+            color: #f5576c;
+            font-weight: 900;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            height: 80px;
+        }
+        
+        .btn {
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            position: absolute;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            right: 20%;
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+        }
+        
+        .btn-yes:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.6);
+        }
+        
+        .btn-no {
+            background: linear-gradient(45deg, #eb3349, #f45c43);
+            color: white;
+            left: 20%;
+            box-shadow: 0 10px 30px rgba(235, 51, 73, 0.4);
+            transition: all 0.2s ease-out;
+        }
+        
+        .message {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-radius: 20px;
+            border-right: 5px solid #667eea;
+            text-align: right;
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message h3 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .message p {
+            color: #444;
+            font-size: 1.3rem;
+            line-height: 2;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: fly 4s ease-in forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fly {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh) scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1.5) rotate(720deg);
+            }
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            color: #FFD700;
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .emoji-decoration {
+            font-size: 3rem;
+            margin: 10px;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Floating Icons -->
+    <div class="floating-icon" style="top: 10%; left: 10%; animation-delay: 0s;">🤝</div>
+    <div class="floating-icon" style="top: 20%; right: 15%; animation-delay: 1s;">⭐</div>
+    <div class="floating-icon" style="bottom: 20%; left: 20%; animation-delay: 2s;">🎈</div>
+    <div class="floating-icon" style="bottom: 10%; right: 10%; animation-delay: 3s;">🌟</div>
+    <div class="floating-icon" style="top: 50%; left: 5%; animation-delay: 4s;">💫</div>
+    <div class="floating-icon" style="top: 50%; right: 5%; animation-delay: 5s;">✨</div>
+    
+    <div class="stars" id="stars"></div>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="friendship-badge">💎 Best Friends Forever 💎</div>
+        
+        <h1>صحبة العمر</h1>
+        <div class="names">Gog 🤝 Saif</div>
+        
+        <div class="question-box">
+            <div class="question">
+                يا <span class="highlight">Gog</span> الجميلة...<br>
+                انتي عارفة ان <span class="highlight">Saif</span> صحبك واخوك اللي بيحترمك وبيقدرك؟<br>
+                <br>
+                <span style="font-size: 1.2rem; color: #666;">
+                    (اللي جابه ربنا واللي مش هيسيبك في حالك أبداً 😄)
+                </span>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-no" id="noBtn" onmouseover="runAway()" onclick="runAway()">
+                No ❌
+            </button>
+            <button class="btn btn-yes" onclick="sayYes()">
+                Yes ✓
+            </button>
+        </div>
+        
+        <div class="message" id="message">
+            <h3>🌟 ده اللي احنا عايزين نسمعه! 🌟</h3>
+            
+            <p style="animation-delay: 0.2s;">
+                🎯 <strong>Gog</strong>، انتي مش بس صحبتي... انتي اختي اللي مربطهاش ربطة! 
+            </p>
+            
+            <p style="animation-delay: 0.4s;">
+                💪 معاكي بقالي وقت، وكل يوم بقول "ربنا يخليكي ليا" عشان الصحبة الصح دي نعمة
+            </p>
+            
+            <p style="animation-delay: 0.6s;">
+                😎 انا <strong>Saif</strong> وافتخر اني صاحب بنت زيّك - شاطرة، طيبة، ودايماً بتنوري أي مكان
+            </p>
+            
+            <p style="animation-delay: 0.8s;">
+                🤝 سوا البنحارب، سوا البنضحك، ولو حد زعلك... خليه يلاقيني! 
+            </p>
+            
+            <p style="animation-delay: 1.0s;">
+                👑 انتي <strong>الدلعونة</strong> بتاعتي، وانا <strong>السند</strong> بتاعك دايماً
+            </p>
+            
+            <p style="animation-delay: 1.2s;">
+                🎉 "الصحبة الحلوة مش بتتباع... واللي زيك يا Gog بتتجمع مش بتتفرّق! 💎"
+            </p>
+            
+            <div style="margin-top: 20px; font-size: 2rem;">
+                <span class="emoji-decoration">🤗</span>
+                <span class="emoji-decoration">💙</span>
+                <span class="emoji-decoration">🌈</span>
+                <span class="emoji-decoration">⚡</span>
+                <span class="emoji-decoration">🔥</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.container');
+        let moveCount = 0;
+        
+        function runAway() {
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate max movement within container bounds
+            const maxX = containerRect.width - btnRect.width - 40;
+            const maxY = 200;
+            
+            const randomX = Math.random() * maxX - (maxX/2);
+            const randomY = Math.random() * maxY - (maxY/2);
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            // Make it faster each time
+            moveCount++;
+            if (moveCount > 5) {
+                noBtn.innerHTML = "مستحيل! 😅";
+            }
+            if (moveCount > 10) {
+                noBtn.innerHTML = "استسلمت! 🏳️";
+            }
+        }
+        
+        function sayYes() {
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+            
+            // Play success sound
+            playSound();
+            
+            // Create flying emojis
+            createFlyingEmojis();
+            
+            // Create stars
+            createStars();
+            
+            // Hide buttons
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // Scroll to message
+            message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function playSound() {
+            // Create audio context for a nice chord
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C major chord
+            const now = audioContext.currentTime;
+            
+            frequencies.forEach((freq, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = freq;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, now + index * 0.1);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + index * 0.1 + 1.5);
+                
+                oscillator.start(now + index * 0.1);
+                oscillator.stop(now + index * 0.1 + 1.5);
+            });
+        }
+        
+        function createFlyingEmojis() {
+            const heartsContainer = document.getElementById('hearts');
+            const emojis = ['🤝', '⭐', '✨', '💫', '🎉', '🔥', '💎', '🌟', '🤗', '👊'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'heart';
+                    emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + '%';
+                    emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    emoji.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                    heartsContainer.appendChild(emoji);
+                    
+                    setTimeout(() => emoji.remove(), 4000);
+                }, i * 100);
+            }
+        }
+        
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = '⭐';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Initial stars
+        createStars();
+    </script>
+</body>
+</html>
