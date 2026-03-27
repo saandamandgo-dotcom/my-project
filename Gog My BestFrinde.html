@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gog & Saif - Best Friends Forever</title>
+    <title>Gog & Saif - Best Friends Forever 💎</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
         
@@ -34,7 +34,6 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Floating Icons */
         .floating-icon {
             position: fixed;
             font-size: 1.8rem;
@@ -160,6 +159,26 @@
             transition: transform 0.3s ease-out;
         }
         
+        .btn-next {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            margin-top: 20px;
+            animation: bounce 1s infinite;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            margin: 10px;
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+        
+        .btn-nav:hover, .btn-nav:active {
+            transform: scale(1.05);
+        }
+        
         .message {
             display: none;
             margin-top: 25px;
@@ -172,14 +191,8 @@
         }
         
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .message h3 {
@@ -204,14 +217,245 @@
         }
         
         @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+        
+        .nav-page {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 4px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .nav-header h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .cards-page {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .cards-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 4px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .cards-header h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover, .card:active {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #667eea;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .card-title {
+            color: #764ba2;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .card-desc {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        .tasks-page {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .tasks-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 4px solid #38ef7d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tasks-header h2 {
+            color: #11998e;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .task-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-right: 4px solid #38ef7d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .task-title {
+            color: #333;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .task-btn {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .honesty-page {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .honesty-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 4px solid #f5576c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .honesty-header h2 {
+            color: #f5576c;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .honesty-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .honesty-textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            padding: 15px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 15px;
+            direction: rtl;
+        }
+        
+        .honesty-textarea:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+        
+        .honesty-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .honesty-btn {
+            background: linear-gradient(45deg, #f5576c, #f093fb);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .back-btn {
+            background: linear-gradient(45deg, #eb3349, #f45c43);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
         }
         
         .hearts {
@@ -227,22 +471,14 @@
         .heart {
             position: absolute;
             font-size: 1.5rem;
-            animation: fly 4s ease-in forwards;
+            animation: flyHeart 4s ease-in forwards;
             opacity: 0;
         }
         
-        @keyframes fly {
-            0% {
-                opacity: 1;
-                transform: translateY(100vh) scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) scale(1.5) rotate(720deg);
-            }
+        @keyframes flyHeart {
+            0% { opacity: 1; transform: translateY(100vh) scale(0) rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1.5) rotate(720deg); }
         }
         
         .stars {
@@ -266,109 +502,45 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
-        .emoji-decoration {
-            font-size: 2rem;
-            margin: 5px;
-            animation: bounce 2s infinite;
-            display: inline-block;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .signature {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 2px dashed #667eea40;
-            color: #764ba2;
-            font-weight: 700;
-            font-size: 1.1rem;
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: none;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .names {
-                font-size: 1.2rem;
-            }
-            
-            .question {
-                font-size: 1.1rem;
-            }
-            
-            .btn {
-                padding: 10px 30px;
-                font-size: 1.1rem;
-                min-width: 100px;
-            }
-            
-            .message h3 {
-                font-size: 1.3rem;
-            }
-            
-            .message p {
-                font-size: 1rem;
-                padding: 10px;
-                line-height: 1.7;
-            }
-            
-            .floating-icon {
-                font-size: 1.2rem;
-            }
-            
-            .friendship-badge {
-                font-size: 0.85rem;
-                padding: 6px 20px;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .question {
-                font-size: 1rem;
-            }
-            
-            .btn {
-                padding: 8px 25px;
-                font-size: 1rem;
-            }
-        }
-        
-        /* Tablet */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .container {
-                max-width: 80%;
-            }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 1.6rem; }
+            .names { font-size: 1.2rem; }
+            .question { font-size: 1.1rem; }
+            .btn { padding: 10px 30px; font-size: 1.1rem; }
+            .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .nav-grid { grid-template-columns: 1fr; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
-    <!-- Floating Icons -->
-    <div class="floating-icon" style="top: 5%; left: 5%; animation-delay: 0s;">🤝</div>
-    <div class="floating-icon" style="top: 15%; right: 5%; animation-delay: 1s;">⭐</div>
-    <div class="floating-icon" style="bottom: 25%; left: 3%; animation-delay: 2s;">🎈</div>
-    <div class="floating-icon" style="bottom: 10%; right: 5%; animation-delay: 3s;">🌟</div>
-    <div class="floating-icon" style="top: 40%; left: 2%; animation-delay: 4s;">💫</div>
-    <div class="floating-icon" style="top: 60%; right: 3%; animation-delay: 5s;">✨</div>
-    <div class="floating-icon" style="bottom: 40%; left: 8%; animation-delay: 1.5s;">🎯</div>
-    <div class="floating-icon" style="top: 25%; right: 8%; animation-delay: 2.5s;">🔥</div>
+    <div class="floating-icon" style="top: 5%; left: 5%;">🤝</div>
+    <div class="floating-icon" style="top: 15%; right: 5%;">⭐</div>
+    <div class="floating-icon" style="bottom: 25%; left: 3%;">🎈</div>
+    <div class="floating-icon" style="bottom: 10%; right: 5%;">🌟</div>
     
     <div class="stars" id="stars"></div>
     <div class="hearts" id="hearts"></div>
+    <div class="notification" id="notification"></div>
     
-    <div class="container">
-        <div class="friendship-badge">💎 Best Friends Forever 💎</div>
-        
+    <!-- Page 1: Question -->
+    <div class="container" id="page1">
+        <div class="friendship-badge">💎 Best Friends Forever</div>
         <h1>صحبة العمر</h1>
         <div class="names">Gog 🤝 Saif</div>
         
@@ -376,118 +548,319 @@
             <div class="question">
                 يا <span class="highlight">Gog</span> الجميلة...<br>
                 انتي عارفة ان <span class="highlight">Saif</span> صحبك واخوك اللي بيحترمك وبيقدرك؟<br>
-                <br>
-                <span style="font-size: 0.95rem; color: #666;">
-                    (اللي جابه ربنا واللي مش هيسيبك في حالك أبداً 😄)
-                </span>
+                <span style="font-size: 0.95rem; color: #666;">(اللي جابه ربنا واللي مش هيسيبك في حالك أبداً 😄)</span>
             </div>
         </div>
         
         <div class="buttons" id="buttonContainer">
-            <button class="btn btn-no" id="noBtn" ontouchstart="runAway(event)" onmouseover="runAway(event)" onclick="runAway(event)">
-                No ❌
-            </button>
-            <button class="btn btn-yes" onclick="sayYes()">
-                Yes ✓
-            </button>
+            <button class="btn btn-no" id="noBtn" ontouchstart="runAway(event)" onmouseover="runAway(event)">No ❌</button>
+            <button class="btn btn-yes" onclick="sayYes()">Yes ✓</button>
         </div>
         
         <div class="message" id="message">
-            <h3>🌟 ده اللي احنا عايزين نسمعه! 🌟</h3>
+            <h3>🌟 ده اللي احنا عايزين نسمعه!</h3>
+            <p style="animation-delay: 0.2s;">🎯 <strong>Gog</strong>، انتي مش بس صحبتي... انتي اختي اللي مربطهاش ربطة! ودايماً هكون فخور اني اعرفك</p>
+            <p style="animation-delay: 0.4s;">💪 معاكي بقالي وقت، وكل يوم بقول "ربنا يخليكي ليا" عشان الصحبة الصح دي نعمة مش بتهون</p>
+            <p style="animation-delay: 0.6s;">😎 انا <strong>Saif</strong> وافتخر اني صاحب بنت زيّك - شاطرة، طيبة، ودايماً بتنوري أي مكان تدخله</p>
+            <p style="animation-delay: 0.8s;">🤝 سوا البنحارب، سوا البنضحك، ولو حد زعلك... خليه يلاقيني! عشان انا السند اللي مش هيتزحزح</p>
+            <p style="animation-delay: 1.0s;">👑 انتي <strong>الدلعونة</strong> بتاعتي، وانا <strong>السند</strong> بتاعك دايماً... والاتنين مكملين بعض!</p>
+            <p style="animation-delay: 1.2s;">🎉 "الصحبة الحلوة مش بتتباع... واللي زيك يا <strong>Gog</strong> بتتجمع مش بتتفرّق! 💎"</p>
+            <p style="animation-delay: 1.4s;">💬 افتكري دايماً: مهما حصل، مهما بعدنا، مهما جت ضغوط... <strong>Saif</strong> هيفضل موجود. مش وعد، ده حقيقة!</p>
+            <p style="animation-delay: 1.6s;">🏆 افتخري بنفسك يا صحبتي، عشان انتي استثنائية بكل المقاييس... وانا محظوظ اني جزء من حياتك!</p>
+            <p style="animation-delay: 1.8s;">⚡ اخر حاجة: لو حد سألك مين <strong>Saif</strong>؟ قوليله ده "اخويا الروحي، صاحبي اللي فوق الراس"! </p>
             
-            <p style="animation-delay: 0.2s;">
-                🎯 <strong>Gog</strong>، انتي مش بس صحبتي... انتي اختي اللي مربطهاش ربطة! ودايماً هكون فخور اني اعرفك
-            </p>
-            
-            <p style="animation-delay: 0.4s;">
-                💪 معاكي بقالي وقت، وكل يوم بقول "ربنا يخليكي ليا" عشان الصحبة الصح دي نعمة مش بتهون
-            </p>
-            
-            <p style="animation-delay: 0.6s;">
-                😎 انا <strong>Saif</strong> وافتخر اني صاحب بنت زيّك - شاطرة، طيبة، ودايماً بتنوري أي مكان تدخله
-            </p>
-            
-            <p style="animation-delay: 0.8s;">
-                🤝 سوا البنحارب، سوا البنضحك، ولو حد زعلك... خليه يلاقيني! عشان انا السند اللي مش هيتزحزح
-            </p>
-            
-            <p style="animation-delay: 1.0s;">
-                👑 انتي <strong>الدلعونة</strong> بتاعتي، وانا <strong>السند</strong> بتاعك دايماً... والاتنين مكملين بعض!
-            </p>
-            
-            <p style="animation-delay: 1.2s;">
-                🎉 "الصحبة الحلوة مش بتتباع... واللي زيك يا <strong>Gog</strong> بتتجمع مش بتتفرّق! 💎"
-            </p>
-            
-            <p style="animation-delay: 1.4s;">
-                💬 افتكري دايماً: مهما حصل، مهما بعدنا، مهما جت ضغوط... <strong>Saif</strong> هيفضل موجود. مش وعد، ده حقيقة!
-            </p>
-            
-            <p style="animation-delay: 1.6s;">
-                🏆 افتخري بنفسك يا صحبتي، عشان انتي استثنائية بكل المقاييس... وانا محظوظ اني جزء من حياتك!
-            </p>
-            
-            <p style="animation-delay: 1.8s;">
-                ⚡ اخر حاجة: لو حد سألك مين <strong>Saif</strong>؟ قوليله ده "اخويا الروحي، صاحبي اللي فوق الراس"! 
-            </p>
-            
-            <div style="margin-top: 20px; font-size: 1.8rem; text-align: center;">
-                <span class="emoji-decoration">🤗</span>
-                <span class="emoji-decoration">💙</span>
-                <span class="emoji-decoration">🌈</span>
-                <span class="emoji-decoration">⚡</span>
-                <span class="emoji-decoration">🔥</span>
+            <div style="margin-top: 20px; font-size: 1.8rem;">
+                🤗 💙 🌈 ⚡ 🔥
             </div>
             
-            <div class="signature">
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 2px dashed #667eea40; color: #764ba2; font-weight: 700;">
                 مع خالص التقدير والاحترام<br>
                 من أخوك الصحبي: Saif 💎
             </div>
+            
+            <button class="btn btn-next" onclick="goToNav()" style="display: none;" id="nextBtn">
+                🎁 اختاري اللي نفسك فيه يا Gog! →
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Page -->
+    <div class="nav-page" id="page2">
+        <div class="nav-header">
+            <div class="friendship-badge">🎯 القائمة الرئيسية</div>
+            <h2>اختاري يا Gog!</h2>
+            <p>عندك 3 اختيارات حلوة... اختاري اللي نفسك فيه 💙</p>
+        </div>
+        
+        <div class="nav-grid">
+            <button class="btn btn-nav" onclick="goToCards()">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">🎁</div>
+                كروت الاستخدام
+                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">10 كروت للاستخدام الفوري</div>
+            </button>
+            
+            <button class="btn btn-nav" onclick="goToTasks()">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">📋</div>
+                المهام اليومية
+                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">تحديات يومية من Saif</div>
+            </button>
+            
+            <button class="btn btn-nav" onclick="goToHonesty()">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">💬</div>
+                صندوق الصراحة
+                <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">قولي اللي في قلبك</div>
+            </button>
+            
+            <button class="btn btn-nav" style="background: linear-gradient(45deg, #764ba2, #667eea);" onclick="goBackToMain()">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">🏠</div>
+                الرجوع للرئيسية
+            </button>
+        </div>
+    </div>
+
+    <!-- Cards Page -->
+    <div class="cards-page" id="page3">
+        <div class="cards-header">
+            <div class="friendship-badge">🎁 كروت الاستخدام</div>
+            <h2>اختاري كارت يا Gog!</h2>
+            <p>كل كارت ليه استخدام خاص... اختاري اللي نفسك فيه وهبعتلك رسالة على واتساب! 📱</p>
+        </div>
+        
+        <div class="cards-grid">
+            <div class="card" onclick="sendCard('خروجة')">
+                <span class="card-icon">🚗</span>
+                <div class="card-title">خروجة</div>
+                <div class="card-desc">يلا بينا نخرج نتفسح!</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('عندي مشكلة')">
+                <span class="card-icon">👂</span>
+                <div class="card-title">سماع المشاكل</div>
+                <div class="card-desc">عايزاك تسمعني</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('نصيحة')">
+                <span class="card-icon">💡</span>
+                <div class="card-title">نصيحة صحبي</div>
+                <div class="card-desc">محتاجة رأيك</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('ضحك')">
+                <span class="card-icon">😂</span>
+                <div class="card-title">موقف مضحك</div>
+                <div class="card-desc">عندي حاجة تضحكك</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('مساعدة')">
+                <span class="card-icon">🆘</span>
+                <div class="card-title">محتاجة مساعدة</div>
+                <div class="card-desc">ساعدني يا Saif</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('فضفضة')">
+                <span class="card-icon">💬</span>
+                <div class="card-title">فضفضة</div>
+                <div class="card-desc">عايزة اتكلم في أي حاجة</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('اكل')">
+                <span class="card-icon">🍕</span>
+                <div class="card-title">نروح ناكل</div>
+                <div class="card-desc">الجعانة يا صحبي!</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('فيلم')">
+                <span class="card-icon">🎬</span>
+                <div class="card-title">نفرج على فيلم</div>
+                <div class="card-desc">movie night يا Gog!</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('مفاجأة')">
+                <span class="card-icon">🎉</span>
+                <div class="card-title">مفاجأة</div>
+                <div class="card-desc">عندي مفاجأة ليك!</div>
+            </div>
+            
+            <div class="card" onclick="sendCard('شكراً')">
+                <span class="card-icon">🙏</span>
+                <div class="card-title">شكراً يا Saif</div>
+                <div class="card-desc">بشكرك على كل حاجة</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="back-btn" onclick="goToNav()">← رجوع للقائمة</button>
+        </div>
+    </div>
+
+    <!-- Tasks Page (Saif يعملها لـ Gog) -->
+    <div class="tasks-page" id="page4">
+        <div class="tasks-header">
+            <div class="friendship-badge">📋 المهام اليومية</div>
+            <h2>طلبات Gog من Saif!</h2>
+            <p>Gog عايزة منك تعمللها الحاجات دي يا Saif! 😄</p>
+        </div>
+        
+        <div id="tasksList">
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">🌅 صباح الخير</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يقول Gog صباح الخير بشكل حلو</div>
+                <button class="task-btn" onclick="sendTask('صباح الخير')">ابعت الرسالة 📱</button>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">💙 كلمة حلوة</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يقول Gog كلمة حلوة ويعبرلها</div>
+                <button class="task-btn" onclick="sendTask('كلمة حلوة')">ابعت الرسالة 📱</button>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">😂 نكتة تضحك</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يبعت لـ Gog نكتة تضحكها</div>
+                <button class="task-btn" onclick="sendTask('نكتة')">ابعت الرسالة 📱</button>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">📸 صورة ذكرى</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يبعت صورة من ذكرياتكم سوا</div>
+                <button class="task-btn" onclick="sendTask('صورة ذكرى')">ابعت الرسالة 📱</button>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">🎯 تحدي صحبة</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يتحدى Gog في حاجة حلوة</div>
+                <button class="task-btn" onclick="sendTask('تحدي')">ابعت الرسالة 📱</button>
+            </div>
+            
+            <div class="task-item">
+                <div class="task-header">
+                    <div class="task-title">🍕 عزومة</div>
+                </div>
+                <div style="color: #666; margin-bottom: 10px;">Saif يعزم Gog على اكل حلو</div>
+                <button class="task-btn" onclick="sendTask('عزومة')">ابعت الرسالة 📱</button>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="back-btn" onclick="goToNav()">← رجوع للقائمة</button>
+        </div>
+    </div>
+
+    <!-- Honesty Page -->
+    <div class="honesty-page" id="page5">
+        <div class="honesty-header">
+            <div class="friendship-badge">💬 صندوق الصراحة</div>
+            <h2>قولي اللي في قلبك يا Gog</h2>
+            <p>اكتبي حاجات مش بتحبيها في Saif، عيوب، أو حاجة زعلتك... وهتتبعتله على طول! 🤝</p>
+        </div>
+        
+        <div class="honesty-form">
+            <select class="honesty-select" id="honestyType">
+                <option value="عيب">عيب فيك يا Saif ⚠️</option>
+                <option value="زعلانة">حاجة زعلتني منك 😔</option>
+                <option value="نصيحة">نصيحة عشان خاطري 💡</option>
+                <option value="سر">سر 🤫</option>
+            </select>
+            
+            <textarea class="honesty-textarea" id="honestyText" placeholder="اكتبي هنا اللي في قلبك... مش هزعل وعد! 😊"></textarea>
+            
+            <button class="honesty-btn" onclick="saveHonesty()">
+                💾 ابعتي لـ Saif على واتساب
+            </button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="back-btn" onclick="goToNav()">← رجوع للقائمة</button>
         </div>
     </div>
 
     <script>
-        const noBtn = document.getElementById('noBtn');
-        const container = document.querySelector('.container');
+        const phoneNumber = '201011942107';
         let moveCount = 0;
         let isMobile = window.matchMedia("(max-width: 768px)").matches;
         
+        // Navigation Functions
+        function goToNav() {
+            hideAllPages();
+            document.getElementById('page2').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function goBackToMain() {
+            hideAllPages();
+            document.getElementById('page1').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function goToCards() {
+            hideAllPages();
+            document.getElementById('page3').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function goToTasks() {
+            hideAllPages();
+            document.getElementById('page4').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function goToHonesty() {
+            hideAllPages();
+            document.getElementById('page5').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        
+        function hideAllPages() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'none';
+            document.getElementById('page3').style.display = 'none';
+            document.getElementById('page4').style.display = 'none';
+            document.getElementById('page5').style.display = 'none';
+        }
+        
+        // Question Page Functions
         function runAway(e) {
             if(e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
             
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
-            
-            // Calculate boundaries relative to viewport
+            const btn = document.getElementById('noBtn');
             const maxMoveX = Math.min(150, window.innerWidth * 0.3);
             const maxMoveY = 100;
             
             let randomX = (Math.random() - 0.5) * 2 * maxMoveX;
             let randomY = (Math.random() - 0.5) * 2 * maxMoveY;
             
-            // Ensure button stays visible
-            const newLeft = btnRect.left + randomX;
-            const newTop = btnRect.top + randomY;
+            const newLeft = btn.getBoundingClientRect().left + randomX;
+            const newTop = btn.getBoundingClientRect().top + randomY;
             
             if (newLeft < 20) randomX += 50;
             if (newLeft > window.innerWidth - 100) randomX -= 50;
             if (newTop < 100) randomY += 50;
             if (newTop > window.innerHeight - 100) randomY -= 50;
             
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
             
             moveCount++;
             if (moveCount === 3) {
-                noBtn.innerHTML = "مستحيل! 😅";
+                btn.innerHTML = "مستحيل! 😅";
             } else if (moveCount === 6) {
-                noBtn.innerHTML = "ياختي سيبيني! 😂";
+                btn.innerHTML = "ياختي سيبيني! 😂";
             } else if (moveCount === 10) {
-                noBtn.innerHTML = "خلاص! 🏳️";
+                btn.innerHTML = "خلاص! 🏳️";
             } else if (moveCount > 12) {
-                noBtn.innerHTML = "Yes! ✅";
+                btn.innerHTML = "Yes! ✅";
                 setTimeout(() => sayYes(), 500);
             }
         }
@@ -495,6 +868,7 @@
         function sayYes() {
             const message = document.getElementById('message');
             const buttons = document.getElementById('buttonContainer');
+            const nextBtn = document.getElementById('nextBtn');
             
             message.style.display = 'block';
             buttons.style.display = 'none';
@@ -502,14 +876,83 @@
             // Play sound
             playSound();
             
-            // Create effects
+            // Create flying emojis
             createFlyingEmojis();
-            createStars();
             
-            // Smooth scroll to message
+            setTimeout(() => {
+                nextBtn.style.display = 'inline-block';
+            }, 2500);
+            
             setTimeout(() => {
                 message.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
+        }
+        
+        // Send WhatsApp Functions
+        function sendCard(type) {
+            const messages = {
+                'خروجة': 'يا Saif! 🚗\\nجعانة ومش عارفة اعمل حاجة...\\nيلا بينا نخرج نتفسح وناكل حاجة حلوة!\\n- Gog 💙',
+                'عندي مشكلة': 'يا Saif... 👂\\nعندي مشكلة ومحتاجاك تسمعني\\nمش هلاقي غيرك يفهمني\\n- Gog 💙',
+                'نصيحة': 'يا Saif! 💡\\nمحتاجة نصيحتك في حاجة\\nرأيك دايماً بيفرق معايا\\n- Gog 💙',
+                'ضحك': 'يا Saif! 😂\\nعندي موقف مضحك حصللي...\\nعايزة احكيلك ونضحك سوا!\\n- Gog 💙',
+                'مساعدة': 'يا Saif! 🆘\\nمحتاجة مساعدتك في حاجة ضرورية\\nمش هعرف اعملها غير بيك\\n- Gog 💙',
+                'فضفضة': 'يا Saif... 💬\\nعايزة افضفض معاك\\nمش عايزة نصايح، عايزة بس حد يسمع\\n- Gog 💙',
+                'اكل': 'يا Saif! 🍕\\nالجعانة يا صحبي!\\nنروح ناكل فين النهاردة؟\\n- Gog 💙',
+                'فيلم': 'يا Saif! 🎬\\nعايزة نفرج على فيلم سوا\\nmovie night يا صحبي!\\n- Gog 💙',
+                'مفاجأة': 'يا Saif! 🎉\\nعندي مفاجأة حلوة ليك!\\nاستنى هقولك على تفاصيلها\\n- Gog 💙',
+                'شكراً': 'يا Saif... 🙏\\nبشكرك على كل حاجة عملتها معايا\\nربنا يخليك ليا يا اخويا\\n- Gog 💙'
+            };
+            
+            sendWhatsApp(type, messages[type]);
+        }
+        
+        function sendTask(taskType) {
+            const messages = {
+                'صباح الخير': 'صباح الخير يا Gog! 🌅\\nصباح الورد والفل والياسمين\\nنهارك سعيد يا احلى صحبة في الدنيا! 💙',
+                'كلمة حلوة': 'يا Gog! 💙\\nعايز اقولك انك احلى صحبة في الدنيا\\nربنا يخليكي ليا يا اختي\\nمش هسيبك ابداً! 🤝',
+                'نكتة': 'يا Gog! 😂\\nعندي نكتة تحبك:\\n\\n[اكتب هنا نكتة]\\n\\nاتحداك متضحكيش! 😄',
+                'صورة ذكرى': 'يا Gog! 📸\\nشوفت الصورة دي؟\\n\\n[ابعت صورة من ذكرياتكم]\\n\\nايام جميلة مش هتتنسى! 💎',
+                'تحدي': 'يا Gog! 🎯\\nعندي تحدي ليكي:\\n\\n[اكتب هنا التحدي]\\n\\nمستعدة؟ 😏',
+                'عزومة': 'يا Gog! 🍕\\nعايز اعزمك على اكل حلو النهاردة\\nاختاري المكان اللي نفسك فيه\\nعلى حسابي! 😎'
+            };
+            
+            sendWhatsApp(taskType, messages[taskType]);
+        }
+        
+        function saveHonesty() {
+            const type = document.getElementById('honestyType').value;
+            const text = document.getElementById('honestyText').value.trim();
+            
+            if (!text) {
+                showNotification('اكتبي حاجة الأول يا Gog! ✍️');
+                return;
+            }
+            
+            const messages = {
+                'عيب': `يا Saif... 💬\\nGog كتبتلك عيب:\\n${text}\\n\\n(من صندوق الصراحة)`,
+                'زعلانة': `يا Saif... 😔\\nGog زعلانة منك:\\n${text}\\n\\n(من صندوق الصراحة)`,
+                'نصيحة': `يا Saif... 💡\\nGog عندها نصيحة:\\n${text}\\n\\n(من صندوق الصراحة)`,
+                'سر': `يا Saif... 🤫\\nGog قالتلك سر:\\n${text}\\n\\n(من صندوق الصراحة)`
+            };
+            
+            sendWhatsApp(type, messages[type]);
+            
+            document.getElementById('honestyText').value = '';
+            showNotification('تم إرسال الرسالة! 📱');
+        }
+        
+        function sendWhatsApp(type, message) {
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, '_blank');
+            showNotification('تم فتح واتساب! 📱');
+        }
+        
+        // Utility Functions
+        function showNotification(text) {
+            const notif = document.getElementById('notification');
+            notif.textContent = text;
+            notif.style.display = 'block';
+            setTimeout(() => notif.style.display = 'none', 3000);
         }
         
         function playSound() {
@@ -561,9 +1004,6 @@
         
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            const existingStars = starsContainer.querySelectorAll('.star');
-            if(existingStars.length > 15) return;
-            
             for (let i = 0; i < 15; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -578,7 +1018,7 @@
         // Initialize
         createStars();
         
-        // Handle window resize
+        // Handle resize
         window.addEventListener('resize', () => {
             isMobile = window.matchMedia("(max-width: 768px)").matches;
         });
