@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Lectures 1-3 | Complete Bilingual Explanation (EN then AR)</title>
+  <meta name="description" content="Professional responsive bilingual (English then Arabic) website explaining AI Lectures 1-3: Intro to AI, Intelligent Agents, Search & State Space." />
+
+  <style>
+    /* =========
+       Design System
+       ========= */
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1223;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.12);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.60);
+      --brand1:#7C3AED;
+      --brand2:#22D3EE;
+      --brand3:#F97316;
+      --good:#22C55E;
+      --warn:#F59E0B;
+      --bad:#EF4444;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1150px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% 15%, rgba(124,58,237,.38), transparent 55%),
+        radial-gradient(900px 700px at 80% 20%, rgba(34,211,238,.26), transparent 60%),
+        radial-gradient(900px 700px at 60% 85%, rgba(249,115,22,.20), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 32px)); margin:0 auto; }
+
+    /* =========
+       Top Nav
+       ========= */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,10,18,.78), rgba(7,10,18,.38));
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background:
+        radial-gradient(16px 16px at 25% 25%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, var(--brand1), var(--brand2));
+      box-shadow: 0 10px 35px rgba(124,58,237,.25);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .nav{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      padding:10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight:650;
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, color .15s ease;
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); color: var(--text); }
+    .pill.primary{
+      color: rgba(255,255,255,.92);
+      background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(34,211,238,.22));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* =========
+       Hero
+       ========= */
+    .hero{ padding: 38px 0 18px; }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+    }
+    .heroCard{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard .inner{ padding: 22px; }
+    .kicker{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      color: var(--muted);
+      font-weight:650;
+      font-size: 13px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--brand2);
+      box-shadow: 0 0 0 6px rgba(34,211,238,.12);
+    }
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(24px, 2.8vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.65;
+      max-width: 70ch;
+    }
+    .heroActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.92);
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-weight: 750;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
+    .btn.gradient{
+      background: linear-gradient(135deg, rgba(124,58,237,.65), rgba(34,211,238,.35));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* =========
+       Sidebar Card (Quick Map)
+       ========= */
+    .mapCard{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .mapCard .inner{ padding: 18px; }
+    .mapTitle{ font-weight: 850; margin: 0 0 8px; }
+    .mapList{ margin: 0; padding-left: 18px; color: var(--muted); line-height:1.7; }
+    .tagRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .tag{
+      font-size: 12px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(0,0,0,.18);
+    }
+
+    /* =========
+       Sections
+       ========= */
+    section{ padding: 14px 0; }
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid2{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 42px rgba(0,0,0,.30);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+    .card .hd .title{
+      margin:0; font-weight: 900; letter-spacing: -.2px;
+      font-size: 15px;
+    }
+    .card .bd{ padding: 16px; }
+
+    .muted{ color: var(--muted); }
+    .small{ font-size: 13px; line-height:1.65; }
+    .lead{ font-size: 14.5px; line-height:1.8; color: var(--muted); margin: 0; }
+
+    /* =========
+       Bilingual Blocks (EN then AR)
+       ========= */
+    .bi{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .langBlock{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      border-radius: 14px;
+      padding: 12px 12px;
+    }
+    .langLabel{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.70);
+      letter-spacing: .3px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .ar{ direction: rtl; text-align: right; font-family: "Noto Naskh Arabic", "Noto Kufi Arabic", Tahoma, Arial, sans-serif; }
+    .langText{ margin:0; color: rgba(255,255,255,.86); line-height:1.85; font-size: 14px; }
+
+    /* =========
+       Fancy Lists, callouts
+       ========= */
+    .callout{
+      border:1px solid rgba(34,211,238,.22);
+      background: linear-gradient(135deg, rgba(34,211,238,.12), rgba(124,58,237,.10));
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .callout .k{ font-weight: 900; margin: 0 0 6px; }
+    .callout ul{ margin: 8px 0 0; padding-left: 18px; color: var(--muted); line-height:1.75; }
+
+    .columns{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .columns{ grid-template-columns: 1fr; } }
+
+    .mini{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .mini h4{ margin: 0 0 6px; font-weight: 900; }
+    .mini p{ margin:0; color: var(--muted); line-height:1.75; font-size: 13.5px; }
+
+    /* =========
+       Code blocks
+       ========= */
+    pre{
+      margin: 0;
+      padding: 14px;
+      border-radius: 14px;
+      overflow:auto;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height:1.6;
+      color: rgba(234,240,255,.92);
+    }
+    code{ font-family: var(--mono); }
+
+    /* =========
+       Accordion
+       ========= */
+    details{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    details + details{ margin-top: 10px; }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: rgba(255,255,255,.92);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width: 28px; height: 28px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      background: rgba(0,0,0,.18);
+      flex: 0 0 auto;
+      transition: transform .18s ease;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    .detBody{ padding: 0 14px 14px; color: var(--muted); line-height:1.85; font-size: 14px; }
+
+    /* =========
+       Tables
+       ========= */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    th,td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      vertical-align:top;
+      font-size: 13px;
+      line-height:1.6;
+    }
+    th{
+      text-align:left;
+      color: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.05);
+      font-weight: 900;
+    }
+    tr:last-child td{ border-bottom:none; }
+    .badge{
+      display:inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.85);
+      font-size: 12px;
+      font-weight: 800;
+      margin-right: 6px;
+    }
+
+    /* =========
+       SVG Illustrations
+       ========= */
+    .svgWrap{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: radial-gradient(600px 260px at 20% 10%, rgba(34,211,238,.10), transparent 55%),
+                  radial-gradient(600px 260px at 80% 20%, rgba(124,58,237,.12), transparent 55%),
+                  rgba(0,0,0,.18);
+      padding: 12px;
+      overflow:hidden;
+    }
+    .svgCap{ margin: 10px 2px 0; color: var(--muted); font-size: 12.5px; line-height:1.65; }
+
+    /* =========
+       Quiz
+       ========= */
+    .quizQ{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.18);
+    }
+    .quizQ + .quizQ{ margin-top: 10px; }
+    .quizQ .q{ margin:0 0 8px; font-weight: 900; }
+    .opts{ display:grid; gap: 8px; }
+    .opt{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .opt:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); }
+    .opt input{ margin-top: 2px; }
+    .result{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: var(--muted);
+      display:none;
+    }
+    .result.good{ border-color: rgba(34,197,94,.30); color: rgba(200,255,224,.92); background: rgba(34,197,94,.10); }
+    .result.bad{ border-color: rgba(239,68,68,.30); color: rgba(255,220,220,.92); background: rgba(239,68,68,.10); }
+
+    /* =========
+       Footer
+       ========= */
+    footer{
+      padding: 26px 0 40px;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height:1.7;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .pill,.btn,.opt,.chev{ transition:none !important; }
+      .pill:hover,.btn:hover,.opt:hover{ transform:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand" title="AI Lectures 1-3">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; font-weight:900;">AI Lectures 1-3</div>
+            <div style="font-size:12px; color:rgba(234,240,255,.65); font-weight:700;">English first, Arabic translation under it</div>
+          </div>
+        </div>
+
+        <div class="nav">
+          <a class="pill" href="#lecture1">Lecture 1</a>
+          <a class="pill" href="#lecture2">Lecture 2</a>
+          <a class="pill" href="#lecture3">Lecture 3</a>
+          <a class="pill" href="#examples">Examples</a>
+          <a class="pill primary" href="#quiz">Quiz</a>
+          <button class="pill" id="toggleArabicBtn" type="button">Toggle Arabic</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="inner">
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              <span><span class="badge">AI310</span><span class="badge">CS361</span><span class="badge">CS212</span> Helwan University</span>
+            </div>
+
+            <h1>Artificial Intelligence, from “What is AI?” to Agents and Search</h1>
+
+            <p class="sub">
+              A complete, detailed, bilingual (EN then AR) explanation of Lectures 1-3 with diagrams, many examples, and interactive questions.
+              Designed as a mobile-friendly professional website.
+            </p>
+
+            <div class="heroActions">
+              <a class="btn gradient" href="#lecture1">Start Lecture 1</a>
+              <a class="btn" href="#quiz">Jump to Quiz</a>
+              <button class="btn" type="button" id="expandAllBtn">Expand All Details</button>
+            </div>
+
+            <div style="margin-top:14px" class="callout">
+              <p class="k">How to use this page</p>
+              <ul>
+                <li>Read the English block first, then the Arabic translation below it.</li>
+                <li>Open “Details” sections to see deeper explanations and extra notes.</li>
+                <li>Use the Quiz at the end to test your understanding.</li>
+                <li>On mobile, everything stacks automatically.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="mapCard">
+          <div class="inner">
+            <p class="mapTitle">Quick Map (What you will master)</p>
+            <ol class="mapList">
+              <li>What Intelligence and AI mean, and the 4 approaches to AI.</li>
+              <li>Turing Test, Total Turing Test, Chinese Room, Strong vs Weak AI, ANI/AGI/ASI.</li>
+              <li>Intelligent agents: rationality, PEAS, goal-based vs cost-based.</li>
+              <li>Environment types: observable, deterministic, episodic, static, discrete, multi-agent, known.</li>
+              <li>Problem solving by search: state space, heuristics, search tree, repeated states, backtracking.</li>
+            </ol>
+
+            <div class="tagRow">
+              <span class="tag">Responsive</span>
+              <span class="tag">Bilingual</span>
+              <span class="tag">Diagrams</span>
+              <span class="tag">Examples</span>
+              <span class="tag">Quiz</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============= Lecture 1 ============= -->
+  <section id="lecture1">
+    <div class="wrap">
+      <div class="card">
+        <div class="hd">
+          <p class="title">Lecture 1: An Introduction to Artificial Intelligence</p>
+          <span class="pill" style="cursor:default;">Core Concepts</span>
+        </div>
+        <div class="bd">
+          <div class="bi">
+            <div class="langBlock">
+              <div class="langLabel"><span>English</span><span>Lecture 1 Overview</span></div>
+              <p class="langText">
+                Lecture 1 builds the foundation. It answers two big questions:
+                <br><b>(1) What is Intelligence?</b> and <b>(2) What is Artificial Intelligence?</b>
+                Then it explains different perspectives on AI, focusing on:
+                systems that act like humans, systems that think like humans, systems that think rationally, and systems that act rationally (intelligent agents).
+              </p>
+            </div>
+
+            <div class="langBlock ar arabicBlock">
+              <div class="langLabel"><span>Arabic (Translation)</span><span>نظرة عامة المحاضرة 1</span></div>
+              <p class="langText">
+                المحاضرة 1 بتبني الأساس. بتجاوب على سؤالين كبار:
+                <br><b>(1) يعني إيه ذكاء؟</b> و <b>(2) يعني إيه ذكاء اصطناعي؟</b>
+                وبعد كده بتشرح طرق مختلفة لفهم AI، مع التركيز على:
+                أنظمة تتصرف مثل البشر، أنظمة تفكر مثل البشر، أنظمة تفكر بشكل عقلاني/منطقي، وأنظمة تتصرف بشكل عقلاني (وهم الوكلاء الأذكياء).
+              </p>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="grid2">
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">1.1 What is Intelligence?</p><span class="pill" style="cursor:default;">Definitions</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Meaning</span></div>
+                    <p class="langText">
+                      Intelligence is not a single simple thing. The lecture shows several definitions:
+                      <br><b>Practical judgment and adaptation</b> (Binet),
+                      <b>acquiring and using knowledge</b> (Humphreys),
+                      and <b>the capacity to learn and solve problems</b> (dictionary).
+                      In AI, we often operationalize intelligence as the ability to achieve goals in the world using computation.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>المعنى</span></div>
+                    <p class="langText">
+                      الذكاء مش حاجة واحدة بسيطة. المحاضرة بتعرض تعريفات مختلفة:
+                      <br><b>الحُكم العملي والتكيّف</b> (بينيه)،
+                      <b>اكتساب المعرفة واستخدامها</b> (همفريز)،
+                      و <b>القدرة على التعلم وحل المشكلات</b>.
+                      وفي AI بنحوّل الفكرة لتعريف عملي: تحقيق أهداف في العالم باستخدام عمليات حسابية.
+                    </p>
+                  </div>
+                </div>
+
+                <details>
+                  <summary>
+                    Deep explanation: Why it is hard to define intelligence
+                    <span class="chev">▾</span>
+                  </summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Details</span></div>
+                        <p class="langText">
+                          A “solid” definition of intelligence is difficult because:
+                          <br>1) Intelligence includes many skills (learning, memory, reasoning, creativity, language, planning).
+                          <br>2) Different environments require different behaviors. What is intelligent in chess is not the same as intelligent in driving.
+                          <br>3) Some intelligence is statistical (learning patterns), some is logical (formal reasoning), and some is social (communication).
+                          <br><b>So AI uses multiple models and tests</b> instead of one universal definition.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>تفاصيل</span></div>
+                        <p class="langText">
+                          صعب نعمل تعريف “نهائي” للذكاء لأن:
+                          <br>1) الذكاء فيه مهارات كتير (تعلم، ذاكرة، منطق، إبداع، لغة، تخطيط).
+                          <br>2) كل بيئة لها سلوك مختلف. ذكاء الشطرنج غير ذكاء القيادة.
+                          <br>3) في ذكاء احتمالي (تعلم أنماط)، وذكاء منطقي (استدلال رسمي)، وذكاء اجتماعي (تواصل).
+                          <br><b>عشان كده AI بيستخدم نماذج واختبارات متعددة</b> بدل تعريف واحد.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">1.1 What is Artificial Intelligence?</p><span class="pill" style="cursor:default;">McCarthy + Others</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Definition</span></div>
+                    <p class="langText">
+                      John McCarthy’s classic definition:
+                      <br><b>AI is the science and engineering of making intelligent machines</b>, especially intelligent computer programs.
+                      The key idea is: build systems that behave intelligently to achieve goals.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>تعريف</span></div>
+                    <p class="langText">
+                      تعريف جون مكارثي المشهور:
+                      <br><b>الذكاء الاصطناعي هو علم وهندسة صنع آلات ذكية</b> خصوصا برامج الكمبيوتر الذكية.
+                      الفكرة الأساسية: بناء أنظمة تتصرف بذكاء لتحقيق أهداف.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="columns" style="margin-top:12px;">
+                  <div class="mini">
+                    <h4>AI in Britannica (1991)</h4>
+                    <p>Solving problems normally requiring human intellectual abilities.</p>
+                  </div>
+                  <div class="mini">
+                    <h4>Elaine Rich (1983)</h4>
+                    <p>Making computers do things that people currently do better.</p>
+                  </div>
+                  <div class="mini">
+                    <h4>Modern View</h4>
+                    <p>Intelligent behavior in artifacts, often as agents with goals and constraints.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="card" style="box-shadow:none;">
+            <div class="hd"><p class="title">Four Main Approaches to AI (Russell & Norvig)</p><span class="pill" style="cursor:default;">Big Picture</span></div>
+            <div class="bd">
+              <div class="bi">
+                <div class="langBlock">
+                  <div class="langLabel"><span>English</span><span>Approaches</span></div>
+                  <p class="langText">
+                    AI can be categorized into four approaches:
+                    <br><b>1) Thinking Humanly</b> (cognitive modeling),
+                    <b>2) Acting Humanly</b> (Turing Test approach),
+                    <b>3) Thinking Rationally</b> (laws of thought, logic),
+                    <b>4) Acting Rationally</b> (rational agent).
+                    <br><br>
+                    In many AI courses, the <b>rational agent</b> approach becomes the main engineering goal: do the right thing given information and limits.
+                  </p>
+                </div>
+
+                <div class="langBlock ar arabicBlock">
+                  <div class="langLabel"><span>Arabic (Translation)</span><span>المنهجيات</span></div>
+                  <p class="langText">
+                    AI ممكن نفهمه بأربع طرق:
+                    <br><b>1) التفكير مثل البشر</b> (نمذجة معرفية)،
+                    <b>2) التصرف مثل البشر</b> (اختبار تورينج)،
+                    <b>3) التفكير بشكل عقلاني/منطقي</b> (المنطق وقوانين التفكير)،
+                    <b>4) التصرف بشكل عقلاني</b> (الوكيل العقلاني).
+                    <br><br>
+                    في أغلب الكورسات، <b>الوكيل العقلاني</b> بيكون الهدف الهندسي: يعمل الصح حسب المعلومات والقيود.
+                  </p>
+                </div>
+              </div>
+
+              <div class="svgWrap" style="margin-top:12px;">
+                <!-- Simple illustrative 2x2 diagram -->
+                <svg viewBox="0 0 900 380" width="100%" height="auto" role="img" aria-label="Four approaches to AI diagram">
+                  <defs>
+                    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#7C3AED" stop-opacity=".85"/>
+                      <stop offset="1" stop-color="#22D3EE" stop-opacity=".55"/>
+                    </linearGradient>
+                    <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+                      <stop offset="0" stop-color="#F97316" stop-opacity=".55"/>
+                      <stop offset="1" stop-color="#22C55E" stop-opacity=".35"/>
+                    </linearGradient>
+                  </defs>
+
+                  <rect x="10" y="10" width="880" height="360" rx="22" fill="rgba(0,0,0,.18)" stroke="rgba(255,255,255,.12)"/>
+                  <rect x="30" y="30" width="410" height="150" rx="18" fill="url(#g1)" opacity=".25" stroke="rgba(255,255,255,.14)"/>
+                  <rect x="460" y="30" width="410" height="150" rx="18" fill="url(#g2)" opacity=".20" stroke="rgba(255,255,255,.14)"/>
+                  <rect x="30" y="200" width="410" height="150" rx="18" fill="url(#g2)" opacity=".15" stroke="rgba(255,255,255,.14)"/>
+                  <rect x="460" y="200" width="410" height="150" rx="18" fill="url(#g1)" opacity=".18" stroke="rgba(255,255,255,.14)"/>
+
+                  <text x="55" y="72" fill="rgba(255,255,255,.95)" font-size="22" font-weight="800">Thinking Humanly</text>
+                  <text x="55" y="102" fill="rgba(255,255,255,.78)" font-size="15">Cognitive modeling</text>
+
+                  <text x="485" y="72" fill="rgba(255,255,255,.95)" font-size="22" font-weight="800">Acting Humanly</text>
+                  <text x="485" y="102" fill="rgba(255,255,255,.78)" font-size="15">Turing Test approach</text>
+
+                  <text x="55" y="242" fill="rgba(255,255,255,.95)" font-size="22" font-weight="800">Thinking Rationally</text>
+                  <text x="55" y="272" fill="rgba(255,255,255,.78)" font-size="15">Logic, Laws of Thought</text>
+
+                  <text x="485" y="242" fill="rgba(255,255,255,.95)" font-size="22" font-weight="800">Acting Rationally</text>
+                  <text x="485" y="272" fill="rgba(255,255,255,.78)" font-size="15">Rational agent approach</text>
+
+                  <text x="30" y="360" fill="rgba(234,240,255,.70)" font-size="13">
+                    Key takeaway: Modern AI often focuses on agents that act rationally under constraints.
+                  </text>
+                </svg>
+
+                <p class="svgCap">
+                  English: This 2x2 “map” explains how people historically approached AI. Arabic translation is provided above in the text blocks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid2">
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">1.2 Systems that Act Like Humans</p><span class="pill" style="cursor:default;">Turing + Searle</span></div>
+              <div class="bd">
+                <details open>
+                  <summary>Turing Test (Imitation Game) <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Turing Test</span></div>
+                        <p class="langText">
+                          The Turing Test asks: can a human interrogator tell if they are chatting with a human or a machine using only text?
+                          If the machine’s answers are indistinguishable from a human’s, it “passes”.
+                          <br><br>
+                          What abilities are needed to pass?
+                          <br>• Natural Language Processing (understand + respond)
+                          <br>• Knowledge representation (store facts)
+                          <br>• Reasoning (answer consistently)
+                          <br>• Learning (improve with experience)
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>اختبار تورينج</span></div>
+                        <p class="langText">
+                          اختبار تورينج بيسأل: هل ممكن شخص يسأل عبر الكتابة فقط ويقدر يميز هل اللي بيرد إنسان ولا آلة؟
+                          لو الآلة ردودها مش ممكن تتفرق عن الإنسان، يبقى “نجحت”.
+                          <br><br>
+                          إيه القدرات المطلوبة؟
+                          <br>• فهم وإنتاج اللغة الطبيعية
+                          <br>• تمثيل المعرفة
+                          <br>• الاستدلال
+                          <br>• التعلم لتحسين الأداء
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="svgWrap" style="margin-top:10px;">
+                      <svg viewBox="0 0 980 260" width="100%" height="auto" role="img" aria-label="Turing Test diagram">
+                        <defs>
+                          <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#22D3EE" stop-opacity=".55"/>
+                            <stop offset="1" stop-color="#7C3AED" stop-opacity=".65"/>
+                          </linearGradient>
+                        </defs>
+
+                        <rect x="10" y="10" width="960" height="240" rx="22" fill="rgba(0,0,0,.18)" stroke="rgba(255,255,255,.12)"/>
+                        <rect x="40" y="60" width="250" height="140" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.14)"/>
+                        <rect x="365" y="60" width="250" height="140" rx="18" fill="url(#tg)" opacity=".22" stroke="rgba(255,255,255,.14)"/>
+                        <rect x="690" y="60" width="250" height="140" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.14)"/>
+
+                        <text x="70" y="120" fill="rgba(255,255,255,.95)" font-size="18" font-weight="900">Human</text>
+                        <text x="385" y="120" fill="rgba(255,255,255,.95)" font-size="18" font-weight="900">Interrogator</text>
+                        <text x="720" y="120" fill="rgba(255,255,255,.95)" font-size="18" font-weight="900">AI System?</text>
+
+                        <path d="M 290 130 C 320 130, 335 130, 365 130" stroke="rgba(234,240,255,.55)" stroke-width="3" fill="none"/>
+                        <path d="M 615 130 C 645 130, 660 130, 690 130" stroke="rgba(234,240,255,.55)" stroke-width="3" fill="none"/>
+
+                        <text x="40" y="40" fill="rgba(234,240,255,.80)" font-size="14">
+                          Text-only conversation: can the interrogator reliably distinguish human vs machine?
+                        </text>
+                      </svg>
+                      <p class="svgCap">English: A simplified view of the imitation game. The interrogator chats with both sides and tries to decide which is human.</p>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Total Turing Test (adds vision + robotics) <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Total TT</span></div>
+                        <p class="langText">
+                          The Total Turing Test extends the idea to the physical world:
+                          the system should also perceive (vision) and act (robotics).
+                          That means it must connect language with real-world sensing and actions.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>الاختبار الكلي</span></div>
+                        <p class="langText">
+                          الاختبار الكلي بيضيف جانب العالم الحقيقي:
+                          النظام لازم “يشوف” (رؤية حاسوبية) و “يتصرف” (روبوتكس).
+                          يعني اللغة لازم تبقى مرتبطة بحساسات وفعل في الواقع.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Chinese Room Argument (Searle) + Strong vs Weak AI <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Searle</span></div>
+                        <p class="langText">
+                          Searle imagines a person inside a room who does not understand Chinese, but follows a rulebook to manipulate Chinese symbols.
+                          To outsiders, the room seems to “understand” Chinese.
+                          The argument claims: following rules (syntax) is not the same as real understanding (semantics).
+                          <br><br>
+                          <b>Weak AI</b>: simulate intelligence.
+                          <br><b>Strong AI</b>: the system truly has understanding/mind.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>غرفة الصين</span></div>
+                        <p class="langText">
+                          سيرل تخيل شخص داخل غرفة لا يفهم الصيني، لكنه يتبع كتاب قواعد لتحريك رموز صينية وإنتاج ردود صحيحة.
+                          للناس خارج الغرفة، يبدو أنه “فاهم”.
+                          الفكرة: اتباع قواعد شكلية (Syntax) مش معناه فهم المعنى (Semantics).
+                          <br><br>
+                          <b>Weak AI</b>: محاكاة الذكاء.
+                          <br><b>Strong AI</b>: فهم حقيقي ووعي وعقل.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">Where are we now? ANI vs AGI vs ASI</p><span class="pill" style="cursor:default;">Levels</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Levels</span></div>
+                    <p class="langText">
+                      <b>ANI (Narrow AI)</b>: Specialized systems that perform specific tasks well (spam filters, face detection, translation).
+                      <br><b>AGI (General AI)</b>: Human-level general intelligence across many tasks.
+                      <br><b>ASI (Super AI)</b>: Intelligence far beyond humans.
+                      <br><br>
+                      Most real-world AI today is closer to <b>ANI</b>, even if it looks impressive.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>المستويات</span></div>
+                    <p class="langText">
+                      <b>ANI</b>: ذكاء ضيق متخصص في مهمة معينة (فلتر سبام، ترجمة، كشف وجوه).
+                      <br><b>AGI</b>: ذكاء عام بمستوى الإنسان في مهام كثيرة.
+                      <br><b>ASI</b>: ذكاء أعلى بكثير من البشر.
+                      <br><br>
+                      أغلب AI اليوم أقرب لـ <b>ANI</b> حتى لو شكله قوي.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="callout" style="margin-top:12px;">
+                  <p class="k">Mini takeaway</p>
+                  <ul>
+                    <li>“Acting humanly” is one view, but “acting rationally” is often the engineering target.</li>
+                    <li>Passing a test does not automatically mean understanding.</li>
+                    <li>AI is a spectrum: narrow to general to super.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= Lecture 2 ============= -->
+  <section id="lecture2">
+    <div class="wrap">
+      <div class="card">
+        <div class="hd">
+          <p class="title">Lecture 2: Intelligent Agents, Task Environments, and AI Related Disciplines</p>
+          <span class="pill" style="cursor:default;">Agents</span>
+        </div>
+        <div class="bd">
+          <div class="bi">
+            <div class="langBlock">
+              <div class="langLabel"><span>English</span><span>Lecture 2 Overview</span></div>
+              <p class="langText">
+                Lecture 2 shifts the course to the <b>Rational Agent</b> perspective.
+                An agent perceives its environment using sensors and changes it using actuators.
+                We evaluate agents using a <b>performance measure</b>, and we describe tasks using <b>PEAS</b>.
+                Then we classify environments (observable, deterministic, etc.) and clarify AI vs ML vs Deep Learning vs Data Science.
+              </p>
+            </div>
+            <div class="langBlock ar arabicBlock">
+              <div class="langLabel"><span>Arabic (Translation)</span><span>نظرة عامة المحاضرة 2</span></div>
+              <p class="langText">
+                المحاضرة 2 بتحول التركيز لمنظور <b>الوكيل العقلاني</b>.
+                الوكيل بيستقبل معلومات من البيئة بحساسات، وبيؤثر فيها بمشغلات/أفعال.
+                بنقيس الوكيل بـ <b>مقياس أداء</b>، وبنوصف المهمة باستخدام <b>PEAS</b>.
+                وبعدها بنصنف البيئات (قابلية الملاحظة، الحتمية، إلخ) ونفرق بين AI و ML و Deep Learning و Data Science.
+              </p>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="grid2">
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">What is an Intelligent (Rational) Agent?</p><span class="pill" style="cursor:default;">Definition</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Agent</span></div>
+                    <p class="langText">
+                      An agent is anything that:
+                      <br>1) <b>Perceives</b> the environment (sensors),
+                      <br>2) <b>Acts</b> on the environment (actuators).
+                      <br><br>
+                      A <b>rational agent</b> chooses actions that maximize expected performance given the percepts and its knowledge, while considering limitations (bounded rationality).
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>الوكيل</span></div>
+                    <p class="langText">
+                      الوكيل هو أي شيء:
+                      <br>1) <b>يراقب/يستشعر</b> البيئة (Sensors)،
+                      <br>2) <b>يتصرف</b> ويؤثر على البيئة (Actuators).
+                      <br><br>
+                      <b>الوكيل العقلاني</b> يختار الفعل اللي يزود “الأداء المتوقع” بناء على المدخلات ومعرفته، مع مراعاة القيود (عقلانية محدودة).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="svgWrap" style="margin-top:12px;">
+                  <svg viewBox="0 0 980 280" width="100%" height="auto" role="img" aria-label="Agent loop diagram">
+                    <defs>
+                      <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#7C3AED" stop-opacity=".6"/>
+                        <stop offset="1" stop-color="#22D3EE" stop-opacity=".55"/>
+                      </linearGradient>
+                    </defs>
+                    <rect x="10" y="10" width="960" height="260" rx="22" fill="rgba(0,0,0,.18)" stroke="rgba(255,255,255,.12)"/>
+                    <rect x="55" y="70" width="360" height="150" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.14)"/>
+                    <rect x="565" y="70" width="360" height="150" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.14)"/>
+                    <rect x="425" y="105" width="130" height="80" rx="16" fill="url(#ag)" opacity=".22" stroke="rgba(255,255,255,.14)"/>
+
+                    <text x="180" y="100" fill="rgba(255,255,255,.95)" font-size="18" font-weight="900">Environment</text>
+                    <text x="600" y="100" fill="rgba(255,255,255,.95)" font-size="18" font-weight="900">Agent</text>
+                    <text x="442" y="150" fill="rgba(255,255,255,.95)" font-size="14" font-weight="900">Sensors</text>
+                    <text x="442" y="168" fill="rgba(255,255,255,.75)" font-size="12">Percepts</text>
+
+                    <path d="M 415 145 C 365 135, 320 135, 285 145" stroke="rgba(234,240,255,.55)" stroke-width="3" fill="none"/>
+                    <path d="M 565 145 C 610 155, 660 155, 705 145" stroke="rgba(234,240,255,.55)" stroke-width="3" fill="none"/>
+                    <text x="315" y="135" fill="rgba(234,240,255,.78)" font-size="12">Percepts →</text>
+                    <text x="630" y="135" fill="rgba(234,240,255,.78)" font-size="12">← Actions</text>
+
+                    <text x="55" y="44" fill="rgba(234,240,255,.80)" font-size="14">
+                      Agent cycle: perceive, reason, act, get feedback, learn.
+                    </text>
+                  </svg>
+                  <p class="svgCap">English: The agent loop (sense, decide, act). This is a core mental model in modern AI.</p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">PEAS: Specifying a Task Environment</p><span class="pill" style="cursor:default;">Framework</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>PEAS</span></div>
+                    <p class="langText">
+                      <b>PEAS</b> helps you describe an agent problem precisely:
+                      <br><b>P</b> Performance measure: What success means.
+                      <br><b>E</b> Environment: Where the agent operates.
+                      <br><b>A</b> Actuators: Actions the agent can take.
+                      <br><b>S</b> Sensors: What the agent can observe.
+                      <br><br>
+                      PEAS makes tasks “engineering-friendly” so we can compare solutions.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>PEAS</span></div>
+                    <p class="langText">
+                      <b>PEAS</b> طريقة منظمة لوصف مهمة الوكيل:
+                      <br><b>P</b> مقياس الأداء: يعني إيه نجاح؟
+                      <br><b>E</b> البيئة: المكان اللي الوكيل شغال فيه.
+                      <br><b>A</b> المشغلات: الأفعال المتاحة.
+                      <br><b>S</b> الحساسات: إيه اللي يقدر يلاحظه.
+                      <br><br>
+                      PEAS بيخلي توصيف المهمة واضح وسهل مقارنة الحلول.
+                    </p>
+                  </div>
+                </div>
+
+                <details>
+                  <summary>PEAS Example: Autonomous Taxi <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Taxi</span></div>
+                        <p class="langText">
+                          P: safe, fast, legal, comfortable trip, maximize profit.
+                          <br>E: roads, traffic, pedestrians, customers.
+                          <br>A: steering, accelerator, brake, signals.
+                          <br>S: cameras, LIDAR, GPS, speed sensors.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>تاكسي</span></div>
+                        <p class="langText">
+                          P: رحلة آمنة وسريعة وقانونية ومريحة وزيادة الربح.
+                          <br>E: طرق، سيارات، مشاة، عملاء.
+                          <br>A: دركسيون، بنزين، فرامل، إشارات.
+                          <br>S: كاميرات، LIDAR، GPS، حساسات سرعة.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Goal-based vs Cost-based Agents (Spam Filter example) <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Key idea</span></div>
+                        <p class="langText">
+                          A goal-based agent aims to “classify everything correctly”.
+                          But in real life, errors are not equal.
+                          In spam filtering:
+                          <br><b>False positive</b> = important email marked as spam (often very costly).
+                          <br><b>False negative</b> = spam allowed into inbox (annoying, but less costly).
+                          <br><br>
+                          A <b>cost-based agent</b> minimizes long-term cost, not just number of mistakes.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>الفكرة</span></div>
+                        <p class="langText">
+                          الوكيل الهدف-المبني يحاول “يصنّف كله صح”.
+                          لكن الأخطاء مش كلها نفس التأثير.
+                          في فلتر السبام:
+                          <br><b>False Positive</b> = إيميل مهم يتحط سبام (غالبا خسارته كبيرة).
+                          <br><b>False Negative</b> = سبام يدخل الإنبوكس (مزعج لكن أقل ضرر).
+                          <br><br>
+                          <b>الوكيل المعتمد على التكلفة</b> يقلل تكلفة الأخطاء على المدى الطويل مش مجرد عددها.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="card" style="box-shadow:none;">
+            <div class="hd"><p class="title">Environment Types (How to describe the world)</p><span class="pill" style="cursor:default;">Classification</span></div>
+            <div class="bd">
+              <p class="lead">
+                English: Environment properties strongly affect which algorithms work. Below is a clean table of the categories from the lecture.
+              </p>
+              <div style="height:10px"></div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Meaning (EN)</th>
+                    <th>Meaning (AR)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>Fully vs Partially Observable</b></td>
+                    <td>Does the agent see the complete state?</td>
+                    <td class="ar">هل الوكيل يشاهد الحالة كاملة؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Deterministic vs Stochastic vs Strategic</b></td>
+                    <td>Is next state fully determined, random, or depends on other agents?</td>
+                    <td class="ar">هل الانتقال حتمي أم عشوائي أم يعتمد على وكلاء آخرين؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Episodic vs Sequential</b></td>
+                    <td>Independent decisions vs decisions affect future states.</td>
+                    <td class="ar">قرارات منفصلة أم سلسلة تؤثر على المستقبل؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Static vs Dynamic (Semi-dynamic)</b></td>
+                    <td>Does the world change while thinking?</td>
+                    <td class="ar">هل العالم يتغير أثناء تفكير الوكيل؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Discrete vs Continuous</b></td>
+                    <td>Finite vs real-valued states/actions/time.</td>
+                    <td class="ar">حالات/أفعال محدودة أم مستمرة بقيم حقيقية؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Single-Agent vs Multi-Agent</b></td>
+                    <td>One agent vs many interacting agents.</td>
+                    <td class="ar">وكيل واحد أم عدة وكلاء يتفاعلون؟</td>
+                  </tr>
+                  <tr>
+                    <td><b>Known vs Unknown</b></td>
+                    <td>Does the agent know the rules/transition model?</td>
+                    <td class="ar">هل الوكيل يعرف قواعد البيئة ونموذج الانتقال؟</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <details style="margin-top:12px;">
+                <summary>Important note: Known vs Observable are different <span class="chev">▾</span></summary>
+                <div class="detBody">
+                  <div class="bi">
+                    <div class="langBlock">
+                      <div class="langLabel"><span>English</span><span>Clarification</span></div>
+                      <p class="langText">
+                        “Known vs Unknown” is about whether the agent knows the environment rules (transition model, rewards).
+                        “Fully vs Partially observable” is about what the agent can sense at a moment.
+                        A world can be partially observable but known (you know the rules, but can’t see everything), or fully observable but unknown (you see everything but do not know how it changes).
+                      </p>
+                    </div>
+                    <div class="langBlock ar arabicBlock">
+                      <div class="langLabel"><span>Arabic (Translation)</span><span>توضيح</span></div>
+                      <p class="langText">
+                        “Known vs Unknown” يعني هل الوكيل يعرف قوانين البيئة (نموذج الانتقال والمكافآت).
+                        “Fully vs Partially observable” يعني هل الوكيل يقدر يلاحظ الحالة كاملة حاليا.
+                        ممكن بيئة تكون جزئيا قابلة للملاحظة لكن قوانينها معروفة، أو قابلة للملاحظة بالكامل لكن قوانينها غير معروفة.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="card" style="box-shadow:none;">
+            <div class="hd"><p class="title">AI vs Machine Learning vs Deep Learning vs Data Science</p><span class="pill" style="cursor:default;">Related Disciplines</span></div>
+            <div class="bd">
+              <div class="bi">
+                <div class="langBlock">
+                  <div class="langLabel"><span>English</span><span>Relationship</span></div>
+                  <p class="langText">
+                    A short formal relation:
+                    <br><b>Deep Learning ⊂ Machine Learning ⊂ Artificial Intelligence</b>
+                    <br><br>
+                    <b>Machine Learning</b> focuses on prediction/generalization from training data.
+                    <b>Data Mining</b> focuses on discovering unknown patterns in data.
+                    <b>Data Science</b> is broader: collecting, cleaning, analyzing, visualizing data, and building data products.
+                  </p>
+                </div>
+                <div class="langBlock ar arabicBlock">
+                  <div class="langLabel"><span>Arabic (Translation)</span><span>العلاقة</span></div>
+                  <p class="langText">
+                    علاقة مختصرة:
+                    <br><b>Deep Learning جزء من ML، و ML جزء من AI</b>
+                    <br><br>
+                    <b>ML</b> يركز على التنبؤ والتعميم من بيانات تدريب.
+                    <b>Data Mining</b> يركز على اكتشاف أنماط/معلومات غير معروفة سابقا.
+                    <b>Data Science</b> أوسع: جمع وتنظيف وتحليل وتصوير البيانات وبناء منتجات بيانات.
+                  </p>
+                </div>
+              </div>
+
+              <details style="margin-top:12px;">
+                <summary>Big Data: the 5 Vs (and sometimes more) <span class="chev">▾</span></summary>
+                <div class="detBody">
+                  <div class="bi">
+                    <div class="langBlock">
+                      <div class="langLabel"><span>English</span><span>5 Vs</span></div>
+                      <p class="langText">
+                        Big Data is commonly described using:
+                        <br><b>Volume</b> (huge amounts),
+                        <b>Velocity</b> (fast generation),
+                        <b>Variety</b> (many formats, unstructured),
+                        <b>Veracity</b> (data quality issues),
+                        <b>Value</b> (usefulness).
+                      </p>
+                    </div>
+                    <div class="langBlock ar arabicBlock">
+                      <div class="langLabel"><span>Arabic (Translation)</span><span>5 Vs</span></div>
+                      <p class="langText">
+                        Big Data غالبا بتتوصف بـ:
+                        <br><b>Volume</b> حجم كبير،
+                        <b>Velocity</b> سرعة توليد،
+                        <b>Variety</b> تنوع الصيغ،
+                        <b>Veracity</b> مصداقية/جودة البيانات،
+                        <b>Value</b> القيمة الناتجة.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= Lecture 3 ============= -->
+  <section id="lecture3">
+    <div class="wrap">
+      <div class="card">
+        <div class="hd">
+          <p class="title">Lecture 3: Problem Solving as Search, State Space, and Backtracking</p>
+          <span class="pill" style="cursor:default;">Search</span>
+        </div>
+        <div class="bd">
+          <div class="bi">
+            <div class="langBlock">
+              <div class="langLabel"><span>English</span><span>Lecture 3 Overview</span></div>
+              <p class="langText">
+                Lecture 3 explains how many AI problems can be solved by <b>searching</b>.
+                You define states, actions, a transition model, and a goal.
+                Then you design search strategies to find a path from start to goal, ideally with minimal cost.
+                You also learn the difference between <b>states</b> and <b>nodes</b>, and how to handle repeated states.
+              </p>
+            </div>
+            <div class="langBlock ar arabicBlock">
+              <div class="langLabel"><span>Arabic (Translation)</span><span>نظرة عامة المحاضرة 3</span></div>
+              <p class="langText">
+                المحاضرة 3 بتشرح إن مشاكل كتير في AI تتحل عن طريق <b>البحث</b>.
+                بنحدد حالات (States)، أفعال (Actions)، نموذج انتقال (Transition Model)، وهدف (Goal).
+                وبعدها بنصمم استراتيجية بحث توصلنا من البداية للنهاية بأقل تكلفة.
+                كمان بنفرق بين <b>State</b> و <b>Node</b> ونعالج تكرار الحالات.
+              </p>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="grid2">
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">Reflex Agent vs Planning Agent</p><span class="pill" style="cursor:default;">Agent Types</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Difference</span></div>
+                    <p class="langText">
+                      <b>Reflex agent</b>: chooses action from the current percept only, does not model future consequences.
+                      <br><b>Planning agent</b>: considers “what will happen if I do this?”, needs a model of the world, and aims toward a goal.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>الفرق</span></div>
+                    <p class="langText">
+                      <b>Reflex</b>: يختار الفعل اعتمادا على الإحساس الحالي فقط بدون تخطيط للمستقبل.
+                      <br><b>Planning</b>: يفكر “لو عملت كذا هيحصل إيه؟” لازم نموذج للبيئة وهدف واضح.
+                    </p>
+                  </div>
+                </div>
+
+                <details style="margin-top:10px;">
+                  <summary>Mini example <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Example</span></div>
+                        <p class="langText">
+                          Reflex: “If the square is dirty, suck; else move right/left.”
+                          <br>Planning: “If I move left now, I can clean both rooms with fewer steps overall.”
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>مثال</span></div>
+                        <p class="langText">
+                          Reflex: “لو المكان متسخ، نظف، غير كده اتحرك.”
+                          <br>Planning: “لو روحت شمال دلوقتي هقلل عدد الخطوات وأحقق الهدف بكفاءة.”
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">State Space Search + Heuristics</p><span class="pill" style="cursor:default;">Core</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>State Space</span></div>
+                    <p class="langText">
+                      A <b>state space</b> is the set of all states reachable from the initial state by applying actions.
+                      Searching explores alternative sequences of actions.
+                      Humans rarely do exhaustive search; they use <b>heuristics</b>, rules of thumb that guide search toward promising paths.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>فضاء الحالات</span></div>
+                    <p class="langText">
+                      <b>State Space</b> هو كل الحالات الممكن الوصول لها من البداية عبر الأفعال.
+                      البحث يستكشف تسلسلات أفعال بديلة.
+                      البشر نادرا يعملوا بحث شامل، بيستخدموا <b>Heuristics</b> (قواعد تقريبية) لتوجيه البحث للمسارات الواعدة.
+                    </p>
+                  </div>
+                </div>
+
+                <details style="margin-top:10px;">
+                  <summary>Heuristic examples (human thinking) <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Examples</span></div>
+                        <p class="langText">
+                          Examples:
+                          <br>• In route finding, prefer roads that “move you closer” to the destination.
+                          <br>• In chess, focus on moves that win material or create threats, not all legal moves.
+                          <br>• In diagnosing, test the most likely causes first.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>أمثلة</span></div>
+                        <p class="langText">
+                          أمثلة:
+                          <br>• في الطريق، اختار طرق “تقربك” من الهدف.
+                          <br>• في الشطرنج، ركز على النقلات اللي تعمل تهديد أو تكسب قطع.
+                          <br>• في التشخيص، اختبر الأسباب الأكثر احتمالا أولا.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="card" style="box-shadow:none;">
+            <div class="hd"><p class="title">Search Problem Components (Formal Definition)</p><span class="pill" style="cursor:default;">Model</span></div>
+            <div class="bd">
+              <div class="bi">
+                <div class="langBlock">
+                  <div class="langLabel"><span>English</span><span>Components</span></div>
+                  <p class="langText">
+                    A search problem is usually defined by:
+                    <br><b>Initial state</b>, <b>Actions</b>, <b>Transition model</b>, <b>Goal test</b>, <b>Path cost</b>.
+                    <br><br>
+                    The best solution is the path with the lowest cost that reaches a goal.
+                  </p>
+                </div>
+                <div class="langBlock ar arabicBlock">
+                  <div class="langLabel"><span>Arabic (Translation)</span><span>المكونات</span></div>
+                  <p class="langText">
+                    مشكلة البحث بتتحدد بـ:
+                    <br><b>الحالة الابتدائية</b>، <b>الأفعال</b>، <b>نموذج الانتقال</b>، <b>اختبار الهدف</b>، <b>تكلفة المسار</b>.
+                    <br><br>
+                    أفضل حل: أقل تكلفة توصل لهدف.
+                  </p>
+                </div>
+              </div>
+
+              <details style="margin-top:10px;">
+                <summary>Example: Romania (Arad → Bucharest) <span class="chev">▾</span></summary>
+                <div class="detBody">
+                  <div class="bi">
+                    <div class="langBlock">
+                      <div class="langLabel"><span>English</span><span>Romania</span></div>
+                      <p class="langText">
+                        Initial: Arad
+                        <br>Actions: drive to neighboring city
+                        <br>Transition: moving city A→B results in being in B
+                        <br>Goal: Bucharest
+                        <br>Cost: sum of distances
+                      </p>
+                    </div>
+                    <div class="langBlock ar arabicBlock">
+                      <div class="langLabel"><span>Arabic (Translation)</span><span>رومانيا</span></div>
+                      <p class="langText">
+                        البداية: Arad
+                        <br>الأفعال: تتحرك لمدينة مجاورة
+                        <br>الانتقال: A→B يعني تصبح في B
+                        <br>الهدف: Bucharest
+                        <br>التكلفة: مجموع المسافات
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid2">
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">Search Tree: Nodes vs States</p><span class="pill" style="cursor:default;">Important</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Node vs State</span></div>
+                    <p class="langText">
+                      A <b>state</b> describes the world (example: “agent at A, dirty at B”).
+                      A <b>node</b> is a record in the search algorithm (it stores: state, parent pointer, path cost, depth, etc.).
+                      Multiple nodes can refer to the same state via different paths.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>Node vs State</span></div>
+                    <p class="langText">
+                      <b>State</b> تمثل العالم (مثال: الوكيل في A والتراب في B).
+                      <b>Node</b> هي عنصر بيانات في شجرة البحث (يحفظ الحالة + الأب + التكلفة + العمق...).
+                      ممكن أكتر من Node تشير لنفس State عبر مسارات مختلفة.
+                    </p>
+                  </div>
+                </div>
+
+                <details style="margin-top:10px;">
+                  <summary>Handling repeated states <span class="chev">▾</span></summary>
+                  <div class="detBody">
+                    <div class="bi">
+                      <div class="langBlock">
+                        <div class="langLabel"><span>English</span><span>Technique</span></div>
+                        <p class="langText">
+                          Use an <b>explored set</b>:
+                          <br>• When you expand a node, mark its state as explored.
+                          <br>• Do not expand already-explored states again.
+                          <br>Additionally, if a better (lower cost) path to the same state is found, replace the older node in the frontier.
+                        </p>
+                      </div>
+                      <div class="langBlock ar arabicBlock">
+                        <div class="langLabel"><span>Arabic (Translation)</span><span>تقنية</span></div>
+                        <p class="langText">
+                          استخدم <b>Explored Set</b>:
+                          <br>• لما توسّع Node، ضيف الـ State في explored.
+                          <br>• لا تعيد توسيع حالات تم استكشافها.
+                          <br>ولو لقيت مسار أقل تكلفة لنفس الحالة، استبدل القديم في frontier.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+
+              </div>
+            </div>
+
+            <div class="card" style="box-shadow:none;">
+              <div class="hd"><p class="title">Backtracking Search (from the lecture)</p><span class="pill" style="cursor:default;">Algorithm</span></div>
+              <div class="bd">
+                <div class="bi">
+                  <div class="langBlock">
+                    <div class="langLabel"><span>English</span><span>Idea</span></div>
+                    <p class="langText">
+                      Backtracking systematically tries paths:
+                      it goes forward until it finds a goal or a dead end,
+                      then it returns (backtracks) to the latest decision point and tries another branch.
+                      It is simple but can be expensive without heuristics.
+                    </p>
+                  </div>
+                  <div class="langBlock ar arabicBlock">
+                    <div class="langLabel"><span>Arabic (Translation)</span><span>الفكرة</span></div>
+                    <p class="langText">
+                      Backtracking بيجرب المسارات بشكل منظم:
+                      يمشي للأمام لحد ما يوصل لهدف أو طريق مسدود،
+                      بعدين يرجع لآخر نقطة قرار ويجرب فرع تاني.
+                      بسيط لكنه قد يكون مكلف بدون Heuristics.
+                    </p>
+                  </div>
+                </div>
+
+                <div style="margin-top:10px;">
+                  <pre><code>// Pseudocode (clean, readable version)
+Backtrack(start):
+  stack = [start]
+  while stack not empty:
+    state = top(stack)
+    if goal(state): return stack
+    if there is an untried child of state:
+      push(child) to stack
+    else:
+      pop(stack)
+  return FAIL</code></pre>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= Examples ============= -->
+  <section id="examples">
+    <div class="wrap">
+      <div class="card">
+        <div class="hd">
+          <p class="title">Many Illustrative Examples (Extra Explanation)</p>
+          <span class="pill" style="cursor:default;">Examples</span>
+        </div>
+        <div class="bd">
+          <div class="columns">
+            <div class="mini">
+              <h4>Example 1: Smart Vacuum Agent</h4>
+              <p>
+                English: Percepts: [location, dirty?]. Actions: Left/Right/Suck/NoOp. Simple reflex rule can work in small worlds, but planning helps minimize steps.
+                <br><span class="ar arabicBlock" style="display:block; margin-top:6px;">
+                  عربي: المدخلات [المكان, هل متسخ؟]. الأفعال: شمال/يمين/شفط/لا شيء. القواعد البسيطة تنفع في عالم صغير، لكن التخطيط يقلل الخطوات.
+                </span>
+              </p>
+            </div>
+
+            <div class="mini">
+              <h4>Example 2: PEAS for YouTube Recommender</h4>
+              <p>
+                English:
+                P: watch time + user satisfaction, E: users + videos, A: recommend list, S: clicks, watch history.
+                <br><span class="ar arabicBlock" style="display:block; margin-top:6px;">
+                  عربي: P وقت مشاهدة ورضا المستخدم، E مستخدمين وفيديوهات، A اقتراح فيديوهات، S نقرات وسجل مشاهدة.
+                </span>
+              </p>
+            </div>
+
+            <div class="mini">
+              <h4>Example 3: Heuristic in 8-Puzzle</h4>
+              <p>
+                English: Use “misplaced tiles” or “Manhattan distance” to guide the search faster than exhaustive methods.
+                <br><span class="ar arabicBlock" style="display:block; margin-top:6px;">
+                  عربي: نستخدم عدد البلاطات في مكان غلط أو مسافة Manhattan لتوجيه البحث أسرع من البحث الشامل.
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <details style="margin-top:12px;">
+            <summary>Extra: How to write a good “state representation” <span class="chev">▾</span></summary>
+            <div class="detBody">
+              <div class="bi">
+                <div class="langBlock">
+                  <div class="langLabel"><span>English</span><span>Guidelines</span></div>
+                  <p class="langText">
+                    Good state representations are:
+                    <br>• Complete enough to decide actions (do not miss key variables).
+                    <br>• Minimal (avoid unnecessary details).
+                    <br>• Easy to compute successors for (transition model).
+                    <br><br>
+                    Example:
+                    For “Farmer, dog, rabbit, lettuce” puzzle, a clean state can be 4 bits indicating which side each is on.
+                  </p>
+                </div>
+                <div class="langBlock ar arabicBlock">
+                  <div class="langLabel"><span>Arabic (Translation)</span><span>إرشادات</span></div>
+                  <p class="langText">
+                    تمثيل الحالة الجيد يكون:
+                    <br>• كافي لاتخاذ قرار (لا ينقص متغيرات مهمة).
+                    <br>• بسيط قدر الإمكان (بدون تفاصيل زائدة).
+                    <br>• سهل حساب الانتقالات منه.
+                    <br><br>
+                    مثال:
+                    لغز الفلاح والكلب والأرنب والخس: نمثل الحالة بـ 4 بتات تحدد كل عنصر على أي ضفة.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= Quiz ============= -->
+  <section id="quiz">
+    <div class="wrap">
+      <div class="card">
+        <div class="hd">
+          <p class="title">Interactive Quiz (Instant Feedback)</p>
+          <span class="pill" style="cursor:default;">Test Yourself</span>
+        </div>
+        <div class="bd">
+          <p class="lead">
+            English: Answer the questions, then click “Check Answers”.
+            <br><span class="ar arabicBlock" style="display:block; margin-top:6px;">
+              عربي: اختار الإجابات واضغط “Check Answers”.
+            </span>
+          </p>
+
+          <div style="height:12px"></div>
+
+          <div class="quizQ" data-answer="b">
+            <p class="q">Q1) Which approach focuses on building agents that “do the right thing” to maximize goal achievement?</p>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q1" value="a" /> Acting Humanly (Turing Test)</label>
+              <label class="opt"><input type="radio" name="q1" value="b" /> Acting Rationally (Rational Agent)</label>
+              <label class="opt"><input type="radio" name="q1" value="c" /> Thinking Humanly (Cognitive modeling)</label>
+            </div>
+            <div class="result" aria-live="polite"></div>
+          </div>
+
+          <div class="quizQ" data-answer="c">
+            <p class="q">Q2) In spam filtering, which error is usually more costly?</p>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q2" value="a" /> False Negative (spam in inbox)</label>
+              <label class="opt"><input type="radio" name="q2" value="b" /> Both equal</label>
+              <label class="opt"><input type="radio" name="q2" value="c" /> False Positive (important email marked spam)</label>
+            </div>
+            <div class="result" aria-live="polite"></div>
+          </div>
+
+          <div class="quizQ" data-answer="a">
+            <p class="q">Q3) A heuristic is best described as:</p>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="q3" value="a" /> A rule-of-thumb that guides search toward promising paths</label>
+              <label class="opt"><input type="radio" name="q3" value="b" /> A guarantee of optimal solution</label>
+              <label class="opt"><input type="radio" name="q3" value="c" /> The explored set used to avoid repeated states</label>
+            </div>
+            <div class="result" aria-live="polite"></div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <button class="btn gradient" type="button" id="checkQuizBtn">Check Answers</button>
+            <button class="btn" type="button" id="resetQuizBtn">Reset</button>
+          </div>
+
+          <details style="margin-top:12px;">
+            <summary>Extra open-ended practice questions (like the lecture sheets) <span class="chev">▾</span></summary>
+            <div class="detBody">
+              <div class="bi">
+                <div class="langBlock">
+                  <div class="langLabel"><span>English</span><span>Practice</span></div>
+                  <p class="langText">
+                    1) Explain the Turing Test and criticize what it does and does not measure.
+                    <br>2) Write PEAS for a “smart medical diagnosis assistant”.
+                    <br>3) Characterize the environment for: Poker, Medical Diagnosis, Image Analysis, Interactive English Tutor.
+                    <br>4) For “Farmer, dog, rabbit, lettuce”, propose a state representation and valid operators.
+                  </p>
+                </div>
+                <div class="langBlock ar arabicBlock">
+                  <div class="langLabel"><span>Arabic (Translation)</span><span>تدريب</span></div>
+                  <p class="langText">
+                    1) اشرح اختبار تورينج وانتقد ما الذي يقيسه وما الذي لا يقيسه.
+                    <br>2) اكتب PEAS لمساعد تشخيص طبي ذكي.
+                    <br>3) صِف بيئة: البوكر، التشخيص الطبي، تحليل الصور، مدرس إنجليزي تفاعلي.
+                    <br>4) للغز الفلاح والكلب والأرنب والخس: اقترح تمثيل حالة وعمليات انتقال صحيحة.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="card" style="box-shadow:none;">
+        <div class="bd">
+          <p style="margin:0;">
+            <b>Tip:</b> If you want, tell me: “Make a separate website page for each lecture” and I will split this into 3 HTML files with a shared theme.
+            <br>
+            <span class="ar arabicBlock" style="display:block; margin-top:6px;">
+              نصيحة: لو تحب، قول لي “اقسمه 3 صفحات” وأنا أعمل لكل محاضرة صفحة HTML لوحدها مع نفس التصميم.
+            </span>
+          </p>
+        </div>
+      </div>
+      <div style="margin-top:12px; opacity:.9;">
+        Built as a single-file responsive site. You can deploy it anywhere (GitHub Pages, Netlify) or just open it locally.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Toggle Arabic blocks (hide/show) =====
+    const toggleArabicBtn = document.getElementById('toggleArabicBtn');
+    const arabicBlocks = () => document.querySelectorAll('.arabicBlock');
+
+    let arabicVisible = true;
+    toggleArabicBtn.addEventListener('click', () => {
+      arabicVisible = !arabicVisible;
+      arabicBlocks().forEach(el => el.style.display = arabicVisible ? '' : 'none');
+      toggleArabicBtn.textContent = arabicVisible ? 'Toggle Arabic' : 'Show Arabic';
+    });
+
+    // ===== Expand all details =====
+    document.getElementById('expandAllBtn').addEventListener('click', () => {
+      document.querySelectorAll('details').forEach(d => d.open = true);
+      window.location.hash = '#lecture1';
+    });
+
+    // ===== Quiz checker =====
+    const checkQuizBtn = document.getElementById('checkQuizBtn');
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+
+    function selectedValue(groupName){
+      const el = document.querySelector(`input[name="${groupName}"]:checked`);
+      return el ? el.value : null;
+    }
+
+    checkQuizBtn.addEventListener('click', () => {
+      const questions = document.querySelectorAll('.quizQ');
+      questions.forEach((q, idx) => {
+        const answer = q.getAttribute('data-answer');
+        const group = `q${idx+1}`;
+        const chosen = selectedValue(group);
+        const res = q.querySelector('.result');
+
+        if(!chosen){
+          res.className = 'result';
+          res.style.display = 'block';
+          res.textContent = 'Please select an answer.';
+          return;
+        }
+
+        if(chosen === answer){
+          res.className = 'result good';
+          res.style.display = 'block';
+          res.textContent = 'Correct ✅';
+        } else {
+          res.className = 'result bad';
+          res.style.display = 'block';
+          res.textContent = `Incorrect. Correct answer is: "${answer.toUpperCase()}".`;
+        }
+      });
+    });
+
+    resetQuizBtn.addEventListener('click', () => {
+      document.querySelectorAll('.quizQ input[type="radio"]').forEach(r => r.checked = false);
+      document.querySelectorAll('.quizQ .result').forEach(res => { res.style.display='none'; res.textContent=''; });
+    });
+  </script>
+</body>
+</html>
