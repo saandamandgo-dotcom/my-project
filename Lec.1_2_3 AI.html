@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lectures Hub | مركز محاضرات الذكاء الاصطناعي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-purple: #bf00ff;
+            --dark-bg: #0a0a0f;
+            --card-bg: #12121a;
+            --text-light: #e0e0e0;
+            --gradient-1: linear-gradient(135deg, #00f3ff 0%, #bf00ff 100%);
+            --gradient-2: linear-gradient(45deg, #ff00ff 0%, #00f3ff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Grid */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .main-header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .glitch-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            color: #fff;
+            text-shadow: 0 0 20px var(--neon-cyan);
+            animation: glitch 2s infinite;
+        }
+
+        .glitch-title::before,
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-title::before {
+            color: var(--neon-pink);
+            animation: glitch-1 0.3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        }
+
+        .glitch-title::after {
+            color: var(--neon-cyan);
+            animation: glitch-2 0.3s infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            50% { transform: translate(-5px, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            50% { transform: translate(5px, 0); }
+        }
+
+        .subtitle {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation Cards */
+        .lecture-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .lecture-card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .lecture-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--neon-cyan), transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lecture-card:hover::before {
+            opacity: 1;
+        }
+
+        .lecture-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .lecture-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.2);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--neon-cyan);
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .card-title-ar {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.3rem;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+        }
+
+        .card-topics {
+            list-style: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .card-topics li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-topics li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .back-btn:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1) 0%, rgba(191, 0, 255, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title-ar {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-pink);
+        }
+
+        /* Content Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .info-card.pink {
+            border-left-color: var(--neon-pink);
+        }
+
+        .info-card.purple {
+            border-left-color: var(--neon-purple);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--gradient-1);
+        }
+
+        .info-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+        }
+
+        .info-title-ar {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .bilingual-content {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .lang-block {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .lang-label {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .lang-label.ar {
+            background: var(--neon-pink);
+        }
+
+        /* Mind Maps */
+        .mind-map-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mind-map {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .central-node {
+            background: var(--gradient-1);
+            padding: 2rem 3rem;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .branch {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: var(--neon-cyan);
+        }
+
+        .branch:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 243, 255, 0.2);
+        }
+
+        .branch-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .branch-title-ar {
+            font-family: 'Cairo', sans-serif;
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient-1);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: var(--card-bg);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        }
+
+        .image-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+        }
+
+        .image-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #0d0d12;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f56; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #27c93f; }
+
+        code {
+            color: var(--neon-cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            background: rgba(0, 243, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .question-text {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .question-text-ar {
+            font-family: 'Cairo', sans-serif;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .option {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 243, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 50px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 5px;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="cyber-grid"></div>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="container">
+        <!-- Main Header -->
+        <header class="main-header" id="mainMenu">
+            <h1 class="glitch-title" data-text="AI LECTURES">AI LECTURES</h1>
+            <p class="subtitle">مركز محاضرات الذكاء الاصطناعي الشامل</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">Interactive Learning Platform | منصة تعليمية تفاعلية</p>
+        </header>
+
+        <!-- Lecture Selection Cards -->
+        <div class="lecture-selector" id="lectureSelector">
+            <div class="lecture-card" onclick="showLecture(1)">
+                <div class="card-content">
+                    <span class="card-number">01</span>
+                    <h3 class="card-title">Introduction to AI</h3>
+                    <h4 class="card-title-ar">مقدمة في الذكاء الاصطناعي</h4>
+                    <ul class="card-topics">
+                        <li>What is Intelligence? | ما هو الذكاء؟</li>
+                        <li>Foundations of AI | أساسيات الذكاء الاصطناعي</li>
+                        <li>Turing Test | اختبار تورينج</li>
+                        <li>Chinese Room Argument | حجرة الصيني</li>
+                        <li>Strong vs Weak AI | الذكاء الاصطناعي القوي والضعيف</li>
+                        <li>Intelligent Agents | الوكلاء الذكيون</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lecture-card" onclick="showLecture(2)">
+                <div class="card-content">
+                    <span class="card-number">02</span>
+                    <h3 class="card-title">Intelligent Agents</h3>
+                    <h4 class="card-title-ar">الوكلاء الذكيون والتخصصات المرتبطة</h4>
+                    <ul class="card-topics">
+                        <li>Rational Agents | الوكلاء العقلانيون</li>
+                        <li>PEAS Specification | مواصفات PEAS</li>
+                        <li>Environment Types | أنواع البيئات</li>
+                        <li>AI vs ML vs DL | الذكاء الاصطناعي vs التعلم الآلي</li>
+                        <li>Data Science | علم البيانات</li>
+                        <li>Big Data | البيانات الضخمة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lecture-card" onclick="showLecture(3)">
+                <div class="card-content">
+                    <span class="card-number">03</span>
+                    <h3 class="card-title">Problem Solving & Search</h3>
+                    <h4 class="card-title-ar">حل المشكلات والبحث في فضاء الحالات</h4>
+                    <ul class="card-topics">
+                        <li>State Space Search | البحث في فضاء الحالات</li>
+                        <li>Search Strategies | استراتيجيات البحث</li>
+                        <li>Uninformed Search | البحث غير الموجه</li>
+                        <li>Informed Search | البحث الموجه</li>
+                        <li>Backtracking | التتبع العكسي</li>
+                        <li>Game Playing | ألعاب الذكاء الاصطناعي</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LECTURE 1 CONTENT -->
+        <section class="content-section" id="lecture1">
+            <button class="back-btn" onclick="backToMenu()">← Back to Menu | العودة للقائمة</button>
+            
+            <div class="section-header">
+                <h2 class="section-title">LECTURE 1: Introduction to AI</h2>
+                <h3 class="section-title-ar">المحاضرة الأولى: مقدمة في الذكاء الاصطناعي</h3>
+            </div>
+
+            <!-- Mind Map -->
+            <div class="mind-map-container">
+                <div class="mind-map">
+                    <div class="central-node">
+                        Artificial Intelligence<br>
+                        <span style="font-size: 0.7em;">الذكاء الاصطناعي</span>
+                    </div>
+                    <div class="branches">
+                        <div class="branch">
+                            <div class="branch-title">Thinking Humanly</div>
+                            <div class="branch-title-ar">التفكير كالإنسان</div>
+                            <p>Cognitive modeling approach</p>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-title">Thinking Rationally</div>
+                            <div class="branch-title-ar">التفكير بشكل عقلاني</div>
+                            <p>Laws of thought approach</p>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-title">Acting Humanly</div>
+                            <div class="branch-title-ar">التصرف كالإنسان</div>
+                            <p>Turing Test approach</p>
+                        </div>
+                        <div class="branch">
+                            <div class="branch-title">Acting Rationally</div>
+                            <div class="branch-title-ar">التصرف بشكل عقلاني</div>
+                            <p>Rational agent approach</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foundations Grid -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box">🧠</div>
+                        <div>
+                            <h4 class="info-title">Philosophy</h4>
+                            <p class="info-title-ar">الفلسفة</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>Can formal rules be used to draw valid conclusions? How does the mind arise from a physical brain? Where does knowledge come from?</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>هل يمكن استخدام القواعد الرسمية لاستخلاص استنتاجات صحيحة؟ كيف تنشأ العقل من الدماغ المادي؟ من أين تأتي المعرفة؟</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card pink">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: var(--gradient-2);">🔢</div>
+                        <div>
+                            <h4 class="info-title">Mathematics</h4>
+                            <p class="info-title-ar">الرياضيات</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>What are the formal rules to draw valid conclusions? What can be computed? How do we reason with uncertain information?</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>ما هي القواعد الرسمية لاستخلاص الاستنتاجات الصحيحة؟ ما الذي يمكن حسابه؟ كيف نستدل بالمعلومات غير المؤكدة؟</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card purple">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: linear-gradient(45deg, #bf00ff, #ff00ff);">⚡</div>
+                        <div>
+                            <h4 class="info-title">Neuroscience</h4>
+                            <p class="info-title-ar">علم الأعصاب</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>How do brains process information? Understanding neural networks and brain structure to inspire AI architectures.</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>كيف تعالج الأدمغة المعلومات؟ فهم الشبكات العصبية وبنية الدماغ لإلهام هياكل الذكاء الاصطناعي.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box">💻</div>
+                        <div>
+                            <h4 class="info-title">Computer Engineering</h4>
+                            <p class="info-title-ar">هندسة الحاسوب</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>How can we build an efficient computer? Hardware optimization for AI computations and parallel processing.</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>كيف يمكننا بناء حاسوب فعال؟ تحسين الأجهزة لحسابات الذكاء الاصطناعي والمعالجة المتوازية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turing Test Section -->
+            <div class="info-card" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box">🎭</div>
+                    <div>
+                        <h4 class="info-title">The Turing Test (1950)</h4>
+                        <p class="info-title-ar">اختبار تورينج (١٩٥٠)</p>
+                    </div>
+                </div>
+                <div class="bilingual-content">
+                    <div class="lang-block">
+                        <span class="lang-label">EN</span>
+                        <p><strong>The Imitation Game:</strong> Can a human interrogator tell whether written responses come from a human or a machine? If the machine can fool the interrogator, it passes the test.</p>
+                        <p><strong>Capabilities Required:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Natural Language Processing</li>
+                            <li>Knowledge Representation</li>
+                            <li>Automated Reasoning</li>
+                            <li>Machine Learning</li>
+                        </ul>
+                    </div>
+                    <div class="lang-block">
+                        <span class="lang-label ar">ع</span>
+                        <p><strong>لعبة التقليد:</strong> هل يمكن للمحقق البشري التمييز بين الردود المكتوبة القادمة من إنسان أو آلة؟ إذا استطاعت الآلة خداع المحقق، فإنها تجتاز الاختبار.</p>
+                        <p><strong>القدرات المطلوبة:</strong></p>
+                        <ul style="margin-right: 2rem; margin-top: 0.5rem; list-style-type: none;">
+                            <li>▸ معالجة اللغة الطبيعية</li>
+                            <li>▸ تمثيل المعرفة</li>
+                            <li>▸ الاستدلال الآلي</li>
+                            <li>▸ التعلم الآلي</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chinese Room -->
+            <div class="info-card pink" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box" style="background: var(--gradient-2);">🏠</div>
+                    <div>
+                        <h4 class="info-title">The Chinese Room Argument (Searle, 1980)</h4>
+                        <p class="info-title-ar">حجة الغرفة الصينية (سيرل، ١٩٨٠)</p>
+                    </div>
+                </div>
+                <div class="bilingual-content">
+                    <div class="lang-block">
+                        <span class="lang-label">EN</span>
+                        <p>A person in a room follows English instructions to manipulate Chinese symbols. To outside observers, the room appears to understand Chinese, but the person inside has no understanding.</p>
+                        <p><strong>Conclusion:</strong> Syntax (symbol manipulation) ≠ Semantics (understanding)</p>
+                        <p><strong>Strong AI:</strong> Machines can truly understand (consciousness)</p>
+                        <p><strong>Weak AI:</strong> Machines only simulate understanding</p>
+                    </div>
+                    <div class="lang-block">
+                        <span class="lang-label ar">ع</span>
+                        <p>شخص في غرفة يتبع تعليمات إنجليزية للتعامل مع الرموز الصينية. للمراقبين من الخارج، تبدو الغرفة تفهم الصينية، لكن الشخص داخلها لا يفهم.</p>
+                        <p><strong>الاستنتاج:</strong> الصياغة (معالجة الرموز) ≠ الدلالة (الفهم)</p>
+                        <p><strong>الذكاء الاصطناعي القوي:</strong> الآلات يمكنها الفهم الحقيقي (الوعي)</p>
+                        <p><strong>الذكاء الاصطناعي الضعيف:</strong> الآلات تحاكي الفهم فقط</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Stages of AI -->
+            <div class="mind-map-container">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-family: 'Orbitron';">Three Stages of AI | مراحل الذكاء الاصطناعي الثلاث</h3>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+                    <div style="background: linear-gradient(90deg, rgba(0,243,255,0.2), transparent); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--neon-cyan);">
+                        <h4 style="color: var(--neon-cyan); font-family: 'Orbitron';">ANI - Artificial Narrow Intelligence | الذكاء الاصطناعي الضيق</h4>
+                        <p>Performs specific tasks (Siri, Alexa, Chess programs) | أداء مهام محددة (سيري، أليكسا، برامج الشطرنج)</p>
+                    </div>
+                    <div style="background: linear-gradient(90deg, rgba(191,0,255,0.2), transparent); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--neon-purple);">
+                        <h4 style="color: var(--neon-purple); font-family: 'Orbitron';">AGI - Artificial General Intelligence | الذكاء الاصطناعي العام</h4>
+                        <p>Human-level intelligence across all domains | ذكاء بمستوى الإنسان في جميع المجالات</p>
+                    </div>
+                    <div style="background: linear-gradient(90deg, rgba(255,0,255,0.2), transparent); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--neon-pink);">
+                        <h4 style="color: var(--neon-pink); font-family: 'Orbitron';">ASI - Artificial Super Intelligence | الذكاء الاصطناعي الفائق</h4>
+                        <p>Surpasses human intelligence in all aspects | يتجاوز الذكاء البشري في جميع الجوانب</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="quiz-container">
+                <h3 style="font-family: 'Orbitron'; margin-bottom: 1.5rem; text-align: center;">🎯 Quick Quiz | اختبار سريع</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">Q1: Which approach focuses on "acting rationally" rather than "thinking like humans"?</p>
+                    <p class="question-text-ar">أي منهج يركز على "التصرف بشكل عقلاني" بدلاً من "التفكير مثل البشر"؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>Cognitive Modeling Approach | منهج النمذجة المعرفية</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>Rational Agent Approach | منهج الوكيل العقلاني</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>Turing Test Approach | منهج اختبار تورينج</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q2: What does the Chinese Room argument demonstrate?</p>
+                    <p class="question-text-ar">ماذا تُظهر حجة الغرفة الصينية؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>That AI can understand language | أن الذكاء الاصطناعي يمكنه فهم اللغة</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>That syntax ≠ semantics | أن الصياغة لا تساوي الدلالة</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>That Turing Test is perfect | أن اختبار تورينج مثالي</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LECTURE 2 CONTENT -->
+        <section class="content-section" id="lecture2">
+            <button class="back-btn" onclick="backToMenu()">← Back to Menu | العودة للقائمة</button>
+            
+            <div class="section-header">
+                <h2 class="section-title">LECTURE 2: Intelligent Agents & Related Disciplines</h2>
+                <h3 class="section-title-ar">المحاضرة الثانية: الوكلاء الذكيون والتخصصات المرتبطة</h3>
+            </div>
+
+            <!-- Agent Architecture Mind Map -->
+            <div class="mind-map-container">
+                <div class="mind-map">
+                    <div class="central-node" style="background: var(--gradient-2);">
+                        Intelligent Agent<br>
+                        <span style="font-size: 0.6em;">الوكيل الذكي</span>
+                    </div>
+                    <div class="branches">
+                        <div class="branch" style="border-color: var(--neon-pink);">
+                            <div class="branch-title" style="color: var(--neon-pink);">Sensors</div>
+                            <div class="branch-title-ar">المستشعرات</div>
+                            <p>Perceive environment | إدراك البيئة</p>
+                        </div>
+                        <div class="branch" style="border-color: var(--neon-purple);">
+                            <div class="branch-title" style="color: var(--neon-purple);">Actuators</div>
+                            <div class="branch-title-ar">المشغلات</div>
+                            <p>Act on environment | التأثير على البيئة</p>
+                        </div>
+                        <div class="branch" style="border-color: var(--neon-cyan);">
+                            <div class="branch-title">Agent Function</div>
+                            <div class="branch-title-ar">دالة الوكيل</div>
+                            <p>Maps percepts to actions | ربط الإدراكات بالأفعال</p>
+                        </div>
+                        <div class="branch" style="border-color: #00ff88;">
+                            <div class="branch-title" style="color: #00ff88;">Learning</div>
+                            <div class="branch-title-ar" style="color: #00ff88;">التعلم</div>
+                            <p>Improve from experience | التحسن من التجربة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PEAS Framework -->
+            <div class="info-card" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box">📋</div>
+                    <div>
+                        <h4 class="info-title">PEAS Specification</h4>
+                        <p class="info-title-ar">مواصفات PEAS</p>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                    </div>
+                    <code>
+P = Performance Measure | مقياس الأداء<br>
+E = Environment | البيئة<br>
+A = Actuators | المشغلات<br>
+S = Sensors | المستشعرات<br><br>
+Example: Autonomous Taxi | مثال: سيارة أجرة ذاتية القيادة<br>
+P: Safe, fast, legal, comfortable trip | رحلة آمنة وسريعة وقانونية ومريحة<br>
+E: Roads, traffic, pedestrians | الطرق، المرور، المشاة<br>
+A: Steering, accelerator, brake | التوجيه، المسرع، المكابح<br>
+S: Cameras, LIDAR, GPS, speedometer | الكاميرات، ليدار، GPS، عداد السرعة
+                    </code>
+                </div>
+            </div>
+
+            <!-- Environment Types -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box">👁️</div>
+                        <div>
+                            <h4 class="info-title">Observable</h4>
+                            <p class="info-title-ar">الملاحظة</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p><strong>Fully Observable:</strong> Agent has complete state info (Chess)</p>
+                            <p><strong>Partially Observable:</strong> Incomplete info (Poker)</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p><strong>ملاحظة كاملة:</strong> الوكيل لديه معلومات كاملة عن الحالة (الشطرنج)</p>
+                            <p><strong>ملاحظة جزئية:</strong> معلومات غير كاملة (البوكر)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card pink">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: var(--gradient-2);">🎲</div>
+                        <div>
+                            <h4 class="info-title">Deterministic vs Stochastic</h4>
+                            <p class="info-title-ar">حتمي vs عشوائي</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p><strong>Deterministic:</strong> Next state fully determined (8-puzzle)</p>
+                            <p><strong>Stochastic:</strong> Uncertainty in outcomes (Backgammon with dice)</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p><strong>حتمي:</strong> الحالة التالية محددة بالكامل (لعبة ٨)</p>
+                            <p><strong>عشوائي:</strong> عدم اليقين في النتائج (الطاولة مع النرد)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card purple">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: linear-gradient(45deg, #bf00ff, #ff00ff);">⚡</div>
+                        <div>
+                            <h4 class="info-title">Static vs Dynamic</h4>
+                            <p class="info-title-ar">ساكن vs ديناميكي</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p><strong>Static:</strong> Environment unchanged while agent deliberates (Crossword)</p>
+                            <p><strong>Dynamic:</strong> Changes continuously (Autonomous driving)</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p><strong>ساكن:</strong> البيئة لا تتغير أثناء تفكير الوكيل (الكلمات المتقاطعة)</p>
+                            <p><strong>ديناميكي:</strong> يتغير باستمرار (القيادة الذاتية)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box">👥</div>
+                        <div>
+                            <h4 class="info-title">Single vs Multi-Agent</h4>
+                            <p class="info-title-ar">وكيل واحد vs متعدد</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p><strong>Single:</strong> Solitaire, Crossword</p>
+                            <p><strong>Multi:</strong> Chess (competitive), Robot soccer (cooperative)</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p><strong>واحد:</strong> سوليتير، كلمات متقاطعة</p>
+                            <p><strong>متعدد:</strong> شطرنج (تنافسي)، كرة قدم روبوتات (تعاوني)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI vs ML vs DL -->
+            <div class="mind-map-container">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-family: 'Orbitron';">AI ⊃ Machine Learning ⊃ Deep Learning</h3>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                    <div style="width: 300px; height: 300px; border-radius: 50%; background: rgba(0,243,255,0.1); border: 3px solid var(--neon-cyan); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                        <span style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-cyan);">AI</span>
+                        <span style="font-size: 0.8rem;">Artificial Intelligence</span>
+                        <span style="font-family: 'Cairo'; color: #888;">الذكاء الاصطناعي</span>
+                        <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: rgba(191,0,255,0.2); border: 3px solid var(--neon-purple); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <span style="font-family: 'Orbitron'; color: var(--neon-purple);">ML</span>
+                            <span style="font-size: 0.7rem;">Machine Learning</span>
+                            <span style="font-family: 'Cairo'; font-size: 0.8rem; color: #888;">التعلم الآلي</span>
+                            <div style="position: absolute; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,0,255,0.3); border: 3px solid var(--neon-pink); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <span style="font-family: 'Orbitron'; color: var(--neon-pink);">DL</span>
+                                <span style="font-size: 0.6rem;">Deep Learning</span>
+                                <span style="font-family: 'Cairo'; font-size: 0.7rem; color: #888;">التعلم العميق</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Data 5Vs -->
+            <div class="info-card pink" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box" style="background: var(--gradient-2);">💾</div>
+                    <div>
+                        <h4 class="info-title">The 5 Vs of Big Data</h4>
+                        <p class="info-title-ar">الـ٥ Vs للبيانات الضخمة</p>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="text-align: center; padding: 1rem; background: rgba(0,243,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: var(--neon-cyan);">📊</div>
+                        <h5 style="font-family: 'Orbitron'; color: var(--neon-cyan);">Volume</h5>
+                        <p style="font-size: 0.9rem;">Massive amounts of data | كميات ضخمة من البيانات</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(191,0,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: var(--neon-purple);">⚡</div>
+                        <h5 style="font-family: 'Orbitron'; color: var(--neon-purple);">Velocity</h5>
+                        <p style="font-size: 0.9rem;">Speed of data generation | سرعة توليد البيانات</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255,0,255,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: var(--neon-pink);">🎨</div>
+                        <h5 style="font-family: 'Orbitron'; color: var(--neon-pink);">Variety</h5>
+                        <p style="font-size: 0.9rem;">Different data types | أنواع مختلفة من البيانات</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(0,255,136,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: #00ff88;">✓</div>
+                        <h5 style="font-family: 'Orbitron'; color: #00ff88;">Veracity</h5>
+                        <p style="font-size: 0.9rem;">Data quality & trustworthiness | جودة وموثوقية البيانات</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255,170,0,0.1); border-radius: 10px;">
+                        <div style="font-size: 2rem; color: #ffaa00;">💎</div>
+                        <h5 style="font-family: 'Orbitron'; color: #ffaa00;">Value</h5>
+                        <p style="font-size: 0.9rem;">Useful insights | رؤى مفيدة</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="quiz-container">
+                <h3 style="font-family: 'Orbitron'; margin-bottom: 1.5rem; text-align: center;">🎯 Quick Quiz | اختبار سريع</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">Q1: A spam filter is best described as what type of agent?</p>
+                    <p class="question-text-ar">مرشح البريد المزعج يُوصف best كأي نوع من الوكلاء؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>Simple reflex agent | وكيل رد فعل بسيط</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>Learning agent | وكيل تعلم</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>Model-based reflex agent | وكيل رد فعل قائم على نموذج</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q2: Which environment property describes chess with a clock?</p>
+                    <p class="question-text-ar">أي خاصية بيئة تصف الشطرنج مع الساعة؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>Fully observable & Static | ملاحظة كاملة وساكن</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>Fully observable & Semi-dynamic | ملاحظة كاملة وشبه ديناميكي</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>Partially observable & Dynamic | ملاحظة جزئية وديناميكي</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LECTURE 3 CONTENT -->
+        <section class="content-section" id="lecture3">
+            <button class="back-btn" onclick="backToMenu()">← Back to Menu | العودة للقائمة</button>
+            
+            <div class="section-header">
+                <h2 class="section-title">LECTURE 3: Problem Solving as Search</h2>
+                <h3 class="section-title-ar">المحاضرة الثالثة: حل المشكلات كبحث</h3>
+            </div>
+
+            <!-- Search Problem Components -->
+            <div class="mind-map-container">
+                <div class="mind-map">
+                    <div class="central-node" style="background: linear-gradient(135deg, #00ff88 0%, #00f3ff 100%);">
+                        State Space Search<br>
+                        <span style="font-size: 0.6em;">البحث في فضاء الحالات</span>
+                    </div>
+                    <div class="branches">
+                        <div class="branch" style="border-color: #00ff88;">
+                            <div class="branch-title" style="color: #00ff88;">Initial State</div>
+                            <div class="branch-title-ar" style="color: #00ff88;">الحالة الابتدائية</div>
+                            <p>Starting point | نقطة البداية</p>
+                        </div>
+                        <div class="branch" style="border-color: var(--neon-cyan);">
+                            <div class="branch-title">Actions</div>
+                            <div class="branch-title-ar">الأفعال</div>
+                            <p>Available moves | الحركات المتاحة</p>
+                        </div>
+                        <div class="branch" style="border-color: var(--neon-purple);">
+                            <div class="branch-title" style="color: var(--neon-purple);">Transition Model</div>
+                            <div class="branch-title-ar" style="color: var(--neon-purple);">نموذج الانتقال</div>
+                            <p>Result of actions | نتيجة الأفعال</p>
+                        </div>
+                        <div class="branch" style="border-color: var(--neon-pink);">
+                            <div class="branch-title" style="color: var(--neon-pink);">Goal Test</div>
+                            <div class="branch-title-ar" style="color: var(--neon-pink);">اختبار الهدف</div>
+                            <p>Is goal reached? | هل تم الوصول للهدف؟</p>
+                        </div>
+                        <div class="branch" style="border-color: #ffaa00;">
+                            <div class="branch-title" style="color: #ffaa00;">Path Cost</div>
+                            <div class="branch-title-ar" style="color: #ffaa00;">تكلفة المسار</div>
+                            <p>Sum of step costs | مجموع تكاليف الخطوات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Strategies Comparison -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: linear-gradient(135deg, #ff4444, #ff8888);">🔍</div>
+                        <div>
+                            <h4 class="info-title">Uninformed Search</h4>
+                            <p class="info-title-ar">البحث غير الموجه (أعمى)</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>No domain knowledge, only problem definition</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Breadth-First Search (BFS)</li>
+                                <li>Depth-First Search (DFS)</li>
+                                <li>Uniform Cost Search</li>
+                                <li>Iterative Deepening</li>
+                            </ul>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>لا يوجد معرفة بالمجال، فقط تعريف المشكلة</p>
+                            <ul style="margin-right: 1.5rem; margin-top: 0.5rem; list-style: none;">
+                                <li>▸ البحث بالعرض الأول (BFS)</li>
+                                <li>▸ البحث بالعمق الأول (DFS)</li>
+                                <li>▸ البحث بتكلفة موحدة</li>
+                                <li>▸ التعمق التكراري</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card" style="border-left-color: #00ff88;">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: linear-gradient(135deg, #00ff88, #00f3ff);">🧭</div>
+                        <div>
+                            <h4 class="info-title" style="color: #00ff88;">Informed Search (Heuristic)</h4>
+                            <p class="info-title-ar" style="color: #00ff88;">البحث الموجه (الاستدلالي)</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>Uses heuristic function h(n) to estimate cost to goal</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Greedy Best-First Search</li>
+                                <li>A* Search (optimal)</li>
+                                <li>IDA* (memory-bounded)</li>
+                            </ul>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>يستخدم دالة استدلالية h(n) لتقدير التكلفة للهدف</p>
+                            <ul style="margin-right: 1.5rem; margin-top: 0.5rem; list-style: none;">
+                                <li>▸ البحث الجشعي الأفضل أولاً</li>
+                                <li>▸ البحث A* (أمثل)</li>
+                                <li>▸ IDA* (محدود الذاكرة)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BFS vs DFS Visualization -->
+            <div class="info-card" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box">🌳</div>
+                    <div>
+                        <h4 class="info-title">Search Tree Exploration</h4>
+                        <p class="info-title-ar">استكشاف شجرة البحث</p>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h5 style="color: var(--neon-cyan); font-family: 'Orbitron'; margin-bottom: 1rem;">Breadth-First Search | البحث بالعرض</h5>
+                        <div style="background: rgba(0,243,255,0.05); padding: 1rem; border-radius: 10px; font-family: monospace;">
+                            <div style="text-align: center; padding: 0.5rem; background: var(--neon-cyan); color: #000; border-radius: 5px;">A</div>
+                            <div style="display: flex; justify-content: space-around; margin-top: 0.5rem;">
+                                <span style="padding: 0.3rem 0.8rem; background: rgba(0,243,255,0.3); border-radius: 3px;">B</span>
+                                <span style="padding: 0.3rem 0.8rem; background: rgba(0,243,255,0.3); border-radius: 3px;">C</span>
+                                <span style="padding: 0.3rem 0.8rem; background: rgba(0,243,255,0.3); border-radius: 3px;">D</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-around; margin-top: 0.5rem; font-size: 0.8rem;">
+                                <span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">Explores all nodes at current depth before moving deeper | يستكشف جميع العقد في العمق الحالي قبل التعمق</p>
+                        <p style="color: var(--neon-cyan);">Complete: ✓ | Optimal: ✓ (if uniform cost) | Space: O(b^d)</p>
+                    </div>
+                    <div>
+                        <h5 style="color: var(--neon-pink); font-family: 'Orbitron'; margin-bottom: 1rem;">Depth-First Search | البحث بالعمق</h5>
+                        <div style="background: rgba(255,0,255,0.05); padding: 1rem; border-radius: 10px; font-family: monospace;">
+                            <div style="text-align: center; padding: 0.5rem; background: var(--neon-pink); color: #000; border-radius: 5px;">A</div>
+                            <div style="margin-top: 0.5rem; padding-left: 2rem;">
+                                <span style="padding: 0.3rem 0.8rem; background: rgba(255,0,255,0.3); border-radius: 3px;">B</span>
+                                <div style="margin-top: 0.5rem; padding-left: 2rem;">
+                                    <span style="padding: 0.3rem 0.8rem; background: rgba(255,0,255,0.5); border-radius: 3px;">E</span>
+                                    <div style="margin-top: 0.5rem; padding-left: 2rem;">
+                                        <span style="padding: 0.3rem 0.8rem; background: rgba(255,0,255,0.7); border-radius: 3px;">K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">Explores as far as possible along each branch | يستكشف أقصى ما يمكن على كل فرع</p>
+                        <p style="color: var(--neon-pink);">Complete: ✗ (in infinite spaces) | Optimal: ✗ | Space: O(bm)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A* Algorithm -->
+            <div class="info-card" style="border-left-color: #00ff88; margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box" style="background: linear-gradient(135deg, #00ff88, #00f3ff);">⭐</div>
+                    <div>
+                        <h4 class="info-title" style="color: #00ff88;">A* Search Algorithm</h4>
+                        <p class="info-title-ar" style="color: #00ff88;">خوارزمية البحث A*</p>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                    </div>
+                    <code>
+f(n) = g(n) + h(n)<br><br>
+g(n) = cost from start to node n | التكلفة من البداية للعقدة n<br>
+h(n) = heuristic estimate from n to goal | التقدير الاستدلالي من n للهدف<br>
+f(n) = estimated total cost | إجمالي التكلفة المقدرة<br><br>
+Properties | الخصائص:<br>
+• Complete: Yes (if branching factor finite) | كاملة: نعم<br>
+• Optimal: Yes (if h(n) is admissible) | أمثل: نعم (إذا كانت h(n) مقبولة)<br>
+• Admissible: h(n) ≤ h*(n) never overestimates | مقبولة: لا تبالغ أبداً
+                    </code>
+                </div>
+            </div>
+
+            <!-- Backtracking -->
+            <div class="info-card purple" style="margin: 2rem 0;">
+                <div class="card-header">
+                    <div class="icon-box" style="background: linear-gradient(45deg, #bf00ff, #ff00ff);">↩️</div>
+                    <div>
+                        <h4 class="info-title" style="color: var(--neon-purple);">Backtracking Search</h4>
+                        <p class="info-title-ar" style="color: var(--neon-purple);">البحث بالتتبع العكسي</p>
+                    </div>
+                </div>
+                <div class="bilingual-content">
+                    <div class="lang-block">
+                        <span class="lang-label">EN</span>
+                        <p>Systematically tries all paths through state space. When a dead end is reached, backtracks to the most recent unexamined node.</p>
+                        <p><strong>Data Structures:</strong></p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>SL: State List (current path)</li>
+                            <li>NSL: New State List (nodes to explore)</li>
+                            <li>DE: Dead Ends (failed paths)</li>
+                            <li>CS: Current State</li>
+                        </ul>
+                    </div>
+                    <div class="lang-block">
+                        <span class="lang-label ar">ع</span>
+                        <p>يحاول جميع المسارات عبر فضاء الحالات بشكل منهجي. عند الوصول إلى طريق مسدود، يعود إلى أحدث عقدة غير مفحوصة.</p>
+                        <p><strong>هياكل البيانات:</strong></p>
+                        <ul style="margin-right: 1.5rem; list-style: none;">
+                            <li>▸ SL: قائمة الحالات (المسار الحالي)</li>
+                            <li>▸ NSL: قائمة الحالات الجديدة (للاستكشاف)</li>
+                            <li>▸ DE: الطرق المسدودة (المسارات الفاشلة)</li>
+                            <li>▸ CS: الحالة الحالية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classic Problems -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="icon-box">🧩</div>
+                        <div>
+                            <h4 class="info-title">8-Puzzle Problem</h4>
+                            <p class="info-title-ar">مشكلة لعبة الـ٨</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>States: 181,440 (9!/2)<br>Actions: Move blank (up, down, left, right)<br>Goal: Tiles in order</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>الحالات: ١٨١٬٤٤٠<br>الأفعال: تحريك الفراغ<br>الهدف: المربعات مرتبة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card pink">
+                    <div class="card-header">
+                        <div class="icon-box" style="background: var(--gradient-2);">🌍</div>
+                        <div>
+                            <h4 class="info-title">Romania Navigation</h4>
+                            <p class="info-title-ar">التنقل في رومانيا</p>
+                        </div>
+                    </div>
+                    <div class="bilingual-content">
+                        <div class="lang-block">
+                            <span class="lang-label">EN</span>
+                            <p>Finding path from Arad to Bucharest using straight-line distance heuristic</p>
+                        </div>
+                        <div class="lang-block">
+                            <span class="lang-label ar">ع</span>
+                            <p>إيجاد مسار من أراد إلى بوخارست باستخدام استدلال المسافة المستقيمة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="quiz-container">
+                <h3 style="font-family: 'Orbitron'; margin-bottom: 1.5rem; text-align: center;">🎯 Quick Quiz | اختبار سريع</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">Q1: Which search algorithm uses f(n) = g(n) + h(n)?</p>
+                    <p class="question-text-ar">أي خوارزمية بحث تستخدم f(n) = g(n) + h(n)؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>Greedy Best-First Search | البحث الجشعي</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>A* Search | البحث A*</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>Uniform Cost Search | البحث بتكلفة موحدة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q2: What makes a heuristic admissible?</p>
+                    <p class="question-text-ar">ما الذي يجعل الاستدلال مقبولاً؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">A</span>
+                            <span>It always finds the goal | يجد الهدف دائماً</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, true)">
+                            <span class="option-letter">B</span>
+                            <span>It never overestimates the true cost | لا يبالغ في التكلفة الحقيقية</span>
+                        </div>
+                        <div class="option" onclick="checkAnswer(this, false)">
+                            <span class="option-letter">C</span>
+                            <span>It runs in polynomial time | يعمل في زمن كثير الحدود</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPREHENSIVE QUIZ SECTION -->
+        <section class="content-section" id="comprehensiveQuiz">
+            <button class="back-btn" onclick="backToMenu()">← Back to Menu | العودة للقائمة</button>
+            
+            <div class="section-header">
+                <h2 class="section-title">COMPREHENSIVE ASSESSMENT</h2>
+                <h3 class="section-title-ar">التقييم الشامل لجميع المحاضرات</h3>
+            </div>
+
+            <div class="quiz-container">
+                <h3 style="font-family: 'Orbitron'; margin-bottom: 1.5rem; color: var(--neon-cyan);">📚 Lecture 1 Questions | أسئلة المحاضرة الأولى</h3>
+                
+                <div class="quiz-question">
+                    <p class="question-text">Q1: Who coined the term "Artificial Intelligence" in 1956?</p>
+                    <p class="question-text-ar">من أطلق مصطلح "الذكاء الاصطناعي" عام ١٩٥٦؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">A</span><span>Alan Turing | آلان تورينج</span></div>
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">B</span><span>John McCarthy | جون مكارثي</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>Marvin Minsky | مارفن مينسكي</span></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q2: The Total Turing Test includes which additional components?</p>
+                    <p class="question-text-ar">يشمل اختبار تورينج الكامل أي مكونات إضافية؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">A</span><span>Computer Vision & Robotics | الرؤية الحاسوبية والروبوتات</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">B</span><span>Only speech recognition | التعرف على الكلام فقط</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>Emotional intelligence | الذكاء العاطفي</span></div>
+                    </div>
+                </div>
+
+                <h3 style="font-family: 'Orbitron'; margin: 2rem 0 1.5rem; color: var(--neon-purple);">🔧 Lecture 2 Questions | أسئلة المحاضرة الثانية</h3>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q3: In PEAS, what does 'E' stand for?</p>
+                    <p class="question-text-ar">في PEAS، ماذا يمثل 'E'؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">A</span><span>Evaluator | المقيّم</span></div>
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">B</span><span>Environment | البيئة</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>Executor | المنفذ</span></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q4: Which is NOT a property of environment types?</p>
+                    <p class="question-text-ar">أي من التالي ليس خاصية من خصائص أنواع البيئات؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">A</span><span>Fully vs Partially Observable | ملاحظة كاملة vs جزئية</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">B</span><span>Deterministic vs Stochastic | حتمي vs عشوائي</span></div>
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">C</span><span>Fast vs Slow | سريع vs بطيء</span></div>
+                    </div>
+                </div>
+
+                <h3 style="font-family: 'Orbitron'; margin: 2rem 0 1.5rem; color: #00ff88;">🌳 Lecture 3 Questions | أسئلة المحاضرة الثالثة</h3>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q5: What is the time complexity of Breadth-First Search?</p>
+                    <p class="question-text-ar">ما هو التعقيد الزمني للبحث بالعرض الأول؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">A</span><span>O(b^d) | أُو(b^د)</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">B</span><span>O(d) | أُو(د)</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>O(log b) | أُو(لوغ ب)</span></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q6: When does A* search become equivalent to Uniform Cost Search?</p>
+                    <p class="question-text-ar">متى يصبح البحث A* مكافئاً للبحث بتكلفة موحدة؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">A</span><span>When h(n) = 0 for all nodes | عندما h(n) = ٠ لجميع العقد</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">B</span><span>When h(n) is maximum | عندما h(n) هي القيمة القصوى</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>When g(n) = 0 | عندما g(n) = ٠</span></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p class="question-text">Q7: Which data structure is used for the frontier in DFS?</p>
+                    <p class="question-text-ar">أي هيكل بيانات يُستخدم للحدود في DFS؟</p>
+                    <div class="options">
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">A</span><span>Queue (FIFO) | طابور</span></div>
+                        <div class="option" onclick="checkAnswer(this, true)"><span class="option-letter">B</span><span>Stack (LIFO) | كومة</span></div>
+                        <div class="option" onclick="checkAnswer(this, false)"><span class="option-letter">C</span><span>Priority Queue | طابور أولويات</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating Quiz Button -->
+        <button onclick="showComprehensiveQuiz()" style="position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-1); border: none; color: #fff; font-size: 1.5rem; cursor: pointer; box-shadow: 0 5px 20px rgba(0,243,255,0.4); z-index: 100; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            📝
+        </button>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Progress bar
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        };
+
+        // Navigation functions
+        function showLecture(num) {
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('lectureSelector').style.display = 'none';
+            document.querySelector('.subtitle').style.display = 'none';
+            
+            // Hide all lectures
+            document.getElementById('lecture1').classList.remove('active');
+            document.getElementById('lecture2').classList.remove('active');
+            document.getElementById('lecture3').classList.remove('active');
+            document.getElementById('comprehensiveQuiz').classList.remove('active');
+            
+            // Show selected
+            document.getElementById('lecture' + num).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showComprehensiveQuiz() {
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('lectureSelector').style.display = 'none';
+            document.querySelector('.subtitle').style.display = 'none';
+            
+            document.getElementById('lecture1').classList.remove('active');
+            document.getElementById('lecture2').classList.remove('active');
+            document.getElementById('lecture3').classList.remove('active');
+            
+            document.getElementById('comprehensiveQuiz').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToMenu() {
+            document.getElementById('mainMenu').style.display = 'block';
+            document.getElementById('lectureSelector').style.display = 'grid';
+            document.querySelector('.subtitle').style.display = 'block';
+            
+            document.getElementById('lecture1').classList.remove('active');
+            document.getElementById('lecture2').classList.remove('active');
+            document.getElementById('lecture3').classList.remove('active');
+            document.getElementById('comprehensiveQuiz').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Quiz functionality
+        function checkAnswer(element, isCorrect) {
+            // Remove previous styling
+            element.style.background = '';
+            element.style.transform = '';
+            
+            if (isCorrect) {
+                element.style.background = 'rgba(0, 255, 136, 0.3)';
+                element.style.borderLeft = '4px solid #00ff88';
+                element.innerHTML += ' ✓ CORRECT | صحيح';
+            } else {
+                element.style.background = 'rgba(255, 68, 68, 0.3)';
+                element.style.borderLeft = '4px solid #ff4444';
+                element.innerHTML += ' ✗ WRONG | خطأ';
+            }
+            
+            // Disable all options in this question
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+        }
+
+        // Add 3D tilt effect to cards
+        document.querySelectorAll('.lecture-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
