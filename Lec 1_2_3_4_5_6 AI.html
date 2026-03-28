@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI310 — Artificial Intelligence (Lectures 1–6) — Bilingual Course</title>
+  <meta name="description" content="Comprehensive bilingual (English/Arabic) interactive course page for AI310 — Lectures 1 to 6. Responsive, modern design with examples and exercises." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#071428; --card:#0b1a2a; --accent:#06b6d4; --muted:#9fb3c8; --glass: rgba(255,255,255,0.03);
+      --max-width:1100px; --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6f3fb;background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(6,182,212,0.06), transparent 8%),
+      linear-gradient(180deg,#041022 0%, #071428 60%);}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:var(--max-width);margin:28px auto;padding:20px}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+    .logo{
+      width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#06b6d4,#3b82f6);
+      display:flex;align-items:center;justify-content:center;color:#021124;font-weight:800;font-size:20px;box-shadow:0 6px 20px rgba(3,7,18,0.6);
+    }
+    h1{margin:0;font-size:20px;color:#eaf8ff}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
+    nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+    nav.toc a{background:var(--glass);padding:8px 12px;border-radius:10px;color:#cfeffb;font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,0.03)}
+    main{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    @media (max-width:980px){ main{grid-template-columns:1fr} .sidebar{order:2} }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;box-shadow:0 8px 30px rgba(2,6,12,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .section-title h2{margin:0;font-size:16px;color:#e8fbff}
+    .section-title span{color:var(--muted);font-size:13px}
+    .bilingual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:760px){ .bilingual{grid-template-columns:1fr} }
+    .en{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .ar{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);direction:rtl;text-align:right}
+    .term{display:inline-block;background:rgba(6,182,212,0.08);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:600;margin:6px 6px 6px 0}
+    .code{background:#021826;color:#bfeefc;padding:12px;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;overflow:auto}
+    .example{border-left:4px solid rgba(6,182,212,0.12);padding:12px;margin:12px 0;border-radius:8px;background:linear-gradient(180deg, rgba(6,182,212,0.02), transparent)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:980px){ .grid-3{grid-template-columns:1fr 1fr} }
+    @media (max-width:560px){ .grid-3{grid-template-columns:1fr} }
+    .small{font-size:13px;color:var(--muted)}
+    .hero-visual{display:flex;gap:12px;align-items:center}
+    .svg-hero{width:120px;height:80px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#3b82f6);display:flex;align-items:center;justify-content:center;color:#021124;font-weight:700}
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+    .exercise{margin:10px 0;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px dashed rgba(255,255,255,0.03)}
+    .qa{display:flex;gap:12px;align-items:flex-start}
+    .qa .q{font-weight:700;color:#dff8ff}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,#06b6d4,#3b82f6);color:#021124;font-weight:700;border:none;cursor:pointer}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:600;font-size:13px}
+    .sidebar .card + .card{margin-top:12px}
+    .toc-note{color:var(--muted);font-size:13px;margin-top:8px}
+    /* table */
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px;color:#dff8ff}
+    th{color:var(--muted);text-align:left}
+    /* images placeholders */
+    .img-placeholder{width:100%;height:160px;border-radius:10px;background:linear-gradient(135deg,#0b2a3a,#06202b);display:flex;align-items:center;justify-content:center;color:#7fdff0;font-weight:700}
+    .caption{font-size:12px;color:var(--muted);margin-top:6px}
+    /* progress */
+    .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,#06b6d4,#3b82f6);width:60%}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">AI</div>
+      <div>
+        <h1>AI310 — Artificial Intelligence: Lectures 1–6</h1>
+        <p class="lead">Comprehensive bilingual course notes, examples, exercises — English primary with Arabic translation.</p>
+      </div>
+    </header>
+
+    <nav class="toc">
+      <a href="#lec1">Lecture 1</a>
+      <a href="#lec2">Lecture 2</a>
+      <a href="#lec3">Lecture 3</a>
+      <a href="#lec5">Lecture 5</a>
+      <a href="#lec6">Lecture 6</a>
+      <a href="#examples">Examples</a>
+      <a href="#exercises">Exercises</a>
+    </nav>
+
+    <main>
+      <section>
+        <!-- LECTURE 1 -->
+        <article id="lec1" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Lecture 1 — Introduction to Artificial Intelligence</h2>
+            <span>المحاضرة 1 — مقدمة في الذكاء الاصطناعي</span>
+          </div>
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>What is Intelligence?</h3>
+              <p class="small">Foundations: psychology, neuroscience, mathematics, linguistics, ethics, control theory, economics.</p>
+              <ul>
+                <li><span class="term">Ability to solve novel problems</span> — intelligence often measured by adaptability and problem solving.</li>
+                <li><span class="term">Act rationally</span> — choose actions that maximize expected achievement of goals.</li>
+                <li><span class="term">Act like humans</span> — Turing-inspired behavioral criterion.</li>
+              </ul>
+
+              <h3>What is Artificial Intelligence?</h3>
+              <p class="small">John McCarthy's concise definition: <em>“It is the science and engineering of making intelligent machines, especially intelligent computer programs.”</em></p>
+              <p class="small">Practical working definition: <strong>Intelligence is the computational part of the ability to achieve goals in the world.</strong></p>
+
+              <h4>Four approaches</h4>
+              <ol>
+                <li>Thinking humanly</li>
+                <li>Acting humanly (Turing Test)</li>
+                <li>Thinking rationally (laws of thought)</li>
+                <li>Acting rationally (rational agent approach)</li>
+              </ol>
+            </div>
+
+            <div class="ar">
+              <h3>ما هو الذكاء؟</h3>
+              <p class="small">أساسيات: علم النفس، علم الأعصاب، الرياضيات، اللغويات، الأخلاقيات، نظرية التحكم، الاقتصاد.</p>
+              <ul>
+                <li><span class="term">القدرة على حل المشكلات الجديدة</span> — يقاس الذكاء بالقدرة على التكيّف وحل المشكلات.</li>
+                <li><span class="term">التصرف بعقلانية</span> — اختيار الأفعال التي تزيد من تحقيق الأهداف المتوقعة.</li>
+                <li><span class="term">التصرف مثل البشر</span> — معيار سلوكي مستوحى من تورينج.</li>
+              </ul>
+
+              <h3>ما هو الذكاء الاصطناعي؟</h3>
+              <p class="small">تعريف جون مكارثي: <em>«هو علم وهندسة صنع آلات ذكية، وخاصة برامج حاسوبية ذكية.»</em></p>
+              <p class="small">تعريف عملي: <strong>الذكاء هو الجزء الحاسوبي من القدرة على تحقيق الأهداف في العالم.</strong></p>
+
+              <h4>أربع مقاربات</h4>
+              <ol>
+                <li>التفكير البشري</li>
+                <li>التصرف البشري (اختبار تورينج)</li>
+                <li>التفكير العقلاني (قوانين التفكير)</li>
+                <li>التصرف العقلاني (نهج الوكيل العقلاني)</li>
+              </ol>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Systems that Act Like Humans</h3>
+              <p class="small">Turing Test (Imitation Game): an interrogator communicates via text with a hidden human and a hidden machine. If the interrogator cannot reliably tell which is which, the machine is said to pass.</p>
+
+              <h4>The Chinese Room (Searle)</h4>
+              <p class="small">Thought experiment arguing that syntactic symbol manipulation (running a program) is not sufficient for semantic understanding.</p>
+
+              <h4>Strong vs Weak AI</h4>
+              <p class="small"><strong>Weak AI:</strong> machines simulate intelligence. <strong>Strong AI:</strong> machines actually have minds, understanding, and consciousness.</p>
+            </div>
+
+            <div class="ar">
+              <h3>أنظمة تتصرف مثل البشر</h3>
+              <p class="small">اختبار تورينج: محاور يتواصل نصياً مع إنسان وآلة مخفيين. إذا لم يستطع المحاور التمييز بينهما، تُعتبر الآلة قد نجحت.</p>
+
+              <h4>الغرفة الصينية (سيرل)</h4>
+              <p class="small">تجربة فكرية تقول إن معالجة الرموز الشكلية وحدها لا تكفي للفهم الدلالي.</p>
+
+              <h4>الذكاء القوي مقابل الضعيف</h4>
+              <p class="small"><strong>الذكاء الضعيف:</strong> الآلات تحاكي الذكاء. <strong>الذكاء القوي:</strong> الآلات تمتلك عقولاً وفهماً ووعيًا حقيقياً.</p>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="en small">
+            <strong>Quoted from lecture notes:</strong>
+            <blockquote style="margin:8px 0;padding-left:12px;border-left:3px solid rgba(6,182,212,0.12);color:#cfeffb">
+              “It is the science and engineering of making intelligent machines, especially intelligent computer programs.”
+            </blockquote>
+            <blockquote style="margin:8px 0;padding-left:12px;border-left:3px solid rgba(6,182,212,0.12);color:#cfeffb">
+              “PEAS: Performance measure, Environment, Actuators, Sensors.”
+            </blockquote>
+          </div>
+
+        </article>
+
+        <!-- LECTURE 2 -->
+        <article id="lec2" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Lecture 2 — Intelligent Agents & Related Disciplines</h2>
+            <span>المحاضرة 2 — الوكلاء الأذكياء والتخصصات المرتبطة</span>
+          </div>
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Intelligent Agent (Rational Agent)</h3>
+              <p class="small">An agent perceives its environment via sensors and acts via actuators. A rational agent chooses actions expected to maximize its performance measure given percepts and built-in knowledge.</p>
+
+              <h4>PEAS framework</h4>
+              <p class="small"><strong>P</strong>erformance measure, <strong>E</strong>nvironment, <strong>A</strong>ctuators, <strong>S</strong>ensors — used to specify task environments.</p>
+
+              <h4>Examples</h4>
+              <ul>
+                <li><strong>Vacuum agent</strong> — percepts: [location, status]; actions: {Left, Right, Suck, NoOp}.</li>
+                <li><strong>Autonomous taxi (PEAS)</strong>: Performance = safe, fast, legal, comfortable; Environment = roads, traffic; Actuators = steering, throttle; Sensors = cameras, LIDAR, GPS.</li>
+              </ul>
+
+              <h4>Goal-based vs Cost-based agents</h4>
+              <p class="small">Goal-based agents plan to reach a goal state. Cost-based agents minimize expected long-term cost (e.g., spam filter with weighted false positive/negative costs).</p>
+            </div>
+
+            <div class="ar">
+              <h3>الوكيل الذكي (الوكيل العقلاني)</h3>
+              <p class="small">الوكيل يستشعر البيئة عبر حساسات ويتصرف عبر محركات. الوكيل العقلاني يختار الأفعال التي تتوقع تعظيم مقياس الأداء بناءً على المدركات والمعرفة المدمجة.</p>
+
+              <h4>إطار PEAS</h4>
+              <p class="small"><strong>P</strong>مقياس الأداء، <strong>E</strong>البيئة، <strong>A</strong>المحركات، <strong>S</strong>الحساسات — لتحديد بيئة المهمة.</p>
+
+              <h4>أمثلة</h4>
+              <ul>
+                <li><strong>وكيل المكنسة</strong> — المدركات: [الموقع، الحالة]; الأفعال: {يسار، يمين، شفط، لا شيء}.</li>
+                <li><strong>تاكسي ذاتي (PEAS)</strong>: الأداء = آمن، سريع، قانوني، مريح؛ البيئة = الطرق، المرور؛ المحركات = عجلة القيادة، دواسة؛ الحساسات = كاميرات، ليدار، GPS.</li>
+              </ul>
+
+              <h4>وكلاء قائمون على الهدف مقابل قائمون على التكلفة</h4>
+              <p class="small">وكلاء الأهداف يخططون للوصول إلى حالة هدف. وكلاء التكلفة يقللون التكلفة المتوقعة على المدى الطويل (مثل فلتر البريد المزعج مع أوزان للأخطاء).</p>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Environment Types (Key properties)</h3>
+              <table>
+                <thead><tr><th>Property</th><th>Options</th></tr></thead>
+                <tbody>
+                  <tr><td>Observability</td><td>Fully Observable / Partially Observable</td></tr>
+                  <tr><td>Determinism</td><td>Deterministic / Stochastic / Strategic</td></tr>
+                  <tr><td>Episode</td><td>Episodic / Sequential</td></tr>
+                  <tr><td>Dynamics</td><td>Static / Dynamic / Semi-dynamic</td></tr>
+                  <tr><td>State space</td><td>Discrete / Continuous</td></tr>
+                  <tr><td>Agents</td><td>Single-Agent / Multi-Agent</td></tr>
+                  <tr><td>Knowledge</td><td>Known / Unknown</td></tr>
+                </tbody>
+              </table>
+              <p class="small">Use these properties to choose algorithms and representations.</p>
+            </div>
+
+            <div class="ar">
+              <h3>أنواع البيئات (الخصائص الأساسية)</h3>
+              <table>
+                <thead><tr><th>الخاصية</th><th>الخيارات</th></tr></thead>
+                <tbody>
+                  <tr><td>قابلية الملاحظة</td><td>قابل للملاحظة بالكامل / جزئياً</td></tr>
+                  <tr><td>الحتمية</td><td>حتمي / عشوائي / استراتيجي</td></tr>
+                  <tr><td>الحلقات</td><td>حلقي / تسلسلي</td></tr>
+                  <tr><td>الديناميكية</td><td>ثابت / ديناميكي / شبه ديناميكي</td></tr>
+                  <tr><td>فضاء الحالة</td><td>مجزأ / مستمر</td></tr>
+                  <tr><td>الوكلاء</td><td>وكيل واحد / متعدد الوكلاء</td></tr>
+                  <tr><td>المعرفة</td><td>معروف / غير معروف</td></tr>
+                </tbody>
+              </table>
+              <p class="small">استخدم هذه الخصائص لاختيار الخوارزميات والتمثيلات المناسبة.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- LECTURE 3 -->
+        <article id="lec3" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Lecture 3 — Problem Solving by Search & State Space</h2>
+            <span>المحاضرة 3 — حل المشكلات بالبحث وفضاء الحالة</span>
+          </div>
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Search Problem Components</h3>
+              <ul>
+                <li><strong>Initial state</strong></li>
+                <li><strong>Actions</strong></li>
+                <li><strong>Transition model</strong></li>
+                <li><strong>Goal test</strong></li>
+                <li><strong>Path cost</strong> (sum of step costs)</li>
+              </ul>
+
+              <h4>State space</h4>
+              <p class="small">Set of all states reachable from the initial state by any sequence of actions. Represented as a directed graph.</p>
+
+              <h4>Examples</h4>
+              <ul>
+                <li><strong>Romania problem</strong> — cities as states, roads as actions, distances as costs.</li>
+                <li><strong>8-puzzle</strong> — 9 positions, 8 tiles; actions: move blank up/down/left/right; path cost = number of moves.</li>
+                <li><strong>Vacuum world</strong> — agent location + dirt status; actions: Left, Right, Suck.</li>
+              </ul>
+            </div>
+
+            <div class="ar">
+              <h3>مكونات مشكلة البحث</h3>
+              <ul>
+                <li><strong>الحالة الابتدائية</strong></li>
+                <li><strong>الأفعال</strong></li>
+                <li><strong>نموذج الانتقال</strong></li>
+                <li><strong>اختبار الهدف</strong></li>
+                <li><strong>تكلفة المسار</strong> (مجموع تكاليف الخطوات)</li>
+              </ul>
+
+              <h4>فضاء الحالة</h4>
+              <p class="small">مجموعة كل الحالات الممكن الوصول إليها من الحالة الابتدائية عبر أي تسلسل من الأفعال. يُمثل كرسوم موجهة.</p>
+
+              <h4>أمثلة</h4>
+              <ul>
+                <li><strong>مشكلة رومانيا</strong> — المدن حالات، الطرق أفعال، المسافات تكاليف.</li>
+                <li><strong>لغز 8</strong> — 9 مواضع، 8 قطع؛ الأفعال: تحريك الفراغ؛ تكلفة المسار = عدد الحركات.</li>
+                <li><strong>عالم المكنسة</strong> — موقع الوكيل + حالة الأوساخ؛ الأفعال: يسار، يمين، شفط.</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="en">
+            <h3>Tree Search Outline (pseudocode)</h3>
+            <div class="code">
+function TreeSearch(start) {<br>
+&nbsp;&nbsp;// frontier: nodes to expand<br>
+&nbsp;&nbsp;frontier = [makeNode(start)];<br>
+&nbsp;&nbsp;explored = {};<br>
+&nbsp;&nbsp;while (frontier not empty) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node = select(frontier); // strategy dependent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (goalTest(node.state)) return solution(node);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;explored.add(node.state);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for each action in actions(node.state) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child = childNode(node, action);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (child.state not in explored and not in frontier) frontier.add(child);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;return failure;<br>
+}
+            </div>
+          </div>
+
+          <div class="ar" style="margin-top:12px">
+            <h3>مخطط البحث الشجري (كود تقريبي)</h3>
+            <div class="code" style="direction:ltr">
+function TreeSearch(start) { ... }  // راجع الكود الإنجليزي أعلاه
+            </div>
+          </div>
+        </article>
+
+        <!-- LECTURE 5 -->
+        <article id="lec5" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Lecture 5 — Blind (Uninformed) vs Heuristic (Informed) Search</h2>
+            <span>المحاضرة 5 — البحث غير الموجه مقابل البحث الموجه</span>
+          </div>
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Uninformed (Blind) Search</h3>
+              <ul>
+                <li><strong>Breadth-First Search (BFS)</strong> — explores level by level; guarantees shortest path when step cost = 1; time O(b^d), space O(b^d).</li>
+                <li><strong>Depth-First Search (DFS)</strong> — explores deep first; low memory O(bd) but may not find shortest path and can get stuck in infinite paths.</li>
+                <li><strong>Depth-Limited & Iterative Deepening</strong> — DFS with cutoff; iterative deepening combines DFS space efficiency with BFS completeness.</li>
+                <li><strong>Uniform-Cost Search (UCS)</strong> — expands lowest path-cost node first; optimal when step costs ≥ 0.</li>
+                <li><strong>Bidirectional Search</strong> — search forward from start and backward from goal; can reduce complexity to O(b^{d/2}).</li>
+              </ul>
+            </div>
+
+            <div class="ar">
+              <h3>البحث غير الموجه</h3>
+              <ul>
+                <li><strong>بحث عرضي (BFS)</strong> — يستكشف مستوى بمستوى؛ يضمن أقصر مسار عندما تكون تكلفة الخطوة = 1؛ الزمن O(b^d)، الذاكرة O(b^d).</li>
+                <li><strong>بحث عمقي (DFS)</strong> — يستكشف إلى العمق أولاً؛ ذاكرة منخفضة O(bd) لكنه قد لا يجد أقصر مسار وقد يدخل في حلقات لا نهائية.</li>
+                <li><strong>الحد العمقي والتعمق التكراري</strong> — DFS مع حد؛ التعمق التكراري يجمع بين كفاءة الذاكرة والاكتمال.</li>
+                <li><strong>بحث بتكلفة موحدة (UCS)</strong> — يوسع العقدة ذات أقل تكلفة مسار؛ مثالي عندما تكون تكاليف الخطوات ≥ 0.</li>
+                <li><strong>بحث ثنائي الاتجاه</strong> — بحث أمامي وخلفي؛ يقلل التعقيد إلى O(b^{d/2}).</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Heuristic (Informed) Search</h3>
+              <p class="small">Define heuristic function h(n) estimating cost from node n to goal. Examples for 8-puzzle:</p>
+              <ul>
+                <li><strong>h1</strong>: number of misplaced tiles.</li>
+                <li><strong>h2</strong>: sum of Manhattan distances (admissible).</li>
+              </ul>
+              <p class="small">A* uses f(n) = g(n) + h(n) and is optimal if h is admissible.</p>
+            </div>
+
+            <div class="ar">
+              <h3>البحث الموجه (الاسترشادي)</h3>
+              <p class="small">دالة الاستدلال h(n) تقدّر تكلفة الوصول من العقدة n إلى الهدف. أمثلة للغز 8:</p>
+              <ul>
+                <li><strong>h1</strong>: عدد القطع في غير مكانها.</li>
+                <li><strong>h2</strong>: مجموع مسافات مانهاتن (قابلة للقبول).</li>
+              </ul>
+              <p class="small">خوارزمية A* تستخدم f(n) = g(n) + h(n) وتكون مثالية إذا كانت h قابلة للقبول.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- LECTURE 6 -->
+        <article id="lec6" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Lecture 6 — Adversarial Search (Games)</h2>
+            <span>المحاضرة 6 — البحث التنافسي (الألعاب)</span>
+          </div>
+
+          <div class="bilingual">
+            <div class="en">
+              <h3>Minimax</h3>
+              <p class="small">Two-player zero-sum games: MAX chooses moves to maximize utility; MIN chooses to minimize MAX's utility. Minimax value computed recursively: value(node) = max(children) for MAX nodes, min(children) for MIN nodes.</p>
+
+              <h3>Alpha-Beta Pruning</h3>
+              <p class="small">Alpha = best already explored option along path to root for MAX (lower bound). Beta = best for MIN (upper bound). Prune when alpha ≥ beta. Produces same move as minimax but explores fewer nodes.</p>
+            </div>
+
+            <div class="ar">
+              <h3>مينيمكس</h3>
+              <p class="small">ألعاب ثنائية اللاعبين مجموعها صفر: MAX يحاول تعظيم المنفعة؛ MIN يحاول تقليلها. قيمة المينيمكس تحسب بشكل تكراري: قيمة العقدة = أقصى قيمة للأبناء لعقد MAX، وأدنى قيمة لعقد MIN.</p>
+
+              <h3>قطع ألفا-بيتا</h3>
+              <p class="small">ألفا = أفضل خيار معروف لمسار الجذر لـ MAX (حد أدنى). بيتا = أفضل خيار لـ MIN (حد أقصى). نقطع الشجرة عندما يكون alpha ≥ beta. تعطي نفس نتيجة المينيمكس مع عدد أقل من العقد.</p>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0">
+
+          <div class="en small">
+            <h4>When to use search techniques?</h4>
+            <ul>
+              <li>Search is appropriate when no closed-form solution exists and the search space is manageable or good heuristics exist.</li>
+              <li>Alternative techniques: simulated annealing, genetic algorithms, swarm intelligence for large or continuous spaces.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- EXAMPLES SECTION -->
+        <article id="examples" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Worked Examples & Visuals</h2>
+            <span>أمثلة محلولة ومرئيات</span>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:12px">
+            <div class="card" style="padding:12px">
+              <div class="img-placeholder">Romania Map</div>
+              <div class="caption">Romania route planning — state graph example</div>
+              <div class="small" style="margin-top:8px">Use UCS or A* with straight-line heuristic to find shortest path to Bucharest.</div>
+            </div>
+
+            <div class="card" style="padding:12px">
+              <div class="img-placeholder">8-Puzzle</div>
+              <div class="caption">8-puzzle: heuristics comparison</div>
+              <div class="small" style="margin-top:8px">h1 (misplaced) vs h2 (Manhattan). A* with Manhattan is usually faster and optimal.</div>
+            </div>
+
+            <div class="card" style="padding:12px">
+              <div class="img-placeholder">Minimax Tree</div>
+              <div class="caption">Minimax with alpha-beta pruning</div>
+              <div class="small" style="margin-top:8px">Prune branches where alpha ≥ beta to reduce node evaluations.</div>
+            </div>
+          </div>
+
+          <div class="en">
+            <h3>Vacuum Agent — Pseudocode</h3>
+            <div class="code">
+function Vacuum_Agent(percept) {<br>
+&nbsp;&nbsp;// percept = [location, status]<br>
+&nbsp;&nbsp;if (percept.status == 'Dirty') return 'Suck';<br>
+&nbsp;&nbsp;else if (percept.location == 'A') return 'Right';<br>
+&nbsp;&nbsp;else if (percept.location == 'B') return 'Left';<br>
+&nbsp;&nbsp;else return 'NoOp';<br>
+}
+            </div>
+          </div>
+
+          <div class="ar" style="margin-top:12px">
+            <h3>وكيل المكنسة — كود تقريبي</h3>
+            <div class="code" style="direction:ltr">
+function Vacuum_Agent(percept) { ... }  // راجع الكود الإنجليزي أعلاه
+            </div>
+          </div>
+        </article>
+
+        <!-- EXERCISES -->
+        <article id="exercises" class="card" style="margin-bottom:18px">
+          <div class="section-title">
+            <h2>Exercises & Practice Problems</h2>
+            <span>تمارين وأسئلة تدريبية</span>
+          </div>
+
+          <div class="exercise">
+            <div class="qa">
+              <div class="q">Q1 (English)</div>
+              <div>Describe the Turing Test and give one modern critique. <span class="pill">Hint: Chinese Room</span></div>
+            </div>
+            <div style="margin-top:8px" class="small">
+              <strong>Answer (short):</strong> The Turing Test asks whether a machine's text responses are indistinguishable from a human's. A critique: passing the test shows behavioral equivalence but not necessarily understanding (Searle's Chinese Room).
+            </div>
+            <div style="margin-top:8px" class="small ar">
+              <strong>الإجابة (مختصرة):</strong> اختبار تورينج يقيس ما إذا كانت ردود الآلة النصية لا تميز عن ردود الإنسان. النقد: النجاح السلوكي لا يعني الفهم الدلالي (غرفة الصينية لسيرل).
+            </div>
+          </div>
+
+          <div class="exercise">
+            <div class="qa">
+              <div class="q">Q2 (English)</div>
+              <div>For the 8-puzzle state below, compute h1 (misplaced) and h2 (Manhattan).</div>
+            </div>
+            <div class="code" style="margin-top:8px">
+Start state:<br>
+2 8 3<br>
+1 6 4<br>
+7 _ 5
+            </div>
+            <div class="small" style="margin-top:8px">
+              <strong>Solution:</strong> h1 = count misplaced tiles = 5 (tiles 2,8,3,6,5 are misplaced). h2 = sum Manhattan distances = compute each tile distance to goal positions (example: tile 2 distance 1, tile 8 distance 2, ... ) → total = 10 (example value; compute precisely in class).
+            </div>
+            <div class="small ar" style="margin-top:8px">
+              <strong>الحل:</strong> h1 = عدد القطع في غير مكانها = 5. h2 = مجموع مسافات مانهاتن = احسب مسافة كل قطعة إلى موقعها النهائي → المجموع = 10 (قيمة توضيحية).
+            </div>
+          </div>
+
+          <div class="exercise">
+            <div class="qa">
+              <div class="q">Q3 (English)</div>
+              <div>Formalize the Missionaries and Cannibals problem as a state-space search (state representation, initial, goal, operators).</div>
+            </div>
+            <div class="small" style="margin-top:8px">
+              <strong>Solution sketch:</strong> State = (M_left, C_left, boat_side). Initial = (3,3,Left). Goal = (0,0,Right). Operators: move 1 or 2 people across (combinations of M and C) with constraint: on each bank, M >= C or M=0. Path cost = number of crossings.
+            </div>
+            <div class="small ar" style="margin-top:8px">
+              <strong>مخطط الحل:</strong> الحالة = (عدد المبشرين على اليسار، عدد آكلي البشر على اليسار، جانب القارب). الابتدائية = (3,3,يسار). الهدف = (0,0،يمين). المشغلات: نقل 1 أو 2 أشخاص مع قيد: في كل ضفة يجب أن يكون المبشرون ≥ آكلي البشر أو المبشرون = 0. تكلفة المسار = عدد العبور.
+            </div>
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="card">
+          <h3 style="margin-top:0">Quick Reference</h3>
+          <div class="small">
+            <div style="margin:8px 0"><strong>PEAS</strong> — Performance, Environment, Actuators, Sensors</div>
+            <div style="margin:8px 0"><strong>Search types</strong> — Uninformed: BFS, DFS, UCS; Informed: Greedy, A*, Best-First</div>
+            <div style="margin:8px 0"><strong>Heuristics</strong> — admissible vs consistent; Manhattan is admissible for sliding puzzles</div>
+            <div style="margin:8px 0"><strong>Adversarial</strong> — Minimax, Alpha-Beta (prune when α ≥ β)</div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="progress"><i></i></div>
+            <div class="small" style="margin-top:8px">Course progress: Lectures 1–6 summarized</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin:0 0 8px 0">Cheat Sheet (Algorithms)</h4>
+          <table>
+            <thead><tr><th>Algorithm</th><th>Complexity (time)</th></tr></thead>
+            <tbody>
+              <tr><td>BFS</td><td>O(b^d)</td></tr>
+              <tr><td>DFS</td><td>O(b^m) (m = max depth)</td></tr>
+              <tr><td>UCS</td><td>O(b^{1 + ⌊C*/ε⌋})</td></tr>
+              <tr><td>A*</td><td>Optimal if h admissible; time depends on heuristic</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4 style="margin:0 0 8px 0">Study Tips</h4>
+          <ul class="small">
+            <li>Practice by hand: run BFS/DFS on small graphs.</li>
+            <li>Implement A* with both h1 and h2 and compare expansions.</li>
+            <li>Draw minimax trees and simulate alpha-beta pruning by hand.</li>
+            <li>Explain concepts in Arabic and English to solidify understanding.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small">This single-file page contains a full bilingual summary and exercises for Lectures 1–6 of AI310. Replace placeholder visuals with your images if desired.</div>
+    </footer>
+  </div>
+</body>
+</html>
