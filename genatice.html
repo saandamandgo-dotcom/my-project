@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetic Engineering Complete Course | الهندسة الوراثية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Cairo', 'sans-serif'],
+                        arabic: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#00d4ff',
+                        secondary: '#7c3aed',
+                        accent: '#f472b6',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .gradient-border {
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #f472b6);
+            padding: 2px;
+            border-radius: 1rem;
+        }
+        .gradient-border-inner {
+            background: #1e293b;
+            border-radius: 0.9rem;
+            height: 100%;
+        }
+        .arabic-text {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        .lecture-content {
+            display: none;
+        }
+        .lecture-content.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+        .nav-btn.active {
+            background: linear-gradient(90deg, rgba(0,212,255,0.2), rgba(124,58,237,0.2));
+            border-left: 4px solid #00d4ff;
+            color: #00d4ff;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d4ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 glass-card border-b border-white/10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center animate-pulse-slow">
+                    <i class="fas fa-dna text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent neon-text">
+                        BioTech Academy
+                    </h1>
+                    <p class="text-xs text-gray-400 arabic-text hidden" id="header-subtitle-ar">الهندسة الوراثية الشاملة</p>
+                    <p class="text-xs text-gray-400" id="header-subtitle-en">Complete Genetic Engineering</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="px-4 py-2 rounded-full glass-card hover:bg-white/10 transition-all border border-primary/30 text-primary font-semibold text-sm flex items-center gap-2">
+                    <i class="fas fa-globe"></i>
+                    <span id="lang-btn-text">العربية</span>
+                </button>
+                <button class="md:hidden text-2xl text-primary" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16 min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed md:static w-72 h-[calc(100vh-4rem)] bg-darker/95 border-r border-white/10 overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+            <div class="p-4">
+                <h3 class="text-primary font-bold mb-4 uppercase tracking-wider text-sm" data-en="Lectures" data-ar="المحاضرات">Lectures</h3>
+                <nav class="space-y-2">
+                    <button onclick="showLecture(1)" class="nav-btn active w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-1">
+                        <span class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">01</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="Gene Cloning" data-ar="استنساخ الجينات">Gene Cloning</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة الأولى</p>
+                        </div>
+                    </button>
+                    
+                    <button onclick="showLecture(2)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-2">
+                        <span class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold text-sm">02</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="DNA Enzymes" data-ar="إنزيمات DNA">DNA Enzymes</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة الثانية</p>
+                        </div>
+                    </button>
+
+                    <button onclick="showLecture(3)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-3">
+                        <span class="w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center font-bold text-sm">03</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="Restriction Enzymes" data-ar="إنزيمات القطع">Restriction Enzymes</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة الثالثة</p>
+                        </div>
+                    </button>
+
+                    <button onclick="showLecture(4)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-4">
+                        <span class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold text-sm">04</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="DNA Ligase" data-ar="الليغيز">DNA Ligase</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة الرابعة</p>
+                        </div>
+                    </button>
+
+                    <button onclick="showLecture(5)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-5">
+                        <span class="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-sm">05</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="Cloning Vectors I" data-ar="المتجهات (١)">Cloning Vectors I</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة الخامسة</p>
+                        </div>
+                    </button>
+
+                    <button onclick="showLecture(6)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-6">
+                        <span class="w-8 h-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm">06</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="Cloning Vectors II" data-ar="المتجهات (٢)">Cloning Vectors II</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة السادسة</p>
+                        </div>
+                    </button>
+
+                    <button onclick="showLecture(7)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-3" id="nav-7">
+                        <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">07</span>
+                        <div class="flex-1">
+                            <p class="font-semibold text-sm" data-en="Cloning Methods" data-ar="طرق الاستنساخ">Cloning Methods</p>
+                            <p class="text-xs text-gray-500 arabic-text hidden">المحاضرة السابعة</p>
+                        </div>
+                    </button>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 md:p-8 overflow-x-hidden">
+            
+            <!-- Lecture 1: Gene Cloning -->
+            <div id="lecture-1" class="lecture-content active">
+                <div class="mb-8 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent" data-en="Gene Technology & Cloning" data-ar="تكنولوجيا الجينات والاستنساخ">
+                        Gene Technology & Cloning
+                    </h2>
+                    <p class="text-gray-400 text-lg max-w-3xl mx-auto" data-en="Introduction to recombinant DNA technology and the birth of genetic engineering" data-ar="مقدمة في تكنولوجيا DNA المعاد التركيب وميلاد الهندسة الوراثية">
+                        Introduction to recombinant DNA technology
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 hover:transform hover:scale-[1.02] transition-all">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                <i class="fas fa-cut text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold" data-en="Historical Discovery" data-ar="الاكتشاف التاريخي">Historical Discovery</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-primary mt-1"></i>
+                                <span data-en="<strong>1967:</strong> Discovery of DNA Ligase - the molecular glue that joins DNA pieces" data-ar="<strong>1967:</strong> اكتشاف إنزيم الليغيز - الغراء الجزيئي الذي يربط قطع DNA"><strong>1967:</strong> Discovery of DNA Ligase</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-primary mt-1"></i>
+                                <span data-en="<strong>1970:</strong> Restriction Enzymes discovered - molecular scissors cutting DNA at specific sequences" data-ar="<strong>1970:</strong> اكتشاف إنزيمات القطع - المقص الجزيئي يقطع DNA في تسلسلات محددة"><strong>1970:</strong> Restriction Enzymes discovered</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 hover:transform hover:scale-[1.02] transition-all">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+                                <i class="fas fa-copy text-secondary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold" data-en="What is Gene Cloning?" data-ar="ما هو استنساخ الجينات؟">What is Gene Cloning?</h3>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed" data-en="Gene cloning starts with isolating a specific gene of interest from an organism's genome. This gene is inserted into a vector using restriction enzymes and ligase, forming a recombinant DNA molecule that can replicate in host cells." data-ar="يبدأ استنساخ الجينات بعزل جين محدد من اهتمام من جينوم الكائن الحي. يتم إدخال هذا الجين في متجه باستخدام إنزيمات القطع والليغيز، مكوناً جزيء DNA معاد التركيب يمكنه التكاثر في الخلايا المضيفة.">
+                            Gene cloning starts with isolating a specific gene of interest from an organism's genome...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 5 Steps of Cloning -->
+                <div class="gradient-border mb-8">
+                    <div class="gradient-border-inner p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-center" data-en="The 5 Steps of Gene Cloning" data-ar="خطوات استنساخ الجينات الخمس">The 5 Steps of Gene Cloning</h3>
+                        
+                        <div class="grid md:grid-cols-5 gap-4">
+                            <div class="text-center group">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/40 transition-all">
+                                    <span class="text-2xl font-bold text-primary">1</span>
+                                </div>
+                                <h4 class="font-bold mb-2 text-sm" data-en="Isolation" data-ar="العزل">Isolation</h4>
+                                <p class="text-xs text-gray-400" data-en="Cut gene & vector with RE" data-ar="قطع الجين والمتجه بإنزيمات القطع">Cut gene & vector with RE</p>
+                            </div>
+                            <div class="text-center group">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/40 transition-all">
+                                    <span class="text-2xl font-bold text-secondary">2</span>
+                                </div>
+                                <h4 class="font-bold mb-2 text-sm" data-en="Ligation" data-ar="الربط">Ligation</h4>
+                                <p class="text-xs text-gray-400" data-en="Join gene to vector with Ligase" data-ar="ربط الجين بالمتجه بالليغيز">Join with Ligase</p>
+                            </div>
+                            <div class="text-center group">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-accent/20 flex items-center justify-center group-hover:bg-accent/40 transition-all">
+                                    <span class="text-2xl font-bold text-accent">3</span>
+                                </div>
+                                <h4 class="font-bold mb-2 text-sm" data-en="Transformation" data-ar="التحول">Transformation</h4>
+                                <p class="text-xs text-gray-400" data-en="Introduce to host cells" data-ar="إدخاله للخلايا المضيفة">Introduce to host</p>
+                            </div>
+                            <div class="text-center group">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/40 transition-all">
+                                    <span class="text-2xl font-bold text-green-400">4</span>
+                                </div>
+                                <h4 class="font-bold mb-2 text-sm" data-en="Selection" data-ar="الاختيار">Selection</h4>
+                                <p class="text-xs text-gray-400" data-en="Select transformed cells" data-ar="اختيار الخلايا المتحولة">Select cells</p>
+                            </div>
+                            <div class="text-center group">
+                                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-yellow-500/20 flex items-center justify-center group-hover:bg-yellow-500/40 transition-all">
+                                    <span class="text-2xl font-bold text-yellow-400">5</span>
+                                </div>
+                                <h4 class="font-bold mb-2 text-sm" data-en="Purification" data-ar="التنقية">Purification</h4>
+                                <p class="text-xs text-gray-400" data-en="Isolate the product" data-ar="عزل المنتج">Isolate product</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 mb-8">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn1.byjus.com/ec31b32bac77e0806dbe40018ae2d6d42b4f92b8.png" alt="DNA Cloning Process" class="w-full max-w-3xl mx-auto rounded-xl mb-4">
+                    <p class="text-center text-sm text-gray-400" data-en="Complete DNA Cloning Workflow Diagram" data-ar="مخطط سير عمل استنساخ DNA الكامل">Complete DNA Cloning Workflow Diagram</p>
+                </div>
+            </div>
+
+            <!-- Lecture 2: DNA Modifying Enzymes -->
+            <div id="lecture-2" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent" data-en="DNA Modifying Enzymes" data-ar="إنزيمات تعديل DNA">DNA Modifying Enzymes</h2>
+                    <p class="text-gray-400" data-en="Essential tools for manipulating DNA: Polymerases, Kinases, and Phosphatases" data-ar="أدوات أساسية للتعامل مع DNA: البوليمرازات، الكينازات، والفوسفاتاز">Essential tools for manipulating DNA</p>
+                </div>
+
+                <!-- Polymerases Section -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-primary flex items-center gap-2">
+                            <i class="fas fa-fire"></i>
+                            <span data-en="Taq DNA Polymerase" data-ar="بوليمراز Taq">Taq DNA Polymerase</span>
+                        </h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li data-en="• Thermostable enzyme from Thermus aquaticus" data-ar="• إنزيم thermostable من Thermus aquaticus">• Thermostable enzyme</li>
+                            <li data-en="• Essential for PCR (Polymerase Chain Reaction)" data-ar="• أساسي لـ PCR (تفاعل البوليمراز المتسلسل)">• Essential for PCR</li>
+                            <li data-en="• Optimal temperature: 72-75°C" data-ar="• درجة الحرارة المثلى: 72-75°م">• Optimal: 72-75°C</li>
+                            <li data-en="• Adds single A overhang (3' dA) - used in TA cloning" data-ar="• يضيف A واحدة (3' dA) - يستخدم في TA cloning">• Adds 3' dA overhang</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-secondary flex items-center gap-2">
+                            <i class="fas fa-tools"></i>
+                            <span data-en="T4 DNA Polymerase" data-ar="بوليمراز T4">T4 DNA Polymerase</span>
+                        </h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li data-en="• Strong 3'→5' exonuclease (proofreading)" data-ar="• نشاط 3'→5' exonuclease قوي (تصحيح الأخطاء)">• 3'→5' exonuclease activity</li>
+                            <li data-en="• Creates blunt ends (fills 5' overhangs)" data-ar="• ينشئ نهايات بلانت (يملأ 5' overhangs)">• Creates blunt ends</li>
+                            <li data-en="• No strand displacement activity" data-ar="• لا يحل محل السلسلة">• No strand displacement</li>
+                            <li data-en="• Used for probe labeling & gap filling" data-ar="• يستخدم في وضع العلامات على المسبار وملء الفجوات">• Probe labeling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- PCR Steps -->
+                <div class="glass-card rounded-2xl p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-6 text-center" data-en="PCR Cycle Steps" data-ar="خطوات دورة PCR">PCR Cycle Steps</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-red-400 mb-2">95°C</div>
+                            <h4 class="font-bold mb-2" data-en="Denaturation" data-ar="الانفصال">Denaturation</h4>
+                            <p class="text-xs text-gray-400" data-en="DNA strands separate" data-ar="انفصال سلاسل DNA">DNA strands separate</p>
+                        </div>
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2">55°C</div>
+                            <h4 class="font-bold mb-2" data-en="Annealing" data-ar="التوصيل">Annealing</h4>
+                            <p class="text-xs text-gray-400" data-en="Primers bind to template" data-ar="البرايمر يرتبط بالقالب">Primers bind</p>
+                        </div>
+                        <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-green-400 mb-2">72°C</div>
+                            <h4 class="font-bold mb-2" data-en="Extension" data-ar="الامتداد">Extension</h4>
+                            <p class="text-xs text-gray-400" data-en="Taq synthesizes new strand" data-ar="Taq ينتج سلسلة جديدة">Taq synthesizes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Enzymes -->
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="glass-card rounded-xl p-4">
+                        <h4 class="font-bold text-accent mb-2" data-en="Reverse Transcriptase" data-ar="الترانسكربتاز العكسي">Reverse Transcriptase</h4>
+                        <p class="text-xs text-gray-300" data-en="RNA-directed DNA polymerase. Synthesizes cDNA from RNA template." data-ar="بوليمراز DNA موجه بـ RNA. ينتج cDNA من قالب RNA.">Synthesizes cDNA from RNA</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4">
+                        <h4 class="font-bold text-yellow-400 mb-2" data-en="Kinases" data-ar="الكينازات">Kinases</h4>
+                        <p class="text-xs text-gray-300" data-en="Add phosphate groups (PO4) to DNA ends - The 'On' switch" data-ar="تضيف مجموعات فوسفات إلى نهايات DNA - مفتاح التشغيل">Add phosphate groups</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4">
+                        <h4 class="font-bold text-purple-400 mb-2" data-en="Phosphatases" data-ar="الفوسفاتاز">Phosphatases</h4>
+                        <p class="text-xs text-gray-300" data-en="Remove phosphate groups - The 'Off' switch. Prevents self-ligation." data-ar="تزيل مجموعات الفوسفات - مفتاح الإيقاف. تمنع الربط الذاتي.">Remove phosphate groups</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lecture 3: Restriction Enzymes -->
+            <div id="lecture-3" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 text-accent" data-en="Restriction Enzymes" data-ar="إنزيمات القطع">Restriction Enzymes</h2>
+                    <p class="text-gray-400" data-en="Molecular scissors that recognize specific DNA sequences" data-ar="المقص الجزيئي الذي يتعرف على تسلسلات DNA محددة">Molecular scissors</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 mb-8">
+                    <img src="https://kimi-web-img.moonshot.cn/img/geneticeducation.co.in/01a4e56f332cd0c6aed8e9bcb1838792cf77dd76.jpeg" alt="Restriction Enzyme Cutting Patterns" class="w-full max-w-2xl mx-auto rounded-xl mb-4">
+                    <p class="text-center text-sm text-gray-400" data-en="Sticky Ends vs Blunt Ends cutting patterns" data-ar="أنماط القطع: النهايات اللاصقة مقابل النهايات البلانت">Sticky vs Blunt ends</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border-l-4 border-accent">
+                        <h3 class="text-xl font-bold mb-3" data-en="Sticky Ends (Cohesive)" data-ar="نهايات لاصقة (تماسكية)">Sticky Ends</h3>
+                        <p class="text-gray-300 mb-3" data-en="Staggered cut leaves single-strand overhangs that can pair with complementary sequences." data-ar="قطع متدرج يترك أطرافاً ذات شريط واحد يمكن أن ترتبط مع تسلسلات مكملة.">
+                            Staggered cut leaves single-strand overhangs
+                        </p>
+                        <div class="bg-black/30 p-3 rounded font-mono text-xs text-green-400">
+                            5'-G AATTC-3'<br>
+                            3'-CTTAA G-5'
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border-l-4 border-primary">
+                        <h3 class="text-xl font-bold mb-3" data-en="Blunt Ends" data-ar="نهايات بلانت">Blunt Ends</h3>
+                        <p class="text-gray-300 mb-3" data-en="Straight cut with no overhangs. Less efficient for ligation." data-ar="قطع مستقيم بدون أطراف بارزة. أقل كفاءة في الربط.">
+                            Straight cut with no overhangs
+                        </p>
+                        <div class="bg-black/30 p-3 rounded font-mono text-xs text-blue-400">
+                            5'-CCC GGG-3'<br>
+                            3'-GGG CCC-5'
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types Table -->
+                <div class="overflow-x-auto glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-4" data-en="Types of Restriction Enzymes" data-ar="أنواع إنزيمات القطع">Types of Restriction Enzymes</h3>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="text-left p-3 text-primary" data-en="Type" data-ar="النوع">Type</th>
+                                <th class="text-left p-3 text-primary" data-en="Recognition" data-ar="التعرف">Recognition</th>
+                                <th class="text-left p-3 text-primary" data-en="Cut Site" data-ar="موقع القطع">Cut Site</th>
+                                <th class="text-left p-3 text-primary" data-en="Cofactors" data-ar="العوامل المساعدة">Cofactors</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5">
+                                <td class="p-3 font-bold">Type I</td>
+                                <td class="p-3" data-en="Asymmetric" data-ar="غير متماثل">Asymmetric</td>
+                                <td class="p-3" data-en="Random (~1000bp away)" data-ar="عشوائي (1000 زوج قاعدة بعيداً)">Random</td>
+                                <td class="p-3">ATP, AdoMet, Mg²⁺</td>
+                            </tr>
+                            <tr class="border-b border-white/5 bg-white/5">
+                                <td class="p-3 font-bold text-primary">Type II</td>
+                                <td class="p-3" data-en="Palindromic (4-8bp)" data-ar="متناظر (4-8 زوج قاعدة)">Palindromic</td>
+                                <td class="p-3" data-en="At recognition site" data-ar="عند موقع التعرف">At site</td>
+                                <td class="p-3">Mg²⁺ only</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="p-3 font-bold">Type III</td>
+                                <td class="p-3" data-en="Asymmetric (5-6bp)" data-ar="غير متماثل">Asymmetric</td>
+                                <td class="p-3" data-en="20-30bp away" data-ar="20-30 زوج قاعدة بعيداً">20-30bp away</td>
+                                <td class="p-3">ATP, AdoMet, Mg²⁺</td>
+                            </tr>
+                            <tr class="bg-white/5">
+                                <td class="p-3 font-bold text-accent">Type V</td>
+                                <td class="p-3" data-en="gRNA guided (CRISPR)" data-ar="موجه بواسطة gRNA">gRNA guided</td>
+                                <td class="p-3" data-en="PAM site" data-ar="موقع PAM">PAM site</td>
+                                <td class="p-3">Mg²⁺</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 p-4 bg-primary/10 rounded-xl border border-primary/30">
+                    <h4 class="font-bold mb-2 text-primary" data-en="Nomenclature Example: EcoRI" data-ar="مثال على التسمية: EcoRI">Nomenclature: EcoRI</h4>
+                    <p class="text-sm text-gray-300">
+                        <strong>E</strong> = Escherichia (Genus)<br>
+                        <strong>co</strong> = coli (Species)<br>
+                        <strong>R</strong> = RY13 (Strain)<br>
+                        <strong>I</strong> = First enzyme discovered
+                    </p>
+                </div>
+            </div>
+
+            <!-- Lecture 4: DNA Ligase -->
+            <div id="lecture-4" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 text-green-400" data-en="DNA Ligase: The Molecular Glue" data-ar="DNA ليغيز: الغراء الجزيئي">DNA Ligase: The Molecular Glue</h2>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 mb-8">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i.sstatic.net/adf3fc6fd7ec48676eee67f53ceede309458edea.jpg" alt="DNA Ligase Mechanism" class="w-full max-w-2xl mx-auto rounded-xl">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-green-400" data-en="Function" data-ar="الوظيفة">Function</h3>
+                        <p class="text-gray-300 mb-4" data-en="Catalyzes formation of phosphodiester bonds between 3'-OH and 5'-phosphate ends, joining DNA fragments permanently." data-ar="تحفز تكوين روابط فوسفوديستر بين نهايات 3'-OH و 5'-فوسفات، تاركةً قطع DNA بشكل دائم.">
+                            Joins DNA strands by forming phosphodiester bonds
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li><i class="fas fa-check text-green-400 mr-2"></i>Requires ATP or NAD+</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i>Repairs single-strand breaks</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i>Essential for DNA replication</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-blue-400" data-en="Ligation Conditions" data-ar="شروط الربط">Ligation Conditions</h3>
+                        <div class="space-y-3">
+                            <div class="bg-blue-500/10 p-3 rounded-lg">
+                                <h4 class="font-bold text-sm mb-1" data-en="Sticky Ends" data-ar="نهايات لاصقة">Sticky Ends</h4>
+                                <p class="text-xs text-gray-400" data-en="37°C, 1.0-1.5 Weiss Units, efficient ligation" data-ar="37°م، 1.0-1.5 وحدة ويس، ربط فعال">37°C, 1.0-1.5 Weiss Units</p>
+                            </div>
+                            <div class="bg-purple-500/10 p-3 rounded-lg">
+                                <h4 class="font-bold text-sm mb-1" data-en="Blunt Ends" data-ar="نهايات بلانت">Blunt Ends</h4>
+                                <p class="text-xs text-gray-400" data-en="14°C overnight, 1.5-5.0 Weiss Units, less efficient" data-ar="14°م طوال الليل، 1.5-5.0 وحدة ويس، أقل كفاءة">14°C overnight, higher concentration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips -->
+                <div class="mt-6 glass-card rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4" data-en="6 Tips for Efficient Ligation" data-ar="6 نصائح للربط الفعال">6 Tips for Efficient Ligation</h3>
+                    <div class="grid md:grid-cols-3 gap-4 text-sm">
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">1</span>
+                            <span data-en="Compatible ends (sticky/sticky or blunt/blunt)" data-ar="نهايات متوافقة (لاصقة/لاصقة أو بلانت/بلانت)">Compatible ends</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">2</span>
+                            <span data-en="Check DNA ends before ligation" data-ar="افحص نهايات DNA قبل الربط">Check DNA ends</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">3</span>
+                            <span data-en="Insert:Vector ratio 3:1" data-ar="نسبة الإدراج:المتجه 3:1">3:1 ratio</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">4</span>
+                            <span data-en="Aliquot buffer (prevent freeze-thaw)" data-ar="قسّم المخزن المؤقت (منع التجميد/الذوبان)">Aliquot buffer</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">5</span>
+                            <span data-en="Avoid inhibitors (EDTA, salts)" data-ar="تجنب المثبطات (EDTA، أملاح)">Avoid inhibitors</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">6</span>
+                            <span data-en="Always run controls" data-ar="شغل ضوابط دائماً">Run controls</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lecture 5: Cloning Vectors I -->
+            <div id="lecture-5" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 text-yellow-400" data-en="Cloning Vectors Part I" data-ar="المتجهات الاستنساخية (١)">Cloning Vectors Part I</h2>
+                    <p class="text-gray-400" data-en="Vehicles to carry foreign DNA into host cells" data-ar="مركبات لنقل DNA الأجنبي إلى الخلايا المضيفة">Vehicles for foreign DNA</p>
+                </div>
+
+                <!-- Essential Elements -->
+                <div class="gradient-border mb-8">
+                    <div class="gradient-border-inner p-6">
+                        <h3 class="text-xl font-bold mb-6 text-center" data-en="Essential Vector Elements" data-ar="العناصر الأساسية للمتجه">Essential Vector Elements</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-black/30 p-4 rounded-xl text-center">
+                                <i class="fas fa-circle-notch text-3xl text-primary mb-2"></i>
+                                <h4 class="font-bold mb-1" data-en="ori" data-ar="أصل التضاعف">ori</h4>
+                                <p class="text-xs text-gray-400" data-en="Origin of Replication - where DNA copying starts" data-ar="أصل التضاعف - حيث يبدأ نسخ DNA">Origin of Replication</p>
+                            </div>
+                            <div class="bg-black/30 p-4 rounded-xl text-center">
+                                <i class="fas fa-scissors text-3xl text-secondary mb-2"></i>
+                                <h4 class="font-bold mb-1" data-en="MCS" data-ar="موقع الاستنساخ المتعدد">MCS</h4>
+                                <p class="text-xs text-gray-400" data-en="Multiple Cloning Site - many restriction sites" data-ar="موقع الاستنساخ المتعدد - مواقع قطع متعددة">Multiple Cloning Site</p>
+                            </div>
+                            <div class="bg-black/30 p-4 rounded-xl text-center">
+                                <i class="fas fa-shield-alt text-3xl text-accent mb-2"></i>
+                                <h4 class="font-bold mb-1" data-en="Marker" data-ar="علامة انتقاء">Marker</h4>
+                                <p class="text-xs text-gray-400" data-en="Antibiotic resistance gene for selection" data-ar="جين مقاومة للمضادات الحيوية للاختيار">Selectable Marker</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plasmids -->
+                <div class="glass-card rounded-2xl p-6 mb-8">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 text-primary">Plasmids</h3>
+                            <ul class="space-y-2 text-gray-300 text-sm mb-4">
+                                <li data-en="• Small, circular, extrachromosomal DNA" data-ar="• DNA صغير دائري خارج الكروموسومات">• Small circular DNA</li>
+                                <li data-en="• High copy number (20-200 copies/cell)" data-ar="• عدد نسخ عالي (20-200 نسخة/خلية)">• High copy number</li>
+                                <li data-en="• Easy to isolate and purify" data-ar="• سهل العزل والتنقية">• Easy to isolate</li>
+                                <li data-en="• Capacity: 10-20 kb insert" data-ar="• سعة: 10-20 كيلو قاعدة">• Capacity: 10-20 kb</li>
+                            </ul>
+                            
+                            <div class="bg-primary/10 p-4 rounded-lg border border-primary/30">
+                                <h4 class="font-bold text-primary mb-2">pUC19 Vector</h4>
+                                <p class="text-xs text-gray-300" data-en="High copy number, blue-white screening via lacZα, 54bp polylinker with 13 restriction sites" data-ar="عدد نسخ عالي، فحص أزرق-أبيض عبر lacZα، بولي لينكر 54 زوج قاعدة مع 13 موقع قطع">
+                                    High copy, blue-white screening, 13 restriction sites
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <img src="https://kimi-web-img.moonshot.cn/img/microbenotes.com/fae6a879cdb79128853f2e890ebfb00154e1e4d9.jpg" alt="pUC19 Vector Map" class="w-full rounded-xl">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blue-White Screening -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-4 text-accent" data-en="Blue-White Screening (pUC System)" data-ar="الفحص الأزرق-الأبيض (نظام pUC)">Blue-White Screening</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-gray-300 mb-4 text-sm" data-en="Based on insertional inactivation of lacZα gene encoding β-galactosidase enzyme." data-ar="يعتمد على إلغاء تنشيط الجين lacZα المشفر لإنزيم بيتا-جالاكتوزيداز.">
+                                Insertional inactivation of lacZα gene
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 bg-blue-500/10 p-3 rounded-lg">
+                                    <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+                                    <div>
+                                        <h5 class="font-bold text-sm text-blue-400" data-en="Blue Colonies" data-ar="مستعمرات زرقاء">Blue Colonies</h5>
+                                        <p class="text-xs text-gray-400" data-en="No insert. Functional β-galactosidase breaks down X-gal." data-ar="لا يوجد إدراج. الإنزيم وظيفي يحلل X-gal.">No insert</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10">
+                                    <div class="w-4 h-4 rounded-full bg-white border border-gray-400"></div>
+                                    <div>
+                                        <h5 class="font-bold text-sm text-white" data-en="White Colonies" data-ar="مستعمرات بيضاء">White Colonies</h5>
+                                        <p class="text-xs text-gray-400" data-en="Insert present. Disrupted lacZα = no enzyme activity." data-ar="يوجد إدراج. تعطيل lacZα = لا نشاط إنزيمي.">Insert present</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-black/30 p-4 rounded-xl font-mono text-xs">
+                            <div class="text-gray-500 mb-2">// lacZα Peptide Complementation</div>
+                            <div class="text-green-400">Vector provides: lacZα (N-terminal)</div>
+                            <div class="text-blue-400">Host provides: lacZΔ (C-terminal)</div>
+                            <div class="text-yellow-400 mt-2">// With Insert:</div>
+                            <div class="text-red-400">Frameshift → No peptide → No enzyme</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lecture 6: Cloning Vectors II -->
+            <div id="lecture-6" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 text-red-400" data-en="Advanced Vectors" data-ar="المتجهات المتقدمة">Advanced Vectors</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <!-- Cosmids -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-3 text-purple-400">Cosmids</h3>
+                        <p class="text-sm text-gray-300 mb-3" data-en="Hybrid vectors: plasmid + cos site from λ phage. Can carry 28-46 kb inserts." data-ar="متجهات هجينة: بلازميد + موقع cos من فيروس λ. تستوعب 28-46 كيلو قاعدة.">
+                            Plasmid + λ phage cos site
+                        </p>
+                        <ul class="text-xs text-gray-400 space-y-1">
+                            <li>• <span data-en="Replicate as plasmids" data-ar="تتضاعف كبلازميدات">Replicate as plasmids</span></li>
+                            <li>• <span data-en="Packaged like phage" data-ar="تُعبأ مثل الفيروسات">Packaged like phage</span></li>
+                            <li>• <span data-en="High transformation efficiency" data-ar="كفاءة تحويل عالية">High efficiency</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- BAC -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-3 text-blue-400" data-en="BAC (Bacterial Artificial Chromosome)" data-ar="الكروموسوم الاصطناعي البكتيري">BAC</h3>
+                        <p class="text-sm text-gray-300 mb-3" data-en="Based on F-plasmid. Carry up to 300 kb. Stable, low copy number." data-ar="مبني على F-بلازميد. يحمل حتى 300 كيلو قاعدة. مستقر، عدد نسخ منخفض.">
+                            Based on F-plasmid, up to 300 kb
+                        </p>
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.genome.gov/30d4eec63d70131d1c0ce75d4ebc17679c5bec2d.jpg" alt="BAC Structure" class="w-full rounded-lg mt-2">
+                    </div>
+
+                    <!-- YAC -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-3 text-yellow-400" data-en="YAC (Yeast Artificial Chromosome)" data-ar="الكروموسوم الاصطناعي الخميري">YAC</h3>
+                        <p class="text-sm text-gray-300" data-en="Used in eukaryotic systems. Capacity: up to 500 kb or more. Contains telomeres, centromere, and ARS." data-ar="يستخدم في الأنظمة حقيقية النواة. السعة: حتى 500 كيلو قاعدة أو أكثر. يحتوي على تيلوميرات وسنترومير وARS.">
+                            Eukaryotic system, up to 500 kb
+                        </p>
+                    </div>
+
+                    <!-- Expression Vector -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-xl font-bold mb-3 text-green-400" data-en="Expression Vectors" data-ar="متجهات التعبير">Expression Vectors</h3>
+                        <p class="text-sm text-gray-300" data-en="Designed for protein production. Contains: Strong promoter, Ribosome binding site, Start/Stop codons, Tags for purification." data-ar="مصممة لإنتاج البروتينات. تحتوي على: مروج قوي، موقع ربط ريبوزومي، كودونات بداية/نهاية، علامات للتنقية.">
+                            For protein production with promoters & tags
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="glass-card rounded-2xl p-6 overflow-x-auto">
+                    <h3 class="text-xl font-bold mb-4" data-en="Vector Comparison" data-ar="مقارنة المتجهات">Vector Comparison</h3>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="text-left p-3" data-en="Vector" data-ar="المتجه">Vector</th>
+                                <th class="text-left p-3" data-en="Insert Size" data-ar="حجم الإدراج">Size</th>
+                                <th class="text-left p-3" data-en="Host" data-ar="المضيف">Host</th>
+                                <th class="text-left p-3" data-en="Key Feature" data-ar="الميزة الرئيسية">Feature</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5">
+                                <td class="p-3 font-bold">Plasmid</td>
+                                <td class="p-3">2-20 kb</td>
+                                <td class="p-3">Bacteria</td>
+                                <td class="p-3" data-en="High copy, easy handling" data-ar="نسخ عالي، سهل الاستخدام">High copy</td>
+                            </tr>
+                            <tr class="border-b border-white/5 bg-white/5">
+                                <td class="p-3 font-bold">Cosmid</td>
+                                <td class="p-3">28-46 kb</td>
+                                <td class="p-3">Bacteria</td>
+                                <td class="p-3" data-en="Phage packaging" data-ar="تعبئة فيروسية">Phage packaging</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="p-3 font-bold">BAC</td>
+                                <td class="p-3">Up to 300 kb</td>
+                                <td class="p-3">Bacteria</td>
+                                <td class="p-3" data-en="Very stable, F-plasmid origin" data-ar="مستقر جداً، أصل F-بلازميد">Stable</td>
+                            </tr>
+                            <tr class="bg-white/5">
+                                <td class="p-3 font-bold">YAC</td>
+                                <td class="p-3">Up to 500 kb</td>
+                                <td class="p-3">Yeast</td>
+                                <td class="p-3" data-en="Eukaryotic system" data-ar="نظام حقيقي النواة">Eukaryotic</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Lecture 7: Cloning Methods -->
+            <div id="lecture-7" class="lecture-content">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold mb-4 text-purple-400" data-en="DNA Cloning Methods" data-ar="طرق استنساخ DNA">DNA Cloning Methods</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Traditional -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">1</span>
+                            <h3 class="text-xl font-bold" data-en="Traditional Cloning (Restriction-based)" data-ar="الاستنساخ التقليدي (بناءً على القطع)">Traditional Cloning</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4 text-sm" data-en="Uses restriction enzymes to create compatible ends. DNA ligase joins fragments. Limitation: Insert must not contain internal restriction sites." data-ar="يستخدم إنزيمات القطع لإنشاء نهايات متوافقة. DNA ليغيز يربط القطع. القيد: يجب ألا يحتوي الإدراج على مواقع قطع داخلية.">
+                            Uses RE + Ligase. Limitation: No internal cut sites in insert.
+                        </p>
+                    </div>
+
+                    <!-- TA Cloning -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-10 h-10 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-bold">2</span>
+                            <h3 class="text-xl font-bold">TA Cloning (PCR Cloning)</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-gray-300 text-sm mb-3" data-en="Taq polymerase adds single A overhang to PCR products. Vector has T overhangs. No restriction digestion needed." data-ar="بوليمراز Taq يضيف A واحدة لمنتجات PCR. المتجه يحتوي على أطراف T. لا يحتاج قطع بإنزيمات.">
+                                    A-overhangs on insert, T-overhangs on vector
+                                </p>
+                                <ul class="text-xs text-gray-400 space-y-1">
+                                    <li>• <span data-en="Quick (5-15 min ligation)" data-ar="سريع (5-15 دقيقة ربط)">Quick ligation</span></li>
+                                    <li>• <span data-en="No restriction sites needed" data-ar="لا تحتاج مواقع قطع">No RE needed</span></li>
+                                    <li>• <span data-en="pGEM-T Easy vector common" data-ar="متجه pGEM-T Easy شائع">pGEM-T vector</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-black/30 p-3 rounded-lg font-mono text-xs">
+                                <div class="text-primary">Insert: 5'-...GATC A-3'</div>
+                                <div class="text-secondary">Vector: 3'-T CTAG...-5'</div>
+                                <div class="text-gray-500 mt-2">// A-T base pairing</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LIC -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-10 h-10 rounded-full bg-accent/20 text-accent flex items-center justify-center font-bold">3</span>
+                            <h3 class="text-xl font-bold" data-en="Ligation-Independent Cloning (LIC)" data-ar="الاستنساخ المستقل عن الربط (LIC)">LIC</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3" data-en="Uses T4 DNA polymerase with single dNTP to create 12-15bp overhangs. No ligase required - annealing is sufficient. E.coli repairs nicks in vivo." data-ar="يستخدم بوليمراز T4 مع dNTP واحد لإنشاء أطراف 12-15 زوج قاعدة. لا يحتاج ليغيز - التوصيل كافٍ. E.coli تصلح الشقوق داخل الخلية.">
+                            T4 polymerase creates overhangs. No ligase needed.
+                        </p>
+                    </div>
+
+                    <!-- Gibson/Seamless -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold">4</span>
+                            <h3 class="text-xl font-bold" data-en="Seamless Cloning (Gibson Assembly)" data-ar="الاستنساخ السلس (تجميع جيبسون)">Gibson Assembly</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-gray-300 text-sm mb-4" data-en="Isothermal assembly using 3 enzymes: 5'→3' exonuclease (creates overhangs), Polymerase (fills gaps), Ligase (seals nicks). 15-60 min at 50°C." data-ar="تجميع حراري باستخدام 3 إنزيمات: exonuclease 5'→3' (ينشئ أطراف)، بوليمراز (يملأ فجوات)، ليغيز (يصلح شقوق). 15-60 دقيقة عند 50°م.">
+                                    3 enzymes, one tube, 50°C
+                                </p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                        <span data-en="15-40 bp homology regions" data-ar="مناطق تشابه 15-40 زوج قاعدة">15-40 bp homology</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                        <span data-en="Multiple fragments (2-10+)" data-ar="قطع متعددة (2-10+)">Multiple fragments</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                        <span data-en="No scars/scars left" data-ar="لا يترك آثار/ندبات">Scarless</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="https://kimi-web-img.moonshot.cn/img/www.idtdna.com/441bf8186348a5c3a733ef0be4fa1e64cae669ab.jpg" alt="Gibson Assembly" class="w-full rounded-xl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison -->
+                <div class="mt-8 glass-card rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4" data-en="Method Comparison" data-ar="مقارنة الطرق">Method Comparison</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs md:text-sm">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="text-left p-2" data-en="Method" data-ar="الطريقة">Method</th>
+                                    <th class="text-left p-2" data-en="Enzymes" data-ar="الإنزيمات">Enzymes</th>
+                                    <th class="text-left p-2" data-en="Time" data-ar="الوقت">Time</th>
+                                    <th class="text-left p-2" data-en="Fragments" data-ar="القطع">Fragments</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-300">
+                                <tr class="border-b border-white/5">
+                                    <td class="p-2 font-bold">Traditional</td>
+                                    <td class="p-2">RE + Ligase</td>
+                                    <td class="p-2">2-4 hours</td>
+                                    <td class="p-2">1</td>
+                                </tr>
+                                <tr class="border-b border-white/5 bg-white/5">
+                                    <td class="p-2 font-bold">TA Cloning</td>
+                                    <td class="p-2">Taq + Ligase</td>
+                                    <td class="p-2">15 min</td>
+                                    <td class="p-2">1</td>
+                                </tr>
+                                <tr class="border-b border-white/5">
+                                    <td class="p-2 font-bold">LIC</td>
+                                    <td class="p-2">T4 Polymerase</td>
+                                    <td class="p-2">20 min</td>
+                                    <td class="p-2">1-2</td>
+                                </tr>
+                                <tr class="bg-white/5">
+                                    <td class="p-2 font-bold text-green-400">Gibson</td>
+                                    <td class="p-2">Exo+Pol+Lig</td>
+                                    <td class="p-2">15-60 min</td>
+                                    <td class="p-2">2-10+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/50 z-30 hidden" onclick="toggleMobileMenu()"></div>
+
+    <script>
+        // Language Toggle
+        let currentLang = 'en';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const btnText = document.getElementById('lang-btn-text');
+            const headerSubEn = document.getElementById('header-subtitle-en');
+            const headerSubAr = document.getElementById('header-subtitle-ar');
+            
+            if (currentLang === 'ar') {
+                btnText.textContent = 'English';
+                document.body.setAttribute('dir', 'rtl');
+                headerSubEn.classList.add('hidden');
+                headerSubAr.classList.remove('hidden');
+                // Add arabic class to all elements with data-ar
+                document.querySelectorAll('[data-ar]').forEach(el => {
+                    el.dataset.en = el.textContent;
+                    el.textContent = el.dataset.ar;
+                });
+                document.querySelectorAll('.arabic-text').forEach(el => el.classList.remove('hidden'));
+            } else {
+                btnText.textContent = 'العربية';
+                document.body.setAttribute('dir', 'ltr');
+                headerSubEn.classList.remove('hidden');
+                headerSubAr.classList.add('hidden');
+                // Restore english
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    el.textContent = el.dataset.en;
+                });
+                document.querySelectorAll('.arabic-text').forEach(el => el.classList.add('hidden'));
+            }
+        }
+
+        // Lecture Navigation
+        function showLecture(num) {
+            // Hide all lectures
+            document.querySelectorAll('.lecture-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected lecture
+            document.getElementById(`lecture-${num}`).classList.add('active');
+            document.getElementById(`nav-${num}`).classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-menu');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Store original English text
+            document.querySelectorAll('[data-en]').forEach(el => {
+                if (!el.dataset.en) el.dataset.en = el.textContent;
+            });
+        });
+    </script>
+</body>
+</html>
