@@ -1,0 +1,733 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.pres { width: 100%; }
+.controls { display: flex; gap: 8px; align-items: center; justify-content: center; padding: 12px 0; flex-wrap: wrap; }
+.controls button { padding: 6px 14px; font-size: 13px; border-radius: 6px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; }
+.controls button:hover { background: var(--color-background-secondary); }
+.controls button.active { background: #1B4F8A; color: #fff; border-color: #1B4F8A; }
+.slide-counter { font-size: 13px; color: var(--color-text-secondary); min-width: 60px; text-align: center; }
+.slide { display: none; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; position: relative; }
+.slide.active { display: block; }
+.slide svg { width: 100%; height: 100%; display: block; }
+.thumb-row { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0; }
+.thumb { flex: 0 0 100px; height: 56px; border-radius: 6px; overflow: hidden; cursor: pointer; border: 2px solid transparent; }
+.thumb:hover { border-color: #0D9488; }
+.thumb.active { border-color: #1B4F8A; }
+.thumb svg { width: 100%; height: 100%; display: block; }
+</style>
+
+<div class="pres">
+  <div class="thumb-row" id="thumbs"></div>
+  <div id="slides"></div>
+  <div class="controls">
+    <button onclick="prev()">← Prev</button>
+    <span class="slide-counter" id="counter">1 / 10</span>
+    <button onclick="next()">Next →</button>
+  </div>
+</div>
+
+<script>
+const slides = [
+{
+  title: "Title",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="8" height="450" fill="#0D9488"/>
+  <!-- DNA helix decoration -->
+  <circle cx="650" cy="100" r="180" fill="#112240" opacity="0.8"/>
+  <ellipse cx="650" cy="225" rx="40" ry="180" fill="none" stroke="#0D9488" stroke-width="3" opacity="0.5"/>
+  <ellipse cx="650" cy="225" rx="40" ry="180" fill="none" stroke="#1B4F8A" stroke-width="3" opacity="0.5" transform="rotate(60,650,225)"/>
+  <line x1="620" y1="80" x2="680" y2="90" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="615" y1="130" x2="685" y2="120" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="615" y1="180" x2="685" y2="190" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="618" y1="230" x2="682" y2="220" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="617" y1="280" x2="683" y2="290" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="620" y1="330" x2="680" y2="320" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <line x1="622" y1="380" x2="678" y2="390" stroke="#5EEAD4" stroke-width="2" opacity="0.6"/>
+  <!-- Circles decoration -->
+  <circle cx="580" cy="420" r="60" fill="#1B4F8A" opacity="0.2"/>
+  <circle cx="720" cy="30" r="40" fill="#0D9488" opacity="0.15"/>
+  <!-- Text -->
+  <text x="30" y="80" font-family="Arial" font-size="11" fill="#5EEAD4" letter-spacing="4" font-weight="bold">MOLECULAR BIOLOGY</text>
+  <text x="30" y="160" font-family="Arial" font-size="52" fill="white" font-weight="bold">Recombinant DNA</text>
+  <text x="30" y="220" font-family="Arial" font-size="52" fill="white" font-weight="bold">&amp; Gene Therapy</text>
+  <rect x="30" y="250" width="180" height="4" fill="#0D9488" rx="2"/>
+  <text x="30" y="285" font-family="Arial" font-size="16" fill="#94A3B8">CRISPR-Cas9 &amp; Modern Genetic Engineering</text>
+  <text x="30" y="320" font-family="Arial" font-size="13" fill="#64748B" font-style="italic">Biology | Biotechnology | Medicine</text>
+  </svg>`
+},
+{
+  title: "Recombinant DNA",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#5EEAD4" font-weight="bold">RECOMBINANT DNA</text>
+  <!-- Definition box -->
+  <rect x="20" y="65" width="360" height="70" rx="6" fill="#112240" stroke="#0D9488" stroke-width="1"/>
+  <text x="35" y="90" font-family="Arial" font-size="12" fill="white">DNA formed by combining sequences</text>
+  <text x="35" y="107" font-family="Arial" font-size="12" fill="white">from two or more different organisms</text>
+  <text x="35" y="124" font-family="Arial" font-size="12" fill="#94A3B8">using laboratory techniques.</text>
+  <!-- Plasmid diagram -->
+  <circle cx="620" cy="240" r="110" fill="none" stroke="#0D9488" stroke-width="4"/>
+  <circle cx="620" cy="240" r="110" fill="#112240" opacity="0.5"/>
+  <text x="620" y="235" font-family="Arial" font-size="13" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Plasmid</text>
+  <text x="620" y="252" font-family="Arial" font-size="11" fill="#94A3B8" text-anchor="middle">Vector</text>
+  <!-- Arrow showing gene insertion -->
+  <rect x="480" y="185" width="60" height="20" rx="4" fill="#1B4F8A"/>
+  <text x="510" y="199" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Gene</text>
+  <path d="M 540 195 L 560 205 L 540 215 Z" fill="#0D9488"/>
+  <!-- Cut sites on plasmid -->
+  <rect x="600" y="128" width="40" height="16" rx="3" fill="#7C3AED"/>
+  <text x="620" y="140" font-family="Arial" font-size="9" fill="white" text-anchor="middle">Cut site</text>
+  <!-- Bullet points -->
+  <rect x="20" y="148" width="360" height="54" rx="5" fill="#112240"/>
+  <circle cx="40" cy="167" r="7" fill="#0D9488"/>
+  <text x="40" y="171" font-family="Arial" font-size="9" fill="white" text-anchor="middle">1</text>
+  <text x="55" y="163" font-family="Arial" font-size="12" fill="#E2F0FB" font-weight="bold">Restriction Enzymes</text>
+  <text x="55" y="179" font-family="Arial" font-size="11" fill="#94A3B8">Cut DNA at specific sequences (recognition sites)</text>
+  <rect x="20" y="210" width="360" height="54" rx="5" fill="#112240"/>
+  <circle cx="40" cy="229" r="7" fill="#0D9488"/>
+  <text x="40" y="233" font-family="Arial" font-size="9" fill="white" text-anchor="middle">2</text>
+  <text x="55" y="225" font-family="Arial" font-size="12" fill="#E2F0FB" font-weight="bold">DNA Ligase</text>
+  <text x="55" y="241" font-family="Arial" font-size="11" fill="#94A3B8">Joins DNA fragments together (seals cuts)</text>
+  <rect x="20" y="272" width="360" height="54" rx="5" fill="#112240"/>
+  <circle cx="40" cy="291" r="7" fill="#1B4F8A"/>
+  <text x="40" y="295" font-family="Arial" font-size="9" fill="white" text-anchor="middle">3</text>
+  <text x="55" y="287" font-family="Arial" font-size="12" fill="#E2F0FB" font-weight="bold">Vectors (Plasmids)</text>
+  <text x="55" y="303" font-family="Arial" font-size="11" fill="#94A3B8">Carry foreign DNA into host cells</text>
+  <rect x="20" y="334" width="360" height="54" rx="5" fill="#112240"/>
+  <circle cx="40" cy="353" r="7" fill="#1B4F8A"/>
+  <text x="40" y="357" font-family="Arial" font-size="9" fill="white" text-anchor="middle">4</text>
+  <text x="55" y="349" font-family="Arial" font-size="12" fill="#E2F0FB" font-weight="bold">Host Organisms</text>
+  <text x="55" y="365" font-family="Arial" font-size="11" fill="#94A3B8">Bacteria &amp; yeast replicate the new DNA</text>
+  <!-- Bacteria icon -->
+  <ellipse cx="620" cy="390" rx="35" ry="18" fill="#1B4F8A" opacity="0.7"/>
+  <text x="620" y="395" font-family="Arial" font-size="10" fill="white" text-anchor="middle">E. coli host</text>
+  </svg>`
+},
+{
+  title: "rDNA Steps",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#5EEAD4" font-weight="bold">HOW IT WORKS — Step by Step</text>
+  <!-- Steps -->
+  <rect x="20" y="62" width="370" height="68" rx="6" fill="#112240"/>
+  <rect x="20" y="62" width="6" height="68" fill="#0D9488" rx="3"/>
+  <rect x="34" y="72" width="28" height="28" rx="4" fill="#0D9488"/>
+  <text x="48" y="91" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">01</text>
+  <text x="72" y="85" font-family="Arial" font-size="13" fill="white" font-weight="bold">Isolate Target Gene</text>
+  <text x="72" y="103" font-family="Arial" font-size="11" fill="#94A3B8">Extract gene from donor organism's DNA</text>
+  <rect x="20" y="138" width="370" height="68" rx="6" fill="#112240"/>
+  <rect x="20" y="138" width="6" height="68" fill="#1B4F8A" rx="3"/>
+  <rect x="34" y="148" width="28" height="28" rx="4" fill="#1B4F8A"/>
+  <text x="48" y="167" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">02</text>
+  <text x="72" y="161" font-family="Arial" font-size="13" fill="white" font-weight="bold">Cut with Restriction Enzymes</text>
+  <text x="72" y="179" font-family="Arial" font-size="11" fill="#94A3B8">Creates "sticky ends" for joining</text>
+  <rect x="20" y="214" width="370" height="68" rx="6" fill="#112240"/>
+  <rect x="20" y="214" width="6" height="68" fill="#7C3AED" rx="3"/>
+  <rect x="34" y="224" width="28" height="28" rx="4" fill="#7C3AED"/>
+  <text x="48" y="243" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">03</text>
+  <text x="72" y="237" font-family="Arial" font-size="13" fill="white" font-weight="bold">Insert into Plasmid Vector</text>
+  <text x="72" y="255" font-family="Arial" font-size="11" fill="#94A3B8">DNA ligase seals the gene into vector</text>
+  <rect x="20" y="290" width="370" height="68" rx="6" fill="#112240"/>
+  <rect x="20" y="290" width="6" height="68" fill="#B45309" rx="3"/>
+  <rect x="34" y="300" width="28" height="28" rx="4" fill="#B45309"/>
+  <text x="48" y="319" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">04</text>
+  <text x="72" y="313" font-family="Arial" font-size="13" fill="white" font-weight="bold">Transform Host Cell</text>
+  <text x="72" y="331" font-family="Arial" font-size="11" fill="#94A3B8">Vector enters bacteria or yeast cell</text>
+  <rect x="20" y="366" width="370" height="68" rx="6" fill="#112240"/>
+  <rect x="20" y="366" width="6" height="68" fill="#15803D" rx="3"/>
+  <rect x="34" y="376" width="28" height="28" rx="4" fill="#15803D"/>
+  <text x="48" y="395" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">05</text>
+  <text x="72" y="389" font-family="Arial" font-size="13" fill="white" font-weight="bold">Clone &amp; Express</text>
+  <text x="72" y="407" font-family="Arial" font-size="11" fill="#94A3B8">Host replicates DNA and produces protein</text>
+  <!-- Diagram right side -->
+  <!-- Donor DNA -->
+  <rect x="430" y="70" width="130" height="36" rx="5" fill="#0D9488"/>
+  <text x="495" y="93" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Donor DNA</text>
+  <!-- Arrow down -->
+  <line x1="495" y1="106" x2="495" y2="136" stroke="#5EEAD4" stroke-width="2"/>
+  <polygon points="490,136 500,136 495,146" fill="#5EEAD4"/>
+  <!-- Restriction Enzyme box -->
+  <rect x="430" y="148" width="130" height="36" rx="5" fill="#1B4F8A"/>
+  <text x="495" y="171" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Cut (EcoRI / BamHI)</text>
+  <!-- Arrow -->
+  <line x1="495" y1="184" x2="495" y2="210" stroke="#5EEAD4" stroke-width="2"/>
+  <polygon points="490,210 500,210 495,220" fill="#5EEAD4"/>
+  <!-- Plasmid circle -->
+  <circle cx="650" cy="270" r="70" fill="none" stroke="#7C3AED" stroke-width="3"/>
+  <circle cx="650" cy="270" r="70" fill="#1A0535" opacity="0.6"/>
+  <text x="650" y="268" font-family="Arial" font-size="12" fill="#C084FC" text-anchor="middle" font-weight="bold">Recombinant</text>
+  <text x="650" y="284" font-family="Arial" font-size="12" fill="#C084FC" text-anchor="middle" font-weight="bold">Plasmid</text>
+  <!-- Gene shown on plasmid -->
+  <rect x="620" y="198" width="60" height="16" rx="4" fill="#0D9488"/>
+  <text x="650" y="210" font-family="Arial" font-size="9" fill="white" text-anchor="middle">Gene inserted</text>
+  <!-- Arrow to bacteria -->
+  <line x1="650" y1="340" x2="650" y2="368" stroke="#5EEAD4" stroke-width="2"/>
+  <polygon points="645,368 655,368 650,378" fill="#5EEAD4"/>
+  <!-- Bacteria -->
+  <ellipse cx="650" cy="400" rx="60" ry="28" fill="#15803D" opacity="0.8"/>
+  <text x="650" y="405" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Host Cell</text>
+  </svg>`
+},
+{
+  title: "Applications",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#5EEAD4" font-weight="bold">APPLICATIONS OF RECOMBINANT DNA</text>
+  <!-- 4 cards -->
+  <!-- Medicine -->
+  <rect x="16" y="62" width="186" height="175" rx="8" fill="#112240" stroke="#1D4ED8" stroke-width="1.5"/>
+  <rect x="16" y="62" width="186" height="44" rx="8" fill="#1D4ED8"/>
+  <rect x="16" y="88" width="186" height="18" fill="#1D4ED8"/>
+  <text x="109" y="89" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Medicine</text>
+  <rect x="32" y="116" width="6" height="100" rx="3" fill="#1D4ED8" opacity="0.5"/>
+  <text x="46" y="132" font-family="Arial" font-size="11" fill="#E2F0FB">Insulin production</text>
+  <text x="46" y="152" font-family="Arial" font-size="11" fill="#E2F0FB">Growth hormones</text>
+  <text x="46" y="172" font-family="Arial" font-size="11" fill="#E2F0FB">Vaccines (Hep B)</text>
+  <text x="46" y="192" font-family="Arial" font-size="11" fill="#E2F0FB">Blood clotting factors</text>
+  <text x="46" y="212" font-family="Arial" font-size="11" fill="#E2F0FB">Monoclonal antibodies</text>
+  <!-- Agriculture -->
+  <rect x="210" y="62" width="186" height="175" rx="8" fill="#112240" stroke="#15803D" stroke-width="1.5"/>
+  <rect x="210" y="62" width="186" height="44" rx="8" fill="#15803D"/>
+  <rect x="210" y="88" width="186" height="18" fill="#15803D"/>
+  <text x="303" y="89" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Agriculture</text>
+  <rect x="226" y="116" width="6" height="100" rx="3" fill="#15803D" opacity="0.5"/>
+  <text x="240" y="132" font-family="Arial" font-size="11" fill="#E2F0FB">Pest-resistant crops</text>
+  <text x="240" y="152" font-family="Arial" font-size="11" fill="#E2F0FB">Drought tolerance</text>
+  <text x="240" y="172" font-family="Arial" font-size="11" fill="#E2F0FB">Golden Rice (Vit A)</text>
+  <text x="240" y="192" font-family="Arial" font-size="11" fill="#E2F0FB">Bt corn (Bacillus)</text>
+  <text x="240" y="212" font-family="Arial" font-size="11" fill="#E2F0FB">Herbicide resistance</text>
+  <!-- Research -->
+  <rect x="404" y="62" width="186" height="175" rx="8" fill="#112240" stroke="#7C3AED" stroke-width="1.5"/>
+  <rect x="404" y="62" width="186" height="44" rx="8" fill="#7C3AED"/>
+  <rect x="404" y="88" width="186" height="18" fill="#7C3AED"/>
+  <text x="497" y="89" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Research</text>
+  <rect x="420" y="116" width="6" height="100" rx="3" fill="#7C3AED" opacity="0.5"/>
+  <text x="434" y="132" font-family="Arial" font-size="11" fill="#E2F0FB">Knockout mice models</text>
+  <text x="434" y="152" font-family="Arial" font-size="11" fill="#E2F0FB">Disease modeling</text>
+  <text x="434" y="172" font-family="Arial" font-size="11" fill="#E2F0FB">Protein structure study</text>
+  <text x="434" y="192" font-family="Arial" font-size="11" fill="#E2F0FB">Gene function analysis</text>
+  <text x="434" y="212" font-family="Arial" font-size="11" fill="#E2F0FB">Fluorescent reporters</text>
+  <!-- Industry -->
+  <rect x="598" y="62" width="186" height="175" rx="8" fill="#112240" stroke="#B45309" stroke-width="1.5"/>
+  <rect x="598" y="62" width="186" height="44" rx="8" fill="#B45309"/>
+  <rect x="598" y="88" width="186" height="18" fill="#B45309"/>
+  <text x="691" y="89" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Industry</text>
+  <rect x="614" y="116" width="6" height="100" rx="3" fill="#B45309" opacity="0.5"/>
+  <text x="628" y="132" font-family="Arial" font-size="11" fill="#E2F0FB">Detergent enzymes</text>
+  <text x="628" y="152" font-family="Arial" font-size="11" fill="#E2F0FB">Biofuel production</text>
+  <text x="628" y="172" font-family="Arial" font-size="11" fill="#E2F0FB">Food processing</text>
+  <text x="628" y="192" font-family="Arial" font-size="11" fill="#E2F0FB">Cheese (chymosin)</text>
+  <text x="628" y="212" font-family="Arial" font-size="11" fill="#E2F0FB">Biodegradable plastics</text>
+  <!-- Bottom example callout -->
+  <rect x="16" y="252" width="768" height="60" rx="8" fill="#112240" stroke="#0D9488" stroke-width="1"/>
+  <text x="35" y="276" font-family="Arial" font-size="13" fill="#5EEAD4" font-weight="bold">Real Example: Human Insulin</text>
+  <text x="35" y="298" font-family="Arial" font-size="12" fill="#94A3B8">Human insulin gene inserted into E. coli → bacteria produce insulin → purified for diabetics. Before 1982, insulin came from pigs/cows.</text>
+  <!-- Timeline bottom -->
+  <rect x="16" y="328" width="768" height="106" rx="8" fill="#0F1F35"/>
+  <text x="35" y="350" font-family="Arial" font-size="13" fill="#5EEAD4" font-weight="bold">Key Milestones</text>
+  <rect x="35" y="365" width="720" height="3" fill="#1E3A5F" rx="1"/>
+  <circle cx="100" cy="366" r="6" fill="#0D9488"/>
+  <text x="100" y="388" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">1973</text>
+  <text x="100" y="402" font-family="Arial" font-size="10" fill="white" text-anchor="middle">First rDNA</text>
+  <circle cx="250" cy="366" r="6" fill="#1B4F8A"/>
+  <text x="250" y="388" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">1982</text>
+  <text x="250" y="402" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Humulin insulin</text>
+  <circle cx="440" cy="366" r="6" fill="#7C3AED"/>
+  <text x="440" y="388" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">1994</text>
+  <text x="440" y="402" font-family="Arial" font-size="10" fill="white" text-anchor="middle">GM tomato (Flavr Savr)</text>
+  <circle cx="630" cy="366" r="6" fill="#15803D"/>
+  <text x="630" y="388" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">2000s</text>
+  <text x="630" y="402" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Widespread GMO use</text>
+  <circle cx="740" cy="366" r="6" fill="#B45309"/>
+  <text x="740" y="388" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Today</text>
+  <text x="740" y="402" font-family="Arial" font-size="10" fill="white" text-anchor="middle">mRNA vaccines</text>
+  </svg>`
+},
+{
+  title: "Gene Therapy",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#5EEAD4" font-weight="bold">GENE THERAPY</text>
+  <!-- Definition -->
+  <rect x="16" y="62" width="450" height="60" rx="6" fill="#112240" stroke="#0D9488" stroke-width="1"/>
+  <text x="32" y="83" font-family="Arial" font-size="12" fill="white">Treating or preventing disease by inserting,</text>
+  <text x="32" y="100" font-family="Arial" font-size="12" fill="white">altering, or replacing genes within a person's cells.</text>
+  <!-- Diagram: gene therapy process right side -->
+  <rect x="490" y="62" width="294" height="375" rx="8" fill="#0F1F35"/>
+  <!-- Viral vector -->
+  <circle cx="637" cy="130" r="45" fill="none" stroke="#0D9488" stroke-width="2"/>
+  <circle cx="637" cy="130" r="30" fill="#112240"/>
+  <text x="637" y="127" font-family="Arial" font-size="10" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Viral</text>
+  <text x="637" y="140" font-family="Arial" font-size="10" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Vector</text>
+  <!-- Spikes on virus -->
+  <line x1="637" y1="85" x2="637" y2="70" stroke="#0D9488" stroke-width="2"/>
+  <line x1="637" y1="175" x2="637" y2="190" stroke="#0D9488" stroke-width="2"/>
+  <line x1="592" y1="130" x2="577" y2="130" stroke="#0D9488" stroke-width="2"/>
+  <line x1="682" y1="130" x2="697" y2="130" stroke="#0D9488" stroke-width="2"/>
+  <circle cx="637" cy="70" r="5" fill="#0D9488"/>
+  <circle cx="637" cy="190" r="5" fill="#0D9488"/>
+  <circle cx="577" cy="130" r="5" fill="#0D9488"/>
+  <circle cx="697" cy="130" r="5" fill="#0D9488"/>
+  <!-- Arrow down -->
+  <line x1="637" y1="195" x2="637" y2="230" stroke="#5EEAD4" stroke-width="2"/>
+  <polygon points="631,230 643,230 637,242" fill="#5EEAD4"/>
+  <!-- Human cell -->
+  <ellipse cx="637" cy="310" rx="80" ry="60" fill="#1B4F8A" opacity="0.4"/>
+  <ellipse cx="637" cy="310" rx="80" ry="60" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+  <!-- Nucleus -->
+  <circle cx="637" cy="310" r="30" fill="#112240" stroke="#0D9488" stroke-width="1.5"/>
+  <text x="637" y="307" font-family="Arial" font-size="9" fill="#5EEAD4" text-anchor="middle">Nucleus</text>
+  <text x="637" y="320" font-family="Arial" font-size="9" fill="#5EEAD4" text-anchor="middle">(new gene)</text>
+  <text x="637" y="390" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Patient Cell</text>
+  <!-- Types left side -->
+  <rect x="16" y="135" width="460" height="70" rx="6" fill="#112240"/>
+  <rect x="16" y="135" width="5" height="70" rx="2" fill="#0D9488"/>
+  <text x="30" y="157" font-family="Arial" font-size="13" fill="white" font-weight="bold">Somatic Gene Therapy</text>
+  <text x="30" y="175" font-family="Arial" font-size="11" fill="#94A3B8">Targets body cells only. Changes are NOT heritable.</text>
+  <text x="30" y="192" font-family="Arial" font-size="11" fill="#94A3B8">Most current clinical trials use this approach.</text>
+  <rect x="16" y="215" width="460" height="70" rx="6" fill="#112240"/>
+  <rect x="16" y="215" width="5" height="70" rx="2" fill="#7C3AED"/>
+  <text x="30" y="237" font-family="Arial" font-size="13" fill="white" font-weight="bold">Germline Gene Therapy</text>
+  <text x="30" y="255" font-family="Arial" font-size="11" fill="#94A3B8">Modifies egg/sperm — changes are HERITABLE.</text>
+  <text x="30" y="272" font-family="Arial" font-size="11" fill="#94A3B8">Highly controversial. Banned in most countries.</text>
+  <rect x="16" y="295" width="222" height="70" rx="6" fill="#112240"/>
+  <rect x="16" y="295" width="5" height="70" rx="2" fill="#1B4F8A"/>
+  <text x="30" y="317" font-family="Arial" font-size="12" fill="white" font-weight="bold">Ex Vivo</text>
+  <text x="30" y="335" font-family="Arial" font-size="11" fill="#94A3B8">Cells removed, edited</text>
+  <text x="30" y="352" font-family="Arial" font-size="11" fill="#94A3B8">in lab, returned to body</text>
+  <rect x="246" y="295" width="230" height="70" rx="6" fill="#112240"/>
+  <rect x="246" y="295" width="5" height="70" rx="2" fill="#B45309"/>
+  <text x="260" y="317" font-family="Arial" font-size="12" fill="white" font-weight="bold">In Vivo</text>
+  <text x="260" y="335" font-family="Arial" font-size="11" fill="#94A3B8">Gene delivered directly</text>
+  <text x="260" y="352" font-family="Arial" font-size="11" fill="#94A3B8">into the body via vector</text>
+  <!-- First approved therapy -->
+  <rect x="16" y="378" width="460" height="56" rx="6" fill="#0F1F35" stroke="#15803D" stroke-width="1"/>
+  <text x="30" y="400" font-family="Arial" font-size="12" fill="#5EEAD4" font-weight="bold">First Gene Therapy (1990): ADA-SCID</text>
+  <text x="30" y="420" font-family="Arial" font-size="11" fill="#94A3B8">4-year-old Ashanthi DeSilva — immune deficiency cured using retroviral vector</text>
+  </svg>`
+},
+{
+  title: "CRISPR Intro",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#1A0535"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#C084FC" font-weight="bold">CRISPR-Cas9 — Gene Editing Revolution</text>
+  <!-- Full name -->
+  <rect x="16" y="62" width="470" height="44" rx="6" fill="#1A0535" stroke="#7C3AED" stroke-width="1"/>
+  <text x="30" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">C</text>
+  <text x="40" y="80" font-family="Arial" font-size="11" fill="#94A3B8">lustered  </text>
+  <text x="115" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">R</text>
+  <text x="125" y="80" font-family="Arial" font-size="11" fill="#94A3B8">egularly  </text>
+  <text x="196" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">I</text>
+  <text x="204" y="80" font-family="Arial" font-size="11" fill="#94A3B8">nterspaced  </text>
+  <text x="293" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">S</text>
+  <text x="302" y="80" font-family="Arial" font-size="11" fill="#94A3B8">hort  </text>
+  <text x="340" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">P</text>
+  <text x="349" y="80" font-family="Arial" font-size="11" fill="#94A3B8">alindromic  </text>
+  <text x="435" y="80" font-family="Arial" font-size="11" fill="#C084FC" font-weight="bold">R</text>
+  <text x="444" y="80" font-family="Arial" font-size="11" fill="#94A3B8">epeats</text>
+  <text x="30" y="97" font-family="Arial" font-size="11" fill="#64748B" font-style="italic">Bacterial immune system — adapted as a precise gene-editing tool</text>
+  <!-- CRISPR visual right -->
+  <rect x="510" y="62" width="274" height="375" rx="8" fill="#1A0535"/>
+  <!-- DNA strands -->
+  <rect x="540" y="100" width="220" height="16" rx="4" fill="#1B4F8A"/>
+  <text x="650" y="112" font-family="Arial" font-size="9" fill="white" text-anchor="middle">5'——————————————3'</text>
+  <rect x="540" y="136" width="220" height="16" rx="4" fill="#1B4F8A"/>
+  <text x="650" y="148" font-family="Arial" font-size="9" fill="white" text-anchor="middle">3'——————————————5'</text>
+  <!-- Guide RNA -->
+  <rect x="590" y="160" width="120" height="50" rx="6" fill="#7C3AED" opacity="0.8"/>
+  <text x="650" y="182" font-family="Arial" font-size="10" fill="white" text-anchor="middle" font-weight="bold">Guide RNA</text>
+  <text x="650" y="198" font-family="Arial" font-size="9" fill="#E9D5FF" text-anchor="middle">(gRNA — 20 bp)</text>
+  <!-- Cas9 protein -->
+  <ellipse cx="650" cy="290" rx="75" ry="55" fill="#4C1D95" opacity="0.9"/>
+  <ellipse cx="650" cy="290" rx="75" ry="55" fill="none" stroke="#7C3AED" stroke-width="2"/>
+  <text x="650" y="285" font-family="Arial" font-size="13" fill="#C084FC" text-anchor="middle" font-weight="bold">Cas9</text>
+  <text x="650" y="301" font-family="Arial" font-size="10" fill="#E9D5FF" text-anchor="middle">Protein</text>
+  <text x="650" y="316" font-family="Arial" font-size="9" fill="#A78BFA" text-anchor="middle">(molecular scissors)</text>
+  <!-- Scissors icon -->
+  <line x1="625" y1="348" x2="640" y2="368" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+  <line x1="655" y1="348" x2="640" y2="368" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="619" cy="345" r="6" fill="none" stroke="#C084FC" stroke-width="2"/>
+  <circle cx="661" cy="345" r="6" fill="none" stroke="#C084FC" stroke-width="2"/>
+  <text x="650" y="400" font-family="Arial" font-size="10" fill="#7C3AED" text-anchor="middle">Cuts DNA at target site</text>
+  <!-- Left facts -->
+  <rect x="16" y="118" width="480" height="64" rx="6" fill="#1A0535"/>
+  <rect x="16" y="118" width="5" height="64" rx="2" fill="#7C3AED"/>
+  <text x="30" y="140" font-family="Arial" font-size="12" fill="#C084FC" font-weight="bold">Nobel Prize 2020</text>
+  <text x="30" y="158" font-family="Arial" font-size="11" fill="#94A3B8">Jennifer Doudna &amp; Emmanuelle Charpentier</text>
+  <text x="30" y="174" font-family="Arial" font-size="11" fill="#94A3B8">"Scissors for the genome" — adapted from bacterial immunity</text>
+  <rect x="16" y="194" width="480" height="50" rx="6" fill="#1A0535"/>
+  <rect x="16" y="194" width="5" height="50" rx="2" fill="#0D9488"/>
+  <text x="30" y="214" font-family="Arial" font-size="12" fill="white" font-weight="bold">How it differs from rDNA</text>
+  <text x="30" y="232" font-family="Arial" font-size="11" fill="#94A3B8">CRISPR EDITS the genome in place. rDNA ADDS new genes via vectors.</text>
+  <rect x="16" y="256" width="480" height="50" rx="6" fill="#1A0535"/>
+  <rect x="16" y="256" width="5" height="50" rx="2" fill="#B45309"/>
+  <text x="30" y="276" font-family="Arial" font-size="12" fill="white" font-weight="bold">Precision</text>
+  <text x="30" y="294" font-family="Arial" font-size="11" fill="#94A3B8">Can target a single base pair among 3 BILLION in the human genome</text>
+  <rect x="16" y="318" width="480" height="50" rx="6" fill="#1A0535"/>
+  <rect x="16" y="318" width="5" height="50" rx="2" fill="#15803D"/>
+  <text x="30" y="338" font-family="Arial" font-size="12" fill="white" font-weight="bold">Cost Revolution</text>
+  <text x="30" y="356" font-family="Arial" font-size="11" fill="#94A3B8">Gene editing cost dropped from $10,000s to just $30 per experiment</text>
+  <rect x="16" y="380" width="480" height="56" rx="6" fill="#1A0535"/>
+  <rect x="16" y="380" width="5" height="56" rx="2" fill="#DC2626"/>
+  <text x="30" y="400" font-family="Arial" font-size="12" fill="white" font-weight="bold">Origin: Bacteria</text>
+  <text x="30" y="418" font-family="Arial" font-size="11" fill="#94A3B8">Bacteria store viral DNA sequences to "remember" past infections</text>
+  <text x="30" y="432" font-family="Arial" font-size="11" fill="#94A3B8">and destroy viruses on re-infection. Scientists repurposed this system.</text>
+  </svg>`
+},
+{
+  title: "CRISPR Mechanism",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#1A0535"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#C084FC" font-weight="bold">HOW CRISPR-Cas9 WORKS</text>
+  <!-- Steps column left -->
+  <rect x="16" y="65" width="380" height="66" rx="6" fill="#1A0535"/>
+  <rect x="16" y="65" width="38" height="66" rx="6" fill="#7C3AED"/>
+  <text x="35" y="102" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">01</text>
+  <text x="65" y="88" font-family="Arial" font-size="13" fill="white" font-weight="bold">Design Guide RNA (gRNA)</text>
+  <text x="65" y="107" font-family="Arial" font-size="11" fill="#94A3B8">Synthetic 20-nucleotide RNA matches the target DNA sequence</text>
+  <rect x="16" y="139" width="380" height="66" rx="6" fill="#1A0535"/>
+  <rect x="16" y="139" width="38" height="66" rx="6" fill="#6D28D9"/>
+  <text x="35" y="176" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">02</text>
+  <text x="65" y="162" font-family="Arial" font-size="13" fill="white" font-weight="bold">gRNA + Cas9 Complex</text>
+  <text x="65" y="181" font-family="Arial" font-size="11" fill="#94A3B8">Guide RNA binds to Cas9 — forms a search-and-destroy tool</text>
+  <rect x="16" y="213" width="380" height="66" rx="6" fill="#1A0535"/>
+  <rect x="16" y="213" width="38" height="66" rx="6" fill="#5B21B6"/>
+  <text x="35" y="250" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">03</text>
+  <text x="65" y="236" font-family="Arial" font-size="13" fill="white" font-weight="bold">Scan &amp; Find Target</text>
+  <text x="65" y="255" font-family="Arial" font-size="11" fill="#94A3B8">Complex scans entire genome and binds at matching sequence</text>
+  <rect x="16" y="287" width="380" height="66" rx="6" fill="#1A0535"/>
+  <rect x="16" y="287" width="38" height="66" rx="6" fill="#4C1D95"/>
+  <text x="35" y="324" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">04</text>
+  <text x="65" y="310" font-family="Arial" font-size="13" fill="white" font-weight="bold">Cut Both DNA Strands</text>
+  <text x="65" y="329" font-family="Arial" font-size="11" fill="#94A3B8">Cas9 creates a double-strand break (DSB) at the target site</text>
+  <rect x="16" y="361" width="380" height="74" rx="6" fill="#1A0535"/>
+  <rect x="16" y="361" width="38" height="74" rx="6" fill="#3B0764"/>
+  <text x="35" y="402" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">05</text>
+  <text x="65" y="382" font-family="Arial" font-size="13" fill="white" font-weight="bold">Cell Repairs DNA</text>
+  <text x="65" y="400" font-family="Arial" font-size="11" fill="#94A3B8">NHEJ: gene disrupted (knockout)</text>
+  <text x="65" y="420" font-family="Arial" font-size="11" fill="#94A3B8">HDR: new gene sequence inserted (knock-in)</text>
+  <!-- Right diagram -->
+  <rect x="410" y="65" width="374" height="375" rx="8" fill="#1A0535"/>
+  <!-- DNA double helix simplified -->
+  <rect x="430" y="90" width="340" height="18" rx="3" fill="#1B4F8A"/>
+  <text x="600" y="103" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Target DNA — 5' → 3'</text>
+  <rect x="430" y="118" width="340" height="18" rx="3" fill="#1B4F8A"/>
+  <text x="600" y="131" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Complementary strand — 3' → 5'</text>
+  <!-- Base pairs -->
+  <line x1="460" y1="108" x2="460" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="500" y1="108" x2="500" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="540" y1="108" x2="540" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="580" y1="108" x2="580" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="620" y1="108" x2="620" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="660" y1="108" x2="660" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="700" y1="108" x2="700" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <line x1="740" y1="108" x2="740" y2="118" stroke="#5EEAD4" stroke-width="1.5"/>
+  <!-- Arrow down to Cas9 -->
+  <line x1="600" y1="136" x2="600" y2="165" stroke="#C084FC" stroke-width="2"/>
+  <polygon points="595,165 605,165 600,175" fill="#C084FC"/>
+  <!-- Guide RNA -->
+  <rect x="520" y="175" width="160" height="34" rx="6" fill="#7C3AED"/>
+  <text x="600" y="197" font-family="Arial" font-size="11" fill="white" text-anchor="middle" font-weight="bold">gRNA → binds to DNA</text>
+  <!-- Arrow down -->
+  <line x1="600" y1="209" x2="600" y2="235" stroke="#C084FC" stroke-width="2"/>
+  <polygon points="595,235 605,235 600,245" fill="#C084FC"/>
+  <!-- Cas9 box -->
+  <rect x="480" y="245" width="240" height="60" rx="8" fill="#4C1D95" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="600" y="271" font-family="Arial" font-size="13" fill="#E9D5FF" text-anchor="middle" font-weight="bold">Cas9 Protein</text>
+  <text x="600" y="290" font-family="Arial" font-size="10" fill="#A78BFA" text-anchor="middle">holds gRNA — scans genome</text>
+  <!-- Arrow down to cut -->
+  <line x1="600" y1="305" x2="600" y2="330" stroke="#C084FC" stroke-width="2"/>
+  <polygon points="595,330 605,330 600,340" fill="#C084FC"/>
+  <!-- Cut DNA -->
+  <rect x="430" y="340" width="155" height="18" rx="3" fill="#1B4F8A"/>
+  <text x="507" y="353" font-family="Arial" font-size="9" fill="white" text-anchor="middle">Cut strand 1</text>
+  <rect x="595" y="340" width="155" height="18" rx="3" fill="#1B4F8A"/>
+  <text x="672" y="353" font-family="Arial" font-size="9" fill="white" text-anchor="middle">Cut strand 2</text>
+  <!-- Scissors symbol at cut -->
+  <text x="583" y="355" font-family="Arial" font-size="16" fill="#C084FC">✂</text>
+  <!-- NHEJ and HDR -->
+  <rect x="430" y="372" width="155" height="52" rx="5" fill="#112240" stroke="#DC2626" stroke-width="1"/>
+  <text x="507" y="392" font-family="Arial" font-size="11" fill="#FCA5A5" text-anchor="middle" font-weight="bold">NHEJ</text>
+  <text x="507" y="407" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Error-prone repair</text>
+  <text x="507" y="419" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">→ gene knockout</text>
+  <rect x="595" y="372" width="155" height="52" rx="5" fill="#112240" stroke="#15803D" stroke-width="1"/>
+  <text x="672" y="392" font-family="Arial" font-size="11" fill="#86EFAC" text-anchor="middle" font-weight="bold">HDR</text>
+  <text x="672" y="407" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Template-based repair</text>
+  <text x="672" y="419" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">→ gene insertion</text>
+  </svg>`
+},
+{
+  title: "CRISPR Applications",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#1A0535"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#C084FC" font-weight="bold">CRISPR — Real World Applications</text>
+  <!-- 6 cards 2x3 -->
+  <!-- Sickle Cell -->
+  <rect x="14" y="62" width="244" height="116" rx="7" fill="#112240" stroke="#9333EA" stroke-width="1.5"/>
+  <rect x="14" y="62" width="244" height="34" rx="7" fill="#9333EA"/>
+  <rect x="14" y="82" width="244" height="14" fill="#9333EA"/>
+  <text x="136" y="83" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">Sickle Cell Disease</text>
+  <text x="26" y="112" font-family="Arial" font-size="11" fill="#E2F0FB">Casgevy — first CRISPR therapy</text>
+  <text x="26" y="128" font-family="Arial" font-size="11" fill="#E2F0FB">FDA approved December 2023</text>
+  <text x="26" y="144" font-family="Arial" font-size="11" fill="#94A3B8">Ex vivo: edits patient stem cells</text>
+  <text x="26" y="162" font-family="Arial" font-size="11" fill="#94A3B8">Restores normal hemoglobin</text>
+  <!-- Cancer -->
+  <rect x="278" y="62" width="244" height="116" rx="7" fill="#112240" stroke="#DC2626" stroke-width="1.5"/>
+  <rect x="278" y="62" width="244" height="34" rx="7" fill="#DC2626"/>
+  <rect x="278" y="82" width="244" height="14" fill="#DC2626"/>
+  <text x="400" y="83" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">Cancer Treatment</text>
+  <text x="290" y="112" font-family="Arial" font-size="11" fill="#E2F0FB">CAR-T cell therapy enhancement</text>
+  <text x="290" y="128" font-family="Arial" font-size="11" fill="#E2F0FB">Edit T-cells to target tumors</text>
+  <text x="290" y="144" font-family="Arial" font-size="11" fill="#94A3B8">Trials for leukemia, lymphoma</text>
+  <text x="290" y="162" font-family="Arial" font-size="11" fill="#94A3B8">Personalized cancer vaccines</text>
+  <!-- Blindness -->
+  <rect x="542" y="62" width="242" height="116" rx="7" fill="#112240" stroke="#0891B2" stroke-width="1.5"/>
+  <rect x="542" y="62" width="242" height="34" rx="7" fill="#0891B2"/>
+  <rect x="542" y="82" width="242" height="14" fill="#0891B2"/>
+  <text x="663" y="83" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">Inherited Blindness</text>
+  <text x="554" y="112" font-family="Arial" font-size="11" fill="#E2F0FB">Leber Congenital Amaurosis</text>
+  <text x="554" y="128" font-family="Arial" font-size="11" fill="#E2F0FB">First in vivo CRISPR treatment</text>
+  <text x="554" y="144" font-family="Arial" font-size="11" fill="#94A3B8">Injected directly into the eye</text>
+  <text x="554" y="162" font-family="Arial" font-size="11" fill="#94A3B8">Edits CEP290 gene mutation</text>
+  <!-- GM Crops -->
+  <rect x="14" y="192" width="244" height="116" rx="7" fill="#112240" stroke="#16A34A" stroke-width="1.5"/>
+  <rect x="14" y="192" width="244" height="34" rx="7" fill="#16A34A"/>
+  <rect x="14" y="212" width="244" height="14" fill="#16A34A"/>
+  <text x="136" y="213" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">GM Crops</text>
+  <text x="26" y="242" font-family="Arial" font-size="11" fill="#E2F0FB">Disease-resistant plants</text>
+  <text x="26" y="258" font-family="Arial" font-size="11" fill="#E2F0FB">CRISPR mushrooms (no browning)</text>
+  <text x="26" y="274" font-family="Arial" font-size="11" fill="#94A3B8">High-oleic soybeans (2022)</text>
+  <text x="26" y="292" font-family="Arial" font-size="11" fill="#94A3B8">Drought-tolerant wheat</text>
+  <!-- Gene Drive -->
+  <rect x="278" y="192" width="244" height="116" rx="7" fill="#112240" stroke="#D97706" stroke-width="1.5"/>
+  <rect x="278" y="192" width="244" height="34" rx="7" fill="#D97706"/>
+  <rect x="278" y="212" width="244" height="14" fill="#D97706"/>
+  <text x="400" y="213" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">Malaria — Gene Drive</text>
+  <text x="290" y="242" font-family="Arial" font-size="11" fill="#E2F0FB">Modify Anopheles mosquitoes</text>
+  <text x="290" y="258" font-family="Arial" font-size="11" fill="#E2F0FB">Spread sterility gene in wild pop.</text>
+  <text x="290" y="274" font-family="Arial" font-size="11" fill="#94A3B8">Could eradicate malaria in Africa</text>
+  <text x="290" y="292" font-family="Arial" font-size="11" fill="#94A3B8">Ethical debates ongoing</text>
+  <!-- Base Editing -->
+  <rect x="542" y="192" width="242" height="116" rx="7" fill="#112240" stroke="#6D28D9" stroke-width="1.5"/>
+  <rect x="542" y="192" width="242" height="34" rx="7" fill="#6D28D9"/>
+  <rect x="542" y="212" width="242" height="14" fill="#6D28D9"/>
+  <text x="663" y="213" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">Base &amp; Prime Editing</text>
+  <text x="554" y="242" font-family="Arial" font-size="11" fill="#E2F0FB">Edit single DNA letters</text>
+  <text x="554" y="258" font-family="Arial" font-size="11" fill="#E2F0FB">No double-strand break needed</text>
+  <text x="554" y="274" font-family="Arial" font-size="11" fill="#94A3B8">More precise than standard CRISPR</text>
+  <text x="554" y="292" font-family="Arial" font-size="11" fill="#94A3B8">Corrects point mutations</text>
+  <!-- Bottom stat bar -->
+  <rect x="14" y="322" width="770" height="118" rx="8" fill="#0F1F35"/>
+  <text x="30" y="344" font-family="Arial" font-size="13" fill="#5EEAD4" font-weight="bold">CRISPR by the Numbers</text>
+  <rect x="30" y="358" width="168" height="68" rx="6" fill="#1A0535"/>
+  <text x="114" y="385" font-family="Arial" font-size="22" fill="white" text-anchor="middle" font-weight="bold">1,000+</text>
+  <text x="114" y="403" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Clinical trials ongoing</text>
+  <rect x="210" y="358" width="168" height="68" rx="6" fill="#1A0535"/>
+  <text x="294" y="385" font-family="Arial" font-size="22" fill="white" text-anchor="middle" font-weight="bold">$30</text>
+  <text x="294" y="403" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Cost per experiment (was $1000s)</text>
+  <rect x="390" y="358" width="168" height="68" rx="6" fill="#1A0535"/>
+  <text x="474" y="385" font-family="Arial" font-size="22" fill="white" text-anchor="middle" font-weight="bold">2012</text>
+  <text x="474" y="403" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Year CRISPR was harnessed</text>
+  <rect x="570" y="358" width="210" height="68" rx="6" fill="#1A0535"/>
+  <text x="675" y="385" font-family="Arial" font-size="22" fill="white" text-anchor="middle" font-weight="bold">3 Billion</text>
+  <text x="675" y="403" font-family="Arial" font-size="10" fill="#94A3B8" text-anchor="middle">Base pairs — CRISPR targets 1</text>
+  </svg>`
+},
+{
+  title: "Comparison",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="16" fill="#5EEAD4" font-weight="bold">COMPARISON: Recombinant DNA vs Gene Therapy vs CRISPR</text>
+  <!-- Table header -->
+  <rect x="14" y="58" width="150" height="40" rx="0" fill="#1B4F8A"/>
+  <text x="89" y="83" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Feature</text>
+  <rect x="166" y="58" width="200" height="40" fill="#0D9488"/>
+  <text x="266" y="83" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Recombinant DNA</text>
+  <rect x="368" y="58" width="200" height="40" fill="#0891B2"/>
+  <text x="468" y="83" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Gene Therapy</text>
+  <rect x="570" y="58" width="214" height="40" fill="#7C3AED"/>
+  <text x="677" y="83" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">CRISPR-Cas9</text>
+  <!-- Rows -->
+  <rect x="14" y="100" width="770" height="46" fill="#0F1F35"/>
+  <rect x="14" y="100" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="128" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Purpose</text>
+  <text x="266" y="128" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Create proteins/products</text>
+  <text x="468" y="128" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Treat genetic diseases</text>
+  <text x="677" y="128" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Edit specific genes</text>
+  <rect x="14" y="148" width="770" height="46" fill="#112240"/>
+  <rect x="14" y="148" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="176" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Target</text>
+  <text x="266" y="176" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Any organism</text>
+  <text x="468" y="176" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Human cells</text>
+  <text x="677" y="176" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Any organism</text>
+  <rect x="14" y="196" width="770" height="46" fill="#0F1F35"/>
+  <rect x="14" y="196" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="224" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Precision</text>
+  <text x="266" y="224" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Gene level</text>
+  <text x="468" y="224" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Gene level</text>
+  <text x="677" y="220" font-family="Arial" font-size="11" fill="#C084FC" text-anchor="middle" font-weight="bold">Single nucleotide</text>
+  <rect x="14" y="244" width="770" height="46" fill="#112240"/>
+  <rect x="14" y="244" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="272" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Delivery</text>
+  <text x="266" y="272" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Plasmid/vector</text>
+  <text x="468" y="272" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Viral vector</text>
+  <text x="677" y="272" font-family="Arial" font-size="11" fill="white" text-anchor="middle">gRNA + vector/nanoparticle</text>
+  <rect x="14" y="292" width="770" height="46" fill="#0F1F35"/>
+  <rect x="14" y="292" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="320" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Heritable?</text>
+  <text x="266" y="320" font-family="Arial" font-size="11" fill="white" text-anchor="middle">In clones only</text>
+  <text x="468" y="320" font-family="Arial" font-size="11" fill="#86EFAC" text-anchor="middle">Usually NO</text>
+  <text x="677" y="320" font-family="Arial" font-size="11" fill="#FCA5A5" text-anchor="middle">YES (germline)</text>
+  <rect x="14" y="340" width="770" height="46" fill="#112240"/>
+  <rect x="14" y="340" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="368" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">First Use</text>
+  <text x="266" y="368" font-family="Arial" font-size="11" fill="white" text-anchor="middle">1973</text>
+  <text x="468" y="368" font-family="Arial" font-size="11" fill="white" text-anchor="middle">1990</text>
+  <text x="677" y="368" font-family="Arial" font-size="11" fill="white" text-anchor="middle">2012</text>
+  <rect x="14" y="388" width="770" height="46" fill="#0F1F35"/>
+  <rect x="14" y="388" width="150" height="46" fill="#1E3A5F"/>
+  <text x="89" y="416" font-family="Arial" font-size="11" fill="#5EEAD4" text-anchor="middle" font-weight="bold">Approved Tx</text>
+  <text x="266" y="416" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Insulin, Hep B vaccine</text>
+  <text x="468" y="416" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Luxturna, Zolgensma</text>
+  <text x="677" y="416" font-family="Arial" font-size="11" fill="#C084FC" text-anchor="middle">Casgevy (2023)</text>
+  </svg>`
+},
+{
+  title: "Ethics & Future",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <rect x="0" y="0" width="800" height="52" fill="#112240"/>
+  <text x="30" y="34" font-family="Arial" font-size="18" fill="#5EEAD4" font-weight="bold">Ethics, Risks &amp; The Future</text>
+  <!-- Ethical concerns -->
+  <rect x="14" y="60" width="382" height="36" rx="0" fill="#7F1D1D" rx="6"/>
+  <text x="205" y="83" font-family="Arial" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Ethical Concerns</text>
+  <rect x="14" y="98" width="382" height="50" rx="5" fill="#3B0000"/>
+  <text x="28" y="118" font-family="Arial" font-size="12" fill="#FCA5A5" font-weight="bold">Designer Babies</text>
+  <text x="28" y="136" font-family="Arial" font-size="11" fill="#94A3B8">Germline editing could allow selecting traits in embryos</text>
+  <rect x="14" y="152" width="382" height="50" rx="5" fill="#3B0000"/>
+  <text x="28" y="172" font-family="Arial" font-size="12" fill="#FCA5A5" font-weight="bold">Genetic Inequality</text>
+  <text x="28" y="190" font-family="Arial" font-size="11" fill="#94A3B8">Only wealthy populations may access gene therapies</text>
+  <rect x="14" y="206" width="382" height="50" rx="5" fill="#3B0000"/>
+  <text x="28" y="226" font-family="Arial" font-size="12" fill="#FCA5A5" font-weight="bold">Off-Target Effects</text>
+  <text x="28" y="244" font-family="Arial" font-size="11" fill="#94A3B8">CRISPR may cut wrong DNA locations — unpredictable effects</text>
+  <rect x="14" y="260" width="382" height="50" rx="5" fill="#3B0000"/>
+  <text x="28" y="280" font-family="Arial" font-size="12" fill="#FCA5A5" font-weight="bold">Ecological Risk (Gene Drives)</text>
+  <text x="28" y="298" font-family="Arial" font-size="11" fill="#94A3B8">Species extinction or ecosystem imbalance</text>
+  <rect x="14" y="314" width="382" height="50" rx="5" fill="#3B0000"/>
+  <text x="28" y="334" font-family="Arial" font-size="12" fill="#FCA5A5" font-weight="bold">Bioweapons</text>
+  <text x="28" y="352" font-family="Arial" font-size="11" fill="#94A3B8">CRISPR could theoretically engineer dangerous pathogens</text>
+  <!-- Future -->
+  <rect x="404" y="60" width="380" height="36" rx="6" fill="#065F46"/>
+  <text x="594" y="83" font-family="Arial" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Future Directions</text>
+  <rect x="404" y="98" width="380" height="50" rx="5" fill="#012A1A"/>
+  <text x="418" y="118" font-family="Arial" font-size="12" fill="#86EFAC" font-weight="bold">Base &amp; Prime Editing</text>
+  <text x="418" y="136" font-family="Arial" font-size="11" fill="#94A3B8">Edit single DNA letters without cutting — safer &amp; more precise</text>
+  <rect x="404" y="152" width="380" height="50" rx="5" fill="#012A1A"/>
+  <text x="418" y="172" font-family="Arial" font-size="12" fill="#86EFAC" font-weight="bold">In Vivo CRISPR Therapies</text>
+  <text x="418" y="190" font-family="Arial" font-size="11" fill="#94A3B8">Directly edit liver, eye, lung cells inside the body</text>
+  <rect x="404" y="206" width="380" height="50" rx="5" fill="#012A1A"/>
+  <text x="418" y="226" font-family="Arial" font-size="12" fill="#86EFAC" font-weight="bold">Epigenome Editing</text>
+  <text x="418" y="244" font-family="Arial" font-size="11" fill="#94A3B8">Turn genes on/off without changing DNA sequence</text>
+  <rect x="404" y="260" width="380" height="50" rx="5" fill="#012A1A"/>
+  <text x="418" y="280" font-family="Arial" font-size="12" fill="#86EFAC" font-weight="bold">Personalized Cancer Vaccines</text>
+  <text x="418" y="298" font-family="Arial" font-size="11" fill="#94A3B8">mRNA + CRISPR combination therapies in trials</text>
+  <rect x="404" y="314" width="380" height="50" rx="5" fill="#012A1A"/>
+  <text x="418" y="334" font-family="Arial" font-size="12" fill="#86EFAC" font-weight="bold">Rare Disease Cures</text>
+  <text x="418" y="352" font-family="Arial" font-size="11" fill="#94A3B8">7,000+ rare diseases — most still have no treatment</text>
+  <!-- Bottom note -->
+  <rect x="14" y="378" width="770" height="58" rx="8" fill="#0F1F35" stroke="#0D9488" stroke-width="1"/>
+  <text x="30" y="400" font-family="Arial" font-size="13" fill="#5EEAD4" font-weight="bold">The He Jiankui Controversy (2018)</text>
+  <text x="30" y="420" font-family="Arial" font-size="11" fill="#94A3B8">Chinese scientist edited human embryos (CCR5 gene) resulting in twin girls. Global outcry — sentenced to 3 years prison.</text>
+  <text x="30" y="436" font-family="Arial" font-size="11" fill="#94A3B8">Led to international calls for moratorium on human germline editing.</text>
+  </svg>`
+},
+{
+  title: "Thank You",
+  svg: `<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A1628"/>
+  <!-- Left decoration -->
+  <circle cx="120" cy="225" r="200" fill="#112240" opacity="0.6"/>
+  <ellipse cx="120" cy="225" rx="30" ry="200" fill="none" stroke="#0D9488" stroke-width="3" opacity="0.4"/>
+  <ellipse cx="120" cy="225" rx="30" ry="200" fill="none" stroke="#1B4F8A" stroke-width="3" opacity="0.4" transform="rotate(60,120,225)"/>
+  <line x1="92" y1="90" x2="148" y2="100" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <line x1="88" y1="150" x2="152" y2="140" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <line x1="88" y1="200" x2="152" y2="210" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <line x1="90" y1="250" x2="150" y2="240" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <line x1="90" y1="300" x2="150" y2="310" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <line x1="92" y1="350" x2="148" y2="340" stroke="#5EEAD4" stroke-width="2" opacity="0.5"/>
+  <!-- Right content -->
+  <rect x="280" y="0" width="520" height="450" fill="#112240"/>
+  <rect x="280" y="0" width="5" height="450" fill="#0D9488"/>
+  <text x="540" y="100" font-family="Arial" font-size="48" fill="white" text-anchor="middle" font-weight="bold">Thank You!</text>
+  <rect x="380" y="120" width="320" height="3" fill="#0D9488" rx="1"/>
+  <text x="400" y="158" font-family="Arial" font-size="14" fill="#5EEAD4" font-weight="bold">Key Takeaways:</text>
+  <text x="400" y="186" font-family="Arial" font-size="12" fill="#E2F0FB">rDNA enables production of vital medicines</text>
+  <text x="400" y="210" font-family="Arial" font-size="12" fill="#E2F0FB">Gene therapy can cure genetic diseases</text>
+  <text x="400" y="234" font-family="Arial" font-size="12" fill="#E2F0FB">CRISPR is precise, fast and affordable</text>
+  <text x="400" y="258" font-family="Arial" font-size="12" fill="#E2F0FB">Ethics must guide future applications</text>
+  <rect x="380" y="285" width="320" height="3" fill="#1E3A5F" rx="1"/>
+  <rect x="380" y="302" width="320" height="110" rx="8" fill="#0F1F35"/>
+  <text x="395" y="326" font-family="Arial" font-size="11" fill="#64748B" font-style="italic">"The greatest discoveries of science have</text>
+  <text x="395" y="344" font-family="Arial" font-size="11" fill="#64748B" font-style="italic">always been those that forced us to rethink</text>
+  <text x="395" y="362" font-family="Arial" font-size="11" fill="#64748B" font-style="italic">our place in the universe."</text>
+  <text x="395" y="384" font-family="Arial" font-size="11" fill="#94A3B8">— Stephen Hawking</text>
+  <text x="540" y="432" font-family="Arial" font-size="10" fill="#1E3A5F" text-anchor="middle">Recombinant DNA | Gene Therapy | CRISPR-Cas9</text>
+  </svg>`
+}
+];
+
+let current = 0;
+
+function render() {
+  const container = document.getElementById('slides');
+  const thumbs = document.getElementById('thumbs');
+  container.innerHTML = '';
+  thumbs.innerHTML = '';
+  
+  slides.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'slide' + (i === current ? ' active' : '');
+    div.innerHTML = s.svg;
+    container.appendChild(div);
+    
+    const t = document.createElement('div');
+    t.className = 'thumb' + (i === current ? ' active' : '');
+    t.innerHTML = s.svg;
+    t.onclick = () => { current = i; update(); };
+    thumbs.appendChild(t);
+  });
+  document.getElementById('counter').textContent = `${current+1} / ${slides.length}`;
+}
+
+function update() {
+  document.querySelectorAll('.slide').forEach((el, i) => {
+    el.className = 'slide' + (i === current ? ' active' : '');
+  });
+  document.querySelectorAll('.thumb').forEach((el, i) => {
+    el.className = 'thumb' + (i === current ? ' active' : '');
+  });
+  document.getElementById('counter').textContent = `${current+1} / ${slides.length}`;
+  document.querySelector('.thumb.active')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function next() { current = (current + 1) % slides.length; update(); }
+function prev() { current = (current - 1 + slides.length) % slides.length; update(); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') next();
+  if (e.key === 'ArrowLeft') prev();
+});
+
+render();
+</script>
