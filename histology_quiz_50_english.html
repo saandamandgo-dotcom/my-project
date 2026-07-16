@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Histology Quiz - 50 Questions</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text);
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 30px 20px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    height: 10px;
+    margin: 15px auto;
+    max-width: 400px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #fff;
+    height: 100%;
+    border-radius: 50px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+  .quiz-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--primary);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .quiz-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .question-number {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-right: 10px;
+  }
+  .question-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+  }
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+  .option {
+    position: relative;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    background: #fafbfc;
+  }
+  .option:hover {
+    border-color: var(--primary);
+    background: #eff6ff;
+  }
+  .option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .option .radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-light);
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .option .radio-circle::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.2s;
+  }
+  .option input:checked ~ .radio-circle {
+    border-color: var(--primary);
+  }
+  .option input:checked ~ .radio-circle::after {
+    transform: scale(1);
+  }
+  .option input:checked ~ .option-text {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .option-text {
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .controls {
+    text-align: center;
+    margin: 30px 0 40px;
+  }
+  .btn {
+    padding: 14px 36px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  }
+  .btn-secondary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    margin-top: 12px;
+  }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
+  }
+  .results-container {
+    display: none;
+  }
+  .score-hero {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .score-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+  }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary) calc(var(--pct) * 1%), #e2e8f0 0);
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .score-circle::before {
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .score-value {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .score-message {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  .result-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid;
+    animation: fadeInUp 0.5s ease both;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-card.correct { border-color: var(--success); background: #f0fdf4; }
+  .result-card.wrong { border-color: var(--danger); background: #fef2f2; }
+  .result-card.missed { border-color: var(--warning); background: #fffbeb; }
+  .result-header {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .result-body {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .result-body strong { color: var(--text); }
+  .explanation {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+    color: #334155;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 6px;
+  }
+  .badge-success { background: #dcfce7; color: #166534; }
+  .badge-danger { background: #fee2e2; color: #991b1b; }
+  .badge-warning { background: #fef3c7; color: #92400e; }
+  .hidden { display: none !important; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .stat-box {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.7rem; }
+    .quiz-card { padding: 16px; }
+    .btn { padding: 12px 24px; font-size: 1rem; }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🧬 Histology Quiz</h1>
+    <p>50 Multiple Choice Questions from Introduction to Animal Science</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">Answered 0 / 50 questions</div>
+  </div>
+
+  <div id="quizArea"></div>
+
+  <div class="controls" id="controlsArea">
+    <button class="btn btn-primary" onclick="showResults()">📊 Show Results & Detailed Answers</button>
+  </div>
+
+  <div class="results-container" id="resultsArea">
+    <div class="score-hero">
+      <div class="score-circle" id="scoreCircle"><div class="score-value" id="scoreValue">0%</div></div>
+      <div class="score-message" id="scoreMessage">Evaluating...</div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">Correct ✅</div></div>
+        <div class="stat-box"><div class="stat-value" id="statWrong">0</div><div class="stat-label">Wrong ❌</div></div>
+        <div class="stat-box"><div class="stat-value" id="statMissed">0</div><div class="stat-label">Missed 📝</div></div>
+        <div class="stat-box"><div class="stat-value" id="statTotal">50</div><div class="stat-label">Total Questions</div></div>
+      </div>
+      <button class="btn btn-secondary" onclick="location.reload()">🔄 Retake Quiz</button>
+    </div>
+    <div id="detailedResults"></div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  { q: "What is the definition of Histology?", options: ["Study of tissues and organs with the naked eye","Microscopic study of tissues and organs through sectioning, staining, and examining under a microscope","Study of cells only without tissues","Study of large organs using X-rays"], correct: 1, explain: "Histology is the microscopic study of tissues and organs through sectioning, staining, and examining those sections under a microscope." },
+  { q: "From which germ layer(s) does Epithelial Tissue originate?", options: ["Ectoderm only","Mesoderm only","Endoderm only","Any of the three germ layers (ectoderm, mesoderm, endoderm)"], correct: 3, explain: "Epithelial tissue can originate from any of the three germ layers: ectoderm, mesoderm, or endoderm." },
+  { q: "What structure does epithelial tissue usually rest on?", options: ["Connective tissue","Basement membrane","Muscular tissue","Nervous tissue"], correct: 1, explain: "Epithelial tissue usually rests on a basement membrane, which provides support and anchors it to underlying connective tissue." },
+  { q: "How many primary types of tissues are there in the animal body?", options: ["2","3","4","5"], correct: 2, explain: "There are 4 primary tissue types: Epithelial, Connective, Muscular, and Nervous tissue." },
+  { q: "Which epithelial tissue consists of only one layer of cells?", options: ["Stratified epithelium","Simple epithelium","Transitional epithelium","Pseudostratified epithelium"], correct: 1, explain: "Simple epithelium consists of a single layer of cells. Stratified has multiple layers, and pseudostratified appears layered but is actually single-layered." },
+  { q: "What are the characteristics of Simple squamous epithelium cells?", options: ["Cube-shaped with central spherical nucleus","Flattened, plate-like, and polygonal with central flattened nucleus","Tall and columnar","Spherical and large"], correct: 1, explain: "Simple squamous cells are flattened (plate-like), polygonal in shape, and have a flattened nucleus located at the center of the cell." },
+  { q: "Where is Simple squamous epithelium found?", options: ["Stomach and intestines","Inner surface of blood vessels and lining of coelomic cavity","Kidneys and liver","Outer skin"], correct: 1, explain: "Simple squamous epithelium is found lining the inner surface of blood vessels (endothelium) and the coelomic cavity (mesothelium, such as the peritoneum)." },
+  { q: "What is the shape of Simple cuboidal epithelium cells?", options: ["Flattened","Square-shaped (cube-like) with a central spherical nucleus","Tall and columnar","Conical"], correct: 1, explain: "Simple cuboidal cells are square-shaped (cube-like) in outline with a central spherical nucleus." },
+  { q: "Where is Simple cuboidal epithelium found?", options: ["Lungs and oviducts","Kidneys and many glands including liver, salivary, and sweat glands","Skin and esophagus","Urinary bladder and uterus"], correct: 1, explain: "Simple cuboidal epithelium is found in kidneys (tubules) and many glands including the liver, salivary glands, and sweat glands." },
+  { q: "What is a characteristic feature of Simple columnar epithelium?", options: ["Short and cube-shaped cells","Tall cells standing side by side with nuclei near the basement membrane","Flattened cells only","Multiple layers of cells"], correct: 1, explain: "Simple columnar epithelium consists of tall, elongated cells standing side by side. The nucleus lies near the basement membrane." },
+  { q: "Where is Simple columnar epithelium found?", options: ["Kidneys and bile ducts","Stomach, intestines, and lining of the digestive tract","Skin and esophagus","Urinary bladder"], correct: 1, explain: "Simple columnar epithelium is found in the stomach, intestines, and lining of the digestive tract. It often contains goblet cells and microvilli." },
+  { q: "What is the additional feature of Simple ciliated columnar epithelium?", options: ["Contains blood capillaries","Carries cilia (fine protoplasmic outgrowths) on the free surface","Contains bone plates","Contains muscle fibers"], correct: 1, explain: "Simple ciliated columnar epithelium is similar to simple columnar but has cilia (hair-like projections) on the free surface that help move substances." },
+  { q: "Where is Simple ciliated columnar epithelium found?", options: ["Stomach and intestines","Oviduct (uterine tube) and respiratory tract","Liver and pancreas","Skin and esophagus"], correct: 1, explain: "Simple ciliated columnar epithelium is found in the oviduct (to move the egg) and the respiratory tract (to move mucus)." },
+  { q: "What characterizes Pseudostratified epithelium?", options: ["True multiple layers of cells","Two kinds of cells with nuclei at different levels giving a false stratified appearance","Completely cube-shaped cells","Completely flattened cells"], correct: 1, explain: "Pseudostratified epithelium contains tall cells with nuclei at different levels and smaller basal cells that do not reach the surface. All cells touch the basement membrane, so it is actually a single layer." },
+  { q: "Where is Non-ciliated Pseudostratified epithelium found?", options: ["Trachea","Epididymis","Urinary bladder","Esophagus"], correct: 1, explain: "Non-ciliated pseudostratified epithelium is found in the epididymis, where it contains stereocilia (long microvilli) rather than true cilia." },
+  { q: "Where is Ciliated pseudostratified epithelium found?", options: ["Epididymis","Trachea","Kidneys","Esophagus"], correct: 1, explain: "Ciliated pseudostratified columnar epithelium is found in the trachea and upper respiratory tract, where it performs mucociliary clearance." },
+  { q: "What is the name of the basal layer in Stratified epithelium?", options: ["Superficial layer","Malpighian layer","Spongy layer","Keratinized layer"], correct: 1, explain: "The basal layer of stratified epithelium is called the Malpighian layer. It consists of columnar cells that divide to regenerate the tissue." },
+  { q: "What is the middle layer of Stratified squamous epithelium called?", options: ["Deep basal layer","Spongy layer (irregular, polyhedral cells)","Superficial squamous layer","False layer"], correct: 1, explain: "The middle layer of stratified squamous epithelium is called the spongy layer and consists of irregular, polyhedral (many-sided) cells." },
+  { q: "Which of the following is an example of Stratified squamous keratinized epithelium?", options: ["Esophagus (oesophagus)","Epidermis of skin","Urinary bladder","Trachea"], correct: 1, explain: "The epidermis of the skin is keratinized stratified squamous epithelium. The esophagus is non-keratinized stratified squamous." },
+  { q: "Where is Stratified cuboidal epithelium found?", options: ["Stomach and intestines","Kidney tubules, bile ducts, and ducts of esophageal glands","Skin and esophagus","Trachea"], correct: 1, explain: "Stratified cuboidal epithelium is found in kidney tubules, bile ducts, and ducts of esophageal glands. It provides more protection than simple cuboidal." },
+  { q: "What are the characteristics of Transitional epithelium?", options: ["Never changes shape","Transitional state between stratified squamous and columnar; allows stretching and contraction","Only one layer","Always flattened cells"], correct: 1, explain: "Transitional epithelium is a transitional state between stratified squamous and stratified columnar. It is found in organs that need to stretch and contract, like the urinary bladder." },
+  { q: "Where is Transitional epithelium found?", options: ["Stomach and liver","Wall of uterus and urinary bladder","Esophagus and skin","Kidneys and pancreas"], correct: 1, explain: "Transitional epithelium is found in the wall of the uterus, urinary bladder, renal pelvis, and ureters. It allows these organs to expand and recoil." },
+  { q: "What is the function of Cilia in ciliated epithelium?", options: ["Absorbing nutrients","Moving mucus and particles across the surface","Secreting hormones","Protecting the skin"], correct: 1, explain: "Cilia beat in coordinated waves to move mucus, particles, or eggs across the epithelial surface. This is called mucociliary clearance." },
+  { q: "What type of epithelium lines the esophagus (oesophagus)?", options: ["Simple squamous","Stratified squamous non-keratinized","Simple columnar","Transitional"], correct: 1, explain: "The esophagus is lined by stratified squamous non-keratinized epithelium to protect against abrasion from food." },
+  { q: "What type of epithelium makes up the skin epidermis?", options: ["Simple squamous keratinized","Stratified squamous keratinized","Stratified cuboidal","Pseudostratified columnar"], correct: 1, explain: "The epidermis of the skin consists of stratified squamous keratinized epithelium, which provides protection against water loss, abrasion, and pathogens." },
+  { q: "What is the function of the Basement membrane?", options: ["Producing new cells","Supporting the epithelium and anchoring it to underlying connective tissue","Transmitting nerve signals","Contracting muscles"], correct: 1, explain: "The basement membrane is a thin extracellular layer that supports epithelial tissue and anchors it to the underlying connective tissue. It also acts as a filter." },
+  { q: "What is the main difference between Simple and Stratified epithelium?", options: ["Simple has cilia, stratified does not","Simple is one cell layer, stratified is multiple cell layers","Simple is internal, stratified is external","Simple is animal, stratified is plant"], correct: 1, explain: "Simple epithelium consists of a single layer of cells, while stratified epithelium consists of multiple layers of cells. This affects their protective capabilities." },
+  { q: "What are Goblet cells found in Simple columnar epithelium?", options: ["Muscle cells","Mucus-secreting cells","Nerve cells","Blood cells"], correct: 1, explain: "Goblet cells are specialized unicellular glands found in simple columnar epithelium that secrete mucus to lubricate and protect the epithelial surface." },
+  { q: "What are Microvilli on the surface of Simple columnar epithelium?", options: ["Motile cilia","Small surface projections that increase absorption area","Muscle fibers","Blood capillaries"], correct: 1, explain: "Microvilli are tiny, non-motile projections on the apical surface that greatly increase the surface area for absorption. They form the brush border in the intestine." },
+  { q: "Where is Nonciliated simple columnar epithelium found?", options: ["Uterine tubes","Most of the small intestine (e.g., jejunum)","Trachea","Epididymis"], correct: 1, explain: "Nonciliated simple columnar epithelium is found in most of the digestive tract, such as the jejunum. It contains microvilli and goblet cells for absorption and secretion." },
+  { q: "What are Stereocilia found in the epididymis?", options: ["True motile cilia","Long, non-motile microvilli (elongated microvilli)","Nerve fibers","Connective tissue fibers"], correct: 1, explain: "Stereocilia in the epididymis are actually very long, non-motile microvilli (not true cilia). They increase surface area for fluid absorption." },
+  { q: "What are the small conical cells in Pseudostratified epithelium?", options: ["They do not reach the surface and are called basal cells","Muscle cells","Blood cells","Nerve cells"], correct: 0, explain: "In pseudostratified epithelium, the small conical cells are basal cells that do not reach the free surface. They serve as stem cells for regeneration." },
+  { q: "Which of the following is an example of Simple squamous epithelium in the body cavity?", options: ["Peritoneum (mesothelium)","Trachea","Urinary bladder","Skin"], correct: 0, explain: "The peritoneum is lined by mesothelium, which is a type of simple squamous epithelium that lines the coelomic cavity (body cavity)." },
+  { q: "What is the Malpighian layer in Stratified squamous epithelium?", options: ["The top flattened squamous layer","The basal columnar layer that regenerates the tissue","The middle polyhedral layer","The keratinized dead layer"], correct: 1, explain: "The Malpighian layer is the basal (deepest) layer of stratified squamous epithelium. It consists of columnar cells that undergo mitosis to regenerate the epithelium." },
+  { q: "What is the main function of Epithelial tissue?", options: ["Contraction and movement","Covering, protection, secretion, and absorption","Transmitting nerve signals","Supporting organs"], correct: 1, explain: "Epithelial tissue functions include covering body surfaces (covering), protection against physical and chemical damage, secretion of substances (glands), and absorption of nutrients." },
+  { q: "What is the Endoderm?", options: ["A germ layer that forms the outer skeleton/exoskeleton","A germ layer that forms the inner lining of organs","A germ layer that develops into organs","A muscle layer"], correct: 1, explain: "Endoderm is the innermost germ layer that forms the inner lining (endothelium) of organs such as the digestive tract, respiratory tract, and glands." },
+  { q: "What is the Mesoderm?", options: ["A layer that forms the outer skeleton","A layer that develops into organs, muscles, and connective tissues","A layer that forms the inner lining","A nerve layer"], correct: 1, explain: "Mesoderm is the middle germ layer that develops into organs, muscles, bones, blood, and connective tissues." },
+  { q: "What is the Ectoderm?", options: ["A layer that forms the exoskeleton, skin, and nervous system","A layer that develops into internal organs","A layer that forms the inner lining of the intestines","A muscle layer"], correct: 0, explain: "Ectoderm is the outermost germ layer that forms the skin (epidermis), nervous system, hair, nails, and exoskeleton in some animals." },
+  { q: "What is the Morula stage in embryonic development?", options: ["A single cell","A solid ball of cells","A hollow ball (blastocyst)","A fully developed embryo"], correct: 1, explain: "The morula is an early stage of embryonic development consisting of a solid ball of cells (16-32 cells) formed by cleavage of the zygote, before the blastocyst stage." },
+  { q: "What is the Blastocyst stage?", options: ["A solid ball of cells","A hollow ball containing an inner cell mass","A single cell","A complete embryo"], correct: 1, explain: "The blastocyst is a hollow ball of cells with an inner cell mass (which becomes the embryo) and an outer layer called the trophoblast (which becomes the placenta)." },
+  { q: "What is a Zygote?", options: ["A fertilized egg formed by fusion of sperm and ovum","The first cell after division","A developed embryo","The sac surrounding the embryo"], correct: 0, explain: "A zygote is a fertilized egg cell formed by the fusion (fertilization) of a sperm cell and an egg cell (ovum). It is the first cell of a new organism." },
+  { q: "What is the function of Ciliated pseudostratified columnar epithelium in the trachea?", options: ["Absorbing oxygen","Moving mucus and trapped particles outward (mucociliary clearance)","Secreting hormones","Filtering blood"], correct: 1, explain: "In the trachea, ciliated pseudostratified columnar epithelium moves mucus (produced by goblet cells) and trapped dust/bacteria upward and out of the respiratory tract. This is called mucociliary clearance." },
+  { q: "What do Transitional epithelium cells look like when the bladder is empty (relaxed)?", options: ["Completely flattened cells","Large, dome-shaped (umbrella) surface cells","Only one layer","Tall columnar cells"], correct: 1, explain: "When the bladder is relaxed (empty), the surface cells of transitional epithelium are large and dome-shaped (umbrella cells). When stretched, they flatten out." },
+  { q: "What happens to Transitional epithelium when the bladder is stretched (full)?", options: ["Cells remain dome-shaped","The surface layer becomes flattened and the number of apparent layers decreases","It becomes a single layer","It transforms into nervous tissue"], correct: 1, explain: "When the bladder is stretched (full), the dome-shaped surface cells of transitional epithelium flatten out, and the tissue appears to have fewer layers. This allows expansion." },
+  { q: "Where is Stratified columnar epithelium found?", options: ["Stomach","Urethra, uterus, and ducts of esophageal glands","Trachea","Liver"], correct: 1, explain: "Stratified columnar epithelium is found in the urethra, uterus, and ducts of esophageal glands. It provides protection and some secretion." },
+  { q: "What is the general function of Stratified squamous epithelium?", options: ["Secretion and absorption","Protection against friction and abrasion","Transmitting signals","Contraction"], correct: 1, explain: "Stratified squamous epithelium provides excellent protection against mechanical friction, abrasion, and microbial invasion due to its multiple layers of cells." },
+  { q: "What is the shape of cells in the superficial layer of Stratified columnar epithelium?", options: ["Flattened","Columnar (tall)","Cuboidal","Spherical"], correct: 1, explain: "In stratified columnar epithelium, the superficial (top) layer cells are columnar (tall), while the basal layer cells are cuboidal or irregular." },
+  { q: "What is the Lumen in epithelial-lined tubes?", options: ["The outer wall","The inner empty space (cavity)","The basement membrane","The fatty layer"], correct: 1, explain: "The lumen is the inner open space or cavity within a tube or hollow organ that is lined by epithelial tissue (e.g., intestinal lumen, duct lumen)." },
+  { q: "What is the function of Simple cuboidal epithelium in the kidneys?", options: ["Protection against friction","Secretion and reabsorption","Transmitting nerve signals","Producing sperm"], correct: 1, explain: "In the kidney tubules, simple cuboidal epithelium is involved in secretion (moving substances into the tubule) and reabsorption (moving substances back into the blood)." },
+  { q: "What are the four main types of tissues in the animal body?", options: ["Epithelial, Connective, Muscular, Nervous","Epithelial, Bone, Blood, Muscle","Skin, Bone, Muscle, Nerve","Epithelial, Fat, Muscle, Brain"], correct: 0, explain: "The four main tissue types are: Epithelial (covering/lining), Connective (support), Muscular (movement), and Nervous (control/communication)." },
+  { q: "Which cells in Simple columnar epithelium secrete mucus?", options: ["Basal cells","Goblet cells","Ciliated cells","Squamous cells"], correct: 1, explain: "Goblet cells are specialized mucus-secreting cells found within simple columnar epithelium. They have a distinctive goblet (cup) shape." },
+  { q: "Which cells produce new cells in Stratified squamous epithelium?", options: ["Surface flattened cells","Basal cells (basal/Malpighian layer)","Middle polyhedral cells","Keratinized dead cells"], correct: 1, explain: "Basal cells in the Malpighian (basal) layer undergo mitosis to produce new cells. These new cells gradually move upward and become flattened as they reach the surface." },
+  { q: "What is the function of Connective tissue beneath epithelial tissue?", options: ["Producing epithelial cells","Supporting and nourishing the epithelium","Secreting acids","Transporting oxygen directly"], correct: 1, explain: "Connective tissue (such as the lamina propria) beneath epithelium provides physical support, delivers nutrients and oxygen via blood vessels, and removes waste." },
+  { q: "What do Simple ciliated columnar and Ciliated pseudostratified epithelium have in common?", options: ["Both contain cilia on the free surface","Both are only a single true layer","Both are found in the stomach","Both contain only microvilli"], correct: 0, explain: "Both types have cilia on their apical (free) surface. However, simple ciliated columnar is truly one layer, while pseudostratified appears layered but is actually one layer with nuclei at different levels." },
+  { q: "Why is Pseudostratified epithelium called 'pseudo' (false)?", options: ["Because it contains fake cells","Because it appears stratified but all cells touch the basement membrane (it is actually a single layer)","Because it has no nuclei","Because it is a double layer"], correct: 1, explain: "Pseudostratified means 'falsely stratified.' It looks like multiple layers because nuclei are at different heights, but every cell touches the basement membrane, making it technically a single layer of cells." },
+  { q: "What is the nucleus like in Simple squamous epithelium?", options: ["Spherical and central","Flattened and central","Peripheral (near the base)","Absent"], correct: 1, explain: "The nucleus of a simple squamous cell is flattened (flattened nucleus) to fit within the thin, flattened cytoplasm of the cell, and it is located centrally." },
+  { q: "Which cells line the uterine tubes (oviducts)?", options: ["Simple squamous","Simple ciliated columnar epithelium","Stratified squamous keratinized","Transitional"], correct: 1, explain: "The uterine tubes (oviducts/fallopian tubes) are lined by simple ciliated columnar epithelium. The cilia beat toward the uterus to move the egg cell." }
+];
+
+function renderQuiz() {
+  const area = document.getElementById('quizArea');
+  let html = '';
+  questions.forEach((q, i) => {
+    html += `<div class="quiz-card" id="card_${i}">
+      <div class="question-text"><span class="question-number">${i+1}</span> ${q.q}</div>
+      <div class="options">`;
+    q.options.forEach((opt, j) => {
+      html += `<label class="option" onclick="selectOption(${i}, ${j})">
+        <input type="radio" name="q_${i}" value="${j}" id="q_${i}_${j}">
+        <span class="radio-circle"></span>
+        <span class="option-text">${opt}</span>
+      </label>`;
+    });
+    html += `</div></div>`;
+  });
+  area.innerHTML = html;
+}
+
+function selectOption(qIdx, oIdx) {
+  document.getElementById(`q_${qIdx}_${oIdx}`).checked = true;
+  updateProgress();
+}
+
+function updateProgress() {
+  let answered = 0;
+  questions.forEach((_, i) => {
+    if (document.querySelector(`input[name="q_${i}"]:checked`)) answered++;
+  });
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `Answered ${answered} / ${questions.length} questions`;
+}
+
+function showResults() {
+  let correct = 0, wrong = 0, missed = 0;
+  const detailed = document.getElementById('detailedResults');
+  let html = '';
+
+  questions.forEach((q, i) => {
+    const selected = document.querySelector(`input[name="q_${i}"]:checked`);
+    const userAns = selected ? parseInt(selected.value) : -1;
+    const isCorrect = userAns === q.correct;
+    const isMissed = userAns === -1;
+
+    if (isCorrect) correct++;
+    else if (isMissed) missed++;
+    else wrong++;
+
+    const statusClass = isCorrect ? 'correct' : (isMissed ? 'missed' : 'wrong');
+    const statusIcon = isCorrect ? '✅' : (isMissed ? '⚠️' : '❌');
+    const statusBadge = isCorrect ? '<span class="badge badge-success">Correct</span>' : (isMissed ? '<span class="badge badge-warning">Missed</span>' : '<span class="badge badge-danger">Wrong</span>');
+
+    html += `<div class="result-card ${statusClass}">
+      <div class="result-header">${statusIcon} ${i+1}. ${q.q} ${statusBadge}</div>
+      <div class="result-body">
+        <div>Your answer: <strong>${userAns === -1 ? 'No answer' : q.options[userAns]}</strong></div>
+        <div>Correct answer: <strong style="color:#15803d;">${q.options[q.correct]}</strong></div>
+      </div>
+      <div class="explanation">💡 ${q.explain}</div>
+    </div>`;
+  });
+
+  detailed.innerHTML = html;
+
+  const pct = Math.round((correct / questions.length) * 100);
+  document.getElementById('scoreCircle').style.setProperty('--pct', pct);
+  document.getElementById('scoreValue').textContent = pct + '%';
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statMissed').textContent = missed;
+
+  let msg = '';
+  if (pct >= 90) msg = '🌟 Excellent! Outstanding performance, you mastered the lecture!';
+  else if (pct >= 75) msg = '👏 Very Good! Strong understanding, just a little review needed!';
+  else if (pct >= 60) msg = '💪 Fair! There is room for improvement, review the wrong answers carefully.';
+  else if (pct >= 40) msg = '📚 You need more review of the lecture, focus on weak points.';
+  else msg = '❗ Needs more effort. Review the lecture from the beginning and try again.';
+
+  document.getElementById('scoreMessage').textContent = msg;
+
+  document.getElementById('quizArea').classList.add('hidden');
+  document.getElementById('controlsArea').classList.add('hidden');
+  document.getElementById('progressText').parentElement.classList.add('hidden');
+  document.getElementById('resultsArea').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
